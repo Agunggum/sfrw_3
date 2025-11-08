@@ -227,13 +227,25 @@ class Users extends Model {
 - `get_client_browser()`: Browser detection
 - `thousandsCurrencyFormat()`: Currency formatting
 
-## 🚀 Getting Started
+## 🚀 Installation
 
-1. **Clone/Download** the framework files
-2. **Configure** database settings in `library/config.txt`
-3. **Set** environment variables in `env.php`
-4. **Create** your database tables
-5. **Access** the application via web browser
+### Via GitHub Repository
+
+Clone the Sunda Framework from the official repository:
+
+```bash
+git clone https://github.com/Agunggum/sfrw.git
+cd sfrw
+```
+
+### Manual Installation
+
+1. **Download** the framework files from the repository
+2. **Extract** to your web server directory
+3. **Configure** database settings in `library/config.txt`
+4. **Set** environment variables in `env.php`
+5. **Create** your database tables
+6. **Access** the application via web browser
 
 ## 📋 Requirements
 
@@ -253,6 +265,24 @@ class Users extends Model {
 1. Create new file in `mvc/controller/`
 2. Extend the base `Controller` class
 3. Implement your methods
+
+**Example Controller (`mvc/controller/Controller.php`):**
+
+```php
+<?php
+
+class Indexcontroller extends Controller {
+
+    public static function index() {
+        require_once view('index', [
+            $data['title'] = "sfrw Framework",
+        ]);
+    }
+
+}
+```
+
+This example shows a basic controller that renders the homepage view with a title parameter.
 
 ### Creating Models
 1. Create new file in `app/Models/`
