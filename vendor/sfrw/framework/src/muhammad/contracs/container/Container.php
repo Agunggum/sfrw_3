@@ -8,7 +8,7 @@ function fileCon($folder) {
 }
 
 // MySql or MySqli
-function tables($select = '*', $table, $where, $first){
+function tables($select = '*', $table, $where, $first = 'all'){
     $array = fileCon(BASEPATH);
     if($array[4] == 'MySql'){
         mysql_connect($array[0], $array[1], $array[2]);
