@@ -28,7 +28,7 @@ class Loginmodel extends Controller {
                 $_SESSION['error'] = "true";
                 alert('warning', 'Attention..!', '<i class="fa fa-clock-o"></i> You are no longer able to log into this system.', $uri);
             }
-            elseif($data['password'] != $pass){
+            elseif($data['password'] != $password){
                 $_SESSION['usertrue'] = $username;
 
                 Logcarbon::carbonlog($username." :: login denied : wrong password","logsignin");
@@ -76,7 +76,7 @@ class Loginmodel extends Controller {
 
                 alert('warning', 'Alert forgot password', 'Please re-check the Email you entered, make sure the data you entered is correct.', BASEURL.'forgot-password');
             }
-            elseif($data1['active'] == 'N'){
+            elseif($data['active'] == 'N'){
                 Logcarbon::carbonlog($email." :: forgot denied : inactive","logsignin");
 
                 alert('warning', 'Alert forgot password', 'You are no longer able to log into this system.', BASEURL.'forgot-password');
@@ -99,7 +99,7 @@ class Loginmodel extends Controller {
 
                     if(MAILACTIVATE == 'true'){
                         //mail concept
-                        $sqlmail = permintaanMysql("SELECT email, fullname FROM ".Users_other::schematable()." WHERE usermail='".$email."'");
+                        $sqlmail = permintaanMysql("SELECT email, fullname FROM ".Users::schematable()." WHERE usermail='".$email."'");
                         $jmail = mysqlAmbilArray($sqlmail);
 
                         $subject = MAILTITLE." - Forgot Password";
