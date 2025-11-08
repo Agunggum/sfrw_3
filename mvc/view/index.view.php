@@ -1,7 +1,7 @@
 <?php if ( ! defined('APPPATH')) exit('No direct script access allowed'); ?>
 <?php require_once view('header'); ?>
 <body>
-    <div class="container col-12 d-flex justify-content-center">
+    <div class="container col-12 col-xl-12 col-lg-12 d-flex justify-content-center">
         <div class="row">
             <div class="col-xl-12 col-lg-12 pt-2">
                 <span class="float-right">

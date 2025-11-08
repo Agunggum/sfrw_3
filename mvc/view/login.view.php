@@ -2,12 +2,12 @@
 <?php require_once view('header'); ?>
 <body>
 
-    <div class="col-md-12 col-lg-12">
+    <div class="col-md-12 col-lg-12 col-xl-12">
         <div class="row">
             
-            <div class="col-md-7 col-lg-5 shadow rounded-5" style="height: 100vh; overflow-y: auto;">
+            <div class="col-md-8 col-lg-6 col-xl-5 shadow rounded-5" style="height: 100vh; overflow-y: auto;">
                 
-                <div class="text-center ibox-content border-0">
+                <div class="text-center">
                     <div class="pt-2">
                         <span class="float-right">
                             <div class="form-check form-switch">
@@ -19,7 +19,7 @@
                     </div>
                     
                     <div class="d-flex justify-content-center">
-                        <div class="col-md-12 col-lg-9 mt-5 mb-4 text-left">
+                        <div class="col-md-12 col-lg-12 col-xl-12 mt-5 mb-4 text-left">
                             <div class="h3"><span><?php echo WEBTITLE; ?></span></div>
                             <small data-toggle="modal" data-target="#versionmodal" style="vertical-align: super; font-size: small; cursor: pointer;"><i class="fa fa-copyright"></i> v<?php echo VERSION; ?></small>
                         </div>
@@ -30,9 +30,9 @@
                     
                     <div class="d-flex justify-content-center">
                         
-                        <div class="col-md-12 col-lg-9">
+                        <div class="col-md-12 col-lg-12 col-xl-12">
                             <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
-                                <p class="h4 text-left font-weight-bold">Sign In.</p>
+                                <p class="h3 text-left font-weight-bold">Sign In.</p>
                                 
                                 <form class="m-t" role="form" method="post" action="">
                                     <!-- Email input -->
@@ -50,7 +50,7 @@
                                         <div class="col d-flex justify-content-center">
                                         <!-- Checkbox -->
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="rememberme" checked />
+                                            <input class="form-check-input" type="checkbox" value="" id="rememberme" />
                                             <label class="form-check-label" for="rememberme"> Remember me </label>
                                         </div>
                                         </div>
