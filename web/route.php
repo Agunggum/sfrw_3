@@ -1,0 +1,60 @@
+<?php
+if ( ! 'web') exit('No direct script access allowed');
+/*
+*----------------------------------------------------------------------
+ * SFRW Framework Version 3.0
+ * 
+ * Contoh penggunaan session untuk mengatur halaman yang diakses
+if(BASESESSION==""){
+    if(routeget('forgot-password', ROUTE)){
+        require_once view('forgot-password');
+    }else{
+        require_once view('login');
+    }
+}else{
+    //jika waktu sekarang kurang dari sesi timeout
+    if(WAKTUINI < $_SESSION['timeout'])
+    {
+        //hapus sesi timeout yang lama ,buat sesi timeout yang baru
+        unset($_SESSION['timeout']);
+        $_SESSION['timeout']=WAKTUINI+KADALUARSA;
+
+        require_once view('index');
+    }else{
+        require_once view('endsession');
+    }
+}
+ *
+ *---------------------------------------------------------------------
+ *
+*/
+/*
+  *route berfungsi untuk memanage halaman dan konten
+*/      
+if(routeget('/', ROUTE)){
+  return Indexcontroller::index();
+}else
+
+if(routeget('login', ROUTE)){
+  require_once view('login');
+}else
+
+if(routeget('signout', ROUTE)){
+  require_once view('signout');
+}else
+
+if(routeget('logs-', ROUTE)){
+  require_once vendors('logcarbon/logcarbon');
+  require_once view('logs', [
+    $data['title'] = "Logs",
+    $data['breadcrumb'] = "Logs",
+    $data['icon'] = "fa fa-logs",
+  ]);
+}else
+
+{
+  require_once view('pagenotfound'); // not found page redirect
+}
+
+/* End of file route.php */
+/* Location: ./web/route.php */
