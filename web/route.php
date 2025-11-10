@@ -43,6 +43,10 @@ if(routeget('forgot-password', ROUTE)){
   require_once view('forgot-password');
 }else
 
+if(routeget('datatable', ROUTE)){
+  require_once view('table');
+}else
+
 if(routeget('signout', ROUTE)){
   require_once view('signout');
 }else

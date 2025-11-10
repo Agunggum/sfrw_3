@@ -15,6 +15,7 @@
     <style>
         @import "bootstrap/theme/css/bootstrap.css?v=0.1";
         @import "bootstrap/theme/css/bootstrap.min.css?v=0.1";
+        @import "bootstrap/theme/css/datatables-bootstrap-5.css";
         @import "bootstrap/theme/fontawesome/css/all.css";
     </style>
 </head>

@@ -1,7 +1,7 @@
 <?php if ( ! defined('APPPATH')) exit('No direct script access allowed'); ?>
 <?php require_once view('header'); ?>
 <body>
-    <div class="container col-12 col-xl-12 col-lg-12 d-flex justify-content-center">
+    <div class="container col-12 col-xl-12 col-lg-12">
         <div class="row">
             <div class="col-xl-12 col-lg-12 pt-2">
                 <span class="float-right">
@@ -15,11 +15,20 @@
             <div class="col-xl-8 col-lg-8 pt-5 mt-5">
                 <p><font class="h2 font-weight-bold text-danger">sfrw</font> <small><?php echo VERSIONFRMAEWORK; ?></small></p>
                 <div class="row">
-                    <div class="col-lg-6 rounded border">
-                        <p>sfrw adalah framework <font class="text-danger">indonesia</font> yang dikembangkan oleh indonesia untuk programer atau calon programer <font class="text-danger">indonesia</font>.</p>
+                    <div class="col-lg-6 pb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">sfrw adalah framework <font class="text-danger">indonesia</font> yang dikembangkan oleh indonesia untuk programer atau calon programer <font class="text-danger">indonesia</font></p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-6 rounded border">
-                        <p>lihat <a href="https://documentation.agunggum.id/" target="_blank">dokumentasi</a> terlebih dahulu untuk mempelajari.</p>
+                    <div class="col-lg-6 pb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">Pelajari lebih lanjut.</p>
+                                <a href="https://documentation.agunggum.id/" class="card-link">dokumentasi</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

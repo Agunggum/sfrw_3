@@ -141,6 +141,7 @@ The framework includes a built-in dark mode toggle:
 
 ### Responsive Design
 - Bootstrap 5 integration
+- Datatables integration
 - Mobile-first approach
 - Cross-browser compatibility
 

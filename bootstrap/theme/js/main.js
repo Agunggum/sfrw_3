@@ -174,3 +174,5 @@
         setStoredTheme(newTheme);
     });
 })();
+
+new DataTable('.datatable');
