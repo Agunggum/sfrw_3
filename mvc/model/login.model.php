@@ -42,10 +42,6 @@ class Loginmodel extends Controller {
                 if(ENVIRONMENT == 'maintenance' and $data['role'] != 'administrator'){
                     alert('warning', 'Attention..!', '<i class="fa fa-clock-o"></i> Login denied. system is under maintenance.', $uri);
                 }else{
-                    /*session_start();
-                    session_register("nik");
-                    session_register("password");*/
-                    
                     $_SESSION['username'] = $data['username'];
                     $_SESSION['fullname'] = $data['fullname'];
                     $_SESSION['accessme'] = $data['role'];
