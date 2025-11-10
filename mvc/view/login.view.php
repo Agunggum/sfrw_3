@@ -57,7 +57,7 @@
 
                                         <div class="col">
                                         <!-- Simple link -->
-                                        <a href="#!">Forgot password?</a>
+                                        <a href="<?php echo BASEURL.'forgot-password'; ?>">Forgot password?</a>
                                         </div>
                                     </div>
 

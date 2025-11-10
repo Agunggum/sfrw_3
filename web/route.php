@@ -39,6 +39,10 @@ if(routeget('login', ROUTE)){
   require_once view('login');
 }else
 
+if(routeget('forgot-password', ROUTE)){
+  require_once view('forgot-password');
+}else
+
 if(routeget('signout', ROUTE)){
   require_once view('signout');
 }else
