@@ -169,7 +169,6 @@ function datelongind($ori) {
 
     $print = ($count == 1) ? '1 ' . $name : "$count {$name}";
     return $print . ' yang lalu ' . $long;
-
 }
 
 function thousandsCurrencyFormat($num) {
@@ -308,8 +307,8 @@ function get_client_ip() {
 
 function getUserIP() {
     if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-              $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-              $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+        $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+        $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
     }
     $client  = $_SERVER['HTTP_CLIENT_IP'];
     $forward = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -339,7 +338,7 @@ function get_client_browser()
 
     // If the string *starts* with the string, strpos returns 0 (i.e., FALSE). Do a ghetto hack and start with a space.
     // "[strpos()] may return Boolean FALSE, but may also return a non-Boolean value which evaluates to FALSE."
-    //     http://php.net/manual/en/function.strpos.php
+    // http://php.net/manual/en/function.strpos.php
     $t = " " . $t;
 
     // Humans / Regular Users     
