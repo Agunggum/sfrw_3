@@ -159,17 +159,17 @@ The routing is handled in `web/route.php`:
 // Homepage route
 if(routeget('/', ROUTE)){
   return Indexcontroller::index();
-}
+}else
 
 // Login route
 if(routeget('login', ROUTE)){
   require_once view('login');
-}
+}else
 
 // Logout route
 if(routeget('signout', ROUTE)){
   require_once view('signout');
-}
+}else
 
 // Logs route
 if(routeget('logs-', ROUTE)){
@@ -179,7 +179,7 @@ if(routeget('logs-', ROUTE)){
     $data['breadcrumb'] = "Logs",
     $data['icon'] = "fa fa-logs",
   ]);
-}
+}else
 
 // 404 fallback
 {
