@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo WEBTITLETOP; ?></title>
     <meta name="description" content="<?php echo WEBTITLE; ?> <?php echo VERSIONFRMAEWORK; ?>" />
-    <link rel="shortcut icon" href="<?php echo BASEURL; ?>bootstrap/theme/globe-network.png" />
+    <link rel="icon" href="<?php echo BASEURL; ?>bootstrap/theme/logo-sfrw.ico" sizes="any" >
+    <link rel="icon" href="<?php echo BASEURL; ?>bootstrap/theme/logo-sfrw.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="<?php echo BASEURL; ?>bootstrap/theme/logo-sfrw.png">
     <meta property="og:title" content="<?php echo WEBTITLETOP; ?>>" />
     <meta property="og:image" content="<?php echo BASEURL; ?>bootstrap/theme/globe-network.png" />
     <meta property="og:url" content="<?php echo  BASEURL; ?>" />
