@@ -14,7 +14,7 @@
             </div>
 
             <div class="col-12 col-md-12 col-xl-12 col-lg-12">
-                <section class="overflow-x-auto">
+                <section>
                     <table class="datatable table table-striped">
                         <thead>
                             <tr>
