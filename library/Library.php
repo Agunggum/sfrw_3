@@ -29,7 +29,7 @@ function customError($errno, $errstr, $errfile, $errline) {
         file_put_contents($pathToFile, $data, FILE_APPEND);
         //echo "<code>Kesalahan terdeteksi!</code>";
         if($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj']=='2'){
-        echo "<script>document.location='".$_SERVER['REQUEST_URI']."'</script>";
+        echo "<script>setTimeout(function () { document.location='".$_SERVER['REQUEST_URI']."'; }, 2);</script>";
         }
         //exit();
     }else{
@@ -49,6 +49,9 @@ function customError($errno, $errstr, $errfile, $errline) {
         $pathToFile = $directory.'error.log';
         file_put_contents($pathToFile, $data, FILE_APPEND);
         //echo "<code>Kesalahan terdeteksi!</code>";
+        if($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj']=='2'){
+        echo "<script>setTimeout(function () { document.location='".$_SERVER['REQUEST_URI']."'; }, 2);</script>";
+        }
         //exit();
     }
 }

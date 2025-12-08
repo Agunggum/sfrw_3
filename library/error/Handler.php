@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $arrerr = explode(", ", $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN']);
+
+if(DEBUG == 'true'){
 if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak terdeteksi pada fungsi query, cari di setiap folder yang memakai query atau telusuri halaman target"; }else{ $errstr = $arrerr[1]; }
 ?>
 <!doctype html>
@@ -93,3 +95,4 @@ $(document).ready(function() {
 </body>
 </html>
 <?php $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] = ""; $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'] = ""; $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'] = ""; ?>
+<?php }else{ require_once 'error/500handler.php'; } ?>
