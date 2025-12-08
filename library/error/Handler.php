@@ -95,4 +95,4 @@ $(document).ready(function() {
 </body>
 </html>
 <?php $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] = ""; $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'] = ""; $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'] = ""; ?>
-<?php }else{ require_once 'error/500handler.php'; } ?>
+<?php }else{ require_once BASEPATH.'error/500handler.php'; } exit(); ?>
