@@ -61,7 +61,7 @@ if(routeget('logs-', ROUTE)){
 }else
 
 {
-  require_once view('pagenotfound'); // not found page redirect
+  customErrorHandler(); // not found route
 }
 
 /* End of file route.php */
