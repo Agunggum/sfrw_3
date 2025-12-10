@@ -32,9 +32,12 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
         <div class="my-2">
             <div class="alert alert-dark">
                 <small class="float-right font-weight-bold">S-FRW <?php echo VERSIONFRMAEWORK; ?> <i class="fa fa-copy"></i></small>
-                <h3 class="col-12 p-1 text-wrap" title="ATASI : <?php echo $errstr; ?>"><span class="text-danger">ATASI : </span><?php echo $errstr; ?><br><br><code><?php echo (!empty($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj2'])) ? $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj2']:''; ?></code></h3>
+                <h3 class="col-12 p-1 text-wrap" title="ATASI : <?php echo $errstr; ?>"><span class="text-danger">ATASI : </span><?php echo $errstr; ?><br><br><code class="text-wrap"><?php echo (!empty($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj2'])) ? $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj2']:''; ?></code></h3>
+                <?php if(!empty(arrerr[2])){ ?>
                 <h5 class="col-12 p-1 text-wrap"><strong class="text-danger">pada file</strong> <?php echo $arrerr[2]; ?></h5>
+                <?php } ?>
             </div>
+            <?php if(!empty(arrerr[2])){ ?>
             <div class="col-12 bg-secondary p-3 rounded">
                 <div class="row">
                     <div class="col-lg-4">
@@ -84,6 +87,7 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
                     </div>
                 </div>
             </div>
+            <?php } ?>
         </div>
     </div>
 <script language="javascript">
