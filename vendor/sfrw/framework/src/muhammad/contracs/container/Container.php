@@ -142,7 +142,7 @@ function routeget($get, $route="", $access="") {
     }elseif($get == $route and $access!=""){
         return $get == $route && in_array(ACCESSME, $arraccess);
     }elseif($get == $route and $access==""){
-        return $get == $route && $access=="";
+        return $get == $route && $access==""; 
     }else{
         return "";
     }

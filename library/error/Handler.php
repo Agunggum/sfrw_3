@@ -33,11 +33,10 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
             <div class="alert alert-dark">
                 <small class="float-right font-weight-bold">S-FRW <?php echo VERSIONFRMAEWORK; ?> <i class="fa fa-copy"></i></small>
                 <h3 class="col-12 p-1 text-wrap" title="ATASI : <?php echo $errstr; ?>"><span class="text-danger">ATASI : </span><?php echo $errstr; ?><br><br><code class="text-wrap"><?php echo (!empty($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj2'])) ? $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj2']:''; ?></code></h3>
-                <?php if(!empty(arrerr[2])){ ?>
+                <?php if(!empty($arrerr[2])){ ?>
                 <h5 class="col-12 p-1 text-wrap"><strong class="text-danger">pada file</strong> <?php echo $arrerr[2]; ?></h5>
                 <?php } ?>
             </div>
-            <?php if(!empty(arrerr[2])){ ?>
             <div class="col-12 bg-secondary p-3 rounded">
                 <div class="row">
                     <div class="col-lg-4">
@@ -72,6 +71,7 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
                         <div class="alert alert-secondary">
                             <pre class="comment bg-dark text-white rounded p-3 mt-3 border border-danger text-wrap">
                             <?php 
+                            if(!empty($arrerr[2])){
                             $filename = $arrerr[2];
                                 $read = file($filename); 
                                 $numberline = 1;
@@ -82,12 +82,12 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
                                         echo '<div class="row mb-2"><div class="col-1 mx-0 pl-1 pr-0">'.$numberline++.'.</div> <div class="col-10">'.htmlspecialchars(html_entity_decode($last_line)).'</div></div>';
                                     }
                                 }
+                            }
                             ?></pre>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php } ?>
         </div>
     </div>
 <script language="javascript">
