@@ -181,9 +181,8 @@ if(routeget('logs-', ROUTE)){
   ]);
 }else
 
-// 404 fallback
 {
-  require_once view('pagenotfound');
+  customErrorHandler(); // not found route
 }
 ```
 
