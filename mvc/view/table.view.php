@@ -15,7 +15,7 @@
 
             <div class="col-12 col-md-12 col-xl-12 col-lg-12">
                 <section>
-                    <table class="datatable table table-striped">
+                    <table class="datatable-help table table-striped">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -501,7 +501,7 @@
     </div>
 <script>
 $(document).ready(function() {
-    $('.datatable').DataTable({
+    $('.datatable-help').DataTable({
         "lengthMenu": [
             [<?php echo PAGINATION; ?>, 50, 100, -1],
             [<?php echo PAGINATION; ?>, 50, 100, "All"] // change per page values here
