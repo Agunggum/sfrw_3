@@ -4,7 +4,7 @@ if ( ! 'web') exit('No direct script access allowed');
 *----------------------------------------------------------------------
  * SFRW Framework Version 3.0
  * 
- * Contoh penggunaan session untuk mengatur halaman yang diakses
+ * Contoh penggunaan session untuk mengatur halaman yang diakses memakai halaman login
 if(BASESESSION==""){
     if(routeget('forgot-password', ROUTE)){
         require_once view('forgot-password');
@@ -52,6 +52,7 @@ if(routeget('signout', ROUTE)){
 }else
 
 if(routeget('logs-', ROUTE)){
+  /* cara akses logs gunakan route logs-&file=[nama file di folder logs. contoh: error] */
   require_once vendors('logcarbon/logcarbon');
   require_once view('logs', [
     $data['title'] = "Logs",
