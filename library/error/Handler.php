@@ -94,7 +94,7 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
             </div>
         </div>
     </div>
-<script src="bootstrap/theme/js/main.js?v=0.4"></script>
+<script src="bootstrap/theme/js/main.js?v=0.5"></script>
 <script language="javascript">
 $(document).ready(function() {
     $(".comment").shorten();
