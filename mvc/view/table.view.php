@@ -508,6 +508,7 @@ $(document).ready(function() {
         ],
         pageLength: <?php echo PAGINATION; ?>,
         scrollX: true,
+        fixedHeader: true,
     });
 });
 </script>

@@ -36,6 +36,7 @@ $(document).ready(function() {
             [<?php echo PAGINATION; ?>, 50, 100, "All"] // change per page values here
         ],
         scrollX: true,
+        fixedHeader: true,
         // set the initial value
         pageLength: <?php echo PAGINATION; ?>,
         ajax: {
