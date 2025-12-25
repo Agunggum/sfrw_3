@@ -32,7 +32,7 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
     <script src="bootstrap/theme/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <div class="container col-12 m-1">
+    <div class="container col-12">
         <div class="my-2">
             <div class="alert alert-dark">
                 <small class="float-right font-weight-bold">S-FRW <?php echo VERSIONFRMAEWORK; ?> <i class="fa fa-copy"></i></small>
