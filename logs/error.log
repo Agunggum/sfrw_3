@@ -395,3 +395,4 @@
 2025-12-10 18:29:18 ~ ::1  ~ Chrome ~ Error 2 :: Line 4 :: Undefined variable $route :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\mvc\view\pagenotfound.view.php :: /sfrw_3/ccc
 2025-12-10 18:29:18 ~ ::1  ~ Chrome ~ Error 2 :: Line 5 :: Undefined variable $route :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\mvc\view\pagenotfound.view.php :: /sfrw_3/ccc
 2025-12-25 17:53:56 ~ ::1  ~ Chrome ~ Error 2 :: Line 41 :: fopen(logs/logrequest.log): Failed to open stream: No such file or directory :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\mvc\view\logs.view.php :: /sfrw_3/logs-
+2025-12-25 19:08:30 ~ ::1  ~ Chrome ~ Error 2 :: Line 3 :: fopen(../../logs/error.log): Failed to open stream: No such file or directory :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\mvc\view\logsfiles.view.php :: /sfrw_3/logsfiles

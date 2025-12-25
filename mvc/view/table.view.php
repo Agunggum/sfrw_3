@@ -499,4 +499,16 @@
             </div>
         </div>
     </div>
+<script>
+$(document).ready(function() {
+    $('.datatable').DataTable({
+        "lengthMenu": [
+            [<?php echo PAGINATION; ?>, 50, 100, -1],
+            [<?php echo PAGINATION; ?>, 50, 100, "All"] // change per page values here
+        ],
+        pageLength: <?php echo PAGINATION; ?>,
+        scrollX: true,
+    });
+});
+</script>
 <?php require_once view('footer'); ?>

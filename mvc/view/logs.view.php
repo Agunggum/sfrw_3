@@ -15,35 +15,39 @@
 
             <div class="col-12 col-md-12 col-xl-12 col-lg-12">
                 <section>
-                    <table class="datatable table table-striped">
+                    <table class="datatable-logs table table-striped">
                         <thead>
                             <tr>
-                                <th class="bg-light">Date</th>
-                                <th class="bg-light">IP Browser</th>
-                                <th class="bg-light">Information</th>
+                                <th>Date</th>
+                                <th>IP Browser</th>
+                                <th>Information</th>
                             </tr>
                         </thead>
-
-                        <tbody>
-                            <?php
-                            $filelogs = (!isset($_GET['file'])) ?  "error.log":$_GET['file'].".log";
-                            $nom= 1;
-                            $getfile = fopen('logs/'.$filelogs, 'r');
-                            while($data = fgets($getfile))
-                            {
-                            $dataarr=explode(' ~ ',$data);
-                            ?>
-                            <tr>
-                                <td><?php echo tgl_eng_to_format_timesec($dataarr[0]); ?></td>
-                                <td><?php echo $dataarr[1]; ?> :: <?php echo $dataarr[2]; ?></td>
-                                <td><?php echo $dataarr[3]; ?></td>
-                            </tr>
-                            <?php $nom++; } fclose($getfile); ?>
-
-                        </tbody>
                     </table>
                 </section>
             </div>
         </div>
     </div>
+<script>
+$(document).ready(function() {
+    $('.datatable-logs').DataTable({
+        "lengthMenu": [
+            [<?php echo PAGINATION; ?>, 50, 100, -1],
+            [<?php echo PAGINATION; ?>, 50, 100, "All"] // change per page values here
+        ],
+        scrollX: true,
+        // set the initial value
+        pageLength: <?php echo PAGINATION; ?>,
+        ajax: {
+            url: '<?php echo BASEURL.'logsfiles'; ?>',
+            dataSrc: ''
+        },
+        columns: [
+            {data: 'waktu'},
+            {data: 'level'},
+            {data: 'pesan'}
+        ]
+    });
+});
+</script>
 <?php require_once view('footer'); ?>

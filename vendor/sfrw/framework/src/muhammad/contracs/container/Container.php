@@ -76,6 +76,19 @@ function mysqlAmbilArray($query){
     return $result;
 }
 
+function ambilJson($query){
+    $array = fileCon(BASEPATH);
+    if($array[4] == "MySql"){
+        return "MySql tidak mendukung format json";
+    }elseif($array[4] == "MySqli"){
+        $data = array(); // Array kosong untuk menyimpan data
+        while ($row = mysqli_fetch_assoc($query)) {
+            $data[] = $row; // Tambahkan setiap baris ke array $data
+        }
+        return json_encode($data, JSON_PRETTY_PRINT);
+    }
+}
+
 function barisAngkaMysql($query){
     $array = fileCon(BASEPATH);
     if($array[4] == "MySql"){

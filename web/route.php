@@ -61,6 +61,10 @@ if(routeget('logs-', ROUTE)){
   ]);
 }else
 
+if(routeget('logsfiles', ROUTE)){
+  require_once view('logsfiles');
+}else
+
 {
   customErrorHandler(); // not found route
 }

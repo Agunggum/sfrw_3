@@ -5,30 +5,34 @@ if(DEBUG == 'true'){
 if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak terdeteksi pada fungsi query, cari di setiap folder yang memakai query atau telusuri halaman target"; }else{ $errstr = $arrerr[1]; }
 ?>
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo "ATASI : ".$errstr; ?></title>
     <meta name="description" content="S-FRW">
-    <link rel="shortcut icon" href="<?php echo BASEURL; ?>bootstrap/theme/globe-network.png" />
+    <link rel="icon" href="bootstrap/theme/logo-sfrw.ico" sizes="any" >
+    <link rel="icon" href="bootstrap/theme/logo-sfrw.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="bootstrap/theme/logo-sfrw.png">
     <meta property="og:title" content="S-FRW>" />
-    <meta property="og:image" content="<?php echo BASEURL; ?>bootstrap/theme/globe-network.png" />
+    <meta property="og:image" content="<?php echo BASEURL; ?>bootstrap/theme/logo-sfrw.png" />
     <meta property="og:url" content="<?php echo  BASEURL; ?>" />
     <meta property="og:description" content="S-FRW <?php echo VERSIONFRMAEWORK; ?>" />
     <meta property="og:site_name" content="S-FRW" />
     <style>
         @import "bootstrap/theme/css/bootstrap.css?v=0.1";
+        @import "bootstrap/theme/css/bootstrap.min.css?v=0.1";
         @import "bootstrap/theme/fontawesome/css/all.css";
     </style>
     <script src="bootstrap/theme/js/jquery-1.11.1.min.js"></script>
+    <script src="bootstrap/theme/js/jquery-3.7.1.js"></script>
     <script src="bootstrap/theme/js/bootstrap.min.js"></script>
     <script src="bootstrap/theme/fontawesome/js/all.js"></script>
-    <script src="bootstrap/theme/js/main.js?v=0.4"></script>
+    <script src="bootstrap/theme/js/bootstrap.bundle.min.js"></script>
 </head>
-<body class="bg-dark">
-    <div class="container col-12">
+<body>
+    <div class="container col-12 m-1">
         <div class="my-2">
             <div class="alert alert-dark">
                 <small class="float-right font-weight-bold">S-FRW <?php echo VERSIONFRMAEWORK; ?> <i class="fa fa-copy"></i></small>
@@ -90,6 +94,7 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
             </div>
         </div>
     </div>
+<script src="bootstrap/theme/js/main.js?v=0.4"></script>
 <script language="javascript">
 $(document).ready(function() {
     $(".comment").shorten();
