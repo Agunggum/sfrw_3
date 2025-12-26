@@ -20,27 +20,9 @@
         @import "bootstrap/theme/css/datatables-bootstrap-5.css";
         @import "bootstrap/theme/fontawesome/css/all.css";
         @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
-
-        :root {
-            --bg-body: #ffffff;
-            --text-main: #212529;
-            --card-bg: #f8f9fa;
-            --border-color: #dee2e6;
-            --accent-color: #0d6efd;
-        }
-
-        [data-bs-theme="dark"] {
-            --bg-body: #121212;
-            --text-main: #f8f9fa;
-            --card-bg: #1e1e1e;
-            --border-color: #333333;
-            --accent-color: #3786ff;
-        }
-
-        footer {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-        }
+        :root { --bg-body: #ffffff; --text-main: #212529; --card-bg: #f8f9fa; --border-color: #dee2e6; --accent-color: #0d6efd; }
+        [data-bs-theme="dark"] { --bg-body: #121212; --text-main: #f8f9fa; --card-bg: #1e1e1e; --border-color: #333333; --accent-color: #3786ff; }
+        footer { background-color: var(--card-bg); border: 1px solid var(--border-color); }
     </style>
     <script src="bootstrap/theme/js/jquery-1.11.1.min.js"></script>
     <script src="bootstrap/theme/js/jquery-3.7.1.js"></script>

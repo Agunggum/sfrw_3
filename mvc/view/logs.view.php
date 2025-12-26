@@ -27,9 +27,9 @@
             </div>
         </div>
     </div>
-    <footer class="fixed-bottom mt-auto border-top p-2 w-100" data-bs-theme="light">
+    <footer class="fixed-bottom mt-auto border-top m-1 p-2 rounded" data-bs-theme="light">
         <div class="container">
-            <span><?php echo COPYR; ?></span>
+            <span><i class="bi bi-c-circle"></i><?php echo COPYR; ?></span>
         </div>
     </footer>
 <script>
