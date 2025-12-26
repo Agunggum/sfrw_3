@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <footer class="fixed-bottom mt-auto border-top m-1 p-2 rounded" data-bs-theme="light">
+    <footer class="fixed-bottom mt-auto m-1 p-2 rounded" data-bs-theme="light">
         <div class="container">
             <span><i class="bi bi-c-circle"></i><?php echo COPYR; ?></span>
         </div>
