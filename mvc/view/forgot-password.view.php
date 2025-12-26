@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <div class="col-md-12 col-lg-12 col-xl-12 mt-5 mb-4 text-left">
+                        <div class="col-md-8 col-lg-8 col-xl-8 mt-5 mb-4 text-left">
                             <div class="h3"><span><?php echo WEBTITLE; ?></span></div>
                             <small data-toggle="modal" data-target="#versionmodal" style="vertical-align: super; font-size: small; cursor: pointer;"><i class="fa fa-copyright"></i> v<?php echo VERSION; ?></small>
                         </div>

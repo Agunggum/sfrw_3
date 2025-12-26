@@ -28,7 +28,7 @@
                     
                     <div class="d-flex justify-content-center">
                         
-                        <div class="col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-md-8 col-lg-8 col-xl-8">
                             <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
                                 <p class="h3 text-left font-weight-bold">Sign In.</p>
                                 
