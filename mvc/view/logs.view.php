@@ -30,6 +30,12 @@
 <script>
 $(document).ready(function() {
     $('.datatable-logs').DataTable({
+        layout: {
+            top2Start: 'pageLength',
+            top2End: 'search',
+            topStart: 'info',
+            topEnd: 'paging',
+        },
         "lengthMenu": [
             [<?php echo PAGINATION; ?>, 50, 100, -1],
             [<?php echo PAGINATION; ?>, 50, 100, "All"] // change per page values here
