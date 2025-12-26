@@ -367,7 +367,7 @@ function daydateandtime_indo($date) {
 		$bl = 'Desember';
 	}
 
-	return $hari_ini.", ".$tgl." ".$bl." ".$thn.", ".$time;
+	return $hari_ini.", ".$tgl." ".$bl." ".$thn." ".$time;
 }
 
 function get_client_ip() {
