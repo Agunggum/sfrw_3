@@ -71,7 +71,9 @@ function customErrorHandler() {
         $data .= PHP_EOL;
         $directory = "logs/";
         $pathToFile = $directory.'error.log';
+        if(DEBUG == 'true'){
         file_put_contents($pathToFile, $data, FILE_APPEND);
+        }
         echo "<script>setTimeout(function () { document.location='".$_SERVER['REQUEST_URI']."'; }, 2);</script>";
     }
 }
