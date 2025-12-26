@@ -306,6 +306,70 @@ function dateandtime_indo($date) {
 	return $tgl." ".$bl." ".$thn.", ".$time;
 }
 
+function daydateandtime_indo($date) {
+    list($ltgl,$time)=explode(' ',$date);
+    list($thn,$bln,$tgl)=explode('-',$ltgl);
+    $hari = date ("D",  strtotime($ltgl));
+
+    switch($hari){
+		case 'Sun':
+			$hari_ini = "Minggu";
+		break;
+ 
+		case 'Mon':			
+			$hari_ini = "Senin";
+		break;
+ 
+		case 'Tue':
+			$hari_ini = "Selasa";
+		break;
+ 
+		case 'Wed':
+			$hari_ini = "Rabu";
+		break;
+ 
+		case 'Thu':
+			$hari_ini = "Kamis";
+		break;
+ 
+		case 'Fri':
+			$hari_ini = "Jumat";
+		break;
+ 
+		case 'Sat':
+			$hari_ini = "Sabtu";
+		break;
+	}
+
+	if($bln=='01'){
+		$bl = 'Januari';
+	}elseif($bln=='02'){
+		$bl = 'Februari';
+	}elseif($bln=='03'){
+		$bl = 'Maret';
+	}elseif($bln=='04'){
+		$bl = 'April';
+	}elseif($bln=='05'){
+		$bl = 'Mei';
+	}elseif($bln=='06'){
+		$bl = 'Juni';
+	}elseif($bln=='07'){
+		$bl = 'Juli';
+	}elseif($bln=='08'){
+		$bl = 'Agustus';
+	}elseif($bln=='09'){
+		$bl = 'September';
+	}elseif($bln=='10'){
+		$bl = 'Oktober';
+	}elseif($bln=='11'){
+		$bl = 'November';
+	}elseif($bln=='12'){
+		$bl = 'Desember';
+	}
+
+	return $hari_ini.", ".$tgl." ".$bl." ".$thn.", ".$time;
+}
+
 function get_client_ip() {
     $ipaddress = '';
     if (getenv('HTTP_CLIENT_IP'))

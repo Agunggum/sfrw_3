@@ -10,7 +10,7 @@ if ($getfile) {
         // Pastikan jumlah elemen sesuai sebelum memasukkan ke array
         if (count($parts) >= 3) {
             $result[] = [
-                'waktu'   => $parts[0],
+                'waktu'   => daydateandtime_indo($parts[0]),
                 'level'   => $parts[1].', '.$parts[2],
                 'pesan'   => $parts[3]
             ];
