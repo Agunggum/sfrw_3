@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <footer class="position-fixed bottom-0 mt-auto border-top p-2 w-100" data-bs-theme="light">
+    <footer class="fixed-bottom mt-auto border-top p-2 w-100" data-bs-theme="light">
         <div class="container">
             <span><?php echo COPYR; ?></span>
         </div>
