@@ -97,28 +97,28 @@ if(DEBUG == 'true'){
                     <div class="col-lg-12">
                         <div class="alert alert-secondary">
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong>Lingkungan :</strong>
+                                <strong class="text-danger">Lingkungan :</strong>
                             </div>
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <span class="text-danger font-weight-bold"><?php echo ENVIRONMENT; ?></span>
+                                <em><?php echo ENVIRONMENT; ?></em>
                             </div>
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong>Browser :</strong>
+                                <strong class="text-danger font-weight-bold">Browser :</strong>
                             </div>
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <span class="text-danger font-weight-bold"><?php echo get_client_browser(); ?></span>
+                                <em><?php echo get_client_browser(); ?></em>
                             </div>
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong>IP :</strong>
+                                <strong class="text-danger font-weight-bold">IP :</strong>
                             </div>
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <span class="text-danger font-weight-bold"><?php echo get_client_ip(); ?></span>
+                                <em><?php echo get_client_ip(); ?></em>
                             </div>
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong>Kirim e-Mail :</strong>
+                                <strong class="text-danger font-weight-bold">Kirim e-Mail :</strong>
                             </div>
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <span class="text-danger font-weight-bold"><?php echo MAILACTIVATE; ?></span>
+                                <em><?php echo MAILACTIVATE; ?></em>
                             </div>
                         </div>
                     </div>
