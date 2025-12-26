@@ -1,6 +1,6 @@
 <?php if ( ! defined('APPPATH')) exit('No direct script access allowed'); ?>
 <?php require_once view('header'); ?>
-    <div class="container col-12 col-xl-12 col-lg-12">
+    <div class="container col-12 col-xl-12 col-lg-12 mb-5">
         <div class="row">
             <div class="col-xl-12 col-lg-12 pt-2">
                 <span class="float-right">
@@ -33,4 +33,9 @@
             </div>
         </div>
     </div>
+    <footer class="position-fixed bottom-0 mt-auto border-top p-2 w-100" data-bs-theme="light">
+        <div class="container">
+            <span><?php echo COPYR; ?></span>
+        </div>
+    </footer>
 <?php require_once view('footer'); ?>

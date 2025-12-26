@@ -11,7 +11,7 @@ define('WEBNAME', 'Sunda Framework - SFRW');
 define('MAILTITLE', 'Sunda Framework - SFRW');
 define('VERSION', '1.0');
 define('TVERSION', '');
-if(date('Y')=='2025'){ define('COPYR', ''.date('Y')); }else{ define('COPYR', '2025 - '.date('Y')); }
+define('COPYR', (date('Y')=='2025') ? ''.date('Y'):'2025 - '.date('Y'));
 
 /*****************************************************************/
 /* Date timezone
