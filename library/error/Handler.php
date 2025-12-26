@@ -103,6 +103,18 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
                                 <span class="text-danger font-weight-bold"><?php echo ENVIRONMENT; ?></span>
                             </div>
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
+                                <strong>Browser :</strong>
+                            </div>
+                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
+                                <span class="text-danger font-weight-bold"><?php echo get_client_browser(); ?></span>
+                            </div>
+                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
+                                <strong>IP :</strong>
+                            </div>
+                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
+                                <span class="text-danger font-weight-bold"><?php echo get_client_ip(); ?></span>
+                            </div>
+                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
                                 <strong>Kirim e-Mail :</strong>
                             </div>
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
