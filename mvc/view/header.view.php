@@ -19,6 +19,7 @@
         @import "bootstrap/theme/css/bootstrap.min.css?v=0.1";
         @import "bootstrap/theme/css/datatables-bootstrap-5.css";
         @import "bootstrap/theme/fontawesome/css/all.css";
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
     </style>
     <script src="bootstrap/theme/js/jquery-1.11.1.min.js"></script>
     <script src="bootstrap/theme/js/jquery-3.7.1.js"></script>

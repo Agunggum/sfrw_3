@@ -36,13 +36,18 @@
                                 
                                 <form class="m-t" role="form" method="post" action="">
                                     <!-- Email input -->
-                                    <div data-mdb-input-init class="form-outline mb-4 text-left">
-                                        <input type="username" name="username" id="username" class="form-control" placeholder="username or email" required />
+                                    <div class="mb-4 text-left">
+                                        <input type="username" name="username" id="username" class="form-control" placeholder="username or email" autocomplete="off" required />
                                     </div>
 
                                     <!-- Password input -->
-                                    <div data-mdb-input-init class="form-outline mb-4 text-left">
-                                        <input type="password" name="password" id="password" class="form-control" placeholder="password" required />
+                                    <div class="mb-4 text-left">
+                                        <div class="input-group">
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="password" autocomplete="off" required />
+                                            <button id="toggle-password" class="btn btn-outline-secondary" type="button">
+                                                <i class="bi bi-eye-slash"></i>
+                                            </button>
+                                        </div>
                                     </div>
 
                                     <!-- 2 column grid layout for inline styling -->

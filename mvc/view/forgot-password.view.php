@@ -8,6 +8,16 @@
             <div class="col-md-12 col-lg-6 col-xl-6 shadow rounded-5" style="height: 100vh; overflow-y: auto;">
                 
                 <div class="text-center">
+                    <div class="pt-2">
+                        <span class="float-right">
+                            <div class="form-check form-switch">
+                                <label class="form-check-label mr-5" for="darkModeToggle"><i class="fas fa-sun"></i></label>
+                                <input class="form-check-input" type="checkbox" role="switch" id="darkModeToggle">
+                                <label class="form-check-label" for="darkModeToggle"><i class="fas fa-moon"></i></label>
+                            </div>
+                        </span>
+                    </div>
+                    
                     <div class="d-flex justify-content-center">
                         <div class="col-md-12 col-lg-12 col-xl-12 mt-5 mb-4 text-left">
                             <div class="h3"><span><?php echo WEBTITLE; ?></span></div>

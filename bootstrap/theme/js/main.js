@@ -10,173 +10,118 @@
             lessText: "<i class='fa fa-angles-up'></i> Sembunyikan",
             onLess: function() {},
             onMore: function() {},
-            errMsg: null,
             force: false
         };
 
-        if (settings) {
-            $.extend(config, settings);
-        }
+        if (settings) $.extend(config, settings);
 
-        if ($(this).data('jquery.shorten') && !config.force) {
-            return false;
-        }
-        $(this).data('jquery.shorten', true);
-
-        $(document).off("click", '.morelink');
-
-        $(document).on({
-            click: function() {
-
+        // Gunakan delegasi event sekali saja untuk efisiensi
+        if (!$(document).data('shorten-event-initialized')) {
+            $(document).on('click', '.morelink', function(e) {
+                e.preventDefault();
                 var $this = $(this);
-                if ($this.hasClass('less')) {
-                    $this.removeClass('less');
-                    $this.html(config.moreText);
-                    $this.parent().prev().animate({'height':'0'+'%'}, function () { $this.parent().prev().prev().show(); }).hide('fast', function() {
-                        config.onLess();
-                      });
+                var $container = $this.closest('.shorten-container');
+                var $shortContent = $container.find('.shortcontent');
+                var $allContent = $container.find('.allcontent');
 
+                if ($this.hasClass('less')) {
+                    $this.removeClass('less').html(config.moreText);
+                    $allContent.slideUp('fast', function() {
+                        $shortContent.show();
+                        config.onLess();
+                    });
                 } else {
-                    $this.addClass('less');
-                    $this.html(config.lessText);
-                    $this.parent().prev().animate({'height':'100'+'%'}, function () { $this.parent().prev().prev().hide(); }).show('fast', function() {
+                    $this.addClass('less').html(config.lessText);
+                    $shortContent.hide();
+                    $allContent.slideDown('fast', function() {
                         config.onMore();
-                      });
+                    });
                 }
-                return false;
-            }
-        }, '.morelink');
+            });
+            $(document).data('shorten-event-initialized', true);
+        }
 
         return this.each(function() {
-            var $this = $(this);
+            var $el = $(this);
+            if ($el.data('jquery.shorten') && !config.force) return;
+            $el.data('jquery.shorten', true);
 
-            var content = $this.html();
-            var contentlen = $this.text().length;
-            if (contentlen > config.showChars + config.minHideChars) {
-                var c = content.substr(0, config.showChars);
-                if (c.indexOf('<') >= 0) // If there's HTML don't want to cut it
-                {
-                    var inTag = false; // I'm in a tag?
-                    var bag = ''; // Put the characters to be shown here
-                    var countChars = 0; // Current bag size
-                    var openTags = []; // Stack for opened tags, so I can close them later
-                    var tagName = null;
+            var content = $el.html();
+            var textLen = $el.text().length;
 
-                    for (var i = 0, r = 0; r <= config.showChars; i++) {
-                        if (content[i] == '<' && !inTag) {
-                            inTag = true;
+            if (textLen > config.showChars + config.minHideChars) {
+                // Gunakan cara aman untuk memotong teks tanpa merusak HTML
+                var visibleText = content.substring(0, config.showChars);
+                
+                // Perbaikan: Memastikan tag HTML yang terpotong tertutup otomatis
+                var tempDiv = document.createElement('div');
+                tempDiv.innerHTML = visibleText;
+                var safeShortHtml = tempDiv.innerHTML;
 
-                            // This could be "tag" or "/tag"
-                            tagName = content.substring(i + 1, content.indexOf('>', i));
+                var html = `
+                    <div class="shorten-container">
+                        <div class="shortcontent">${safeShortHtml}<span class="ellip">${config.ellipsesText}</span></div>
+                        <div class="allcontent" style="display:none">${content}</div>
+                        <div class="mt-2">
+                            <a href="#" class="morelink btn btn-outline-danger btn-sm float-right">${config.moreText}</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>`;
 
-                            // If its a closing tag
-                            if (tagName[0] == '/') {
-
-
-                                if (tagName != '/' + openTags[0]) {
-                                    config.errMsg = 'ERROR en HTML: the top of the stack should be the tag that closes';
-                                } else {
-                                    openTags.shift(); // Pops the last tag from the open tag stack (the tag is closed in the retult HTML!)
-                                }
-
-                            } else {
-                                // There are some nasty tags that don't have a close tag like <br/>
-                                if (tagName.toLowerCase() != 'br') {
-                                    openTags.unshift(tagName); // Add to start the name of the tag that opens
-                                }
-                            }
-                        }
-                        if (inTag && content[i] == '>') {
-                            inTag = false;
-                        }
-
-                        if (inTag) { bag += content.charAt(i); } // Add tag name chars to the result
-                        else {
-                            r++;
-                            if (countChars <= config.showChars) {
-                                bag += content.charAt(i); // Fix to ie 7 not allowing you to reference string characters using the []
-                                countChars++;
-                            } else // Now I have the characters needed
-                            {
-                                if (openTags.length > 0) // I have unclosed tags
-                                {
-                                    //console.log('They were open tags');
-                                    //console.log(openTags);
-                                    for (j = 0; j < openTags.length; j++) {
-                                        //console.log('Cierro tag ' + openTags[j]);
-                                        bag += '</' + openTags[j] + '>'; // Close all tags that were opened
-
-                                        // You could shift the tag from the stack to check if you end with an empty stack, that means you have closed all open tags
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    c = $('<div/>').html(bag + '<span class="ellip">' + config.ellipsesText + '</span>').html();
-                }else{
-                    c+=config.ellipsesText;
-                }
-
-                var html = '<div class="shortcontent">' + c +
-                    '</div><div class="allcontent">' + content +
-                    '</div><span><a href="javascript://nop/" class="morelink btn btn-outline-danger btn-sm float-right">' + config.moreText + '</a></span>';
-
-                $this.html(html);
-                $this.find(".allcontent").hide(); // Hide all text
-                $('.shortcontent p:last', $this).css('margin-bottom', 0); //Remove bottom margin on last paragraph as it's likely shortened
+                $el.html(html);
             }
         });
-
     };
-
 })(jQuery);
 
-(() => {
-    'use strict';
-
+// --- Theme Toggle & Initialize ---
+document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('darkModeToggle');
-    const htmlElement = document.documentElement; // Target the <html> element for Bootstrap's data-bs-theme attribute
+    const htmlElement = document.documentElement;
 
-    // Function to get the stored theme from local storage
-    const getStoredTheme = () => localStorage.getItem('theme');
-
-    // Function to set the theme in local storage
-    const setStoredTheme = theme => localStorage.setItem('theme', theme);
-
-    // Function to apply the theme to the HTML element
-    const applyTheme = theme => {
-        if (theme === 'dark') {
-            htmlElement.setAttribute('data-bs-theme', 'dark');
-            themeToggle.checked = true; // Ensure the toggle reflects the dark mode state
-        } else {
-            htmlElement.removeAttribute('data-bs-theme'); // Removes the attribute for light mode (default)
-            themeToggle.checked = false; // Ensure the toggle reflects the light mode state
-        }
+    const applyTheme = (theme) => {
+        theme === 'dark' ? htmlElement.setAttribute('data-bs-theme', 'dark') : htmlElement.removeAttribute('data-bs-theme');
+        if(themeToggle) themeToggle.checked = (theme === 'dark');
     };
 
-    // Get preferred theme (from local storage or system preference)
-    const getPreferredTheme = () => {
-        const storedTheme = getStoredTheme();
-        if (storedTheme) {
-            return storedTheme;
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
+    const preferredTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(preferredTheme);
 
-    // Apply the preferred theme on page load
-    applyTheme(getPreferredTheme());
+    if(themeToggle) {
+        themeToggle.addEventListener('change', () => {
+            const newTheme = themeToggle.checked ? 'dark' : 'light';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    }
 
-    // Event listener for the toggle switch
-    themeToggle.addEventListener('change', () => {
-        const newTheme = themeToggle.checked ? 'dark' : 'light';
-        applyTheme(newTheme);
-        setStoredTheme(newTheme);
-    });
-})();
-
-$(document).ready(function() {
-    $('.datatable').DataTable({
-        scrollX: true,
-    });
+    // Initialize Plugins
+    if ($.fn.DataTable) {
+        $('.datatable').DataTable({ scrollX: true });
+    }
+    
+    // Initialize Shorten
+    $('.shorten').shorten();
 });
+
+// --- Password Toggle ---
+const togglePassword = document.querySelector('#toggle-password');
+const passwordField = document.querySelector('#password');
+
+if (togglePassword && passwordField) {
+    togglePassword.addEventListener('click', function (e) {
+        // Mencegah form submit jika tombol di dalam form
+        e.preventDefault(); 
+        
+        // Toggle tipe input
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+
+        // Toggle ikon (Bootstrap Icons)
+        const icon = this.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('bi-eye');
+            icon.classList.toggle('bi-eye-slash');
+        }
+    });
+}
