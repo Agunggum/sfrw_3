@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" href="bootstrap/theme/logo-sfrw.png">
     <meta property="og:title" content="<?php echo WEBTITLETOP; ?>>" />
     <meta property="og:image" content="bootstrap/theme/globe-network.png" />
-    <meta property="og:url" content="<?php echo  BASEURL; ?>" />
+    <meta property="og:url" content="<?php echo BASEURL; ?>" />
     <meta property="og:description" content="<?php echo WEBTITLE; ?> <?php echo VERSIONFRMAEWORK; ?>" />
     <meta property="og:site_name" content="<?php echo WEBTITLE; ?>" />
     <style>

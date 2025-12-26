@@ -11,15 +11,15 @@ if(DEBUG == 'true'){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo "ATASI : ".$errstr; ?></title>
-    <meta name="description" content="S-FRW">
+    <meta name="description" content="<?php echo WEBTITLETOP; ?>">
     <link rel="icon" href="bootstrap/theme/logo-sfrw.ico" sizes="any" >
     <link rel="icon" href="bootstrap/theme/logo-sfrw.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="bootstrap/theme/logo-sfrw.png">
-    <meta property="og:title" content="S-FRW>" />
+    <meta property="og:title" content="<?php echo WEBTITLETOP; ?>" />
     <meta property="og:image" content="<?php echo BASEURL; ?>bootstrap/theme/logo-sfrw.png" />
     <meta property="og:url" content="<?php echo  BASEURL; ?>" />
-    <meta property="og:description" content="S-FRW <?php echo VERSIONFRMAEWORK; ?>" />
-    <meta property="og:site_name" content="S-FRW" />
+    <meta property="og:description" content="<?php echo WEBTITLETOP; ?> <?php echo VERSIONFRMAEWORK; ?>" />
+    <meta property="og:site_name" content="<?php echo WEBTITLETOP; ?>" />
     <style>
         @import "bootstrap/theme/css/bootstrap.css?v=5.3.8";
         @import "bootstrap/theme/css/bootstrap.min.css?v=5.3.8";
