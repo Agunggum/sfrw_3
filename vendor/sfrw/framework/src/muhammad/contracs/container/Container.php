@@ -305,4 +305,124 @@ function readmoreins($get) {
     $base = substr($get,0,100)." [...]";
     return $base;
 }
+
+//form
+function forminput($data = [], $bootstrap = []) {
+    $typeform = (isset($data[0])) ? $data[0]:'text';
+    $nameform = (isset($data[1])) ? $data[1]:'name';
+    $idform = (isset($data[2])) ? $data[2]:'id';
+    $placeholderform = (isset($data[3])) ? $data[3]:'';
+    $autocompleteform = (isset($data[4])) ? $data[4]:'off';
+    $requiredform = (isset($data[5]) and $data[5] == 'required') ? $data[5]:'';
+
+    $bootstrapgroup = (isset($bootstrap[0])) ? $bootstrap[0]:'';
+    $bootstrapgroupalign = (isset($bootstrap[1])) ? $bootstrap[1]:'right';
+    $bootstrapgroupicon = (isset($bootstrap[2])) ? $bootstrap[2]:'';
+
+    if($bootstrapgroup=='group'){
+        if($bootstrapgroupalign=='left'){
+            $input = '<div class="input-group">'.$bootstrapgroupicon.'<input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' /></div>';
+        }else{
+            $input = '<div class="input-group"><input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' />'.$bootstrapgroupicon.'</div>';
+        }
+    }else{
+        $input = '<input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' />';
+    }
+
+    return '<div class="mb-4 text-left">'.$input.'</div>';
+}
+
+function formselect($select = [], $data = [], $bootstrap = []) {
+    $nameform = (isset($data[0])) ? $data[0]:'name';
+    $idform = (isset($data[1])) ? $data[1]:'id';
+    $placeholderform = (isset($data[2])) ? $data[2]:'';
+    $requiredform = (isset($data[3]) and $data[3] == 'required') ? $data[3]:'';
+
+    $bootstrapgroup = (isset($bootstrap[0])) ? $bootstrap[0]:'';
+    $bootstrapgroupalign = (isset($bootstrap[1])) ? $bootstrap[1]:'right';
+    $bootstrapgroupicon = (isset($bootstrap[2])) ? $bootstrap[2]:'';
+
+    if($bootstrapgroup=='group'){
+        if($bootstrapgroupalign=='left'){
+            $input = '<div class="input-group">'.$bootstrapgroupicon.'<div class="form-floating"><select name="'.$nameform.'" id="'.$idform.'" class="form-select" '.$requiredform.'">';
+            foreach ($select as $selects) {
+                $input .= '<option>'.$selects.'</option>';
+            }
+            $input .= '</select>';
+            $input .= '<label for="'.$idform.'">'.$placeholderform.'</label></div></div>';
+        }else{
+            $input = '<div class="input-group"><div class="form-floating"><select name="'.$nameform.'" id="'.$idform.'" class="form-select" '.$requiredform.'">';
+            foreach ($select as $selects) {
+                $input .= '<option>'.$selects.'</option>';
+            }
+            $input .= '</select>';
+            $input .= '<label for="'.$idform.'">'.$placeholderform.'</label></div>'.$bootstrapgroupicon.'</div>';
+        }
+    }else{
+        $input = '<div class="form-floating"><select name="'.$nameform.'" id="'.$idform.'" class="form-select" '.$requiredform.'">';
+        foreach ($select as $selects) {
+            $input .= '<option>'.$selects.'</option>';
+        }
+        $input .= '</select>';
+        $input .= '<label for="'.$idform.'">'.$placeholderform.'</label></div>';
+    }
+
+    return '<div class="mb-4 text-left">'.$input.'</div>';
+}
+
+function formradio($select = [], $data = [], $bootstrap = []) {
+    $nameform = (isset($data[0])) ? $data[0]:'name';
+    $requiredform = (isset($data[1]) and $data[1] == 'required') ? $data[1]:'';
+
+    $bootstrapgroup = (isset($bootstrap[0])) ? $bootstrap[0]:'';
+    $bootstrapgroupalign = (isset($bootstrap[1])) ? $bootstrap[1]:'right';
+    $bootstrapgroupicon = (isset($bootstrap[2])) ? $bootstrap[2]:'';
+
+    $input = '';
+    if($bootstrapgroup=='group'){
+        if($bootstrapgroupalign=='left'){
+            foreach ($select as $selects) {
+                $input .= '<div class="input-group">'.$bootstrapgroupicon.'<div class="form-check"><input class="form-check-input" type="radio" name="'.$nameform.'" id="'.strtolower(str_replace(" ", "", $selects)).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'" '.$requiredform.'>'.$selects.'</label></div></div>';
+            }
+        }else{
+            foreach ($select as $selects) {
+                $input .= '<div class="input-group"><div class="form-check"><input class="form-check-input" type="radio" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'" '.$requiredform.'>'.$selects.'</label></div>'.$bootstrapgroupicon.'</div>';
+            }
+        }
+    }else{
+        foreach ($select as $selects) {
+            $input .= '<div class="form-check"><input class="form-check-input" type="radio" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'" '.$requiredform.'>'.$selects.'</label></div>';
+        }
+    }
+
+    return '<div class="mb-4 text-left">'.$input.'</div>';
+}
+
+function formcheck($select = [], $data = [], $bootstrap = []) {
+    $nameform = (isset($data[0])) ? $data[0]:'name';
+    $requiredform = (isset($data[1]) and $data[1] == 'required') ? $data[1]:'';
+
+    $bootstrapgroup = (isset($bootstrap[0])) ? $bootstrap[0]:'';
+    $bootstrapgroupalign = (isset($bootstrap[1])) ? $bootstrap[1]:'right';
+    $bootstrapgroupicon = (isset($bootstrap[2])) ? $bootstrap[2]:'';
+
+    $input = '';
+    if($bootstrapgroup=='group'){
+        if($bootstrapgroupalign=='left'){
+            foreach ($select as $selects) {
+                $input .= '<div class="input-group">'.$bootstrapgroupicon.'<div class="form-check"><input class="form-check-input" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div></div>';
+            }
+        }else{
+            foreach ($select as $selects) {
+                $input .= '<div class="input-group"><div class="form-check"><input class="form-check-input" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>'.$bootstrapgroupicon.'</div>';
+            }
+        }
+    }else{
+        foreach ($select as $selects) {
+            $input .= '<div class="form-check"><input class="form-check-input" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>';
+        }
+    }
+
+    return '<div class="mb-4 text-left">'.$input.'</div>';
+}
 /* End of file Container.php */

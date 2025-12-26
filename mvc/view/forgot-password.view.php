@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <div class="col-md-8 col-lg-8 col-xl-8 mt-5 mb-4 text-left">
+                        <div class="col-md-12 col-lg-12 col-xl-12 mt-5 mb-4 text-left">
                             <div class="h3"><span><?php echo WEBTITLE; ?></span></div>
                             <small data-toggle="modal" data-target="#versionmodal" style="vertical-align: super; font-size: small; cursor: pointer;"><i class="fa fa-copyright"></i> v<?php echo VERSION; ?></small>
                         </div>
@@ -28,15 +28,13 @@
                     
                     <div class="d-flex justify-content-center">
                         
-                        <div class="col-md-12 col-lg-12 col-xl-12">
+                        <div class="col-md-8 col-lg-8 col-xl-8">
                             <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
                                 <p class="h3 text-left font-weight-bold">Forgot password.</p>
                                 
                                 <form class="m-t" role="form" method="post" action="">
                                     <!-- Email input -->
-                                    <div data-mdb-input-init class="form-outline mb-4 text-left">
-                                        <input type="username" name="username" id="username" class="form-control" placeholder="email" required />
-                                    </div>
+                                     <?php echo forminput(['email', 'username', 'username', 'email', 'off', 'required']); ?>
 
                                     <!-- Submit button -->
                                     <button type="submit" value="MASUK" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Confirm</button>

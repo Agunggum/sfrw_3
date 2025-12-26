@@ -34,28 +34,16 @@
                                 
                                 <form class="m-t" role="form" method="post" action="">
                                     <!-- Email input -->
-                                    <div class="mb-4 text-left">
-                                        <input type="username" name="username" id="username" class="form-control" placeholder="username or email" autocomplete="off" required />
-                                    </div>
+                                    <?php echo forminput(['username', 'username', 'username', 'username or email', 'off', 'required']); ?>
 
                                     <!-- Password input -->
-                                    <div class="mb-4 text-left">
-                                        <div class="input-group">
-                                            <input type="password" name="password" id="password" class="form-control" placeholder="password" autocomplete="off" required />
-                                            <button id="toggle-password" class="btn btn-outline-secondary" type="button">
-                                                <i class="bi bi-eye-slash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                    <?php echo forminput(['password', 'password', 'password', 'password', 'off', 'required'], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>']); ?>
 
                                     <!-- 2 column grid layout for inline styling -->
                                     <div class="row mb-4">
                                         <div class="col d-flex justify-content-center">
                                         <!-- Checkbox -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="rememberme" />
-                                            <label class="form-check-label" for="rememberme"> Remember me </label>
-                                        </div>
+                                        <?php echo formcheck(['Remember me']); ?>
                                         </div>
 
                                         <div class="col">
