@@ -15,8 +15,8 @@
     <meta property="og:description" content="<?php echo WEBTITLE; ?> <?php echo VERSIONFRMAEWORK; ?>" />
     <meta property="og:site_name" content="<?php echo WEBTITLE; ?>" />
     <style>
-        @import "bootstrap/theme/css/bootstrap.css?v=0.1";
-        @import "bootstrap/theme/css/bootstrap.min.css?v=0.1";
+        @import "bootstrap/theme/css/bootstrap.css?v=5.3.8";
+        @import "bootstrap/theme/css/bootstrap.min.css?v=5.3.8";
         @import "bootstrap/theme/css/datatables-bootstrap-5.css";
         @import "bootstrap/theme/fontawesome/css/all.css";
         @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");

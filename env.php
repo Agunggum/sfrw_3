@@ -13,6 +13,11 @@ define('VERSION', '1.0');
 define('TVERSION', '');
 if(date('Y')=='2025'){ define('COPYR', ''.date('Y')); }else{ define('COPYR', '2025 - '.date('Y')); }
 
+/*****************************************************************/
+/* Date timezone
+*/
+date_default_timezone_set("Asia/Jakarta");
+define('DATEWMIN', date("Y-m-d H:i:s"));
 /*
 /* Expired time
 /* waktu sekarang GMT+7

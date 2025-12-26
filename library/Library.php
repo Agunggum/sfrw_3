@@ -8,9 +8,7 @@ if ( ! ('library')) exit('No direct script access allowed');
 */
 
 function customError($errno, $errstr, $errfile, $errline) {
-    date_default_timezone_set("Asia/Jakarta");
-    $dates = gmdate("Y-m-d H:i:s", time()+60*60*7);
-    $datesc = gmdate("Y-m-d", time()+60*60*7);
+    $dates = date("Y-m-d H:i:s");
     if (!empty($errno) and DEBUG == 'true') {
         $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] = $errno;
         $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'] = $errstr;
@@ -57,7 +55,7 @@ function customError($errno, $errstr, $errfile, $errline) {
 }
 
 function customErrorHandler() {
-    $dates = gmdate("Y-m-d H:i:s", time()+60*60*7);
+    $dates = date("Y-m-d H:i:s");
     $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] = "E-ROUTE-404";
     $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'] = "Rute tidak ditemukan: ".ROUTE;
     $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'] = "0".", "."Rute tidak ditemukan: ".ROUTE.", , ".$_SERVER['REQUEST_URI'].", ".$dates;

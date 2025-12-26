@@ -10,8 +10,3 @@ define('ROUTE', (isset($_GET['params'])) ? $_GET['params']:"");
 */
 define('BASESESSION', (isset($_SESSION['user'])) ? $_SESSION['user']:"");
 define('ACCESSME', (isset($_SESSION['accessme'])) ? $_SESSION['accessme']:"");
-/*****************************************************************/
-/* Date timezone
-*/
-date_default_timezone_set("Asia/Jakarta");
-define('DATEWMIN', gmdate("Y-m-d H:i:s", time()+60*60*7));

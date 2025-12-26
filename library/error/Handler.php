@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $arrerr = explode(", ", $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN']);
 
-if(DEBUG == 'true'){
 if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak terdeteksi pada fungsi query, cari di setiap folder yang memakai query atau telusuri halaman target"; }else{ $errstr = $arrerr[1]; }
+if(DEBUG == 'true'){
 ?>
 <!doctype html>
 <html class="no-js" lang="en" data-bs-theme="light">
@@ -21,8 +21,8 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
     <meta property="og:description" content="S-FRW <?php echo VERSIONFRMAEWORK; ?>" />
     <meta property="og:site_name" content="S-FRW" />
     <style>
-        @import "bootstrap/theme/css/bootstrap.css?v=0.1";
-        @import "bootstrap/theme/css/bootstrap.min.css?v=0.1";
+        @import "bootstrap/theme/css/bootstrap.css?v=5.3.8";
+        @import "bootstrap/theme/css/bootstrap.min.css?v=5.3.8";
         @import "bootstrap/theme/fontawesome/css/all.css";
     </style>
     <script src="bootstrap/theme/js/jquery-1.11.1.min.js"></script>
@@ -135,5 +135,12 @@ $(document).ready(function() {
 </script>
 </body>
 </html>
-<?php $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] = ""; $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'] = ""; $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'] = ""; ?>
-<?php }else{ require_once BASEPATH.'error/500handler.php'; } exit(); ?>
+<?php }else{ 
+    if($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] == "E-ROUTE-404"){
+        require_once BASEPATH.'error/404handler.php';
+    }else{
+        require_once BASEPATH.'error/500handler.php'; 
+    }
+} 
+$_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] = ""; $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'] = ""; $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'] = "";
+exit(); ?>
