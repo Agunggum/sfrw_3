@@ -3,7 +3,7 @@ define('ENVIRONMENT', 'local');
 define('DEBUG', 'true');
 define('BASEURL', 'http://localhost/sfrw_3/');
 define('BASESKIN', 'default'.'/');
-define('DBNAME', ''); //lihat juga pada config.txt pada folder library
+define('CONNECTION', 'false'); // true or false lihat juga pada config.txt pada folder library
 
 define('WEBTITLE', 'Sunda Framework - SFRW');
 define('WEBTITLETOP', 'SFRW');
