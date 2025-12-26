@@ -1,7 +1,5 @@
 <?php if ( ! defined('APPPATH')) exit('No direct script access allowed'); ?>
 <?php require_once view('header'); ?>
-<body>
-
     <div class="col-md-12 col-lg-12 col-xl-12">
         <div class="row">
             

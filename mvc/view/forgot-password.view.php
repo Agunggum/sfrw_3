@@ -1,7 +1,5 @@
 <?php if ( ! defined('APPPATH')) exit('No direct script access allowed'); ?>
 <?php require_once view('header'); ?>
-<body>
-
     <div class="col-md-12 col-lg-12 col-xl-12">
         <div class="row">
             
@@ -17,7 +15,7 @@
                             </div>
                         </span>
                     </div>
-                    
+
                     <div class="d-flex justify-content-center">
                         <div class="col-md-12 col-lg-12 col-xl-12 mt-5 mb-4 text-left">
                             <div class="h3"><span><?php echo WEBTITLE; ?></span></div>
