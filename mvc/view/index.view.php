@@ -25,7 +25,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <p class="card-text">Pelajari lebih lanjut.</p>
-                                <a href="https://documentation.agunggum.id/" target="_blank" class="card-link">dokumentasi</a>
+                                <a href="https://documentation.agunggum.id/" target="_blank" class="btn btn-outline-info">dokumentasi</a>
                             </div>
                         </div>
                     </div>
