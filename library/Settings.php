@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //koneksi ke database via methode/function yang ada di config.php
-if(DBNAME != ''){ db::connectMySQL(BASEPATH); }
+if(DBNAME != ''){ db::connectMySQL(BASEPATH,'config'); }
 // Define page route
 define('ROUTE', (isset($_GET['params'])) ? $_GET['params']:"");
 /*****************************************************************/

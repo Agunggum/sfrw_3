@@ -3,8 +3,8 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class db {
 
-	static public function connectMySQL($base) {
-        $array = fileCon($base);
+	static public function connectMySQL($base,$file) {
+        $array = fileCon($base,$file);
 		if($array[4] == 'MySql'){
 			mysql_connect($array[0], $array[1], $array[2]);
 			mysql_select_db($array[3]) or die(print "Konfigurasi dalam server : Tidak terhubung dengan database.");
@@ -18,8 +18,8 @@ class db {
 		}
 	}
 
-	static public function closeConnectMySQL($base) {
-        $array = fileCon($base);
+	static public function closeConnectMySQL($base,$file) {
+        $array = fileCon($base,$file);
 		if($array[4] == 'MySql'){
 			mysql_close();
 		}elseif($array[4] == 'MySqli'){
