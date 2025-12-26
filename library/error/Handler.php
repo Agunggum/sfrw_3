@@ -32,10 +32,10 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
     <script src="bootstrap/theme/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <div class="container col-12">
+    <div class="col-12">
         <div class="my-2">
             <div class="alert alert-dark">
-                <small class="float-right font-weight-bold">S-FRW <?php echo VERSIONFRMAEWORK; ?> <i class="fa fa-copy"></i></small>
+                <small class="float-right font-weight-bold ml-1">S-FRW <?php echo VERSIONFRMAEWORK; ?> <i class="fa fa-copy"></i></small>
                 <h3 class="col-12 p-1 text-wrap" title="ATASI : <?php echo $errstr; ?>"><span class="text-danger">ATASI : </span><?php echo $errstr; ?><br><br><code class="text-wrap"><?php echo (!empty($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj2'])) ? $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj2']:''; ?></code></h3>
                 <?php if(!empty($arrerr[2])){ ?>
                 <h5 class="col-12 p-1 text-wrap"><strong class="text-danger">pada file</strong> <?php echo $arrerr[2]; ?></h5>
@@ -43,7 +43,7 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
             </div>
             <div class="col-12 bg-secondary p-3 rounded">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-<?php if(!empty($arrerr[2])){ ?>4<?php }else{ ?>12<?php } ?>">
                         <div class="alert alert-secondary">
                             <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
                                 <strong>Baris ke :</strong>
@@ -71,6 +71,8 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
                             </div>
                         </div>
                     </div>
+
+                    <?php if(!empty($arrerr[2])){ ?>
                     <div class="col-lg-8">
                         <div class="alert alert-secondary">
                             <pre class="comment bg-dark text-white rounded p-3 mt-3 border border-danger text-wrap">
@@ -90,11 +92,29 @@ if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak
                             ?></pre>
                         </div>
                     </div>
+                    <?php } ?>
+
+                    <div class="col-lg-12">
+                        <div class="alert alert-secondary">
+                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
+                                <strong>Lingkungan :</strong>
+                            </div>
+                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
+                                <span class="text-danger font-weight-bold"><?php echo ENVIRONMENT; ?></span>
+                            </div>
+                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
+                                <strong>Kirim e-Mail :</strong>
+                            </div>
+                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
+                                <span class="text-danger font-weight-bold"><?php echo MAILACTIVATE; ?></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-<script src="bootstrap/theme/js/main.js?v=0.5"></script>
+<script src="bootstrap/theme/js/main.js?v=0.6"></script>
 <script language="javascript">
 $(document).ready(function() {
     $(".comment").shorten();
