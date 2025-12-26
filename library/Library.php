@@ -62,9 +62,21 @@ function customErrorHandler() {
     $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'] = "Rute tidak ditemukan: ".ROUTE;
     $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'] = "0".", "."Rute tidak ditemukan: ".ROUTE.", , ".$_SERVER['REQUEST_URI'].", ".$dates;
     if($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj']=='E-ROUTE-404'){
-    echo "<script>setTimeout(function () { document.location='".$_SERVER['REQUEST_URI']."'; }, 2);</script>";
+        $lognote = "Error ".$_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj']." :: Line 0 ::  ".$_SESSION['zyA2QF2M25e3TyVmi2w99n2tB']." :: - :: ".$_SERVER['REQUEST_URI'];
+        $dataToLog = array(
+            $dates, //Date and time
+            get_client_ip(), //IP address
+            get_client_browser(), //browser
+            $lognote, //Custom text
+        );
+        $data = implode(" ~ ", $dataToLog);
+        $data .= PHP_EOL;
+        $directory = "logs/";
+        $pathToFile = $directory.'error.log';
+        file_put_contents($pathToFile, $data, FILE_APPEND);
+        echo "<script>setTimeout(function () { document.location='".$_SERVER['REQUEST_URI']."'; }, 2);</script>";
     }
-    }
+}
 
 function core($get) {
     $base = BASEPATH.$get.EXT;
