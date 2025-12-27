@@ -27,13 +27,10 @@ class Logincontroller extends Controller {
     }
     
     static public function namelog($field){
-        $cek = permintaanMysql("SELECT ".Users::schemafillable()." FROM ".Users::schematable()." WHERE nik = '".BASESESSION."'");
+        $cek = permintaanMysql("SELECT ".Users::schemafillable()." FROM ".Users::schematable()." WHERE username = '".BASESESSION."'");
         $j   = mysqlAmbilArray($cek);
         
-        $fillabled = explode(", ", Users::schemafillable());
-        for($ar=1; $ar<count($fillabled); $ar++){
-            if($field == $fillabled[$ar]){ return $j[$fillabled[$ar]]; }
-        }
+        return $j[$field];
     }
 
 }
