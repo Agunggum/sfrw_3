@@ -310,6 +310,8 @@ function readmoreins($get) {
 function forminput($data = [], $bootstrap = []) {
     $typeform = (isset($data[0])) ? $data[0]:'text';
     $nameform = (isset($data[1])) ? $data[1]:'name';
+    $sesiform = (isset($data[1])) ? $data[1].'_form':'name_form';
+    $valueform = (isset($_SESSION[$sesiform])) ? $_SESSION[$sesiform]:'';
     $idform = (isset($data[2])) ? $data[2]:'id';
     $placeholderform = (isset($data[3])) ? $data[3]:'';
     $autocompleteform = (isset($data[4])) ? $data[4]:'off';
@@ -321,12 +323,12 @@ function forminput($data = [], $bootstrap = []) {
 
     if($bootstrapgroup=='group'){
         if($bootstrapgroupalign=='left'){
-            $input = '<div class="input-group">'.$bootstrapgroupicon.'<input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' /></div>';
+            $input = '<div class="input-group">'.$bootstrapgroupicon.'<input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" value="'.$valueform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' /></div>';
         }else{
-            $input = '<div class="input-group"><input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' />'.$bootstrapgroupicon.'</div>';
+            $input = '<div class="input-group"><input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" value="'.$valueform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' />'.$bootstrapgroupicon.'</div>';
         }
     }else{
-        $input = '<input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' />';
+        $input = '<input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" value="'.$valueform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' />';
     }
 
     return '<div class="mb-4 text-left">'.$input.'</div>';

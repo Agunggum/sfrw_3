@@ -12,6 +12,7 @@ class Loginmodel extends Controller {
 
             $password = anti_injection(md5($_POST['password']));
             $username = anti_injection($_POST['username']);
+            $_SESSION['username_form'] = $username;
 
             $login = permintaanMysql("SELECT fullname, username, password, active, role FROM ".Users::schematable()." WHERE username='".$username."'");
             $data = mysqlAmbilArray($login);

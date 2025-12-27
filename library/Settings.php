@@ -8,5 +8,5 @@ define('ROUTE', (isset($_GET['params'])) ? $_GET['params']:"");
 /* Session control
 /* Get Users variable
 */
-define('BASESESSION', (isset($_SESSION['user'])) ? $_SESSION['user']:"");
+define('BASESESSION', (isset($_SESSION['username'])) ? $_SESSION['username']:"");
 define('ACCESSME', (isset($_SESSION['accessme'])) ? $_SESSION['accessme']:"");
