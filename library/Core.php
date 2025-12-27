@@ -20,6 +20,6 @@ require_once app(AUTOLOAD);
 /* End Alert */
 if(isset($_SESSION['alert'])){ $_SESSION['alert']=""; }
 /* End Connection */
-if(CONNECTION == 'true'){ db::closeConnectMySQL(BASEPATH,'config'); }
+if(CONNECTION == 'true'){ db::closeConnectMySQL(BASEPATH); }
 /* End of file core.php */
 /* Location: ./library/core.php */

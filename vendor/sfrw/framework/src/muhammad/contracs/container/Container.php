@@ -1,8 +1,8 @@
 <?php
 
 // file config
-function fileCon($folder,$fileconfig) {
-    $filecon = $folder.$fileconfig.".txt";
+function fileCon($folder) {
+    $filecon = $folder."config.txt";
     $file = fopen($filecon,"r");$filedata = fread($file,filesize($filecon));fclose($file);
     return $array = explode(', ',$filedata);
 }

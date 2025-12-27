@@ -215,3 +215,4 @@
 2025-12-26 16:57:51 ~ ::1  ~ Chrome ~ Error 2 :: Line 352 :: foreach() argument must be of type array|object, null given :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\vendor\sfrw\framework\src\muhammad\contracs\container\Container.php :: /sfrw_3/login
 2025-12-26 16:57:51 ~ ::1  ~ Chrome ~ Error 2 :: Line 82 :: file(null given): Failed to open stream: No such file or directory :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\library\error\Handler.php :: /sfrw_3/login
 2025-12-26 16:57:52 ~ ::1  ~ Chrome ~ Error 2 :: Line 84 :: foreach() argument must be of type array|object, bool given :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\library\error\Handler.php :: /sfrw_3/login
+2025-12-27 11:14:34 ~ ::1  ~ Chrome ~ Error E-ROUTE-404 :: Line 0 ::  Rute tidak ditemukan: registration :: - :: /sfrw_3/registration
