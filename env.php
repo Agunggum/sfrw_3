@@ -35,9 +35,10 @@ define('PAGINATION', '15');
 */
 define('MAILACTIVATE', 'false');
 define('MAILHOST', 'smtp.yourdomain.com');
+define('MAILSENT', 'no-reply@yourdomain.id');
 define('MAILUSER', 'yourmail@yourdomain.com');
 define('MAILPASS', '');
-define('MAILPORT', '587');
+define('MAILPORT', 587);
 
 /* 
 /* Autoload and File Extension
