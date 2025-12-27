@@ -387,11 +387,10 @@ function get_client_ip() {
     else
         $ipaddress = 'UNKNOWN';
 
-	$macCommandString   =   "arp " . $ipaddress . " | awk 'BEGIN{ i=1; } { i++; if(i==3) print $3 }'";
-
+	/*$macCommandString   =   "arp " . $ipaddress . " | awk 'BEGIN{ i=1; } { i++; if(i==3) print $3 }'";
     $mac = exec($macCommandString);
-
-	return $ipaddress." ".$mac;
+	return $ipaddress." ".$mac;*/
+    return $ipaddress;
 }
 
 function getUserIP() {
