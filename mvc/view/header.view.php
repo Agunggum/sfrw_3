@@ -9,7 +9,7 @@
     <link rel="icon" href="bootstrap/theme/logo-sfrw.ico" sizes="any" >
     <link rel="icon" href="bootstrap/theme/logo-sfrw.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="bootstrap/theme/logo-sfrw.png">
-    <meta property="og:title" content="<?php echo WEBTITLETOP; ?>>" />
+    <meta property="og:title" content="<?php echo WEBTITLETOP; ?>" />
     <meta property="og:image" content="bootstrap/theme/logo-sfrw.png" />
     <meta property="og:url" content="<?php echo BASEURL; ?>" />
     <meta property="og:description" content="<?php echo WEBTITLE; ?> <?php echo VERSIONFRMAEWORK; ?>" />
