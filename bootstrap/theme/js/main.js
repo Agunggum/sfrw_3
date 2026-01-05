@@ -71,39 +71,27 @@
  * Theme Manager & Helper Tools
  */
 (() => {
-    'use strict';
-
-    const themeToggle = document.getElementById('darkModeToggle');
-    const htmlElement = document.documentElement;
-
-    const applyTheme = (theme) => {
-        htmlElement.setAttribute('data-bs-theme', theme);
-        localStorage.setItem('theme', theme);
-        if (themeToggle) themeToggle.checked = (theme === 'dark');
+    const getTheme = () => localStorage.getItem('theme') || 
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    // Set tema secepat mungkin untuk mencegah flickering
+    document.documentElement.setAttribute('data-bs-theme', getTheme());
+    
+    // Tunggu DOM siap hanya untuk interaksi toggle
+    window.addEventListener('DOMContentLoaded', () => {
+        const themeToggle = document.getElementById('darkModeToggle');
+        if (!themeToggle) return;
         
-        // Optimasi: Tambahkan transisi CSS secara dinamis agar mata nyaman
-        if (!document.getElementById('theme-transition')) {
-            const style = document.createElement('style');
-            style.id = 'theme-transition';
-            style.innerHTML = `*{transition: background-color 0.3s ease, color 0.3s ease !important;}`;
-            document.head.appendChild(style);
-        }
-    };
-
-    const getPreferredTheme = () => {
-        const stored = localStorage.getItem('theme');
-        if (stored) return stored;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-
-    // Inisialisasi Tema
-    applyTheme(getPreferredTheme());
-
-    if (themeToggle) {
+        themeToggle.checked = getTheme() === 'dark';
         themeToggle.addEventListener('change', () => {
-            applyTheme(themeToggle.checked ? 'dark' : 'light');
+            const newTheme = themeToggle.checked ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
         });
-    }
+    });
+})();
+(() => {
+    'use strict';
 
     // Toggle Password Helper
     const togglePassword = document.querySelector('#toggle-password');
