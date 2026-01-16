@@ -1,5 +1,6 @@
 <?php
 if ( ! 'web') exit('No direct script access allowed');
+extract($_GET);
 /*
 *----------------------------------------------------------------------
  * SFRW Framework Version 3.0
