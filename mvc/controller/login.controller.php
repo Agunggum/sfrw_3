@@ -1,5 +1,5 @@
 <?php
-require_once model('login');
+require_once model_data('login');
 
 use app\Models\Users;
 use sfrw\logcarbon;

@@ -1,74 +1,60 @@
 <?php
 if ( ! 'web') exit('No direct script access allowed');
-extract($_GET);
-/*
-*----------------------------------------------------------------------
- * SFRW Framework Version 3.0
- * 
- * Contoh penggunaan session untuk mengatur halaman yang diakses memakai halaman login
-if(BASESESSION==""){
-    if(routeget('forgot-password', ROUTE)){
-        require_once view('forgot-password');
-    }else{
-        require_once view('login');
-    }
-}else{
-    //jika waktu sekarang kurang dari sesi timeout
-    if(WAKTUINI < $_SESSION['timeout'])
-    {
-        //hapus sesi timeout yang lama ,buat sesi timeout yang baru
-        unset($_SESSION['timeout']);
-        $_SESSION['timeout']=WAKTUINI+KADALUARSA;
 
-        require_once view('index');
-    }else{
-        require_once view('endsession');
-    }
-}
- *
- *---------------------------------------------------------------------
- *
+use muhammad\routing\Rute;
+
+/*
+|--------------------------------------------------------------------------
+| Pengaturan Rute (Laravel Style)
+|--------------------------------------------------------------------------
+|
+| Di sini Anda dapat mendefinisikan rute untuk aplikasi Anda.
+| Rute-rute ini akan diproses oleh muhammad\routing\Rute.
+|
 */
-/*
-  *route berfungsi untuk memanage halaman dan konten
-*/      
-if(routeget('/', ROUTE)){
-  return Indexcontroller::index();
-}else
 
-if(routeget('login', ROUTE)){
-  require_once view('login');
-}else
+// Halaman Beranda
+Rute::ambil('/', function() {
+    return Indexcontroller::index();
+});
 
-if(routeget('forgot-password', ROUTE)){
-  require_once view('forgot-password');
-}else
+// Halaman Login
+Rute::ambil('login', function() {
+    require_once tampilan('login');
+});
 
-if(routeget('datatable', ROUTE)){
-  require_once view('table');
-}else
+// Halaman Lupa Password
+Rute::ambil('forgot-password', function() {
+    require_once tampilan('forgot-password');
+});
 
-if(routeget('signout', ROUTE)){
-  require_once view('signout');
-}else
+// Halaman Tabel (Datatable)
+Rute::ambil('datatable', function() {
+    require_once tampilan('table');
+});
 
-if(routeget('logs-', ROUTE)){
-  /* cara akses logs gunakan route logs-&file=[nama file di folder logs. contoh: error] */
-  require_once vendors('logcarbon/logcarbon');
-  require_once view('logs', [
-    $data['title'] = "Logs",
-    $data['breadcrumb'] = "Logs",
-    $data['icon'] = "fa fa-logs",
-  ]);
-}else
+// Halaman Keluar (Signout)
+Rute::ambil('signout', function() {
+    require_once tampilan('signout');
+});
 
-if(routeget('logsfiles', ROUTE)){
-  require_once view('logsfiles');
-}else
+// Halaman Logs (dengan parameter file)
+Rute::ambil('logs-', function() {
+    require_once vendors('logcarbon/logcarbon');
+    require_once tampilan('logs', [
+        $data['title'] = "Logs",
+        $data['breadcrumb'] = "Logs",
+        $data['icon'] = "fa fa-logs",
+    ]);
+});
 
-{
-  customErrorHandler(); // not found route
-}
+// Halaman Daftar File Logs
+Rute::ambil('logsfiles', function() {
+    require_once tampilan('logsfiles');
+});
+
+// Jalankan Rute
+Rute::jalankan(ROUTE, $_SERVER['REQUEST_METHOD']);
 
 /* End of file route.php */
 /* Location: ./web/route.php */

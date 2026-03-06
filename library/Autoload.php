@@ -95,7 +95,7 @@ $application_folder = 'skin';
 */
 
 // Set the current directory correctly for CLI requests
-if (defined('STDIN'))
+if (defined('STDIN') && !is_dir($system_path))
 {
     chdir(dirname(__FILE__));
 }

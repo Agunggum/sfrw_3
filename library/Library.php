@@ -7,6 +7,70 @@ if ( ! ('library')) exit('No direct script access allowed');
  *
 */
 
+/* 
+/* Autoload and File Extension
+*/
+require_once __DIR__ . '/Rute.php';
+
+// Helper functions in Indonesian
+function tampilan($get, $data = []) {
+    return view($get, $data);
+}
+
+function pengendali($get) {
+    return controller($get);
+}
+
+function model_data($get) {
+    return model($get);
+}
+
+function alihkan($url) {
+    header("Location: " . $url);
+    exit();
+}
+
+function validasi_tanggal($date, $format = 'Y-m-d'){
+    return validateDate($date, $format);
+}
+
+function format_uang($angka) {
+    return format_angka2($angka);
+}
+
+function terbilang_indonesia($x) {
+    return terbilang($x);
+}
+
+function sesi($key, $value = null) {
+    if ($value === null) {
+        return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
+    }
+    $_SESSION[$key] = $value;
+}
+
+function hapus_sesi($key) {
+    if (isset($_SESSION[$key])) {
+        unset($_SESSION[$key]);
+    }
+}
+
+function rute_saat_ini() {
+    return ROUTE;
+}
+
+function permintaan() {
+    return $_REQUEST;
+}
+
+function kiriman() {
+    return $_POST;
+}
+
+function dapatkan_data() {
+    return $_GET;
+}
+
 function customError($errno, $errstr, $errfile, $errline) {
     $dates = date("Y-m-d H:i:s");
     if (!empty($errno) and DEBUG == 'true') {
