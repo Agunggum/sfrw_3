@@ -13,6 +13,10 @@ class Application
         {
             require_once $filenamecontrollers;
         }
+        foreach (glob("app/Http/Middleware/*".EXT) as $filenamemiddleware)
+        {
+            require_once $filenamemiddleware;
+        }
         define('VERSIONFRMAEWORK', '3.0');
         require_once core('Core');
     }

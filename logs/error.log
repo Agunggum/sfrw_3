@@ -216,3 +216,6 @@
 2025-12-26 16:57:51 ~ ::1  ~ Chrome ~ Error 2 :: Line 82 :: file(null given): Failed to open stream: No such file or directory :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\library\error\Handler.php :: /sfrw_3/login
 2025-12-26 16:57:52 ~ ::1  ~ Chrome ~ Error 2 :: Line 84 :: foreach() argument must be of type array|object, bool given :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\library\error\Handler.php :: /sfrw_3/login
 2025-12-27 11:14:34 ~ ::1  ~ Chrome ~ Error E-ROUTE-404 :: Line 0 ::  Rute tidak ditemukan: registration :: - :: /sfrw_3/registration
+2026-03-06 16:01:41 ~ ::1 ~ Chrome ~ Error E-ROUTE-404 :: Line 0 ::  Rute tidak ditemukan: user :: - :: /sfrw_3/user
+2026-03-06 16:01:41 ~ ::1 ~ Chrome ~ Error E-ROUTE-404 :: Line 0 ::  Rute tidak ditemukan: bootstrap/theme/js/main.js :: - :: /sfrw_3/bootstrap/theme/js/main.js?v=0.6
+2026-03-06 16:02:09 ~ ::1 ~ Chrome ~ Error E-ROUTE-404 :: Line 0 ::  Rute tidak ditemukan: bootstrap/theme/js/main.js :: - :: /sfrw_3/bootstrap/theme/js/main.js?v=0.6

@@ -3,6 +3,17 @@ namespace muhammad\routing;
 
 class Rute {
     protected static $rute = [];
+    protected static $middlewareGrup = [];
+
+    public static function middleware($middleware) {
+        self::$middlewareGrup[] = $middleware;
+        return new static;
+    }
+
+    public static function grup($callback) {
+        $callback();
+        array_pop(self::$middlewareGrup);
+    }
 
     public static function ambil($uri, $callback) {
         self::tambahRute('GET', $uri, $callback);
@@ -26,7 +37,8 @@ class Rute {
         self::$rute[] = [
             'method' => $method,
             'uri' => $uri,
-            'callback' => $callback
+            'callback' => $callback,
+            'middleware' => self::$middlewareGrup
         ];
     }
 
@@ -42,7 +54,13 @@ class Rute {
 
                 if (preg_match($pola, $uri_saat_ini, $matches)) {
                     array_shift($matches);
-                    return self::panggilCallback($r['callback'], $matches);
+
+                    // Proses middleware
+                    $callback = self::jalankanMiddleware($r['middleware'], function() use ($r, $matches) {
+                        return self::panggilCallback($r['callback'], $matches);
+                    });
+
+                    return $callback;
                 }
             }
         }
@@ -90,6 +108,28 @@ class Rute {
         }
 
         throw new \Exception("Callback rute tidak valid.");
+    }
+
+    protected static function jalankanMiddleware($middlewares, $next) {
+        if (empty($middlewares)) {
+            return $next();
+        }
+
+        $middleware = array_shift($middlewares);
+
+        list($class, $parameter) = array_pad(explode(':', $middleware), 2, null);
+
+        $middlewareClass = "app\\Http\\Middleware\\" . $class;
+
+        if (!class_exists($middlewareClass)) {
+            throw new \Exception("Middleware {$middlewareClass} tidak ditemukan.");
+        }
+
+        $instance = new $middlewareClass();
+
+        return $instance->tangani(function() use ($middlewares, $next) {
+            return self::jalankanMiddleware($middlewares, $next);
+        }, $parameter);
     }
 
     // Alias for Laravel users

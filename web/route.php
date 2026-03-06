@@ -53,6 +53,21 @@ Rute::ambil('logsfiles', function() {
     require_once tampilan('logsfiles');
 });
 
+// Rute yang memerlukan autentikasi dan peran admin untuk CRUD pengguna
+Rute::middleware('Auth')->grup(function() {
+    Rute::middleware('Role:admin')->grup(function() {
+        Rute::ambil('users', 'UserController@daftar');
+        Rute::ambil('users/tambah', 'UserController@formTambah');
+        Rute::kirim('users/simpan', 'UserController@simpan');
+        Rute::ambil('users/{id}/edit', 'UserController@formEdit');
+        Rute::kirim('users/{id}/perbarui', 'UserController@perbarui');
+        Rute::ambil('users/{id}/hapus', 'UserController@hapus');
+    });
+
+    // Rute ini hanya memerlukan login, tanpa peran spesifik
+    Rute::ambil('users/{id}', 'UserController@lihat');
+});
+
 // Jalankan Rute
 Rute::jalankan(ROUTE, $_SERVER['REQUEST_METHOD']);
 

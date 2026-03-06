@@ -1,0 +1,21 @@
+<?php
+namespace app\Http\Middleware;
+
+class Auth {
+    /**
+     * Tangani permintaan yang masuk.
+     *
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function tangani($next) {
+        if (!sesi('username')) {
+            // Jika pengguna tidak login, alihkan ke halaman login
+            alihkan(BASEURL . 'login');
+            exit();
+        }
+
+        // Jika sudah login, lanjutkan ke permintaan berikutnya
+        return $next();
+    }
+}
