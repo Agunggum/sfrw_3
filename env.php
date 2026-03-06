@@ -1,7 +1,14 @@
 <?php
 define('ENVIRONMENT', 'local');
 define('DEBUG', 'true');
-define('BASEURL', 'http://localhost/sfrw_3/');
+
+// Menentukan BASEURL secara dinamis untuk memudahkan deploy di berbagai environment termasuk Laravel Herd
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$domainName = $_SERVER['HTTP_HOST'];
+$scriptPath = str_replace(['/public/index.php', '/index.php'], '', $_SERVER['SCRIPT_NAME']);
+$dynamicBaseUrl = $protocol . $domainName . $scriptPath . '/';
+
+define('BASEURL', $dynamicBaseUrl);
 define('BASESKIN', 'default'.'/');
 define('CONNECTION', 'false'); // true or false lihat juga pada config.txt pada folder library
 
