@@ -39,12 +39,13 @@ Rute::ambil('signout', function() {
 });
 
 // Halaman Logs (dengan parameter file)
-Rute::ambil('logs-', function() {
+Rute::ambil('logs/{file}', function($file) {
     require_once vendors('logcarbon/logcarbon');
     require_once tampilan('logs', [
         $data['title'] = "Logs",
         $data['breadcrumb'] = "Logs",
         $data['icon'] = "fa fa-logs",
+        $data['file'] = $file
     ]);
 });
 
@@ -67,6 +68,9 @@ Rute::middleware('Auth')->grup(function() {
     // Rute ini hanya memerlukan login, tanpa peran spesifik
     Rute::ambil('users/{id}', 'UserController@lihat');
 });
+
+// Rute khusus untuk setup database (JANGAN GUNAKAN DI LINGKUNGAN PRODUKSI)
+Rute::ambil('setup-database/{kunci}', 'DatabaseSeederController@jalankan');
 
 // Jalankan Rute
 Rute::jalankan(ROUTE, $_SERVER['REQUEST_METHOD']);

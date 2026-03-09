@@ -48,7 +48,8 @@ class Rute {
 
         foreach (self::$rute as $r) {
             if ($r['method'] === $method_saat_ini) {
-                $pola = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([a-zA-Z0-9_]+)', $r['uri']);
+                // Buat pola regex untuk parameter rute
+                $pola = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([a-zA-Z0-9_-]+)', $r['uri']);
                 $pola = str_replace('/', '\/', $pola);
                 $pola = '/^' . $pola . '$/';
 
@@ -56,11 +57,9 @@ class Rute {
                     array_shift($matches);
 
                     // Proses middleware
-                    $callback = self::jalankanMiddleware($r['middleware'], function() use ($r, $matches) {
+                    return self::jalankanMiddleware($r['middleware'], function() use ($r, $matches) {
                         return self::panggilCallback($r['callback'], $matches);
                     });
-
-                    return $callback;
                 }
             }
         }

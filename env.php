@@ -10,7 +10,7 @@ $dynamicBaseUrl = $protocol . $domainName . $scriptPath . '/';
 
 define('BASEURL', $dynamicBaseUrl);
 define('BASESKIN', 'default'.'/');
-define('CONNECTION', 'false'); // true or false lihat juga pada config.txt pada folder library
+define('CONNECTION', 'true'); // true or false lihat juga pada config.txt pada folder library
 
 define('WEBTITLE', 'Sunda Framework - SFRW');
 define('WEBTITLETOP', 'SFRW');

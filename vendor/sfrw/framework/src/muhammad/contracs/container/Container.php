@@ -104,11 +104,8 @@ function barisAngkaMysql($query){
 // end MySql
 
 //Site asset skin
-function asset($skin) {
-    $base = APPPATH.$skin."";
-    if (is_readable($base)) {
-        return $base;
-    }
+function asset($path) {
+    return BASEURL . $path;
 }
 
 //Site library error

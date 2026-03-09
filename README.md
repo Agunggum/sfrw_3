@@ -153,37 +153,44 @@ The framework includes a built-in dark mode toggle:
 
 ## 🔗 Routing System
 
-The routing is handled in `web/route.php`:
+The routing is handled in `web/route.php` using a Laravel-style approach:
 
 ```php
+use muhammad\routing\Rute;
+
 // Homepage route
-if(routeget('/', ROUTE)){
-  return Indexcontroller::index();
-}else
+Rute::ambil('/', function() {
+    return Indexcontroller::index();
+});
 
 // Login route
-if(routeget('login', ROUTE)){
-  require_once view('login');
-}else
+Rute::ambil('login', function() {
+    require_once tampilan('login');
+});
 
 // Logout route
-if(routeget('signout', ROUTE)){
-  require_once view('signout');
-}else
+Rute::ambil('signout', function() {
+    require_once tampilan('signout');
+});
 
-// Logs route
-if(routeget('logs-', ROUTE)){
-  require_once vendors('logcarbon/logcarbon');
-  require_once view('logs', [
-    $data['title'] = "Logs",
-    $data['breadcrumb'] = "Logs",
-    $data['icon'] = "fa fa-logs",
-  ]);
-}else
+// Logs route with parameter
+Rute::ambil('logs/{file}', function($file) {
+    require_once vendors('logcarbon/logcarbon');
+    require_once tampilan('logs', [
+        $data['title'] = "Logs",
+        $data['breadcrumb'] = "Logs",
+        $data['icon'] = "fa fa-logs",
+        $data['file'] = $file
+    ]);
+});
 
-{
-  customErrorHandler(); // not found route
-}
+// Middleware protected routes
+Rute::middleware('Auth')->grup(function() {
+    Rute::middleware('Role:admin')->grup(function() {
+        Rute::ambil('users', 'UserController@daftar');
+        Rute::ambil('users/tambah', 'UserController@formTambah');
+    });
+});
 ```
 
 ## 📊 Models

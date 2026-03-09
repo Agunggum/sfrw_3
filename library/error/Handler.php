@@ -12,24 +12,24 @@ if(DEBUG == 'true'){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo "ATASI : ".$errstr; ?></title>
     <meta name="description" content="<?php echo WEBTITLETOP; ?>">
-    <link rel="icon" href="bootstrap/theme/logo-sfrw.ico" sizes="any" >
-    <link rel="icon" href="bootstrap/theme/logo-sfrw.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="bootstrap/theme/logo-sfrw.png">
+    <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.ico'); ?>" sizes="any" >
+    <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.svg'); ?>" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>">
     <meta property="og:title" content="<?php echo WEBTITLETOP; ?>" />
-    <meta property="og:image" content="<?php echo BASEURL; ?>bootstrap/theme/logo-sfrw.png" />
+    <meta property="og:image" content="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>" />
     <meta property="og:url" content="<?php echo  BASEURL; ?>" />
     <meta property="og:description" content="<?php echo WEBTITLETOP; ?> <?php echo VERSIONFRMAEWORK; ?>" />
     <meta property="og:site_name" content="<?php echo WEBTITLETOP; ?>" />
     <style>
-        @import "bootstrap/theme/css/bootstrap.css?v=5.3.8";
-        @import "bootstrap/theme/css/bootstrap.min.css?v=5.3.8";
-        @import "bootstrap/theme/fontawesome/css/all.css";
+        @import "<?php echo asset('bootstrap/theme/css/bootstrap.css?v=5.3.8'); ?>";
+        @import "<?php echo asset('bootstrap/theme/css/bootstrap.min.css?v=5.3.8'); ?>";
+        @import "<?php echo asset('bootstrap/theme/fontawesome/css/all.css'); ?>";
     </style>
-    <script src="bootstrap/theme/js/jquery-1.11.1.min.js"></script>
-    <script src="bootstrap/theme/js/jquery-3.7.1.js"></script>
-    <script src="bootstrap/theme/js/bootstrap.min.js"></script>
-    <script src="bootstrap/theme/fontawesome/js/all.js"></script>
-    <script src="bootstrap/theme/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo asset('bootstrap/theme/js/jquery-1.11.1.min.js'); ?>"></script>
+    <script src="<?php echo asset('bootstrap/theme/js/jquery-3.7.1.js'); ?>"></script>
+    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo asset('bootstrap/theme/fontawesome/js/all.js'); ?>"></script>
+    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.bundle.min.js'); ?>"></script>
 </head>
 <body>
     <div class="col-12">
@@ -126,7 +126,7 @@ if(DEBUG == 'true'){
             </div>
         </div>
     </div>
-<script src="bootstrap/theme/js/main.js?v=0.6"></script>
+<script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.6'); ?>"></script>
 <script language="javascript">
 $(document).ready(function() {
     $(".comment").shorten();

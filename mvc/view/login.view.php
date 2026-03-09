@@ -41,6 +41,7 @@
                                 <p class="h3 text-left font-weight-bold">Sign In.</p>
                                 
                                 <form class="m-t" role="form" method="post" action="">
+                                    <input type="hidden" name="login" value="MASUK">
                                     <!-- Email input -->
                                     <?php echo forminput(['username', 'username', 'username', 'username or email', 'off', 'required']); ?>
 
@@ -61,7 +62,7 @@
                                     </div>
 
                                     <!-- Submit button -->
-                                    <button type="submit" value="MASUK" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Sign in</button>
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Sign in</button>
 
                                     <!-- Register buttons -->
                                     <div class="text-center">

@@ -10,14 +10,16 @@ class Loginmodel extends Controller {
 	function loginformmodel($uri) { 
 		if(isset($_POST['login']) and $_POST['login']=="MASUK"){
 
-            $password = anti_injection(md5($_POST['password']));
+            $password = $_POST['password'];
             $username = anti_injection($_POST['username']);
             $_SESSION['username_form'] = $username;
 
-            $login = permintaanMysql("SELECT fullname, username, password, active, role FROM ".Users::schematable()." WHERE username='".$username."'");
-            $data = mysqlAmbilArray($login);
+            $data = PembangunKueri::tabel(Users::schematable())
+                        ->pilih('fullname', 'username', 'password', 'active', 'role')
+                        ->dimana('username', '=', $username)
+                        ->pertama();
             
-            if(barisAngkaMysql($login) == 0){
+            if(!$data){
                 Logcarbon::carbonlog($username." :: login denied : not found","logsignin");
             
                 $_SESSION['error'] = "true";
@@ -29,7 +31,7 @@ class Loginmodel extends Controller {
                 $_SESSION['error'] = "true";
                 alert('warning', 'Attention..!', '<i class="fa fa-clock-o"></i> You are no longer able to log into this system.', $uri);
             }
-            elseif($data['password'] != $password){
+            elseif(!password_verify($password, $data['password'])){
                 $_SESSION['usertrue'] = $username;
 
                 Logcarbon::carbonlog($username." :: login denied : wrong password","logsignin");
@@ -43,6 +45,9 @@ class Loginmodel extends Controller {
                 if(ENVIRONMENT == 'maintenance' and $data['role'] != 'administrator'){
                     alert('warning', 'Attention..!', '<i class="fa fa-clock-o"></i> Login denied. system is under maintenance.', $uri);
                 }else{
+                    // Regenerate session ID to prevent session fixation
+                    session_regenerate_id(true);
+
                     $_SESSION['username'] = $data['username'];
                     $_SESSION['fullname'] = $data['fullname'];
                     $_SESSION['accessme'] = $data['role'];
@@ -65,10 +70,12 @@ class Loginmodel extends Controller {
 
             $email = anti_injection($_POST['email']);
 
-            $login = permintaanMysql("SELECT fullname, email, username, password, active FROM ".Users::schematable()." WHERE email='".$email."'");
-            $data = mysqlAmbilArray($login);
+            $data = PembangunKueri::tabel(Users::schematable())
+                        ->pilih('fullname', 'email', 'username', 'password', 'active')
+                        ->dimana('email', '=', $email)
+                        ->pertama();
             
-            if(barisAngkaMysql($login) == 0){
+            if(!$data){
                 Logcarbon::carbonlog($email." :: forgot denied : not found","logsignin");
 
                 alert('warning', 'Alert forgot password', 'Please re-check the Email you entered, make sure the data you entered is correct.', BASEURL.'forgot-password');
@@ -89,15 +96,23 @@ class Loginmodel extends Controller {
 
                     //membuat sesi timeout
                     $linkforgotbase = md5($email."-".DATEWMIN);
-                    $linkforgot = BASEURL."forgot-password&s=".$linkforgotbase;
+                    $linkforgot = BASEURL."forgot-password?s=".$linkforgotbase;
                     $endTime = date('Y-m-d H:i:s', strtotime("+15 minutes", strtotime(DATEWMIN)));
                     
-                    permintaanMysql("INSERT INTO ".Forgotlink::schematable()." VALUES ('','".$email."', '".$linkforgotbase."', '".$endTime."', '".DATEWMIN."', '".DATEWMIN."')");
+                    PembangunKueri::tabel(Forgotlink::schematable())->sisipkan([
+                        'email' => $email,
+                        'target_link' => $linkforgotbase,
+                        'end_time' => $endTime,
+                        'created_at' => DATEWMIN,
+                        'updated_at' => DATEWMIN
+                    ]);
 
                     if(MAILACTIVATE == 'true'){
                         //mail concept
-                        $sqlmail = permintaanMysql("SELECT email, fullname FROM ".Users::schematable()." WHERE usermail='".$email."'");
-                        $jmail = mysqlAmbilArray($sqlmail);
+                        $jmail = PembangunKueri::tabel(Users::schematable())
+                                     ->pilih('email', 'fullname')
+                                     ->dimana('email', '=', $email)
+                                     ->pertama();
 
                         $subject = MAILTITLE." - Forgot Password";
                         // Kirim email dalam format HTML
@@ -119,37 +134,44 @@ class Loginmodel extends Controller {
     function forgotnewformmodel($uri,$s) { 
 		if(isset($_POST['login']) and $_POST['login']=="MASUK"){
 
-            $pass1 = md5($_POST['password1']);
-            $pass2 = md5($_POST['password2']);
+            $pass1 = $_POST['password1'];
+            $pass2 = $_POST['password2'];
 
-            $login = permintaanMysql("SELECT email FROM ".Forgotlink::schematable()." WHERE target_link ='".$s."'");
-            $data = mysqlAmbilArray($login);
+            $data = PembangunKueri::tabel(Forgotlink::schematable())
+                        ->dimana('target_link', '=', $s)
+                        ->pertama();
             
-            if(barisAngkaMysql($login) == 0){
-                Logcarbon::carbonlog($data['email']." :: forgot denied : not found","logsignin");
+            if(!$data){
+                Logcarbon::carbonlog("Unknown :: forgot denied : link not found","logsignin");
 
-                alert('warning', 'Alert forgot password', 'Please re-check your link an email.', BASEURL.'forgot-password&s='.$s);
+                alert('warning', 'Alert forgot password', 'Please re-check your link an email.', BASEURL.'forgot-password?s='.$s);
             }
             elseif($pass1 != $pass2){
                 Logcarbon::carbonlog($data['email']." :: forgot denied : password not match","logsignin");
 
-                alert('warning', 'Alert forgot password', 'Password does not match.', BASEURL.'forgot-password&s='.$s);
+                alert('warning', 'Alert forgot password', 'Password does not match.', BASEURL.'forgot-password?s='.$s);
             }
             else{
 
                 // JIka sedang maintenance data segera lock sistem
                 if(ENVIRONMENT == 'maintenance'){
-                    alert('warning', 'Alert forgot password', 'Login denied. system is under maintenance.', BASEURL.'forgot-password&s='.$s);
+                    alert('warning', 'Alert forgot password', 'Login denied. system is under maintenance.', BASEURL.'forgot-password?s='.$s);
                 }
                 else{
                     Logcarbon::carbonlog($data['email']." :: forgot success (new password)","logsignin");
                     
-                    permintaanMysql("UPDATE ".Users::schematable()." SET password = '$pass2' WHERE email = '".$data['email']."'");
+                    $hashed_password = password_hash($pass2, PASSWORD_DEFAULT);
+
+                    PembangunKueri::tabel(Users::schematable())
+                        ->dimana('email', '=', $data['email'])
+                        ->perbarui(['password' => $hashed_password]);
 
                     if(MAILACTIVATE == 'true'){
                         //mail concept
-                        $sqlmail = permintaanMysql("SELECT username, fullname FROM ".Users::schematable()." WHERE email='".$data['email']."'");
-                        $jmail = mysqlAmbilArray($sqlmail);
+                        $jmail = PembangunKueri::tabel(Users::schematable())
+                                     ->pilih('username', 'fullname', 'email')
+                                     ->dimana('email', '=', $data['email'])
+                                     ->pertama();
 
                         $subject = MAILTITLE." - Forgot Password";
                         // Kirim email dalam format HTML
@@ -175,7 +197,7 @@ class Loginmodel extends Controller {
 
             session_destroy();
             require_once view('pagelogout');
-            echo "<script>setTimeout(function () { window.location.href = '".BASEURL."signout&log=".$_SESSION['timeout']."'; }, 2000);</script>";
+            echo "<script>setTimeout(function () { window.location.href = '".BASEURL."signout?log=".$_SESSION['timeout']."'; }, 2000);</script>";
         }else{
             require_once view('pagelogin');
             echo "<script>setTimeout(function () { window.location.href = '".BASEURL."'; }, 2000);</script>";

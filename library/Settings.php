@@ -8,10 +8,25 @@ if (isset($_GET['params'])) {
 } else {
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $scriptName = str_replace(['/public/index.php', '/index.php'], '', $_SERVER['SCRIPT_NAME']);
-    $route = str_replace($scriptName, '', $uri);
-    $route = str_replace('/public/', '', $route);
-    $route = ltrim($route, '/');
+    
+    // Pastikan hanya menghapus scriptName di awal string
+    if ($scriptName !== '' && strpos($uri, $scriptName) === 0) {
+        $route = substr($uri, strlen($scriptName));
+    } else {
+        $route = $uri;
+    }
 }
+
+// Pembersihan rute universal
+$route = preg_replace('/^\/(public|index\.php)\//', '/', $route);
+$route = preg_replace('/^\/(public|index\.php)$/', '/', $route);
+$route = trim($route, '/');
+
+// Cegah rute kosong terdeteksi sebagai string kosong, harus '/'
+if ($route === '') {
+    $route = '/';
+}
+
 define('ROUTE', $route);
 /*****************************************************************/
 /* Session control

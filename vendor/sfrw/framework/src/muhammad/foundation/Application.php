@@ -9,7 +9,7 @@ class Application
         {
             require_once $filenamemodels;
         }
-        foreach (glob("mvc/controller/*".EXT) as $filenamecontrollers)
+        foreach (glob("mvc/controller/*.controller".EXT) as $filenamecontrollers)
         {
             require_once $filenamecontrollers;
         }

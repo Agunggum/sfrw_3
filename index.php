@@ -10,6 +10,7 @@ require_once 'env.php';
 */
 ob_start();
 session_start();
+
 // The PHP file extension
 EXTENSIONLIBRARY;
 EXTENSIONAUTOLOAD;

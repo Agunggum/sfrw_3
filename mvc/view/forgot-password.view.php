@@ -41,11 +41,12 @@
                                 <p class="h3 text-left font-weight-bold">Forgot password.</p>
                                 
                                 <form class="m-t" role="form" method="post" action="">
+                                    <input type="hidden" name="login" value="MASUK">
                                     <!-- Email input -->
                                      <?php echo forminput(['email', 'username', 'username', 'email', 'off', 'required']); ?>
 
                                     <!-- Submit button -->
-                                    <button type="submit" value="MASUK" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Confirm</button>
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Confirm</button>
 
                                     <!-- Register buttons -->
                                     <div class="text-center">
