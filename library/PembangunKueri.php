@@ -12,28 +12,32 @@ class PembangunKueri {
 
     protected static function hubungkan() {
         if (!self::$koneksi) {
-            $config = fileCon(BASEPATH);
-            $driver = $config[4] ?? 'MySqli';
+            $driver = DB_DRIVER;
 
             if ($driver == 'MySqli') {
-                self::$koneksi = new mysqli($config[0], $config[1], $config[2], $config[3]);
+                if (!class_exists('mysqli')) {
+                    throw new Exception("Ekstensi MySQLi tidak terinstal di server ini.");
+                }
+                self::$koneksi = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                 if (self::$koneksi->connect_error) {
-                    throw new Exception("Koneksi gagal: " . self::$koneksi->connect_error);
+                    throw new Exception("Koneksi MySQLi gagal: " . self::$koneksi->connect_error);
                 }
             } else {
-                self::$koneksi = mysql_connect($config[0], $config[1], $config[2]);
-                if (!self::$koneksi) {
-                    throw new Exception('Tidak bisa terhubung ke MySQL');
+                if (!function_exists('mysql_connect')) {
+                    throw new Exception("Ekstensi MySQL lama (mysql_*) tidak didukung di versi PHP ini. Gunakan driver 'MySqli'.");
                 }
-                mysql_select_db($config[3], self::$koneksi);
+                self::$koneksi = mysql_connect(DB_HOST, DB_USER, DB_PASS);
+                if (!self::$koneksi) {
+                    throw new Exception('Koneksi MySQL gagal: ' . mysql_error());
+                }
+                mysql_select_db(DB_NAME, self::$koneksi);
             }
         }
         return self::$koneksi;
     }
 
     protected static function getDriver() {
-        $config = fileCon(BASEPATH);
-        return $config[4] ?? 'MySqli';
+        return DB_DRIVER;
     }
 
     protected static function escape($nilai) {
@@ -166,14 +170,31 @@ class PembangunKueri {
         return $this;
     }
 
+    protected function bangunWhere() {
+        $kueri = "";
+        if (!empty($this->dimana)) {
+            $kueri .= " WHERE ";
+            foreach ($this->dimana as $i => $kondisi) {
+                if ($i > 0) {
+                    // Cek apakah kondisi sudah diawali dengan OR atau AND
+                    if (strpos(strtoupper($kondisi), 'OR ') !== 0 && strpos(strtoupper($kondisi), 'AND ') !== 0) {
+                        $kueri .= " AND ";
+                    } else {
+                        $kueri .= " ";
+                    }
+                }
+                $kueri .= $kondisi;
+            }
+        }
+        return $kueri;
+    }
+
     protected function bangunKueriSelect() {
         $kueri = "SELECT {$this->pilih} FROM {$this->tabel}";
         if (!empty($this->gabung)) {
             $kueri .= ' ' . implode(' ', $this->gabung);
         }
-        if (!empty($this->dimana)) {
-            $kueri .= " WHERE " . implode(' AND ', $this->dimana);
-        }
+        $kueri .= $this->bangunWhere();
         if ($this->urutkan) {
             $kueri .= " {$this->urutkan}";
         }
@@ -252,17 +273,13 @@ class PembangunKueri {
         }
         $set = implode(', ', $set);
         $kueri = "UPDATE {$this->tabel} SET {$set}";
-        if (!empty($this->dimana)) {
-            $kueri .= " WHERE " . implode(' AND ', $this->dimana);
-        }
+        $kueri .= $this->bangunWhere();
         return $this->eksekusi($kueri);
     }
 
     public function hapus() {
         $kueri = "DELETE FROM {$this->tabel}";
-        if (!empty($this->dimana)) {
-            $kueri .= " WHERE " . implode(' AND ', $this->dimana);
-        }
+        $kueri .= $this->bangunWhere();
         return $this->eksekusi($kueri);
     }
 }

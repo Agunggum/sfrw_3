@@ -1,3 +1,162 @@
+/**
+ * SPA Navigation Manager
+ */
+const SPANavigator = (() => {
+    const contentId = 'spa-content';
+    
+    const init = () => {
+        document.addEventListener('click', handleLinkClick);
+        document.addEventListener('submit', handleFormSubmit);
+        window.addEventListener('popstate', handlePopState);
+    };
+
+    const handleFormSubmit = async (e) => {
+        const form = e.target.closest('form');
+        if (!form || form.getAttribute('target') === '_blank' || form.getAttribute('method')?.toLowerCase() === 'get') {
+            return;
+        }
+
+        e.preventDefault();
+        const formData = new FormData(form);
+        const url = form.getAttribute('action') || window.location.href;
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            handleResponse(response, url);
+        } catch (error) {
+            console.error('SPA form submit failed:', error);
+            form.submit(); // Fallback
+        }
+    };
+
+    const handleLinkClick = (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        const url = link.getAttribute('href');
+        if (!url || url.startsWith('http') || url.startsWith('#') || url.startsWith('javascript:') || link.getAttribute('target') === '_blank') {
+            return;
+        }
+
+        e.preventDefault();
+        navigateTo(url);
+    };
+
+    const handlePopState = (e) => {
+        loadContent(window.location.pathname + window.location.search, false);
+    };
+
+    const navigateTo = (url) => {
+        loadContent(url, true);
+    };
+
+    const loadContent = async (url, pushState = true) => {
+        const container = document.getElementById(contentId);
+        if (!container) return;
+
+        container.style.opacity = '0.5';
+
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            handleResponse(response, url, pushState);
+        } catch (error) {
+            console.error('SPA load failed:', error);
+            window.location.href = url;
+        }
+    };
+
+    const handleResponse = async (response, url, pushState = true) => {
+        const container = document.getElementById(contentId);
+        
+        // Cek header redirect dari server
+        const spaRedirect = response.headers.get('X-SPA-Redirect');
+        if (spaRedirect) {
+            navigateTo(spaRedirect);
+            return;
+        }
+
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const html = await response.text();
+        const title = response.headers.get('X-Page-Title');
+
+        // Update content
+        container.innerHTML = html;
+        container.style.opacity = '1';
+
+        // Update title
+        if (title) document.title = title;
+
+        // Update URL
+        if (pushState && url !== window.location.href) {
+            window.history.pushState({}, title || '', url);
+        }
+
+        // Re-initialize scripts
+        reinitScripts();
+        window.scrollTo(0, 0);
+    };
+
+    const reinitScripts = () => {
+        // Re-init Dark Mode Toggle
+        const themeToggle = document.getElementById('darkModeToggle');
+        if (themeToggle) {
+            themeToggle.checked = localStorage.getItem('theme') === 'dark';
+            themeToggle.removeEventListener('change', handleThemeChange);
+            themeToggle.addEventListener('change', handleThemeChange);
+        }
+
+        // Re-init any other components (Shorten, etc.)
+        $('.comment').shorten();
+        
+        // Execute scripts inside the new content
+        const scripts = document.getElementById(contentId).querySelectorAll('script');
+        scripts.forEach(oldScript => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+            
+            // Handle Module Scripts (for Lit-HTML components)
+            if (oldScript.type === 'module') {
+                const scriptContent = oldScript.innerHTML;
+                const blob = new Blob([scriptContent], { type: 'application/javascript' });
+                newScript.src = URL.createObjectURL(blob);
+            } else {
+                newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            }
+            
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+
+        // Trigger Custom Event for Lit-HTML auto-render
+        document.dispatchEvent(new CustomEvent('spa:content-loaded', {
+            detail: { url: window.location.href, data: window.pageData || {} }
+        }));
+    };
+
+    const handleThemeChange = (e) => {
+        const newTheme = e.target.checked ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-bs-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    };
+
+    return { init, navigateTo };
+})();
+
+// Start SPA Navigation
+SPANavigator.init();
+
 (function($) {
     $.fn.shorten = function(settings) {
         "use strict";

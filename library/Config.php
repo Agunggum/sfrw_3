@@ -4,28 +4,15 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class db {
 
 	static public function connectMySQL($base) {
-        $array = fileCon($base);
-		if($array[4] == 'MySql'){
-			mysql_connect($array[0], $array[1], $array[2]);
-			mysql_select_db($array[3]) or die(print "Konfigurasi dalam server : Tidak terhubung dengan database.");
-		}elseif($array[4] == 'MySqli'){
-			$mysqli = new mysqli($array[0], $array[1], $array[2], $array[3]);
-			if ($mysqli->connect_error){
-				exit("Konfigurasi dalam server : Tidak terhubung dengan database.");
-			}
-		}else{
-			exit("Tidak Terhubung ke database Anda: pastikan jalur berikut sudah benar pada library/config.txt.");
-		}
+        // Menggunakan koneksi dari Container.php untuk konsistensi
+        return get_db_conn();
 	}
 
 	static public function closeConnectMySQL($base) {
-        $array = fileCon($base);
-		if($array[4] == 'MySql'){
-			mysql_close();
-		}elseif($array[4] == 'MySqli'){
-			$mysqli = new mysqli($array[0], $array[1], $array[2], $array[3]);
-			$mysqli->close();
-		}
+        if ($GLOBALS['sfrw_db_conn'] instanceof mysqli) {
+            $GLOBALS['sfrw_db_conn']->close();
+            $GLOBALS['sfrw_db_conn'] = null;
+        }
 	}
 
 }

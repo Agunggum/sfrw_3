@@ -1,146 +1,198 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-$arrerr = explode(", ", $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN']);
 
-if($arrerr[1] == "Trying to get property of non-object"){ $errstr = "Query tidak terdeteksi pada fungsi query, cari di setiap folder yang memakai query atau telusuri halaman target"; }else{ $errstr = $arrerr[1]; }
-if(DEBUG == 'true'){
+$error = $_SESSION['error_data'] ?? [
+    'errno' => $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] ?? 'Unknown',
+    'errstr' => $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'] ?? 'An unknown error occurred',
+    'errfile' => 'Unknown',
+    'errline' => '0',
+    'uri' => $_SERVER['REQUEST_URI'],
+    'time' => date("Y-m-d H:i:s")
+];
+
+// Parse data dari session lama jika ada
+if (!isset($_SESSION['error_data']) && isset($_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'])) {
+    $parts = explode(", ", $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN']);
+    $error['errline'] = $parts[0] ?? '0';
+    $error['errstr'] = $parts[1] ?? $error['errstr'];
+    $error['errfile'] = $parts[2] ?? 'Unknown';
+    $error['uri'] = $parts[3] ?? $error['uri'];
+    $error['time'] = $parts[4] ?? $error['time'];
+}
+
+if (DEBUG == 'true'):
 ?>
-<!doctype html>
-<html class="no-js" lang="en" data-bs-theme="light">
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="light">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?php echo "ATASI : ".$errstr; ?></title>
-    <meta name="description" content="<?php echo WEBTITLETOP; ?>">
-    <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.ico'); ?>" sizes="any" >
-    <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.svg'); ?>" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>">
-    <meta property="og:title" content="<?php echo WEBTITLETOP; ?>" />
-    <meta property="og:image" content="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>" />
-    <meta property="og:url" content="<?php echo  BASEURL; ?>" />
-    <meta property="og:description" content="<?php echo WEBTITLETOP; ?> <?php echo VERSIONFRMAEWORK; ?>" />
-    <meta property="og:site_name" content="<?php echo WEBTITLETOP; ?>" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S-FRW Error: <?php echo htmlspecialchars($error['errstr']); ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script>
+        // Deteksi tema dari localStorage secepat mungkin sebelum halaman dirender
+        (() => {
+            const theme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-bs-theme', theme);
+        })();
+    </script>
     <style>
-        @import "<?php echo asset('bootstrap/theme/css/bootstrap.css?v=5.3.8'); ?>";
-        @import "<?php echo asset('bootstrap/theme/css/bootstrap.min.css?v=5.3.8'); ?>";
-        @import "<?php echo asset('bootstrap/theme/fontawesome/css/all.css'); ?>";
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background-color 0.3s ease; }
+        .error-header { background: #dc3545; color: white; padding: 2rem 0; margin-bottom: 2rem; border-radius: 0 0 1rem 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card { border: none; border-radius: 1rem; box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        
+        /* Tema Adaptif untuk Code Block */
+        [data-bs-theme="dark"] .code-block { background: #121212; color: #e0e0e0; border: 1px solid #333; }
+        [data-bs-theme="light"] .code-block { background: #212529; color: #f8f9fa; }
+        
+        .code-block { padding: 1.5rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'Cascadia Code', 'Courier New', Courier, monospace; font-size: 0.9rem; line-height: 1.5; }
+        .line-number { color: #6c757d; display: inline-block; width: 3rem; text-align: right; margin-right: 1rem; user-select: none; }
+        
+        /* Highlight baris error */
+        [data-bs-theme="dark"] .line-highlight { background: #3d2b2b; display: block; margin: 0 -1.5rem; padding: 0 1.5rem; border-left: 4px solid #ff4d4d; }
+        [data-bs-theme="light"] .line-highlight { background: #495057; display: block; margin: 0 -1.5rem; padding: 0 1.5rem; border-left: 4px solid #ffc107; }
+        
+        .stack-trace { font-size: 0.85rem; }
+        
+        /* Penyesuaian Card pada Dark Mode */
+        [data-bs-theme="dark"] .card { background-color: #1e1e1e; border: 1px solid #333; }
+        [data-bs-theme="dark"] .bg-white { background-color: #1e1e1e !important; }
     </style>
-    <script src="<?php echo asset('bootstrap/theme/js/jquery-1.11.1.min.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/js/jquery-3.7.1.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/fontawesome/js/all.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.bundle.min.js'); ?>"></script>
 </head>
 <body>
-    <div class="col-12">
-        <div class="my-2">
-            <div class="alert alert-dark">
-                <small class="float-right font-weight-bold ml-1">S-FRW <?php echo VERSIONFRMAEWORK; ?> <i class="fa fa-copy"></i></small>
-                <h3 class="col-12 p-1 text-wrap" title="ATASI : <?php echo $errstr; ?>"><span class="text-danger">ATASI : </span><?php echo $errstr; ?><br><br><code class="text-wrap"><?php echo (!empty($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj2'])) ? $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj2']:''; ?></code></h3>
-                <?php if(!empty($arrerr[2])){ ?>
-                <h5 class="col-12 p-1 text-wrap"><strong class="text-danger">pada file</strong> <?php echo $arrerr[2]; ?></h5>
-                <?php } ?>
+    <div class="error-header">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-exclamation-triangle-fill fs-1 me-3"></i>
+                <div>
+                    <h1 class="h3 mb-1">Terjadi Kesalahan pada Aplikasi</h1>
+                    <p class="mb-0 opacity-75">S-FRW Framework <?php echo VERSIONFRMAEWORK; ?></p>
+                </div>
+                <div class="ms-auto">
+                    <button onclick="window.location.reload()" class="btn btn-outline-light">
+                        <i class="bi bi-arrow-clockwise me-1"></i> Coba Lagi
+                    </button>
+                </div>
             </div>
-            <div class="col-12 bg-secondary p-3 rounded">
-                <div class="row">
-                    <div class="col-lg-<?php if(!empty($arrerr[2])){ ?>4<?php }else{ ?>12<?php } ?>">
-                        <div class="alert alert-secondary">
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong>Baris ke :</strong>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <span class="text-danger font-weight-bold"><?php echo $arrerr[0]; ?></span>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong>Halaman Target :</strong>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <span class="text-danger font-weight-bold"><?php echo $arrerr[3]; ?></span>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong>Nomor Kode :</strong>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <span class="text-danger font-weight-bold"><?php echo $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj']; ?></span>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong>Waktu :</strong>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <span class="text-danger font-weight-bold"><?php echo $arrerr[4]; ?></span>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+    </div>
 
-                    <?php if(!empty($arrerr[2])){ ?>
-                    <div class="col-lg-8">
-                        <div class="alert alert-secondary">
-                            <pre class="comment bg-dark text-white rounded p-3 mt-3 border border-danger text-wrap">
-                            <?php 
-                            if(!empty($arrerr[2])){
-                            $filename = $arrerr[2];
-                                $read = file($filename); 
-                                $numberline = 1;
-                                foreach ($read as $line_number => $last_line) {
-                                    if($numberline == $arrerr[0] or ($numberline == $arrerr[0] and basename($filename) == "option.php")){
-                                        echo '<div class="row mb-2 bg-danger"><div class="col-1 mx-0 pl-1 pr-0">'.$numberline++.'.</div> <div class="col-10">'.htmlspecialchars(html_entity_decode($last_line))."</div></div>";
-                                    }else{
-                                        echo '<div class="row mb-2"><div class="col-1 mx-0 pl-1 pr-0">'.$numberline++.'.</div> <div class="col-10">'.htmlspecialchars(html_entity_decode($last_line)).'</div></div>';
-                                    }
-                                }
-                            }
-                            ?></pre>
-                        </div>
-                    </div>
-                    <?php } ?>
-
-                    <div class="col-lg-12">
-                        <div class="alert alert-secondary">
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong class="text-danger">Lingkungan :</strong>
+    <div class="container pb-5">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="card bg-white">
+                    <div class="card-body p-4">
+                        <h2 class="h5 text-danger border-bottom pb-3 mb-3">
+                            <i class="bi bi-bug me-2"></i>Detail Kesalahan
+                        </h2>
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <p class="fs-5 mb-1"><strong>Pesan:</strong></p>
+                                <div class="alert alert-danger border-0 shadow-sm">
+                                    <?php echo htmlspecialchars($error['errstr']); ?>
+                                </div>
                             </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <em><?php echo ENVIRONMENT; ?></em>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong class="text-danger font-weight-bold">Browser :</strong>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <em><?php echo get_client_browser(); ?></em>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong class="text-danger font-weight-bold">IP :</strong>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <em><?php echo get_client_ip(); ?></em>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <strong class="text-danger font-weight-bold">Kirim e-Mail :</strong>
-                            </div>
-                            <div class="border-bottom border-dark p-2 mb-1 col-12 text-truncate">
-                                <em><?php echo MAILACTIVATE; ?></em>
+                            <div class="col-md-4">
+                                <p class="mb-1 text-muted small uppercase">Status</p>
+                                <p class="fw-bold"><?php echo $error['errno']; ?></p>
+                                <p class="mb-1 text-muted small uppercase">Baris Error</p>
+                                <p class="fw-bold text-danger"><?php echo $error['errline']; ?></p>
+                                <p class="mb-1 text-muted small uppercase">Waktu Kejadian</p>
+                                <p class="fw-bold"><?php echo $error['time']; ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <?php if (file_exists($error['errfile'])): ?>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h3 class="h5 mb-3 d-flex justify-content-between align-items-center">
+                            <span><i class="bi bi-file-earmark-code me-2"></i>Sumber Kesalahan</span>
+                            <small class="text-muted fs-6"><?php echo htmlspecialchars($error['errfile']); ?></small>
+                        </h3>
+                        <div class="code-block">
+                            <?php 
+                            $lines = file($error['errfile']);
+                            $start = max(0, $error['errline'] - 10);
+                            $end = min(count($lines), $error['errline'] + 10);
+                            
+                            for ($i = $start; $i < $end; $i++) {
+                                $num = $i + 1;
+                                $line = htmlspecialchars($lines[$i]);
+                                $isHighlighted = ($num == $error['errline']);
+                                echo $isHighlighted ? '<div class="line-highlight">' : '<div>';
+                                echo '<span class="line-number">' . $num . '</span>' . $line;
+                                echo '</div>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <h4 class="h6 text-muted mb-3">INFORMASI LINGKUNGAN</h4>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2 d-flex justify-content-between border-bottom pb-2">
+                                <span class="text-secondary">Environment:</span>
+                                <span class="badge bg-info text-dark"><?php echo ENVIRONMENT; ?></span>
+                            </li>
+                            <li class="mb-2 d-flex justify-content-between border-bottom pb-2">
+                                <span class="text-secondary">PHP Version:</span>
+                                <span><?php echo PHP_VERSION; ?></span>
+                            </li>
+                            <li class="mb-2 d-flex justify-content-between border-bottom pb-2">
+                                <span class="text-secondary">Request URI:</span>
+                                <span class="text-truncate" style="max-width: 200px;"><?php echo htmlspecialchars($error['uri']); ?></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <h4 class="h6 text-muted mb-3">INFORMASI KLIEN</h4>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2 d-flex justify-content-between border-bottom pb-2">
+                                <span class="text-secondary">Browser:</span>
+                                <span><?php echo get_client_browser(); ?></span>
+                            </li>
+                            <li class="mb-2 d-flex justify-content-between border-bottom pb-2">
+                                <span class="text-secondary">IP Address:</span>
+                                <span><?php echo get_client_ip(); ?></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-<script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.6'); ?>"></script>
-<script language="javascript">
-$(document).ready(function() {
-    $(".comment").shorten();
-	$(".comment-small").shorten({showChars: 10});
-});
-</script>
+
+    <footer class="text-center py-4 text-muted">
+        <small>&copy; <?php echo date('Y'); ?> S-FRW Framework. Dirancang untuk efisiensi.</small>
+    </footer>
 </body>
 </html>
-<?php }else{ 
-    if($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] == "E-ROUTE-404"){
-        require_once BASEPATH.'error/404handler.php';
-    }else{
-        require_once BASEPATH.'error/500handler.php'; 
+<?php 
+else:
+    // Tampilan untuk Production (DEBUG = false)
+    if ($error['errno'] == '404' || (isset($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj']) && $_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] == "E-ROUTE-404")) {
+        require_once BASEPATH . 'error/404handler' . EXT;
+    } else {
+        require_once BASEPATH . 'error/500handler' . EXT;
     }
-} 
-$_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'] = ""; $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'] = ""; $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'] = "";
-exit(); ?>
+endif;
+
+// Bersihkan session error
+unset($_SESSION['XfTVKuhxT3LUAbp5C8z37lHdj'], $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'], $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'], $_SESSION['error_data']);
+exit();
+?>

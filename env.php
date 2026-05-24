@@ -20,6 +20,12 @@ define('VERSION', '1.0');
 define('TVERSION', '');
 define('COPYR', (date('Y')=='2025') ? ''.date('Y'):'2025 - '.date('Y'));
 
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_NAME', 'framework');
+define('DB_PASS', '');
+define('DB_DRIVER', 'MySqli');
+
 /*****************************************************************/
 /* Date timezone
 */
@@ -53,6 +59,6 @@ define('MAILPORT', 587);
 
 define('AUTOLOAD', 'app');
 define('EXT', '.php');
-define('EXTENSIONLIBRARY', include('library/Library'.EXT));
+
+define('EXTENSIONLIBRARY', include('vendor/sfrw/framework/src/muhammad/contracs/container/Container'.EXT));
 define('EXTENSIONAUTOLOAD', include('library/Autoload'.EXT));
-define('FILECONFIG', 'library/config.txt');

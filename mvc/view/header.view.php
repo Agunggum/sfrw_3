@@ -1,3 +1,10 @@
+<?php 
+if (defined('IS_AJAX') && IS_AJAX) {
+    // Jika AJAX, kita kirimkan judul halaman via header agar bisa diupdate oleh JS
+    header('X-Page-Title: ' . WEBTITLETOP);
+    return; 
+} 
+?>
 <!doctype html>
 <html class="no-js" lang="en" data-bs-theme="light">
 <head>
@@ -31,4 +38,12 @@
     <script src="<?php echo asset('bootstrap/theme/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/datatables.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/dataTables.bootstrap5.js'); ?>"></script>
+    
+    <!-- Lit-HTML Integration -->
+    <script type="module">
+        import { html, render } from 'https://cdn.jsdelivr.net/npm/lit-html@3.2.1/lit-html.js';
+        window.lit = { html, render };
+    </script>
 </head>
+<body>
+    <div id="spa-content">

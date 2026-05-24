@@ -23,6 +23,10 @@ Rute::ambil('login', function() {
     require_once tampilan('login');
 });
 
+Rute::kirim('authlogin', function() {
+    Logincontroller::loginform(BASEURL);
+});
+
 // Halaman Lupa Password
 Rute::ambil('forgot-password', function() {
     require_once tampilan('forgot-password');
@@ -34,9 +38,7 @@ Rute::ambil('datatable', function() {
 });
 
 // Halaman Keluar (Signout)
-Rute::ambil('signout', function() {
-    require_once tampilan('signout');
-});
+Rute::ambil('signout', 'Logincontroller@signout');
 
 // Halaman Logs (dengan parameter file)
 Rute::ambil('logs/{file}', function($file) {

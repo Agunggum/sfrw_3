@@ -7,6 +7,9 @@
                 
                 <div class="text-center">
                     <div class="pt-2">
+                        <span class="float-left">
+                            <a href="<?php echo BASEURL; ?>">Kembali ke Halaman Utama</a>
+                        </span>
                         <span class="float-right">
                             <div class="d-flex align-items-center ms-lg-3 mt-3 mt-lg-0" aria-label="Berpindah dari terang ke gelap">
                                 <!-- Ikon Matahari (Mode Terang) -->
@@ -31,7 +34,10 @@
                         </div>
                     </div>
                 
-                    <p class="mt-5"><?php Logincontroller::loginform($_SERVER['REQUEST_URI']); 
+                    <p class="mt-5"><?php 
+                    if(isset($_SESSION['username'])){
+                        alihkan(BASEURL);
+                    }
                     if(isset($_SESSION['alert'])){ echo $_SESSION['alert']; } ?></p>
                     
                     <div class="d-flex justify-content-center">
@@ -40,10 +46,10 @@
                             <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
                                 <p class="h3 text-left font-weight-bold">Sign In.</p>
                                 
-                                <form class="m-t" role="form" method="post" action="">
+                                <form class="m-t" role="form" method="post" action="<?php echo BASEURL.'authlogin'; ?>">
                                     <input type="hidden" name="login" value="MASUK">
                                     <!-- Email input -->
-                                    <?php echo forminput(['username', 'username', 'username', 'username or email', 'off', 'required']); ?>
+                                    <?php echo forminput(['text', 'username', 'username', 'username or email', 'off', 'required']); ?>
 
                                     <!-- Password input -->
                                     <?php echo forminput(['password', 'password', 'password', 'password', 'off', 'required'], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>']); ?>

@@ -21,9 +21,9 @@ class Logincontroller extends Controller {
         return $loginModel->forgotnewformmodel($uri,$s);
     }
    
-    static public function signout($nik,$log){
+    public function signout(){
         $loginModel = new Loginmodel;
-        return $loginModel->signoutmodel($nik,$log);
+        return $loginModel->signoutmodel();
     }
     
     static public function namelog($field){

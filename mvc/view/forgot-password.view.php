@@ -31,28 +31,50 @@
                         </div>
                     </div>
                 
-                    <p class="mt-5"><?php Logincontroller::forgotform($_SERVER['REQUEST_URI']); 
+                    <p class="mt-5"><?php 
+                    if(isset($_GET['s'])){
+                        Logincontroller::forgotnewform($_SERVER['REQUEST_URI'], $_GET['s']);
+                    } else {
+                        Logincontroller::forgotform($_SERVER['REQUEST_URI']);
+                    }
                     if(isset($_SESSION['alert'])){ echo $_SESSION['alert']; } ?></p>
                     
                     <div class="d-flex justify-content-center">
                         
                         <div class="col-md-8 col-lg-8 col-xl-8">
                             <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
-                                <p class="h3 text-left font-weight-bold">Forgot password.</p>
-                                
-                                <form class="m-t" role="form" method="post" action="">
-                                    <input type="hidden" name="login" value="MASUK">
-                                    <!-- Email input -->
-                                     <?php echo forminput(['email', 'username', 'username', 'email', 'off', 'required']); ?>
+                                <?php if(isset($_GET['s'])){ ?>
+                                    <p class="h3 text-left font-weight-bold">Reset password.</p>
+                                    
+                                    <form class="m-t" role="form" method="post" action="">
+                                        <input type="hidden" name="login" value="MASUK">
+                                        
+                                        <!-- Password 1 input -->
+                                        <?php echo forminput(['password', 'password1', 'password1', 'new password', 'off', 'required']); ?>
 
-                                    <!-- Submit button -->
-                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Confirm</button>
+                                        <!-- Password 2 input -->
+                                        <?php echo forminput(['password', 'password2', 'password2', 'confirm new password', 'off', 'required']); ?>
 
-                                    <!-- Register buttons -->
-                                    <div class="text-center">
-                                        <p><a href="<?php echo BASEURL.'login'; ?>">Back to login</a></p>
-                                    </div>
-                                </form>
+                                        <!-- Submit button -->
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Reset Password</button>
+                                    </form>
+                                <?php } else { ?>
+                                    <p class="h3 text-left font-weight-bold">Forgot password.</p>
+                                    
+                                    <form class="m-t" role="form" method="post" action="">
+                                        <input type="hidden" name="login" value="MASUK">
+                                        <!-- Email input -->
+                                        <?php echo forminput(['email', 'email', 'email', 'email', 'off', 'required']); ?>
+
+                                        <!-- Submit button -->
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Confirm</button>
+                                    </form>
+                                <?php } ?>
+
+                                <!-- Register buttons -->
+                                <div class="text-center">
+                                    <p><a href="<?php echo BASEURL.'login'; ?>">Back to login</a></p>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>

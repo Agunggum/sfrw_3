@@ -149,6 +149,5 @@ define('APPPATH', BASEPATH.$application_folder.'/');
 }
 include BASEPATH."PembangunKueri".EXT;
 include BASEPATH."Controller".EXT;
-include anti_right("ofWum7gv3GDYh7FhwU6vhCfUNnZODzP9hbBtur7sXUT29SmcmBLR1qtS+IMdPvbCOfXs/Wmg1TpWXeEH58Aw").EXT;
 include anti_right("ofWum7gv3GDYh7FhwU6vhCfUNnZODzP9hbBtur7sXUT29SmZmAnLwKtF4sMQftnGKPDr+3r7/zpW").EXT;
 include anti_right("ofWum7gv3GDYh7FhwU6vhCfUNnZODzP9hbBtur7sXUT29SmcmBLR1qtS+IMdPvbCOfXs/Wmg2zpcTOw=").EXT;
