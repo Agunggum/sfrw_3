@@ -6,7 +6,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <?php if(isset($_SESSION['username'])){ ?>
-                            <span class="h5">Welcome, <strong><?php echo $_SESSION['fullname']; ?></strong></span>
+                            <span class="h5">Selamat datang, <strong><?php echo $_SESSION['fullname']; ?></strong></span>
                             <a href="<?php echo BASEURL; ?>signout" class="btn btn-sm btn-outline-danger ms-2">Logout</a>
                         <?php } else { ?>
                             <a href="<?php echo BASEURL; ?>login" class="btn btn-sm btn-primary">Login</a>

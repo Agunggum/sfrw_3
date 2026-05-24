@@ -13,6 +13,10 @@ class Application
         {
             require_once $filenamecontrollers;
         }
+        foreach (glob("mvc/model/*.model".EXT) as $filenamemodels)
+        {
+            require_once $filenamemodels;
+        }
         foreach (glob("app/Http/Middleware/*".EXT) as $filenamemiddleware)
         {
             require_once $filenamemiddleware;
