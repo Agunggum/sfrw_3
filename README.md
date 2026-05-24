@@ -38,7 +38,7 @@ define('DEBUG', 'true');        // Tampilkan detail error saat pengembangan
 define('BASEURL', 'http://localhost/sfrw_3/');
 ```
 
-## � Fitur Pembangun Kueri
+### Fitur Pembangun Kueri
 
 Pembangun Kueri S-FRW memungkinkan Anda berinteraksi dengan database dengan sintaks yang bersih dan aman:
 
