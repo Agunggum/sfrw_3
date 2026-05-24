@@ -10,22 +10,8 @@
                         <span class="float-left">
                             <a href="<?php echo BASEURL; ?>">Kembali ke Halaman Utama</a>
                         </span>
-                        <span class="float-right">
-                            <div class="d-flex align-items-center ms-lg-3 mt-3 mt-lg-0" aria-label="Berpindah dari terang ke gelap">
-                                <!-- Ikon Matahari (Mode Terang) -->
-                                <i class="bi bi-sun-fill text-warning me-1"></i>
-                                
-                                <!-- Switch Utama -->
-                                <div class="form-check form-switch mb-0">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="darkModeToggle" style="cursor: pointer; width: 2.5em; height: 1.25em;" aria-label="Berpindah dari terang ke gelap">
-                                    <label class="form-check-label" for="darkModeToggle" aria-label="Berpindah dari terang ke gelap"></label>
-                                </div>
-                                
-                                <!-- Ikon Bulan (Mode Gelap) -->
-                                <i class="bi bi-moon-stars-fill text-secondary ms-1"></i>
-                            </div>
-                        </span>
                     </div>
+                    <div class="clearfix"></div>
                     
                     <div class="d-flex justify-content-center">
                         <div class="col-md-12 col-lg-12 col-xl-12 mt-5 mb-4 text-left">
@@ -75,19 +61,7 @@
                                         <p>Not a member? <a href="#!">Register</a></p>
                                         <p>or sign up with:</p>
                                         <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-facebook-f"></i>
-                                        </button>
-
-                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-google"></i>
-                                        </button>
-
-                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-twitter"></i>
-                                        </button>
-
-                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-github"></i>
                                         </button>
                                     </div>
                                 </form>
