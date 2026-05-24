@@ -1,5 +1,5 @@
 <?php if ( ! defined('MODPATH')) exit('No direct script access allowed');
-$filelogs = (!isset($_GET['file'])) ?  "error.log":$_GET['file'].".log";
+$filelogs = (!isset($file)) ?  "error.log":$file.".log";
 $getfile = fopen('logs/'.$filelogs, 'r');
 $result = [];
 

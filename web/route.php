@@ -52,7 +52,7 @@ Rute::ambil('logs/{file}', function($file) {
 });
 
 // Halaman Daftar File Logs
-Rute::ambil('logsfiles', function() {
+Rute::ambil('logsfiles/{file}', function($file) {
     require_once tampilan('logsfiles');
 });
 
