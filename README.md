@@ -11,6 +11,7 @@
 -   **🛠️ Advanced Error Handler**: Tampilan error yang cantik dengan cuplikan kode dan sorotan baris untuk mempercepat debugging.
 -   **🌗 Dark Mode Native**: Dukungan mode gelap dan terang yang tersinkronisasi di seluruh aplikasi.
 -   **💾 Singleton Database**: Koneksi database yang efisien dan terpusat melalui Container.
+-   **💎 Pembangun Kueri (Query Builder)**: Antarmuka database yang fasih, aman dari SQL Injection, dan mendukung driver MySql/MySqli secara transparan.
 
 ## 📁 Struktur Folder Utama
 
@@ -43,7 +44,36 @@ define('DEBUG', 'true');        // Tampilkan detail error saat pengembangan
 define('BASEURL', 'http://localhost/sfrw_3/');
 ```
 
-## 🛡️ Keamanan & Performa
+## � Fitur Pembangun Kueri
+
+Pembangun Kueri S-FRW memungkinkan Anda berinteraksi dengan database dengan sintaks yang bersih dan aman:
+
+```php
+// Mengambil satu data berdasarkan kriteria
+$user = PembangunKueri::tabel('users')
+        ->pilih('fullname', 'email')
+        ->dimana('username', '=', 'admin')
+        ->pertama();
+
+// Mengambil banyak data dengan pengurutan
+$posts = PembangunKueri::tabel('posts')
+        ->urutkan('created_at', 'DESC')
+        ->batas(10)
+        ->dapatkan();
+
+// Menyisipkan data baru (Auto-Escape)
+$newId = PembangunKueri::tabel('logs')->sisipkan([
+    'activity' => 'User Login',
+    'time' => DATEWMIN
+]);
+
+// Memperbarui data
+PembangunKueri::tabel('users')
+    ->dimana('id', '=', 1)
+    ->perbarui(['active' => 'Y']);
+```
+
+## �🛡️ Keamanan & Performa
 
 -   **SQL Injection Protection**: PembangunKueri secara otomatis melakukan *escaping* pada semua data input.
 -   **XSS Protection**: Helper `anti_injection()` tersedia untuk membersihkan input pengguna.
