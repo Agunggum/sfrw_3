@@ -32,8 +32,16 @@ if (DEBUG == 'true'):
     <script>
         // Deteksi tema dari localStorage secepat mungkin sebelum halaman dirender
         (() => {
-            const theme = localStorage.getItem('theme') || 
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            const getStoredTheme = () => localStorage.getItem('theme');
+            const getPreferredTheme = () => {
+                const storedTheme = getStoredTheme();
+                if (storedTheme && storedTheme !== 'auto') {
+                    return storedTheme;
+                }
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            };
+            
+            const theme = getPreferredTheme();
             document.documentElement.setAttribute('data-bs-theme', theme);
         })();
     </script>

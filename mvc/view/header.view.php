@@ -39,10 +39,23 @@ if (defined('IS_AJAX') && IS_AJAX) {
     <script src="<?php echo asset('bootstrap/theme/js/datatables.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/dataTables.bootstrap5.js'); ?>"></script>
     
-    <!-- Lit-HTML Integration -->
     <script type="module">
         import { html, render } from 'https://cdn.jsdelivr.net/npm/lit-html@3.2.1/lit-html.js';
         window.lit = { html, render };
+    </script>
+    <script>
+        // Mencegah flash tema (FOUC)
+        (() => {
+            const getStoredTheme = () => localStorage.getItem('theme');
+            const getPreferredTheme = () => {
+                const storedTheme = getStoredTheme();
+                if (storedTheme && storedTheme !== 'auto') return storedTheme;
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            };
+            const theme = getPreferredTheme();
+            if (theme === 'dark') document.documentElement.setAttribute('data-bs-theme', 'dark');
+            else document.documentElement.setAttribute('data-bs-theme', 'light');
+        })();
     </script>
 </head>
 <body>

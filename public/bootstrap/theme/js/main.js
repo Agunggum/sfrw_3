@@ -110,13 +110,8 @@ const SPANavigator = (() => {
     };
 
     const reinitScripts = () => {
-        // Re-init Dark Mode Toggle
-        const themeToggle = document.getElementById('darkModeToggle');
-        if (themeToggle) {
-            themeToggle.checked = localStorage.getItem('theme') === 'dark';
-            themeToggle.removeEventListener('change', handleThemeChange);
-            themeToggle.addEventListener('change', handleThemeChange);
-        }
+        // Re-init Theme Toggle (Dropdown version)
+        initThemeSwitcher();
 
         // Re-init any other components (Shorten, etc.)
         $('.comment').shorten();
@@ -145,17 +140,89 @@ const SPANavigator = (() => {
         }));
     };
 
-    const handleThemeChange = (e) => {
-        const newTheme = e.target.checked ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-bs-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-    };
+    const getStoredTheme = () => localStorage.getItem('theme')
+    const setStoredTheme = theme => localStorage.setItem('theme', theme)
 
-    return { init, navigateTo };
+    const getPreferredTheme = () => {
+        const storedTheme = getStoredTheme()
+        if (storedTheme) {
+            return storedTheme
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+
+    const setTheme = theme => {
+        if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-bs-theme', 'dark')
+        } else {
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? 'light' : theme)
+        }
+    }
+
+    const showActiveTheme = (theme, focus = false) => {
+        const themeSwitcher = document.querySelector('#bd-theme')
+        if (!themeSwitcher) return
+
+        const activeThemeIcon = themeSwitcher.querySelector('i')
+        const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+        
+        if (!btnToActive) return
+
+        document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+            element.classList.remove('active')
+            element.setAttribute('aria-pressed', 'false')
+            const checkIcon = element.querySelector('.bi-check2')
+            if (checkIcon) checkIcon.classList.add('d-none')
+        })
+
+        btnToActive.classList.add('active')
+        btnToActive.setAttribute('aria-pressed', 'true')
+        
+        const activeCheckIcon = btnToActive.querySelector('.bi-check2')
+        if (activeCheckIcon) activeCheckIcon.classList.remove('d-none')
+        
+        // Update main button icon
+        const iconClasses = btnToActive.querySelector('.theme-icon').classList.value
+        activeThemeIcon.className = iconClasses.replace('me-2 opacity-50', 'me-2').replace('theme-icon', 'theme-icon-active')
+
+        if (focus) {
+            themeSwitcher.focus()
+        }
+    }
+
+    const initThemeSwitcher = () => {
+        const theme = getPreferredTheme()
+        setTheme(theme)
+        showActiveTheme(theme)
+    }
+
+    const setupThemeEventListeners = () => {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            const storedTheme = getStoredTheme()
+            if (storedTheme !== 'light' && storedTheme !== 'dark') {
+                setTheme(getPreferredTheme())
+            }
+        })
+
+        // Use event delegation for theme toggles to avoid multiple listeners during SPA navigation
+        document.addEventListener('click', e => {
+            const toggle = e.target.closest('[data-bs-theme-value]')
+            if (toggle) {
+                const theme = toggle.getAttribute('data-bs-theme-value')
+                setStoredTheme(theme)
+                setTheme(theme)
+                showActiveTheme(theme, true)
+            }
+        })
+    }
+
+    return { init, navigateTo, initThemeSwitcher, setupThemeEventListeners };
 })();
 
 // Start SPA Navigation
 SPANavigator.init();
+SPANavigator.initThemeSwitcher();
+SPANavigator.setupThemeEventListeners();
 
 (function($) {
     $.fn.shorten = function(settings) {
@@ -227,28 +294,8 @@ SPANavigator.init();
 })(jQuery);
 
 /**
- * Theme Manager & Helper Tools
+ * Theme Helper Tools
  */
-(() => {
-    const getTheme = () => localStorage.getItem('theme') || 
-    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    
-    // Set tema secepat mungkin untuk mencegah flickering
-    document.documentElement.setAttribute('data-bs-theme', getTheme());
-    
-    // Tunggu DOM siap hanya untuk interaksi toggle
-    window.addEventListener('DOMContentLoaded', () => {
-        const themeToggle = document.getElementById('darkModeToggle');
-        if (!themeToggle) return;
-        
-        themeToggle.checked = getTheme() === 'dark';
-        themeToggle.addEventListener('change', () => {
-            const newTheme = themeToggle.checked ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-bs-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-    });
-})();
 (() => {
     'use strict';
 

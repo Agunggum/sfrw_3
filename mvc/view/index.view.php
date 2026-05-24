@@ -12,18 +12,34 @@
                             <a href="<?php echo BASEURL; ?>login" class="btn btn-sm btn-primary">Login</a>
                         <?php } ?>
                     </div>
-                    <div class="d-flex align-items-center ms-lg-3 mt-3 mt-lg-0" aria-label="Berpindah dari terang ke gelap">
-                        <!-- Ikon Matahari (Mode Terang) -->
-                        <i class="bi bi-sun-fill text-warning me-1"></i>
-                        
-                        <!-- Switch Utama -->
-                        <div class="form-check form-switch mb-0">
-                            <input class="form-check-input" type="checkbox" role="switch" id="darkModeToggle" style="cursor: pointer; width: 2.5em; height: 1.25em;" aria-label="Berpindah dari terang ke gelap">
-                            <label class="form-check-label" for="darkModeToggle" aria-label="Berpindah dari terang ke gelap"></label>
-                        </div>
-                        
-                        <!-- Ikon Bulan (Mode Gelap) -->
-                        <i class="bi bi-moon-stars-fill text-secondary ms-1"></i>
+                    <div class="dropdown" id="theme-dropdown-container">
+                        <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
+                            <i class="bi bi-circle-half theme-icon-active me-2"></i>
+                            <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="bd-theme-text">
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="bi bi-sun-fill me-2 opacity-50 theme-icon"></i>
+                                    Light
+                                    <i class="bi bi-check2 ms-auto d-none"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="bi bi-moon-stars-fill me-2 opacity-50 theme-icon"></i>
+                                    Dark
+                                    <i class="bi bi-check2 ms-auto d-none"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="bi bi-circle-half me-2 opacity-50 theme-icon"></i>
+                                    System
+                                    <i class="bi bi-check2 ms-auto d-none"></i>
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
