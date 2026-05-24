@@ -31,12 +31,6 @@ S-FRW mendukung gaya pengembangan **"Vibe Coding"**, di mana Anda fokus pada mem
 
 ## 🔧 Konfigurasi Cepat
 
-### Database (`library/config.txt`)
-Format: `host, user, pass, db_name, driver`
-```text
-localhost, root, , my_database, MySqli
-```
-
 ### Environment (`env.php`)
 ```php
 define('ENVIRONMENT', 'local'); // Gunakan 'local' untuk mengaktifkan Live Reload
