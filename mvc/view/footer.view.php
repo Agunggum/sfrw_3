@@ -1,5 +1,5 @@
 <?php if (defined('IS_AJAX') && IS_AJAX) return; ?>
-<script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.15'); ?>"></script>
+<script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.17'); ?>"></script>
 
 <!-- Native Live Reload Integration (SSE) -->
 <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>

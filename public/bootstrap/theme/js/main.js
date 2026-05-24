@@ -3,40 +3,110 @@
  */
 const SPANavigator = (() => {
     const contentId = 'spa-content';
+    let progressBar = null;
+    let isLoading = false;
     
     const init = () => {
+        createProgressBar();
         document.addEventListener('click', handleLinkClick);
         document.addEventListener('submit', handleFormSubmit);
         window.addEventListener('popstate', handlePopState);
     };
 
+    const createProgressBar = () => {
+        if (document.getElementById('nprogress')) return;
+        progressBar = document.createElement('div');
+        progressBar.id = 'nprogress';
+        progressBar.innerHTML = '<div class="bar"></div>';
+        document.body.appendChild(progressBar);
+    };
+
+    const startProgress = () => {
+        const bar = progressBar.querySelector('.bar');
+        bar.style.width = '0%';
+        bar.style.transition = 'width 0.3s ease';
+        setTimeout(() => bar.style.width = '30%', 50);
+        setTimeout(() => bar.style.width = '70%', 400);
+    };
+
+    const stopProgress = () => {
+        const bar = progressBar.querySelector('.bar');
+        bar.style.width = '100%';
+        setTimeout(() => {
+            bar.style.width = '0%';
+            bar.style.transition = 'none';
+        }, 300);
+    };
+
     const handleFormSubmit = async (e) => {
         const form = e.target.closest('form');
-        if (!form || form.getAttribute('target') === '_blank' || form.getAttribute('method')?.toLowerCase() === 'get') {
+        if (!form || form.getAttribute('target') === '_blank') {
             return;
         }
 
+        const submitBtn = form.querySelector('[type="submit"]');
+        const method = form.getAttribute('method')?.toUpperCase() || 'GET';
+        
+        // Animasi Loading pada tombol
+        let originalBtnHtml = '';
+        if (submitBtn) {
+            originalBtnHtml = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Loading...`;
+        }
+
         e.preventDefault();
-        const formData = new FormData(form);
+        startProgress();
+        
         const url = form.getAttribute('action') || window.location.href;
+        const options = {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        };
+
+        if (method === 'POST') {
+            options.method = 'POST';
+            options.body = new FormData(form);
+        } else {
+            // Handle GET form
+            const formData = new FormData(form);
+            const params = new URLSearchParams(formData);
+            const getUrl = url.includes('?') ? `${url}&${params}` : `${url}?${params}`;
+            
+            try {
+                await loadContent(getUrl, true);
+                return;
+            } catch (error) {
+                console.error('SPA GET form failed:', error);
+                window.location.href = getUrl;
+                return;
+            }
+        }
 
         try {
-            const response = await fetch(url, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            });
-
-            handleResponse(response, url);
+            const response = await fetch(url, options);
+            await handleResponse(response, url);
         } catch (error) {
             console.error('SPA form submit failed:', error);
             form.submit(); // Fallback
+        } finally {
+            stopProgress();
+            if (submitBtn && !document.body.contains(submitBtn)) {
+                // Button might have been replaced by SPA content, do nothing
+            } else if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+            }
         }
     };
 
     const handleLinkClick = (e) => {
+        if (isLoading) {
+            e.preventDefault();
+            return;
+        }
+        
         const link = e.target.closest('a');
         if (!link) return;
 
@@ -58,10 +128,14 @@ const SPANavigator = (() => {
     };
 
     const loadContent = async (url, pushState = true) => {
+        if (isLoading) return;
+        
         const container = document.getElementById(contentId);
         if (!container) return;
 
+        isLoading = true;
         container.style.opacity = '0.5';
+        startProgress();
 
         try {
             const response = await fetch(url, {
@@ -74,6 +148,8 @@ const SPANavigator = (() => {
         } catch (error) {
             console.error('SPA load failed:', error);
             window.location.href = url;
+        } finally {
+            stopProgress();
         }
     };
 
