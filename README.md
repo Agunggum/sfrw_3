@@ -1,326 +1,58 @@
-# Sunda Framework (SFRW) v3.0
+# S-FRW Framework (v3.0) 🚀
 
-A lightweight PHP MVC framework designed for rapid web application development with built-in security features, error handling, and modern UI components.
+**Sunda Framework (S-FRW)** adalah framework PHP modern yang dirancang untuk kecepatan, kesederhanaan, dan pengalaman pengembangan yang luar biasa (**Vibe Coding**). Framework ini menggabungkan kekuatan PHP di sisi server dengan reaktivitas modern di sisi klien.
 
-## 🚀 Features
+## ✨ Fitur Unggulan
 
-- **MVC Architecture**: Model-View-Controller pattern for organized code structure
-- **Built-in Security**: SQL injection protection, XSS prevention, and secure session management
-- **Error Handling**: Comprehensive error logging and custom error pages
-- **Dark Mode**: Modern UI with dark mode toggle functionality
-- **Responsive Design**: Bootstrap-based responsive interface
-- **Database Support**: MySQL and MySQLi database connections
-- **Session Management**: Automatic session timeout and management
-- **Email Integration**: SMTP email support with configuration
-- **Logging System**: Detailed error and activity logging
-- **URL Rewriting**: Clean URLs with Apache mod_rewrite
+-   **🚀 SPA (Single Page Application)**: Navigasi antar halaman instan tanpa refresh penuh menggunakan sistem *AJAX-driven navigation*.
+-   **⚛️ Reactive UI dengan lit-html**: Integrasi native dengan `lit-html` untuk membangun komponen UI yang reaktif dan ringan.
+-   **🔥 Native Live Reload**: Pembaruan tampilan secara instan saat Anda mengubah kode, menggunakan teknologi *Server-Sent Events (SSE)*.
+-   **🛡️ PHP 8.1 Ready**: Sepenuhnya dioptimalkan untuk PHP 8.1+ dengan driver database `mysqli` yang stabil dan aman.
+-   **🛠️ Advanced Error Handler**: Tampilan error yang cantik dengan cuplikan kode dan sorotan baris untuk mempercepat debugging.
+-   **🌗 Dark Mode Native**: Dukungan mode gelap dan terang yang tersinkronisasi di seluruh aplikasi.
+-   **💾 Singleton Database**: Koneksi database yang efisien dan terpusat melalui Container.
 
-## 📁 Project Structure
+## 📁 Struktur Folder Utama
 
-```
-sfrw_3/
-├── .htaccess                 # Apache configuration with error pages
-├── index.php                 # Application entry point
-├── env.php                   # Environment configuration
-├── app/                      # Application directory
-│   ├── Models/              # Data models
-│   │   ├── Forgotlink.php   # Password reset model
-│   │   └── Users.php        # User model with schema definition
-│   ├── app.php              # Application bootstrap
-│   └── storage/             # Application storage
-├── bootstrap/               # Framework bootstrap
-│   ├── app.php              # Application initialization
-│   └── theme/               # UI themes and assets
-│       ├── css/             # Stylesheets
-│       ├── fontawesome/     # FontAwesome icons
-│       ├── js/              # JavaScript files
-│       └── globe-network.png # Theme assets
-├── library/                 # Core framework libraries
-│   ├── Autoload.php         # Class autoloader
-│   ├── Config.php           # Database configuration
-│   ├── Controller.php       # Base controller class
-│   ├── Core.php             # Core framework functionality
-│   ├── Library.php          # Utility functions library
-│   ├── Settings.php         # Framework settings
-│   ├── captcha/             # CAPTCHA functionality
-│   ├── classes/             # Third-party classes
-│   │   ├── class.phpmailer.php # PHPMailer integration
-│   │   ├── class.smtp.php   # SMTP configuration
-│   │   └── excel_reader2.php # Excel file reader
-│   ├── config.txt           # Database connection config
-│   └── error/               # Error handling
-│       ├── 404handler.php   # 404 error handler
-│       ├── Handler.php      # General error handler
-│       ├── classnotfound.php # Class not found handler
-│       ├── errorhandler.php # Error handler utility
-│       └── viewnotfound.php # View not found handler
-├── logs/                    # Application logs
-│   └── error.log            # Error log file
-├── mvc/                     # MVC components
-│   ├── controller/          # Controllers
-│   │   ├── Controller.php   # Base controller
-│   │   └── login.controller.php # Login controller
-│   ├── model/               # Models
-│   │   └── login.model.php  # Login model
-│   └── view/                # Views
-│       ├── footer.view.php  # Footer template
-│       ├── header.view.php  # Header template
-│       ├── index.view.php   # Homepage view
-│       ├── login.view.php   # Login page with dark mode
-│       ├── logs.view.php    # Logs view
-│       └── pagenotfound.view.php # 404 page
-├── skin/                    # Application themes
-│   └── default/             # Default theme
-├── vendor/                  # Third-party packages
-│   ├── logcarbon/           # Logging utility
-│   │   └── logcarbon.php    # LogCarbon implementation
-│   └── sfrw/                # SFRW framework core
-│       └── framework/       # Framework core files
-└── web/                     # Web routing
-    └── route.php            # URL routing configuration
+-   `app/`: Logika inti aplikasi dan model berbasis skema.
+-   `mvc/controller/`: Pengendali alur aplikasi.
+-   `mvc/view/`: Tempat semua tampilan dengan ekstensi `.view.php`.
+-   `library/`: Mesin utama framework (Core, PembangunKueri, Container).
+-   `web/route.php`: Pusat pengaturan URL/Rute aplikasi.
+-   `public/`: Folder publik untuk aset dan server live reload.
+
+## 🛠️ Panduan Pengembangan (Vibe Coding)
+
+S-FRW mendukung gaya pengembangan **"Vibe Coding"**, di mana Anda fokus pada membangun fitur dengan cepat dan intuitif.
+
+1.  **Lihat Filosofi Desain**: Pelajari prinsip dasar di [DESIGN.MD](file:///d:/virtual-server/xampp%20php8.1/htdocs/sfrw_3/DESIGN.MD).
+2.  **Mulai Membangun**: Ikuti contoh praktis membangun fitur di [APP.MD](file:///d:/virtual-server/xampp%20php8.1/htdocs/sfrw_3/APP.MD).
+
+## 🔧 Konfigurasi Cepat
+
+### Database (`library/config.txt`)
+Format: `host, user, pass, db_name, driver`
+```text
+localhost, root, , my_database, MySqli
 ```
 
-## 🔧 Configuration
-
-### Environment Settings (`env.php`)
-
+### Environment (`env.php`)
 ```php
-define('ENVIRONMENT', 'local');        // local, maintenance, production
-define('DEBUG', 'true');               // Enable/disable debug mode
+define('ENVIRONMENT', 'local'); // Gunakan 'local' untuk mengaktifkan Live Reload
+define('DEBUG', 'true');        // Tampilkan detail error saat pengembangan
 define('BASEURL', 'http://localhost/sfrw_3/');
-define('DBNAME', '');                 // Database name
 ```
 
-### Database Configuration (`library/config.txt`)
+## 🛡️ Keamanan & Performa
 
-Format: `host, username, password, database, driver`
+-   **SQL Injection Protection**: PembangunKueri secara otomatis melakukan *escaping* pada semua data input.
+-   **XSS Protection**: Helper `anti_injection()` tersedia untuk membersihkan input pengguna.
+-   **Session Fixation Protection**: Regenerasi ID session otomatis saat login sukses.
+-   **SSE Stream**: Live reload menggunakan koneksi persisten yang sangat hemat resource dibandingkan polling tradisional.
 
-```
-localhost, root, , framework, MySqli,
-```
+## 🤝 Kontribusi
 
-### Email Configuration
-
-```php
-define('MAILACTIVATE', 'false');      // Enable email functionality
-define('MAILHOST', 'smtp.yourdomain.com');
-define('MAILUSER', 'yourmail@yourdomain.com');
-define('MAILPASS', '');
-define('MAILPORT', '587');
-```
-
-## 🛡️ Security Features
-
-### SQL Injection Protection
-- Built-in `anti_injection()` function for input sanitization
-- Parameterized queries support
-- HTML entity encoding with `htmlspecialchars()`
-
-### XSS Prevention
-- Input validation and sanitization
-- Output encoding for all user inputs
-- CSRF protection mechanisms
-
-### Session Security
-- Automatic session timeout (configurable)
-- Session regeneration
-- Secure session storage
-
-### Error Handling
-- Custom error pages (403, 404, 500)
-- Error logging to `logs/error.log`
-- Environment-based error display
-
-## 🎨 UI Components
-
-### Dark Mode Support
-The framework includes a built-in dark mode toggle:
-- Automatic theme switching
-- Persistent user preference
-- Smooth transitions
-
-### Responsive Design
-- Bootstrap 5 integration
-- Datatables integration
-- Mobile-first approach
-- Cross-browser compatibility
-
-### Form Components
-- Pre-styled login forms
-- Social login buttons
-- Remember me functionality
-- Password recovery links
-
-## 🔗 Routing System
-
-The routing is handled in `web/route.php` using a Laravel-style approach:
-
-```php
-use muhammad\routing\Rute;
-
-// Homepage route
-Rute::ambil('/', function() {
-    return Indexcontroller::index();
-});
-
-// Login route
-Rute::ambil('login', function() {
-    require_once tampilan('login');
-});
-
-// Logout route
-Rute::ambil('signout', function() {
-    require_once tampilan('signout');
-});
-
-// Logs route with parameter
-Rute::ambil('logs/{file}', function($file) {
-    require_once vendors('logcarbon/logcarbon');
-    require_once tampilan('logs', [
-        $data['title'] = "Logs",
-        $data['breadcrumb'] = "Logs",
-        $data['icon'] = "fa fa-logs",
-        $data['file'] = $file
-    ]);
-});
-
-// Middleware protected routes
-Rute::middleware('Auth')->grup(function() {
-    Rute::middleware('Role:admin')->grup(function() {
-        Rute::ambil('users', 'UserController@daftar');
-        Rute::ambil('users/tambah', 'UserController@formTambah');
-    });
-});
-```
-
-## 📊 Models
-
-### User Model (`app/Models/Users.php`)
-
-```php
-class Users extends Model {
-    static public function schemafillable() {
-        $fill = [
-            'id',
-            'fullname', 
-            'email',
-            'username',
-            'passsword',
-            'active',
-            'role',
-        ];
-        return implode(", ", $fill); 
-    }
-    
-    static public function schematable($table = "master_users") {
-        return $table; 
-    }
-}
-```
-
-## 📝 Utility Functions
-
-### Date & Time Functions
-- `datelongind()`: Indonesian long date format
-- `date_indo()`: Indonesian date format
-- `validateDate()`: Date validation
-
-### Security Functions
-- `anti_injection()`: SQL injection prevention
-- `anti_number_format()`: Number format cleaning
-
-### Helper Functions
-- `get_client_ip()`: Client IP detection
-- `get_client_browser()`: Browser detection
-- `thousandsCurrencyFormat()`: Currency formatting
-
-## 🚀 Installation
-
-### Via GitHub Repository
-
-Clone the Sunda Framework from the official repository:
-
-```bash
-git clone https://github.com/Agunggum/sfrw.git
-cd sfrw
-```
-
-### Manual Installation
-
-1. **Download** the framework files from the repository
-2. **Extract** to your web server directory
-3. **Configure** database settings in `library/config.txt`
-4. **Set** environment variables in `env.php`
-5. **Create** your database tables
-6. **Access** the application via web browser
-
-## 📋 Requirements
-
-- PHP 7.4 or higher
-- MySQL/MariaDB database
-- Apache web server with mod_rewrite
-- PHP extensions: mysqli, session, json
-
-## 🔧 Development
-
-### Adding New Routes
-1. Edit `web/route.php`
-2. Add your route condition
-3. Create corresponding controller and view
-
-### Creating Controllers
-1. Create new file in `mvc/controller/`
-2. Extend the base `Controller` class
-3. Implement your methods
-
-**Example Controller (`mvc/controller/Controller.php`):**
-
-```php
-<?php
-
-class Indexcontroller extends Controller {
-
-    public static function index() {
-        require_once view('index', [
-            $data['title'] = "sfrw Framework",
-        ]);
-    }
-
-}
-```
-
-This example shows a basic controller that renders the homepage view with a title parameter.
-
-### Creating Models
-1. Create new file in `app/Models/`
-2. Extend the base `Model` class
-3. Define your schema and methods
-
-## 🐛 Error Handling
-
-All errors are logged to `logs/error.log` with detailed information:
-- Timestamp
-- Client IP address
-- Browser information
-- Error details
-- Request URI
-
-## 📄 License
-
-This framework is open-source and available for personal and commercial use.
-
-## 🤝 Contributing
-
-Feel free to contribute to the Sunda Framework by:
-- Reporting bugs
-- Suggesting features
-- Submitting pull requests
-- Improving documentation
-
-## 📞 Support
-
-For support and questions, please refer to the documentation or create an issue in the repository.
+S-FRW dibangun dengan ❤️ untuk komunitas developer yang menginginkan framework ringan namun bertenaga. Silakan kirimkan saran atau laporkan bug untuk membantu kami berkembang.
 
 ---
-
-**Sunda Framework (SFRW) v3.0** - Built with ❤️ for modern PHP development
+**Sunda Framework (S-FRW)** - *Fast, Simple, and Reactive.*
