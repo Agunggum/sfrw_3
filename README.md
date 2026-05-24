@@ -25,8 +25,8 @@
 
 S-FRW mendukung gaya pengembangan **"Vibe Coding"**, di mana Anda fokus pada membangun fitur dengan cepat dan intuitif.
 
-1.  **Lihat Filosofi Desain**: Pelajari prinsip dasar di [DESIGN.MD](file:///d:/virtual-server/xampp%20php8.1/htdocs/sfrw_3/DESIGN.MD).
-2.  **Mulai Membangun**: Ikuti contoh praktis membangun fitur di [APP.MD](file:///d:/virtual-server/xampp%20php8.1/htdocs/sfrw_3/APP.MD).
+1.  **Lihat Filosofi Desain**: Pelajari prinsip dasar di [DESIGN.MD].
+2.  **Mulai Membangun**: Ikuti contoh praktis membangun fitur di [APP.MD].
 
 ## 🔧 Konfigurasi Cepat
 
