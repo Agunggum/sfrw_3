@@ -41,7 +41,7 @@
                                     <?php echo forminput(['text', 'username', 'username', 'username', 'off', 'required']); ?>
 
                                     <!-- Password input -->
-                                    <?php echo forminput(['password', 'password', 'password', 'password', 'off', 'required'], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>']); ?>
+                                    <?php echo forminput(['password', 'password', 'password-field', 'password', 'off', 'required'], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>']); ?>
 
                                     <!-- 2 column grid layout for inline styling -->
                                     <div class="row mb-4">
