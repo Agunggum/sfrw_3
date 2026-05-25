@@ -3,7 +3,7 @@
     <div class="col-md-12 col-lg-12 col-xl-12">
         <div class="row">
             
-            <div class="col-md-12 col-lg-6 col-xl-6 shadow rounded-5" style="height: 100vh; overflow-y: auto;">
+            <div class="col-md-12 col-lg-6 col-xl-6 shadow rounded-5 vh-100 overflow-y-auto">
                 
                 <div class="text-center">
                     <div class="pt-2">
