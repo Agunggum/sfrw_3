@@ -1,5 +1,5 @@
 <?php if ( ! defined('APPPATH')) exit('No direct script access allowed'); ?>
-<?php require_once view('header'); ?>
+<?php require_once view('header'); $key = encrypt(date('YmdHi')); ?>
     <div class="container col-12 col-md-12 col-xl-12 col-lg-12 mb-5">
         <div class="row">
             <div class="col-xl-12 col-lg-12 pt-2">
@@ -46,7 +46,8 @@
                     <table class="datatable-help table table-striped">
                         <thead>
                             <tr>
-                                <th>Username</th>
+                                <th>Fullname</th>
+                                <th>Email</th>
                                 <th>Role</th>
                             </tr>
                         </thead>
@@ -54,7 +55,8 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Username</th>
+                                <th>Fullname</th>
+                                <th>Email</th>
                                 <th>Role</th>
                             </tr>
                         </tfoot>
@@ -85,11 +87,12 @@ $(document).ready(function() {
         scrollX: true,
         fixedHeader: true,
         ajax: {
-            url: '<?php echo BASEURL.'userslist'; ?>',
+            url: '<?php echo BASEURL.'userslist/'.$key; ?>',
             dataSrc: ''
         },
         columns: [
-            {data: 'username'},
+            {data: 'fullname'},
+            {data: 'email'},
             {data: 'role'},
         ]
     });

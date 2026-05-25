@@ -15,8 +15,12 @@ class UserController extends Controller {
         require_once tampilan('users/daftar');
     }
 
-    public static function daftarlist() {
-        $users = PembangunKueri::tabel(Users::schematable())->pilih('username', 'role')->urutkan('id', 'DESC')->dapatkan();
+    public static function daftarlist($key) {
+        if ($key != encrypt(date('YmdHi'))) {
+            echo json_encode(['status' => '404', 'message' => 'Kunci tidak valid'], JSON_PRETTY_PRINT);
+            return;
+        }
+        $users = PembangunKueri::tabel(Users::schematable())->pilih('fullname', 'email', 'role')->urutkan('id', 'DESC')->dapatkan();
         echo json_encode($users, JSON_PRETTY_PRINT);
     }
 
