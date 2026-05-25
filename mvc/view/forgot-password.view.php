@@ -34,10 +34,10 @@
                                     
                                     <form class="m-t" role="form" method="post" action="<?php echo $action; ?>">
                                         <!-- Password 1 input -->
-                                        <?php echo forminput(['password', 'password1', 'password1', 'new password', 'off', 'required']); ?>
+                                        <?php echo forminput(['password', 'password1', 'password1', 'new password', 'off', 'required minlength="8"']); ?>
 
                                         <!-- Password 2 input -->
-                                        <?php echo forminput(['password', 'password2', 'password2', 'confirm new password', 'off', 'required']); ?>
+                                        <?php echo forminput(['password', 'password2', 'password-field', 'confirm new password', 'off', 'required minlength="8"'], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>']); ?>
 
                                         <!-- Submit button -->
                                         <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-danger btn-block mb-4">Reset Password</button>
