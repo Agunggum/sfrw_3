@@ -29,6 +29,10 @@ if (defined('IS_AJAX') && IS_AJAX) {
         @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
         :root { --bg-body: #ffffff; --text-main: #212529; --card-bg: #f8f9fa; --border-color: #dee2e6; --accent-color: #0d6efd; }
         [data-bs-theme="dark"] { --bg-body: #121212; --text-main: #f8f9fa; --card-bg: #1e1e1e; --border-color: #333333; --accent-color: #3786ff; }
+        [aria-labelledby="bd-theme-text"] {
+        --bs-dropdown-link-active-bg: #dc3545; /* Ganti dengan warna aktif yang Anda inginkan */
+        --bs-dropdown-link-active-color: #ffffff; /* Warna teks saat aktif */
+        }
         footer { background-color: var(--card-bg); border: 1px solid var(--border-color); }
         /* Loading Animation Styles */
         .btn { transition: all 0.2s ease-in-out; position: relative; }
