@@ -1,5 +1,4 @@
 </div>
-<script type="module" src="<?php echo asset('bootstrap/theme/js/app.js?v=0.4'); ?>"></script>
 <?php if (defined('IS_AJAX') && IS_AJAX) return; ?>
 <script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.17'); ?>"></script>
 
