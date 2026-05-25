@@ -8,7 +8,7 @@
                 <div class="text-center">
                     <div class="pt-2">
                         <span class="float-left">
-                            <a href="<?php echo BASEURL; ?>">Kembali ke Halaman Utama</a>
+                            <a href="<?php echo BASEURL; ?>" data-bs-theme="light" class="text-danger">Kembali ke Halaman Utama</a>
                         </span>
                     </div>
                     <div class="clearfix"></div>
@@ -49,19 +49,19 @@
 
                                         <div class="col">
                                         <!-- Simple link -->
-                                        <a href="<?php echo BASEURL.'forgot-password'; ?>">Forgot password?</a>
+                                        <a href="<?php echo BASEURL.'forgot-password'; ?>" data-bs-theme="light" class="text-danger">Forgot password?</a>
                                         </div>
                                     </div>
 
                                     <!-- Submit button -->
-                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Sign in</button>
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4" data-bs-theme="auto">Sign in</button>
 
                                     <!-- Register buttons -->
                                     <div class="text-center">
-                                        <p>Not a member? <a href="#!">Register</a></p>
+                                        <p>Not a member? <a href="#!" data-bs-theme="light" class="text-danger">Register</a></p>
                                         <p>or sign up with:</p>
-                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-google"></i>
+                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
+                                        <i class="fab fa-google text-danger"></i>
                                         </button>
                                     </div>
                                 </form>
