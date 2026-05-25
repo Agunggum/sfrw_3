@@ -130,11 +130,7 @@ function view($get, $data = []) {
 
     $base = MODPATH."view/{$get}.view".EXT;
     $_REQUEST['errorlogview'] = $base;
-    if (is_readable($base)) {
-        return $base;
-    } else {
-        return BASEPATH."error/viewnotfound".EXT;
-    }        
+    return $base;      
 }
 
 //Site include mvc/controller
