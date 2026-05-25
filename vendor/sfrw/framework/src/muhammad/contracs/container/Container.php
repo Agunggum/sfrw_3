@@ -285,12 +285,12 @@ function forminput($data = [], $bootstrap = []) {
 
     if($bootstrapgroup=='group'){
         if($bootstrapgroupalign=='left'){
-            $input = '<div class="input-group">'.$bootstrapgroupicon.'<input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" value="'.$valueform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' /></div>';
+            $input = '<div class="input-group">'.$bootstrapgroupicon.'<input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" value="'.$valueform.'" class="form-control focus-ring focus-ring-danger" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' /></div>';
         }else{
-            $input = '<div class="input-group"><input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" value="'.$valueform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' />'.$bootstrapgroupicon.'</div>';
+            $input = '<div class="input-group"><input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" value="'.$valueform.'" class="form-control focus-ring focus-ring-danger" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' />'.$bootstrapgroupicon.'</div>';
         }
     }else{
-        $input = '<input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" value="'.$valueform.'" class="form-control" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' />';
+        $input = '<input type="'.$typeform.'" name="'.$nameform.'" id="'.$idform.'" value="'.$valueform.'" class="form-control focus-ring focus-ring-danger" placeholder="'.$placeholderform.'" autocomplete="'.$autocompleteform.'" '.$requiredform.' />';
     }
 
     return '<div class="mb-4 text-left">'.$input.'</div>';
@@ -308,14 +308,14 @@ function formselect($select = [], $data = [], $bootstrap = []) {
 
     if($bootstrapgroup=='group'){
         if($bootstrapgroupalign=='left'){
-            $input = '<div class="input-group">'.$bootstrapgroupicon.'<div class="form-floating"><select name="'.$nameform.'" id="'.$idform.'" class="form-select" '.$requiredform.'">';
+            $input = '<div class="input-group">'.$bootstrapgroupicon.'<div class="form-floating"><select name="'.$nameform.'" id="'.$idform.'" class="form-select focus-ring focus-ring-danger" '.$requiredform.'">';
             foreach ($select as $selects) {
                 $input .= '<option>'.$selects.'</option>';
             }
             $input .= '</select>';
             $input .= '<label for="'.$idform.'">'.$placeholderform.'</label></div></div>';
         }else{
-            $input = '<div class="input-group"><div class="form-floating"><select name="'.$nameform.'" id="'.$idform.'" class="form-select" '.$requiredform.'">';
+            $input = '<div class="input-group"><div class="form-floating"><select name="'.$nameform.'" id="'.$idform.'" class="form-select focus-ring focus-ring-danger" '.$requiredform.'">';
             foreach ($select as $selects) {
                 $input .= '<option>'.$selects.'</option>';
             }
@@ -323,7 +323,7 @@ function formselect($select = [], $data = [], $bootstrap = []) {
             $input .= '<label for="'.$idform.'">'.$placeholderform.'</label></div>'.$bootstrapgroupicon.'</div>';
         }
     }else{
-        $input = '<div class="form-floating"><select name="'.$nameform.'" id="'.$idform.'" class="form-select" '.$requiredform.'">';
+        $input = '<div class="form-floating"><select name="'.$nameform.'" id="'.$idform.'" class="form-select focus-ring focus-ring-danger" '.$requiredform.'">';
         foreach ($select as $selects) {
             $input .= '<option>'.$selects.'</option>';
         }
