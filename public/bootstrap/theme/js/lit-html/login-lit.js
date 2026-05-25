@@ -1,5 +1,4 @@
-import { html, render } from 'https://unpkg.com/lit-html@3.2.1/lit-html.js';
-import { unsafeHTML } from 'https://unpkg.com/lit-html@3.2.1/directives/unsafe-html.js';
+const { html, render } = window.lit;
 
 const welcomeTemplate = (data) => html`
 <div class="d-flex justify-content-center">
