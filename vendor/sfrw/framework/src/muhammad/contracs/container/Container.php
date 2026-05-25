@@ -346,16 +346,16 @@ function formradio($select = [], $data = [], $bootstrap = []) {
     if($bootstrapgroup=='group'){
         if($bootstrapgroupalign=='left'){
             foreach ($select as $selects) {
-                $input .= '<div class="input-group">'.$bootstrapgroupicon.'<div class="form-check"><input class="form-check-input" type="radio" name="'.$nameform.'" id="'.strtolower(str_replace(" ", "", $selects)).'" value="'.$selects.'" '.$requiredform.'><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div></div>';
+                $input .= '<div class="input-group">'.$bootstrapgroupicon.'<div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="radio" name="'.$nameform.'" id="'.strtolower(str_replace(" ", "", $selects)).'" value="'.$selects.'" '.$requiredform.'><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div></div>';
             }
         }else{
             foreach ($select as $selects) {
-                $input .= '<div class="input-group"><div class="form-check"><input class="form-check-input" type="radio" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'" value="'.$selects.'" '.$requiredform.'><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>'.$bootstrapgroupicon.'</div>';
+                $input .= '<div class="input-group"><div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="radio" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'" value="'.$selects.'" '.$requiredform.'><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>'.$bootstrapgroupicon.'</div>';
             }
         }
     }else{
         foreach ($select as $selects) {
-            $input .= '<div class="form-check"><input class="form-check-input" type="radio" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'" value="'.$selects.'" '.$requiredform.'><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>';
+            $input .= '<div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="radio" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'" value="'.$selects.'" '.$requiredform.'><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>';
         }
     }
 
@@ -374,16 +374,16 @@ function formcheck($select = [], $data = [], $bootstrap = []) {
     if($bootstrapgroup=='group'){
         if($bootstrapgroupalign=='left'){
             foreach ($select as $selects) {
-                $input .= '<div class="input-group">'.$bootstrapgroupicon.'<div class="form-check"><input class="form-check-input" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div></div>';
+                $input .= '<div class="input-group">'.$bootstrapgroupicon.'<div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div></div>';
             }
         }else{
             foreach ($select as $selects) {
-                $input .= '<div class="input-group"><div class="form-check"><input class="form-check-input" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>'.$bootstrapgroupicon.'</div>';
+                $input .= '<div class="input-group"><div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>'.$bootstrapgroupicon.'</div>';
             }
         }
     }else{
         foreach ($select as $selects) {
-            $input .= '<div class="form-check"><input class="form-check-input" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>';
+            $input .= '<div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>';
         }
     }
 
