@@ -81,6 +81,7 @@ Rute::ambil('logsfiles/{file}', function($file) {
 Rute::middleware('Auth')->grup(function() {
     Rute::middleware('Role:admin')->grup(function() {
         Rute::ambil('users', 'UserController@daftar');
+        Rute::ambil('userslist', 'UserController@daftarlist');
         Rute::ambil('users/tambah', 'UserController@formTambah');
         Rute::kirim('users/simpan', 'UserController@simpan');
         Rute::ambil('users/{id}/edit', 'UserController@formEdit');
