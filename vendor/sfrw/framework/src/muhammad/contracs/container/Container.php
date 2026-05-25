@@ -45,9 +45,9 @@ function barisAngkaMysql($query){
 }
 // end database
 
-//Site asset skin
+//Site asset public
 function asset($path) {
-    return BASEURL . $path;
+    return 'public/'. $path;
 }
 
 //Site library error

@@ -1,3 +1,7 @@
 
 2026-05-24 18:12:12 ~ ::1 ~ Chrome ~ Error 404 :: Rute tidak ditemukan: logs :: /sfrw_3/logs/
 2026-05-24 18:20:18 ~ ::1 ~ Chrome ~ Error 404 :: Rute tidak ditemukan: logsfiles :: /sfrw_3/logsfiles?_=1779621615690
+2026-05-25 09:51:26 ~ ::1 ~ Chrome ~ Error [2] :: Line 5 :: Undefined variable $jalankanini :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\app\app.php :: /sfrw_3/
+2026-05-25 09:55:25 ~ ::1 ~ Chrome ~ Error 404 :: Rute tidak ditemukan: logs- :: /sfrw_3/logs-
+2026-05-25 10:02:44 ~ ::1 ~ Chrome ~ Error [2] :: Line 5 :: Undefined variable $jalankanini :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\app\app.php :: /sfrw_3/
+2026-05-25 10:02:47 ~ ::1 ~ Chrome ~ Error [2] :: Line 5 :: Undefined variable $jalankanini :: D:\virtual-server\xampp php8.1\htdocs\sfrw_3\app\app.php :: /sfrw_3/
