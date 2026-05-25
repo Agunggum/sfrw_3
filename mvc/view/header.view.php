@@ -27,8 +27,8 @@ if (defined('IS_AJAX') && IS_AJAX) {
         @import "<?php echo asset('bootstrap/theme/css/datatables-bootstrap-5.css'); ?>";
         @import "<?php echo asset('bootstrap/theme/fontawesome/css/all.css'); ?>";
         @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
-        :root { --bg-body: #ffffff; --text-main: #212529; --card-bg: #f8f9fa; --border-color: #dee2e6; --accent-color: #0d6efd; }
-        [data-bs-theme="dark"] { --bg-body: #121212; --text-main: #f8f9fa; --card-bg: #1e1e1e; --border-color: #333333; --accent-color: #3786ff; }
+        :root { --bg-body: #ffffff; --text-main: #212529; --card-bg: #f8f9fa; --border-color: #dee2e6; --accent-color: #dc3545; }
+        [data-bs-theme="dark"] { --bg-body: #121212; --text-main: #f8f9fa; --card-bg: #1e1e1e; --border-color: #333333; --accent-color: #dc3545; }
         [aria-labelledby="bd-theme-text"] {
         --bs-dropdown-link-active-bg: #dc3545; /* Ganti dengan warna aktif yang Anda inginkan */
         --bs-dropdown-link-active-color: #ffffff; /* Warna teks saat aktif */
