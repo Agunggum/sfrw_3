@@ -74,29 +74,30 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                        <div class="col-lg-6 pb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">sfrw adalah framework <font class="text-danger">indonesia</font> yang dikembangkan oleh indonesia untuk programer atau calon programer <font class="text-danger">indonesia</font></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 pb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">Pelajari lebih lanjut.</p>
+                                    <a href="https://documentation.agunggum.id/" target="_blank" class="btn btn-outline-info">dokumentasi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     `;
 
                     // Render ke elemen
                     render(welcomeTemplate(window.pageData), document.getElementById('lit-app'));
                 </script>
 
-                <div class="row">
-                    <div class="col-lg-6 pb-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <p class="card-text">sfrw adalah framework <font class="text-danger">indonesia</font> yang dikembangkan oleh indonesia untuk programer atau calon programer <font class="text-danger">indonesia</font></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 pb-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <p class="card-text">Pelajari lebih lanjut.</p>
-                                <a href="https://documentation.agunggum.id/" target="_blank" class="btn btn-outline-info">dokumentasi</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
