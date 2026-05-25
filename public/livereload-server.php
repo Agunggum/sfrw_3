@@ -19,6 +19,7 @@ $watch_dirs = [
     __DIR__ . '/../library',
     __DIR__ . '/../app',
     __DIR__ . '/../web',
+    __DIR__ . '/../bootstrap',
 ];
 
 /**
