@@ -41,7 +41,7 @@
                                         <?php echo forminput(['password', 'password2', 'password2', 'confirm new password', 'off', 'required']); ?>
 
                                         <!-- Submit button -->
-                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Reset Password</button>
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-danger btn-block mb-4">Reset Password</button>
                                     </form>
                                 <?php } else { ?>
                                     <p class="h3 text-left font-weight-bold">Forgot password.</p>
@@ -52,13 +52,13 @@
                                         <?php echo forminput(['email', 'email', 'email', 'email', 'off', 'required']); ?>
 
                                         <!-- Submit button -->
-                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-primary btn-block mb-4">Confirm</button>
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-danger btn-block mb-4">Confirm</button>
                                     </form>
                                 <?php } ?>
 
                                 <!-- Register buttons -->
                                 <div class="text-center">
-                                    <p><a href="<?php echo BASEURL.'login'; ?>">Back to login</a></p>
+                                    <p><a href="<?php echo BASEURL.'login'; ?>" class="text-danger animated-link">Back to login</a></p>
                                 </div>
                             <?php } ?>
                         </div>

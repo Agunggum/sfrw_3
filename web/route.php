@@ -23,6 +23,10 @@ Rute::ambil('login', function() {
     require_once tampilan('login');
 });
 
+Rute::ambil('register', function() {
+    require_once tampilan('register');
+});
+
 Rute::kirim('authlogin', function() {
     Logincontroller::loginform(BASEURL);
 });

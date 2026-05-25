@@ -30,35 +30,32 @@
                         
                         <div class="col-md-8 col-lg-8 col-xl-8">
                             <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
-                                <p class="h3 text-left font-weight-bold">Sign In.</p>
+                                <p class="h3 text-left font-weight-bold">Sign Up.</p>
                                 
-                                <form class="m-t" role="form" method="post" action="<?php echo BASEURL.'authlogin'; ?>">
+                                <form class="m-t" role="form" method="post" action="<?php echo BASEURL.'authregister'; ?>">
                                     <input type="hidden" name="login" value="MASUK">
                                     <!-- Email input -->
-                                    <?php echo forminput(['text', 'username', 'username', 'username or email', 'off', 'required']); ?>
+                                    <?php echo forminput(['email', 'email', 'email', 'email', 'off', 'required']); ?>
+
+                                    <!-- Email input -->
+                                    <?php echo forminput(['text', 'username', 'username', 'username', 'off', 'required']); ?>
 
                                     <!-- Password input -->
                                     <?php echo forminput(['password', 'password', 'password', 'password', 'off', 'required'], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>']); ?>
 
                                     <!-- 2 column grid layout for inline styling -->
                                     <div class="row mb-4">
-                                        <div class="col d-flex justify-content-center">
-                                        <!-- Checkbox -->
-                                        <?php echo formcheck(['Remember me']); ?>
-                                        </div>
-
                                         <div class="col">
                                         <!-- Simple link -->
-                                        <a href="<?php echo BASEURL.'forgot-password'; ?>" data-bs-theme="light" class="text-danger animated-link">Forgot password?</a>
+                                        <a href="<?php echo BASEURL.'login'; ?>" data-bs-theme="light" class="text-danger animated-link">You have account?</a>
                                         </div>
                                     </div>
 
                                     <!-- Submit button -->
-                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4" data-bs-theme="auto">Sign in</button>
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4" data-bs-theme="auto">Sign up</button>
 
                                     <!-- Register buttons -->
                                     <div class="text-center">
-                                        <p>Not a member? <a href="<?php echo BASEURL.'register'; ?>" data-bs-theme="light" class="text-danger animated-link">Register</a></p>
                                         <p>or sign up with:</p>
                                         <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-google text-danger"></i>

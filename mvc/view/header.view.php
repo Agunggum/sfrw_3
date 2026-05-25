@@ -30,15 +30,46 @@ if (defined('IS_AJAX') && IS_AJAX) {
         :root { --bg-body: #ffffff; --text-main: #212529; --card-bg: #f8f9fa; --border-color: #dee2e6; --accent-color: #0d6efd; }
         [data-bs-theme="dark"] { --bg-body: #121212; --text-main: #f8f9fa; --card-bg: #1e1e1e; --border-color: #333333; --accent-color: #3786ff; }
         footer { background-color: var(--card-bg); border: 1px solid var(--border-color); }
-        
         /* Loading Animation Styles */
         .btn { transition: all 0.2s ease-in-out; position: relative; }
         .btn:disabled { cursor: not-allowed; opacity: 0.8; }
         .spinner-border-sm { width: 1rem; height: 1rem; border-width: 0.15em; }
-        
         /* Global Progress Bar */
         #nprogress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: transparent; z-index: 9999; }
         #nprogress .bar { background: #dc3545; width: 0; height: 100%; transition: width 0.3s ease; }
+        /* Menghapus gaya default hover Bootstrap dan menerapkan animasi */
+        .animated-link {
+        text-decoration: none !important;
+        position: relative;
+        display: inline-block;
+        /* Atur warna teks utama di sini jika ingin mengubahnya */
+        }
+        /* Memaksa hover Bootstrap agar tidak mengubah latar belakang / border */
+        .animated-link:hover, 
+        .animated-link:focus, 
+        .animated-link:active {
+        background-color: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important; /* Menghapus efek glow fokus */
+        color: inherit; /* Menjaga warna teks tetap sama saat di-hover */
+        }
+        /* Membuat animasi garis bawah dari kiri ke kanan */
+        .animated-link::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: -2px; /* Jarak garis dari teks */
+        left: 0;
+        background-color: currentColor; /* Warna garis otomatis mengikuti warna teks */
+        transform-origin: bottom left;
+        transition: transform 0.25s ease-out;
+        }
+        /* Jalankan animasi saat hover */
+        .animated-link:hover::after {
+        transform: scaleX(1);
+        }
     </style>
     <script src="<?php echo asset('bootstrap/theme/js/jquery-1.11.1.min.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/jquery-3.7.1.js'); ?>"></script>
