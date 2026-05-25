@@ -17,23 +17,22 @@
                     </div>
                 
                     <p class="mt-5"><?php 
-                    if(isset($_GET['s'])){
-                        Logincontroller::forgotnewform($_SERVER['REQUEST_URI'], $_GET['s']);
+                    if(isset($s) and $s != ""){
+                        $action = BASEURL.'authforgot/'.$s;
                     } else {
-                        Logincontroller::forgotform($_SERVER['REQUEST_URI']);
+                        $action = BASEURL.'authforgotpassword';
                     }
                     if(isset($_SESSION['alert'])){ echo $_SESSION['alert']; } ?></p>
                     
                     <div class="d-flex justify-content-center">
                         
                         <div class="col-md-8 col-lg-8 col-xl-8">
-                            <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
-                                <?php if(isset($_GET['s'])){ ?>
+                                <?php if(isset($s) and $s != ""){ 
+                                if($data['s']['end_time'] > date('Y-m-d H:i:s')){
+                                ?>
                                     <p class="h3 text-left font-weight-bold">Reset password.</p>
                                     
-                                    <form class="m-t" role="form" method="post" action="">
-                                        <input type="hidden" name="login" value="MASUK">
-                                        
+                                    <form class="m-t" role="form" method="post" action="<?php echo $action; ?>">
                                         <!-- Password 1 input -->
                                         <?php echo forminput(['password', 'password1', 'password1', 'new password', 'off', 'required']); ?>
 
@@ -43,11 +42,10 @@
                                         <!-- Submit button -->
                                         <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-danger btn-block mb-4">Reset Password</button>
                                     </form>
-                                <?php } else { ?>
+                                <?php }else{ alert('warning', 'Attention..!', '<i class="fa fa-lock"></i> Link expired!', BASEURL.'forgot-password'); } } else { ?>
                                     <p class="h3 text-left font-weight-bold">Forgot password.</p>
                                     
-                                    <form class="m-t" role="form" method="post" action="">
-                                        <input type="hidden" name="login" value="MASUK">
+                                    <form class="m-t" role="form" method="post" action="<?php echo $action; ?>">
                                         <!-- Email input -->
                                         <?php echo forminput(['email', 'email', 'email', 'email', 'off', 'required']); ?>
 
@@ -60,7 +58,6 @@
                                 <div class="text-center">
                                     <p><a href="<?php echo BASEURL.'login'; ?>" class="text-danger animated-link">Back to login</a></p>
                                 </div>
-                            <?php } ?>
                         </div>
                     </div>
                 

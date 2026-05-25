@@ -31,9 +31,26 @@ Rute::kirim('authlogin', function() {
     Logincontroller::loginform(BASEURL);
 });
 
+Rute::kirim('authforgotpassword', function() {
+    Logincontroller::forgotform(BASEURL);
+});
+
+Rute::kirim('authforgot/{s}', function($s) {
+    Logincontroller::forgotnewform(BASEURL, $s);
+});
+
 // Halaman Lupa Password
 Rute::ambil('forgot-password', function() {
     require_once tampilan('forgot-password');
+});
+
+Rute::ambil('forgot-password/{s}', function($s) {
+    require_once tampilan('forgot-password', [
+        $data['s'] = PembangunKueri::tabel('forgot_link')
+                ->pilih('end_time')
+                ->dimana('target_link', '=', $s)
+                ->pertama()
+    ]);
 });
 
 // Halaman Tabel (Datatable)
