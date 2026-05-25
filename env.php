@@ -24,7 +24,7 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_NAME', 'framework');
 define('DB_PASS', '');
-define('DB_DRIVER', 'MySqli');
+define('DB_DRIVER', 'MySqli'); //MySql or MySqli
 
 /*****************************************************************/
 /* Date timezone
