@@ -8,7 +8,7 @@
                 <div class="text-center">
                     <div class="pt-2">
                         <span class="float-left">
-                            <a href="<?php echo BASEURL; ?>" data-bs-theme="light" class="text-danger animated-link">Kembali ke Halaman Utama</a>
+                            <a href="<?php echo BASEURL; ?>" data-bs-theme="light" class="text-danger animated-link"><i class="fa fa-angle-left fa-fw"></i> Kembali</a>
                         </span>
                     </div>
                     <div class="clearfix"></div>

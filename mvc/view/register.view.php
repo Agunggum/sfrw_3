@@ -6,13 +6,6 @@
             <div class="col-md-12 col-lg-6 col-xl-6 shadow rounded-5 vh-100 overflow-y-auto">
                 
                 <div class="text-center">
-                    <div class="pt-2">
-                        <span class="float-left">
-                            <a href="<?php echo BASEURL; ?>" data-bs-theme="light" class="text-danger animated-link">Kembali ke Halaman Utama</a>
-                        </span>
-                    </div>
-                    <div class="clearfix"></div>
-                    
                     <div class="d-flex justify-content-center">
                         <div class="col-md-12 col-lg-12 col-xl-12 mt-5 mb-4 text-left">
                             <div class="h3"><span><?php echo WEBTITLE; ?></span></div>
