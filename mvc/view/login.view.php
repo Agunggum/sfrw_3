@@ -33,7 +33,6 @@
                                 <p class="h3 text-left font-weight-bold">Sign In.</p>
                                 
                                 <form class="m-t" role="form" method="post" action="<?php echo BASEURL.'authlogin'; ?>">
-                                    <input type="hidden" name="login" value="MASUK">
                                     <!-- Email input -->
                                     <?php echo forminput(['text', 'username', 'username', 'username or email', 'off', 'required']); ?>
 
