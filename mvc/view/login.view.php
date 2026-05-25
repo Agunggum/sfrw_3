@@ -53,7 +53,7 @@
                                     </div>
 
                                     <!-- Submit button -->
-                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4" data-bs-theme="auto">Sign in</button>
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4 rounded-4" data-bs-theme="auto">Sign in</button>
 
                                     <!-- Register buttons -->
                                     <div class="text-center">

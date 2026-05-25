@@ -9,7 +9,7 @@
                             <span class="h5">Selamat datang, <strong><?php echo $_SESSION['fullname']; ?></strong></span>
                             <a href="<?php echo BASEURL; ?>signout" class="btn btn-sm btn-outline-danger ms-2">Logout</a>
                         <?php } else { ?>
-                            <a href="<?php echo BASEURL; ?>login" class="btn btn-sm btn-danger">Login</a>
+                            <a href="<?php echo BASEURL; ?>login" class="btn btn-sm btn-danger rounded-3">Login</a>
                         <?php } ?>
                     </div>
                     <div class="dropdown" id="theme-dropdown-container">

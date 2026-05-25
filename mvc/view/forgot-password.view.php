@@ -40,7 +40,7 @@
                                         <?php echo forminput(['password', 'password2', 'password-field', 'confirm new password', 'off', 'required minlength="8"'], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>']); ?>
 
                                         <!-- Submit button -->
-                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-danger btn-block mb-4">Reset Password</button>
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-danger btn-block mb-4 rounded-4">Submit New Password</button>
                                     </form>
                                 <?php }else{ alert('warning', 'Attention..!', '<i class="fa fa-lock"></i> Link expired!', BASEURL.'forgot-password'); } } else { ?>
                                     <p class="h3 text-left font-weight-bold">Forgot password.</p>
@@ -50,7 +50,7 @@
                                         <?php echo forminput(['email', 'email', 'email', 'email', 'off', 'required']); ?>
 
                                         <!-- Submit button -->
-                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-danger btn-block mb-4">Confirm</button>
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-danger btn-block mb-4 rounded-4">Confirm</button>
                                     </form>
                                 <?php } ?>
 
