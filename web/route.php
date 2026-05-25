@@ -75,7 +75,7 @@ Rute::middleware('Auth')->grup(function() {
 Rute::ambil('setup-database/{kunci}', 'DatabaseSeederController@jalankan');
 
 // Jalankan Rute
-$jalankanini = Rute::jalankan(ROUTE, $_SERVER['REQUEST_METHOD']);
+Rute::jalankan(ROUTE, $_SERVER['REQUEST_METHOD']);
 
 /* End of file route.php */
 /* Location: ./web/route.php */

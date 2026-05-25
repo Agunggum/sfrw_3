@@ -61,7 +61,7 @@
     </div>
     <footer class="fixed-bottom mt-auto m-1 p-2 rounded" data-bs-theme="light">
         <div class="container">
-            <span><i class="bi bi-c-circle"></i><?php echo COPYR; ?></span>
+            <span><i class="bi bi-c-circle"></i> <?php echo COPYR; ?></span>
         </div>
     </footer>
 <script type="module" src="<?php echo asset('bootstrap/theme/js/lit-html/welcome-lit.js'); ?>"></script>
