@@ -29,6 +29,9 @@ if (DEBUG == 'true'):
     <title>S-FRW Error: <?php echo htmlspecialchars($error['errstr']); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.ico'); ?>" sizes="any" >
+    <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.svg'); ?>" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>">
     <script>
         // Deteksi tema dari localStorage secepat mungkin sebelum halaman dirender
         (() => {
@@ -47,7 +50,7 @@ if (DEBUG == 'true'):
     </script>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background-color 0.3s ease; }
-        .error-header { background: #dc3545; color: white; padding: 2rem 0; margin-bottom: 2rem; border-radius: 0 0 1rem 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .error-header { /*background: #dc3545; color: white;*/ padding: 1rem 0; margin-bottom: 2rem; border-radius: 0 0 1rem 1rem; /*box-shadow: 0 4px 6px rgba(0,0,0,0.1);*/ }
         .card { border: none; border-radius: 1rem; box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05); transition: all 0.3s ease; }
         
         /* Tema Adaptif untuk Code Block */
@@ -186,7 +189,8 @@ if (DEBUG == 'true'):
     </div>
 
     <footer class="text-center py-4 text-muted">
-        <small>&copy; <?php echo date('Y'); ?> S-FRW Framework. Dirancang untuk efisiensi.</small>
+        <div class="h1">S-FRW</div>
+        <small>&copy; <?php echo date('Y'); ?> Dirancang untuk efisiensi.</small>
     </footer>
 </body>
 </html>
