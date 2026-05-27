@@ -1,0 +1,223 @@
+:root {
+--sidebar-width: 250px;
+--navbar-height: 60px;
+--bg-body: #ffffff;
+--bs-body-bg: #ffffff;
+--bs-body-tertiary-bg: #f8f9fa;
+ --text-main: #212529; 
+--card-bg: #f8f9fa; 
+--border-color: #dee2e6; 
+--accent-color: #dc3545;
+}
+[data-bs-theme="dark"] { 
+--bg-body: #121212; 
+--bs-body-bg: #121212;
+--bs-body-tertiary-bg: #222222;
+--text-main: #f8f9fa; 
+--card-bg: #1e1e1e; 
+--border-color: #333333; 
+--accent-color: #dc3545; 
+}
+[aria-labelledby="bd-theme-text"] {
+--bs-dropdown-link-active-bg: #dc3545; /* Ganti dengan warna aktif yang Anda inginkan */
+--bs-dropdown-link-active-color: #ffffff; /* Warna teks saat aktif */
+}
+
+body {
+overflow-x: hidden;
+overflow-y: hidden;
+background-color: var(--bs-body-bg);
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.user-avatar {
+    width: 32px; 
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    /* Warna default jika JS belum memuat warna khusus */
+    background-color: #6f42c1; 
+}
+
+/* Menggunakan CSS untuk menampilkan karakter inisial dari atribut 'data-initials' */
+.user-avatar::after {
+    content: attr(data-initials);
+}
+
+/* Penyesuaian tampilan sedikit saat Dark Mode agar serasi */
+[data-bs-theme="dark"] .user-avatar {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Sidebar Styling */
+#sidebar-wrapper {
+min-height: 100vh;
+height: 100vh;
+width: var(--sidebar-width);
+margin-left: calc(-1 * var(--sidebar-width));
+transition: margin 0.25s ease-out;
+position: fixed;
+z-index: 1030;
+display: flex;
+flex-direction: column;
+}
+
+#sidebarMenu {
+overflow-y: auto;
+flex-grow: 1;
+list-style: none; /* Menghilangkan bullet point bawaan ul */
+padding-left: 0;
+}
+
+/* Base style untuk link menu */
+#sidebar-wrapper .nav-link {
+padding: 0.75rem 1.25rem;
+color: var(--text-main);
+transition: all 0.2s ease;
+}
+
+[data-bs-theme="light"] #sidebar-wrapper {
+background-color: var(--bg-body);
+color: var(--text-main);
+}
+
+[data-bs-theme="light"] #sidebar-wrapper .nav-link:hover,
+[data-bs-theme="light"] #sidebar-wrapper .nav-link.active {
+color: var(--accent-color);
+background-color: rgba(182, 182, 182, 0.1);
+}
+
+/* Tampilan warna sidebar pada mode gelap */
+[data-bs-theme="dark"] #sidebar-wrapper {
+background-color: var(--bg-body);
+border-right: 1px solid var(--border-color);
+}
+
+[data-bs-theme="dark"] #sidebar-wrapper .nav-link {
+color: var(--bs-body-color);
+}
+[data-bs-theme="dark"] #sidebar-wrapper .nav-link:hover,
+[data-bs-theme="dark"] #sidebar-wrapper .nav-link.active {
+color: var(--accent-color);
+background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Styling Khusus untuk Sub-Menu (Nested UL) */
+#sidebar-wrapper .collapse .nav-link {
+color: var(--text-main) !important;
+}
+#sidebar-wrapper .collapse .nav-link:hover {
+color: var(--text-main) !important;
+background-color: transparent !important; /* Efek minimalis tanpa background penuh */
+text-decoration: underline;
+}
+[data-bs-theme="dark"] #sidebar-wrapper .collapse .nav-link {
+color: var(--bs-secondary-color) !important;
+}
+
+/* Variasi Ukuran Font Ikon & Animasi Panah */
+.fs-7 { font-size: 0.8rem; }
+.fs-8 { font-size: 0.55rem; }
+
+.arrow-icon {
+transition: transform 0.25s ease;
+}
+[aria-expanded="true"] .arrow-icon {
+transform: rotate(-180deg);
+}
+
+#sidebar-wrapper .list-group {
+overflow-y: auto;
+flex-grow: 1;
+}
+
+#sidebar-wrapper .sidebar-heading {
+padding: 0.875rem 1.25rem;
+font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group-item {
+border: none;
+padding: 0.75rem 1.25rem;
+color: var(--text-main);
+background: transparent;
+}
+
+#sidebar-wrapper .list-group-item:hover,
+#sidebar-wrapper .list-group-item.active {
+color: var(--accent-color);
+background-color: var(--card-bg);
+}
+
+/* Page Content Styling */
+#page-content-wrapper {
+width: 100%;
+padding-top: var(--navbar-height);
+transition: padding 0.25s ease-out;
+display: flex;
+flex-direction: column;
+}
+
+#page-content-wrapper .container-page {
+height: calc(97vh - var(--navbar-height));
+overflow-y: auto;
+border-radius: 0.5rem; /* Membuat sudut rounded (setara border-radius Bootstrap) */
+/* Opsional: Tambahkan background atau border agar efek rounded & scroll terlihat jelas */
+background-color: var(--bs-body-tertiary-bg);
+flex-grow: 1;
+}
+
+.navbar {
+height: var(--navbar-height);
+background-color: var(--bs-body-tertiary-bg);
+position: fixed;
+top: 0;
+right: 0;
+left: 0;
+z-index: 1020;
+}
+
+/* Responsive Desktop Layout */
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+    margin-left: 0;
+    }
+    #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+    padding-left: var(--sidebar-width);
+    }
+    body.sb-toggled #sidebar-wrapper {
+    margin-left: calc(-1 * var(--sidebar-width));
+    }
+    body.sb-toggled #page-content-wrapper {
+    padding-left: 0;
+    }
+}
+
+/* Mobile Overlay Layer */
+@media (max-width: 767.98px) {
+    body.sb-toggled #sidebar-wrapper {
+    margin-left: 0;
+    }
+    .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1025;
+    }
+    body.sb-toggled .sidebar-overlay {
+    display: block;
+    }
+}

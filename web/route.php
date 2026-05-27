@@ -79,6 +79,10 @@ Rute::ambil('logsfiles/{file}', function($file) {
 
 // Rute yang memerlukan autentikasi dan peran admin untuk CRUD pengguna
 Rute::middleware('Auth')->grup(function() {
+    Rute::ambil('dashboard', function() {
+        require_once tampilan('dashboard/dashboard');
+    });
+
     Rute::middleware('Role:admin')->grup(function() {
         Rute::ambil('users', 'UserController@daftar');
         Rute::ambil('userslist/{key}', 'UserController@daftarlist');

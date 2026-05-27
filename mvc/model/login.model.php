@@ -70,7 +70,7 @@ class Loginmodel extends Controller {
             unset($_SESSION['username_form']);
                 
             // Cek apakah ada URL tujuan yang disimpan sebelumnya
-            $redirect_url = $uri; // Default ke BASEURL yang dikirim dari controller
+            $redirect_url = $uri.'dashboard'; // Default ke BASEURL yang dikirim dari controller
             if(isset($_SESSION['intended_url'])){
                 $redirect_url = $_SESSION['intended_url'];
                 unset($_SESSION['intended_url']);
