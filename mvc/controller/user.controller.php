@@ -20,8 +20,21 @@ class UserController extends Controller {
             echo json_encode(['status' => '404', 'message' => 'Kunci tidak valid'], JSON_PRETTY_PRINT);
             return;
         }
-        $users = PembangunKueri::tabel(Users::schematable())->pilih('fullname', 'email', 'role')->urutkan('id', 'DESC')->dapatkan();
-        echo json_encode($users, JSON_PRETTY_PRINT);
+        $users = PembangunKueri::tabel(Users::schematable())->pilih('*')->urutkan('id', 'ASC')->dapatkan();
+
+        $output_data = [];
+        foreach ($users as $row) {
+            $output_data[] = [
+                "id" => $row['id'],
+                "id_encrypted" => encrypt($row['id']), // Tambahkan kolom terenkripsi di sini
+                "fullname" => $row['fullname'],
+                "username" => $row['username'],
+                "email" => $row['email'],
+                "role" => $row['role']
+            ];
+        }
+        
+        echo json_encode($output_data, JSON_PRETTY_PRINT);
     }
 
     /**
@@ -63,7 +76,7 @@ class UserController extends Controller {
      * Membutuhkan login.
      */
     public static function lihat($id) {
-        $user = PembangunKueri::tabel(Users::schematable())->dimana('id', $id)->pertama();
+        $user = PembangunKueri::tabel(Users::schematable())->dimana('id', decrypt($id))->pertama();
         if (!$user) {
             alert('warning', 'Tidak ditemukan', 'Pengguna tidak ditemukan.', BASEURL . 'users');
             return;
@@ -115,11 +128,11 @@ class UserController extends Controller {
      * Membutuhkan peran 'admin'.
      */
     public static function hapus($id) {
-        try {
-            PembangunKueri::tabel(Users::schematable())->dimana('id', $id)->hapus();
-            alert('success', 'Berhasil', "Pengguna dengan ID {$id} berhasil dihapus.", BASEURL . 'users');
-        } catch (\Exception $e) {
-            alert('warning', 'Gagal', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
+        PembangunKueri::tabel(Users::schematable())->dimana('id', $id)->hapus();
+        $output_data[] = [
+            "status" => "success",
+            "message" => "Pengguna dengan ID {$id} berhasil dihapus.",
+        ];
+        echo json_encode($output_data, JSON_PRETTY_PRINT);
     }
 }

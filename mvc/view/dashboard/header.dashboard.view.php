@@ -1,19 +1,20 @@
-<?php if ( ! defined('APPPATH')) exit('No direct script access allowed'); ?>
-<?php 
+<?php if (! defined('APPPATH')) exit('No direct script access allowed'); ?>
+<?php
 if (defined('IS_AJAX') && IS_AJAX) {
     // Jika AJAX, kita kirimkan judul halaman via header agar bisa diupdate oleh JS
     header('X-Page-Title: ' . WEBTITLETOP);
-    return; 
-} 
+    return;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern AdminDashboard SFRW</title>
     <meta name="description" content="<?php echo WEBTITLE; ?> <?php echo VERSIONFRMAEWORK; ?>" />
-    <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.ico'); ?>" sizes="any" >
+    <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.ico'); ?>" sizes="any">
     <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.svg'); ?>" type="image/svg+xml">
     <link rel="apple-touch-icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>">
     <meta property="og:title" content="<?php echo WEBTITLETOP; ?>" />
@@ -36,4 +37,5 @@ if (defined('IS_AJAX') && IS_AJAX) {
     <script src="<?php echo asset('bootstrap/theme/js/datatables.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/dataTables.bootstrap5.js'); ?>"></script>
 </head>
+
 <body>

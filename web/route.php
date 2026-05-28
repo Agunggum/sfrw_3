@@ -90,7 +90,7 @@ Rute::middleware('Auth')->grup(function() {
         Rute::kirim('users/simpan', 'UserController@simpan');
         Rute::ambil('users/{id}/edit', 'UserController@formEdit');
         Rute::kirim('users/{id}/perbarui', 'UserController@perbarui');
-        Rute::ambil('users/{id}/hapus', 'UserController@hapus');
+        Rute::ambil('users-hapus/{id}', 'UserController@hapus');
     });
 
     // Rute ini hanya memerlukan login, tanpa peran spesifik
