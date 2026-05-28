@@ -127,6 +127,24 @@ class PembangunKueri {
         return $this;
     }
 
+    public function danDimana($kolom, $operator = null, $nilai = null) {
+        if (is_array($kolom)) {
+            foreach ($kolom as $k => $v) {
+                $this->danDimana($k, '=', $v);
+            }
+            return $this;
+        }
+
+        if (func_num_args() === 2) {
+            $nilai = $operator;
+            $operator = '=';
+        }
+
+        $nilai = $this->formatNilai($nilai);
+        $this->dimana[] = "AND {$kolom} {$operator} {$nilai}";
+        return $this;
+    }
+
     public function atauDimana($kolom, $operator = null, $nilai = null) {
         if (is_array($kolom)) {
             foreach ($kolom as $k => $v) {
@@ -274,12 +292,28 @@ class PembangunKueri {
         $set = implode(', ', $set);
         $kueri = "UPDATE {$this->tabel} SET {$set}";
         $kueri .= $this->bangunWhere();
-        return $this->eksekusi($kueri);
+        
+        $this->eksekusi($kueri);
+
+        $koneksi = self::hubungkan();
+        if (self::getDriver() == 'MySqli') {
+            return $koneksi->affected_rows;
+        } else {
+            return mysql_affected_rows($koneksi);
+        }
     }
 
     public function hapus() {
         $kueri = "DELETE FROM {$this->tabel}";
         $kueri .= $this->bangunWhere();
-        return $this->eksekusi($kueri);
+        
+        $this->eksekusi($kueri);
+
+        $koneksi = self::hubungkan();
+        if (self::getDriver() == 'MySqli') {
+            return $koneksi->affected_rows;
+        } else {
+            return mysql_affected_rows($koneksi);
+        }
     }
 }

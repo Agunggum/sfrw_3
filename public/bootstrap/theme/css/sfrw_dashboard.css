@@ -156,6 +156,46 @@ color: var(--accent-color);
 background-color: var(--card-bg);
 }
 
+/* Container Utama Submenu */
+.nav-tree {
+    position: relative;
+}
+
+/* Garis Vertikal Utama */
+.nav-tree::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 15px; /* Memberi jarak di bagian bawah agar garis tidak tembus */
+    left: 7px;    /* Menyesuaikan posisi tepat di belakang icon/text */
+    width: 1px;
+    background-color: #dee2e6; /* Warna garis abu-abu light (bisa diganti sesuai tema) */
+}
+
+/* Item List Navigasi */
+.nav-tree .nav-item {
+    position: relative;
+}
+
+/* Garis Horisontal Cabang */
+.nav-tree .nav-item::before {
+    content: '';
+    position: absolute;
+    top: 20px;    /* Menyelaraskan garis horizontal dengan tengah teks menu */
+    left: 7px;
+    width: 10px;  /* Panjang garis horizontal */
+    height: 1px;
+    background-color: #dee2e6;
+}
+
+/* Opsional: Mengubah warna icon/lingkaran kecil bawaan agar serasi */
+.nav-tree .nav-link i.bi-circle {
+    font-size: 0.55rem; /* Mengecilkan bulatan ikon lingkaran */
+    position: relative;
+    z-index: 2; /* Agar ikon berada di atas garis */
+    background-color: var(--bg-body); /* Sesuaikan dengan background sidebar Anda */
+}
+
 /* Page Content Styling */
 #page-content-wrapper {
 width: 100%;

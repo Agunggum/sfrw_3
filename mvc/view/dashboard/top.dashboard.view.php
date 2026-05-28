@@ -24,7 +24,7 @@
                     <i class="bi bi-chevron-down arrow-icon fs-7"></i>
                 </a>
                 <div class="collapse <?php echo (ROUTE == 'users') ? 'show' : ''; ?>" id="submenuMaster" data-bs-parent="#sidebarMenu">
-                    <ul class="nav flex-column ps-3 pt-1 gap-1">
+                    <ul class="nav flex-column ps-3 pt-1 gap-1 nav-tree">
                         <li class="nav-item">
                             <a href="<?php echo BASEURL; ?>users" class="nav-link rounded <?php echo (ROUTE == 'users') ? 'active' : ''; ?> py-2 small">
                                 <i class="bi bi-circle me-2 fs-8"></i> Data Pengguna
@@ -55,7 +55,7 @@
                     <i class="bi bi-chevron-down arrow-icon fs-7"></i>
                 </a>
                 <div class="collapse" id="submenuLaporan" data-bs-parent="#sidebarMenu">
-                    <ul class="nav flex-column ps-3 pt-1 gap-1">
+                    <ul class="nav flex-column ps-3 pt-1 gap-1 nav-tree">
                         <li class="nav-item">
                             <a href="#" class="nav-link rounded py-2 small">
                                 <i class="bi bi-circle me-2 fs-8"></i> Laporan Penjualan

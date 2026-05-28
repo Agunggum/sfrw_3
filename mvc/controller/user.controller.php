@@ -128,11 +128,33 @@ class UserController extends Controller {
      * Membutuhkan peran 'admin'.
      */
     public static function hapus($id) {
-        PembangunKueri::tabel(Users::schematable())->dimana('id', $id)->hapus();
-        $output_data[] = [
-            "status" => "success",
-            "message" => "Pengguna dengan ID {$id} berhasil dihapus.",
-        ];
-        echo json_encode($output_data, JSON_PRETTY_PRINT);
+        try {
+            $data = PembangunKueri::tabel(Users::schematable())->dimana('id', $id)->danDimana('role', 'user')->hapus();
+            
+            if($data > 0){
+                 $output_data = [
+                    "status" => "success",
+                    "message" => "Pengguna dengan ID {$id} berhasil dihapus.",
+                ];
+            }else{
+                $output_data = [
+                    "status" => "error",
+                    "message" => "Pengguna dengan ID {$id} gagal untuk dihapus.",
+                ];
+            }
+            
+            // HTTP 200 untuk sukses
+            http_response_code(200); 
+            echo json_encode($output_data, JSON_PRETTY_PRINT);
+        } catch (\Exception $e) {
+            $output_data = [
+                "status" => "error",
+                "message" => "Terjadi kesalahan: " . $e->getMessage(),
+            ];
+            
+            // PERBAIKAN: Set status HTTP ke 500 agar ditangkap oleh fungsi error: di AJAX
+            http_response_code(500); 
+            echo json_encode($output_data, JSON_PRETTY_PRINT);
+        }
     }
 }

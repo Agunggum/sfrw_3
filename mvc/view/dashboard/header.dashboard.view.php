@@ -28,7 +28,7 @@ if (defined('IS_AJAX') && IS_AJAX) {
         @import "<?php echo asset('bootstrap/theme/css/datatables-bootstrap-5.css'); ?>";
         @import "<?php echo asset('bootstrap/theme/fontawesome/css/all.css'); ?>";
         @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
-        @import "<?php echo asset('bootstrap/theme/css/sfrw_dashboard.css'); ?>";
+        @import "<?php echo asset('bootstrap/theme/css/sfrw_dashboard.css?v=0.1'); ?>";
     </style>
     <script src="<?php echo asset('bootstrap/theme/js/jquery-3.7.1.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>"></script>

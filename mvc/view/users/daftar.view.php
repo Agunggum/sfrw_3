@@ -129,33 +129,43 @@ $key = encrypt(date('YmdHi')); ?>
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    // PERBAIKAN: Pastikan response dari backend sukses (sesuaikan dengan key JSON backend Anda, misal response.status == 'success' atau response.success == true)
-                    // Jika backend Anda tidak mengembalikan status, hapus kondisi IF ini dan langsung jalankan kode di dalamnya.
-
-                    // Hapus baris dari DataTables secara visual & kalkulasi ulang running number
-                    if (currentTableRow && currentTableRow.length) {
-                        // Gunakan objek instansiasi 'table' DataTables Anda
-                        table.row(currentTableRow).remove().draw(false);
-                    } else {
-                        // Alternatif darurat jika TR tetap tidak terdeteksi: Cari berdasarkan data-id tombol edit yang tersisa di tabel
-                        var fallbackRow = $(`.edit-btn[data-id="${idYangAkanDihapus}"]`).closest('tr');
-                        if (fallbackRow.length) {
-                            table.row(fallbackRow).remove().draw(false);
+                    // Validasi response dari backend
+                    if (response.status === 'success') {
+                        
+                        // Hapus baris dari DataTables secara visual
+                        if (currentTableRow && currentTableRow.length) {
+                            table.row(currentTableRow).remove().draw(false);
+                        } else {
+                            var fallbackRow = $(`.edit-btn[data-id="${idYangAkanDihapus}"]`).closest('tr');
+                            if (fallbackRow.length) {
+                                table.row(fallbackRow).remove().draw(false);
+                            }
                         }
+
+                        // Tutup modal
+                        var modalElement = document.getElementById('staticBackdrop');
+                        var myModal = bootstrap.Modal.getOrCreateInstance(modalElement);
+                        myModal.hide();
+
+                        // Notifikasi sukses
+                        showToast("Sukses: " + response.message, 'success');
+                        $('.datatable-help').DataTable().ajax.reload(null, false);
+
+                    } else {
+                        // Jika backend mengirim status "error" walau HTTP Request-nya 'Success (200)'
+                        showToast("Gagal: " + response.message, 'danger');
                     }
-
-                    // Tutup modal
-                    var modalElement = document.getElementById('staticBackdrop');
-                    var myModal = bootstrap.Modal.getOrCreateInstance(modalElement);
-                    myModal.hide();
-
-                    // Notifikasi sukses
-                    showToast("Sukses: " + response.message, 'success');
-                    $('.datatable-help').DataTable().ajax.reload(null, false);
                 },
                 error: function(xhr, status, error) {
                     console.error("Error Response: ", xhr.responseText);
-                    showToast("Gagal: " + xhr.responseText, 'danger');
+                    
+                    // Coba parsing jika error response berupa JSON string
+                    try {
+                        var errObj = JSON.parse(xhr.responseText);
+                        showToast("Gagal: " + errObj.message, 'danger');
+                    } catch(e) {
+                        showToast("Gagal: Terjadi kesalahan sistem.", 'danger');
+                    }
                 },
                 complete: function() {
                     // Kembalikan status tombol ke semula
