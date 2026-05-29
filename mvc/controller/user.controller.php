@@ -139,7 +139,7 @@ class UserController extends Controller {
             }else{
                 $output_data = [
                     "status" => "error",
-                    "message" => "Pengguna dengan ID {$id} gagal untuk dihapus.",
+                    "message" => "Pengguna dengan ID {$id} gagal untuk dihapus karena Role adalah Admin.",
                 ];
             }
             

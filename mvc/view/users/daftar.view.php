@@ -86,7 +86,7 @@ $key = encrypt(date('YmdHi')); ?>
                         </button>
                         <ul class="dropdown-menu dropdown-table-menu" data-bs-popper="static">
                             <li><a class="dropdown-item edit-btn" href="<?php echo BASEURL; ?>users/${data.id_encrypted}" data-id="${idData}">Edit Details</a></li>
-                            <li><a class="dropdown-item delete-btn" href="#" data-id="${idData}">Delete Record</a></li>
+                            <li><a class="dropdown-item delete-btn" href="#" data-id="${idData}" data-username="${data.username}">Delete Record</a></li>
                         </ul>
                     </div>`;
                     }
@@ -96,12 +96,14 @@ $key = encrypt(date('YmdHi')); ?>
         // Variabel penampung sementara untuk data baris yang akan dihapus
         var currentTableRow = null;
         var idYangAkanDihapus = null;
+        var userYangAkanDihapus = null;
 
         // 1. Event listener ketika tombol delete di dalam dropdown diklik
         $(document).on('click', '.delete-btn', function(e) {
             e.preventDefault();
 
             idYangAkanDihapus = $(this).data('id');
+            userYangAkanDihapus = $(this).data('username');
 
             // Cari elemen <tr> terdekat dari tombol delete yang diklik di tabel asli
             // Kita gunakan .edit-btn yang masih tersisa di tabel asli sebagai acuan pencarian baris (TR)
@@ -109,7 +111,7 @@ $key = encrypt(date('YmdHi')); ?>
             currentTableRow = originalDropdownContainer;
 
             // Tampilkan ID di modal
-            $('#delete-id-display').text(idYangAkanDihapus);
+            $('#delete-id-display').text(userYangAkanDihapus);
 
             // Munculkan modal
             var modalElement = document.getElementById('staticBackdrop');
@@ -238,7 +240,7 @@ $key = encrypt(date('YmdHi')); ?>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Apakah Anda yakin ingin menghapus record ini? <!--(ID: <span id="delete-id-display"></span>)-->
+                Apakah Anda yakin ingin menghapus record ini? (Username: <span id="delete-id-display"></span>)
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
