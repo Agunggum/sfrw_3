@@ -18,8 +18,6 @@ Rute::ambil('/', function() {
     return Indexcontroller::index();
 });
 
-Rute::ambil('getLang', 'IndexController@Lang');
-
 // Halaman Login
 Rute::ambil('login', function() {
     require_once tampilan('login');
@@ -81,7 +79,6 @@ Rute::ambil('logsfiles/{file}', function($file) {
 
 // Rute yang memerlukan autentikasi dan peran admin untuk CRUD pengguna
 Rute::middleware('Auth')->grup(function() {
-    Rute::kirim('lang-update', 'IndexController@updateLang');
     Rute::ambil('dashboard', function() {
         require_once tampilan('dashboard/dashboard');
     });
@@ -102,6 +99,11 @@ Rute::middleware('Auth')->grup(function() {
 
 // Rute khusus untuk setup database (JANGAN GUNAKAN DI LINGKUNGAN PRODUKSI)
 Rute::ambil('setup-database/{kunci}', 'DatabaseSeederController@jalankan');
+
+Rute::ambil('getLang', 'IndexController@Lang');
+Rute::kirim('lang-update', 'IndexController@updateLang');
+Rute::ambil('getLangLogin', 'IndexController@LangLogin');
+Rute::kirim('lang-update-Login', 'IndexController@updateLangLogin');
 
 // Jalankan Rute
 Rute::jalankan(ROUTE, $_SERVER['REQUEST_METHOD']);

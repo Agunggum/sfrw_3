@@ -1,8 +1,13 @@
 [
     {
-        "lang_id": "welcome_title",
-        "element_id": "main-title",
+        "lang_id": "id-pemicu",
+        "element_id": "id-pemicu",
         "element_class": "title-class highlight"
+    },
+    {
+        "lang_id": "id-selamat-datang",
+        "element_id": "id-selamat-datang",
+        "element_class": "title-class"
     },
     {
         "lang_id": "id-keluar",

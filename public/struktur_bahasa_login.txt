@@ -1,0 +1,42 @@
+[
+    {
+        "lang_id": "id-pemicu",
+        "element_id": "id-pemicu",
+        "element_class": "title-class highlight"
+    },
+    {
+        "lang_id": "id-kembali",
+        "element_id": "id-kembali",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-masuk",
+        "element_id": "id-masuk",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-lupa-password",
+        "element_id": "id-lupa-password",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-masuk",
+        "element_id": "id-masuk",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-daftar",
+        "element_id": "id-daftar",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-daftar-google",
+        "element_id": "id-daftar-google",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "pemicu-terjemahan",
+        "element_id": "pemicu-terjemahan",
+        "element_class": "title-class"
+    }
+]

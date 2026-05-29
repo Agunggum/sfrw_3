@@ -5,13 +5,16 @@
             <div class="col-xl-12 col-lg-12 pt-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
+                        <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
                         <?php if(isset($_SESSION['username'])){ ?>
-                            <span class="h5"><span id="main-title" class="title-class" data-lang-id="welcome_title">Selamat datang</span>, <strong><?php echo $_SESSION['fullname']; ?></strong></span>
+                            <span class="h5"><span id="id-selamat-datang" class="title-class" data-lang-id="id-selamat-datang">Selamat datang</span>, <strong><?php echo $_SESSION['fullname']; ?></strong></span>
                             <a href="<?php echo BASEURL; ?>signout" class="btn btn-sm btn-outline-danger ms-2"><span id="id-keluar" class="title-class" data-lang-id="id-keluar">Keluar</span></a>
-                            <button class="btn btn-sm btn-outline-success ms-2" onclick="simulasiPerubahan()">(<span id="pemicu-terjemahan" class="title-class" data-lang-id="pemicu-terjemahan">Pemicu Terjemahan</span>)</button>
                         <?php } else { ?>
-                            <a href="<?php echo BASEURL; ?>login" class="btn btn-sm btn-danger rounded-3">Login</a>
+                            <a href="<?php echo BASEURL; ?>login" class="btn btn-sm btn-danger rounded-3"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span></a>
                         <?php } ?>
+                        <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
+                            <button class="btn btn-sm btn-outline-success ms-2" onclick="simulasiPerubahan()">(<span id="pemicu-terjemahan" class="title-class" data-lang-id="pemicu-terjemahan">Pemicu Terjemahan</span>)</button>
+                        <?php endif; ?>
                     </div>
 
                     <div class="d-flex align-items-center gap-2">

@@ -7,8 +7,9 @@
                 
                 <div class="text-center">
                     <div class="pt-2">
+                        <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
                         <span class="float-left">
-                            <a href="<?php echo BASEURL; ?>" data-bs-theme="light" class="text-danger animated-link"><i class="fa fa-angle-left fa-fw"></i> Kembali</a>
+                            <a href="<?php echo BASEURL; ?>" data-bs-theme="light" class="text-danger animated-link"><i class="fa fa-angle-left fa-fw"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
                         </span>
                     </div>
                     <div class="clearfix"></div>
@@ -30,7 +31,7 @@
                         
                         <div class="col-md-8 col-lg-8 col-xl-8">
                             <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
-                                <p class="h3 text-left font-weight-bold">Sign In.</p>
+                                <p class="h3 text-left font-weight-bold"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span>.</p>
                                 
                                 <form class="m-t" role="form" method="post" action="<?php echo BASEURL.'authlogin'; ?>">
                                     <!-- Email input -->
@@ -48,23 +49,26 @@
 
                                         <div class="col">
                                         <!-- Simple link -->
-                                        <a href="<?php echo BASEURL.'forgot-password'; ?>" data-bs-theme="light" class="text-danger animated-link">Forgot password?</a>
+                                        <a href="<?php echo BASEURL.'forgot-password'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-lupa-password" class="title-class" data-lang-id="id-lupa-password">Lupa password?</span></a>
                                         </div>
                                     </div>
 
                                     <!-- Submit button -->
-                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4 rounded-4" data-bs-theme="auto">Sign in</button>
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4 rounded-4" data-bs-theme="auto"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span></button>
 
                                     <!-- Register buttons -->
                                     <div class="text-center">
-                                        <p>Not a member? <a href="<?php echo BASEURL.'register'; ?>" data-bs-theme="light" class="text-danger animated-link">Register</a></p>
-                                        <p>or sign up with:</p>
+                                        <p>Not a member? <a href="<?php echo BASEURL.'register'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-daftar" class="title-class" data-lang-id="id-daftar">Daftar akun</span></a></p>
+                                        <p><span id="id-daftar-google" class="title-class" data-lang-id="id-daftar-google">Daftar dengan Google</span></p>
                                         <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-google text-danger"></i>
                                         </button>
                                     </div>
                                 </form>
                             <?php } ?>
+                            <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
+                            <button class="btn btn-sm btn-outline-success ms-2" onclick="simulasiPerubahan()">(<span id="pemicu-terjemahan" class="title-class" data-lang-id="pemicu-terjemahan">Pemicu Terjemahan</span>)</button>
+                            <?php endif; ?>
                         </div>
                     </div>
                 

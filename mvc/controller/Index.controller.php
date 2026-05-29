@@ -13,6 +13,12 @@ class IndexController extends Controller {
         $struktur = file_get_contents('public/struktur_bahasa.txt');
         echo $kamus;
     }
+    
+    public static function LangLogin() {
+        $kamus = file_get_contents('public/kamus_login.txt');
+        $struktur = file_get_contents('public/struktur_bahasa_login.txt');
+        echo $kamus;
+    }
 
     public static function updateLang() {
         $inputData = file_get_contents('php://input');
@@ -29,6 +35,30 @@ class IndexController extends Controller {
                 // 2. Simpan file struktur_bahasa.txt (Log perubahan Class & ID)
                 if (isset($data['struktur'])) {
                     self::file_contents_save('public/struktur_bahasa.txt', $data['struktur']);
+                }
+
+                echo "Sukses: Kamus diterjemahkan & Struktur diperbarui!";
+            } else {
+                echo "Gagal: Format JSON tidak valid.";
+            }
+        }
+    }
+
+    public static function updateLangLogin() {
+        $inputData = file_get_contents('php://input');
+
+        if (!empty($inputData)) {
+            $data = json_decode($inputData, true);
+            
+            if ($data !== null) {
+                // 1. Simpan file kamus.txt (Hasil auto-translate Indonesia & Inggris)
+                if (isset($data['kamus'])) {
+                    self::file_contents_save('public/kamus_login.txt', $data['kamus']);
+                }
+                
+                // 2. Simpan file struktur_bahasa.txt (Log perubahan Class & ID)
+                if (isset($data['struktur'])) {
+                    self::file_contents_save('public/struktur_bahasa_login.txt', $data['struktur']);
                 }
 
                 echo "Sukses: Kamus diterjemahkan & Struktur diperbarui!";

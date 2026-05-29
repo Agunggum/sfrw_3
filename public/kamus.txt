@@ -1,6 +1,7 @@
 {
     "id": {
-        "welcome_title": "Selamat datang",
+        "id-pemicu": "",
+        "id-selamat-datang": "Selamat datang",
         "id-keluar": "Keluar",
         "pemicu-terjemahan": "Pemicu Terjemahan",
         "en-lit-html-engine-active": "Lit-HTML Engine Aktif",
@@ -12,7 +13,8 @@
         "id-dokumentasi": "dokumentasi"
     },
     "en": {
-        "welcome_title": "Welcome",
+        "id-pemicu": "",
+        "id-selamat-datang": "Welcome",
         "id-keluar": "Sign out",
         "pemicu-terjemahan": "Translation Trigger",
         "en-lit-html-engine-active": "Lit-HTML Engine Active",
