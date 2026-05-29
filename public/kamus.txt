@@ -22,7 +22,8 @@
         "id-kembali-masuk": "Kembali ke halaman Masuk",
         "id-buat-akun": "Membuat akun.",
         "id-sudah-akun": "Anda sudah punya akun?",
-        "id-or-sign-up": "Atau daftar dengan:"
+        "id-or-sign-up": "Atau daftar dengan:",
+        "id-versi": "versi"
     },
     "en": {
         "id-pemicu": "",
@@ -47,6 +48,7 @@
         "id-kembali-masuk": "Return to the Login page",
         "id-buat-akun": "Create an account.",
         "id-sudah-akun": "Do you already have an account?",
-        "id-or-sign-up": "Or register with:"
+        "id-or-sign-up": "Or register with:",
+        "id-versi": "version"
     }
 }

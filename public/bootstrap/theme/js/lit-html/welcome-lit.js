@@ -8,7 +8,7 @@ const welcomeTemplate = (data) => html`
         <div>
             <h5 class="mb-1"><span id="en-lit-html-engine-active" class="title-class" data-lang-id="en-lit-html-engine-active">Lit-HTML Engine Aktif</span></h5>
                 <p class="mb-0 small">
-                <span id="id-halo" class="title-class" data-lang-id="id-halo">Halo</span> <strong>${data.user}</strong>, <span id="id-anda-menggunakan" class="title-class" data-lang-id="id-anda-menggunakan">Anda menggunakan</span> <strong>${data.title}</strong> versi ${data.version}.
+                <span id="id-halo" class="title-class" data-lang-id="id-halo">Halo</span> <strong>${data.user}</strong>, <span id="id-anda-menggunakan" class="title-class" data-lang-id="id-anda-menggunakan">Anda menggunakan</span> <strong>${data.title}</strong> <span id="id-versi" class="title-class" data-lang-id="id-versi">versi</span> ${data.version}.
                 <br/>Server Time: <span class="badge bg-info">${data.server_time}</span>
             </p>
         </div>
