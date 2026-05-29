@@ -23,7 +23,8 @@
         "id-buat-akun": "Membuat akun.",
         "id-sudah-akun": "Anda sudah punya akun?",
         "id-or-sign-up": "Atau daftar dengan:",
-        "id-versi": "versi"
+        "id-versi": "versi",
+        "id-mendftar": "Mendaftar"
     },
     "en": {
         "id-pemicu": "",
@@ -49,6 +50,7 @@
         "id-buat-akun": "Create an account.",
         "id-sudah-akun": "Do you already have an account?",
         "id-or-sign-up": "Or register with:",
-        "id-versi": "version"
+        "id-versi": "version",
+        "id-mendftar": "Register"
     }
 }
