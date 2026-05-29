@@ -67,7 +67,7 @@
                                 </form>
                             <?php } ?>
                             <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
-                            <button class="btn btn-sm btn-outline-success ms-2" onclick="simulasiPerubahan()">(<span id="pemicu-terjemahan" class="title-class" data-lang-id="pemicu-terjemahan">Pemicu Terjemahan</span>)</button>
+                            <button class="btn btn-sm btn-outline-success ms-2 rounded-3" onclick="simulasiPerubahan()">(<span id="pemicu-terjemahan" class="title-class" data-lang-id="pemicu-terjemahan">Pemicu Terjemahan</span>)</button>
                             <?php endif; ?>
                         </div>
                     </div>

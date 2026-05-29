@@ -16,7 +16,13 @@
         "id-daftar-google": "Daftar dengan Google",
         "id-selamat-datang": "Selamat datang",
         "id-keluar": "Keluar",
-        "id-dasbor": "Dasbor"
+        "id-dasbor": "Dasbor",
+        "id-lupa-kata-sandi": "Lupa Kata Sandi.",
+        "id-konfirmasi": "Konfirmasi",
+        "id-kembali-masuk": "Kembali ke halaman Masuk",
+        "id-buat-akun": "Membuat akun.",
+        "id-sudah-akun": "Anda sudah punya akun?",
+        "id-or-sign-up": "Atau daftar dengan:"
     },
     "en": {
         "id-pemicu": "",
@@ -35,6 +41,12 @@
         "id-daftar-google": "Register with Google",
         "id-selamat-datang": "Welcome",
         "id-keluar": "Sign out",
-        "id-dasbor": "Dashboards"
+        "id-dasbor": "Dashboards",
+        "id-lupa-kata-sandi": "Forgot Password.",
+        "id-konfirmasi": "Confirmation",
+        "id-kembali-masuk": "Return to the Login page",
+        "id-buat-akun": "Create an account.",
+        "id-sudah-akun": "Do you already have an account?",
+        "id-or-sign-up": "Or register with:"
     }
 }

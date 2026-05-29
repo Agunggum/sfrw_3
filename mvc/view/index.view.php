@@ -8,13 +8,13 @@
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
                         <?php if(isset($_SESSION['username'])){ ?>
                             <span class="h5"><span id="id-selamat-datang" class="title-class" data-lang-id="id-selamat-datang">Selamat datang</span>, <strong><?php echo $_SESSION['fullname']; ?></strong></span>
-                            <a href="<?php echo BASEURL; ?>signout" class="btn btn-sm btn-outline-danger ms-2"><span id="id-keluar" class="title-class" data-lang-id="id-keluar">Keluar</span></a>
-                            <a href="<?php echo BASEURL; ?>dashboard" class="btn btn-sm btn-info ms-2"><span id="id-dasbor" class="title-class" data-lang-id="id-dasbor">Dasbor</span></a>
+                            <a href="<?php echo BASEURL; ?>signout" class="btn btn-sm btn-outline-danger ms-2 rounded-3"><span id="id-keluar" class="title-class" data-lang-id="id-keluar">Keluar</span></a>
+                            <a href="<?php echo BASEURL; ?>dashboard" class="btn btn-sm btn-info ms-2 rounded-3"><span id="id-dasbor" class="title-class" data-lang-id="id-dasbor">Dasbor</span></a>
                         <?php } else { ?>
                             <a href="<?php echo BASEURL; ?>login" class="btn btn-sm btn-danger rounded-3"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span></a>
                         <?php } ?>
                         <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
-                            <button class="btn btn-sm btn-outline-success ms-2" onclick="simulasiPerubahan()">(<span id="pemicu-terjemahan" class="title-class" data-lang-id="pemicu-terjemahan">Pemicu Terjemahan</span>)</button>
+                            <button class="btn btn-sm btn-outline-success ms-2 rounded-3" onclick="simulasiPerubahan()">(<span id="pemicu-terjemahan" class="title-class" data-lang-id="pemicu-terjemahan">Pemicu Terjemahan</span>)</button>
                         <?php endif; ?>
                     </div>
 

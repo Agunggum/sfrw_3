@@ -6,6 +6,10 @@
             <div class="col-md-12 col-lg-6 col-xl-6 shadow rounded-5 vh-100 overflow-y-auto">
                 
                 <div class="text-center">
+                    <div class="pt-2">
+                        <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
+                    </div>
+
                     <div class="d-flex justify-content-center">
                         <div class="col-md-12 col-lg-12 col-xl-12 mt-5 mb-4 text-left">
                             <div class="h3"><span><?php echo WEBTITLE; ?></span></div>
@@ -23,7 +27,7 @@
                         
                         <div class="col-md-8 col-lg-8 col-xl-8">
                             <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
-                                <p class="h3 text-left font-weight-bold">Sign Up.</p>
+                                <p class="h3 text-left font-weight-bold"><span id="id-buat-akun" class="title-class" data-lang-id="id-buat-akun">Membuat akun.</span></p>
                                 
                                 <form class="m-t" role="form" method="post" action="<?php echo BASEURL.'authregister'; ?>">
                                     <input type="hidden" name="login" value="MASUK">
@@ -40,22 +44,25 @@
                                     <div class="row mb-4">
                                         <div class="col">
                                         <!-- Simple link -->
-                                        <a href="<?php echo BASEURL.'login'; ?>" data-bs-theme="light" class="text-danger animated-link">You have account?</a>
+                                        <a href="<?php echo BASEURL.'login'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-sudah-akun" class="title-class" data-lang-id="id-sudah-akun">Anda sudah punya akun?</span></a>
                                         </div>
                                     </div>
 
                                     <!-- Submit button -->
-                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4 rounded-4" data-bs-theme="auto">Sign up</button>
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4 rounded-4" data-bs-theme="auto"><span id="id-buat-akun" class="title-class" data-lang-id="id-buat-akun">Membuat akun.</span></button>
 
                                     <!-- Register buttons -->
                                     <div class="text-center">
-                                        <p>or sign up with:</p>
+                                        <p><span id="id-or-sign-up" class="title-class" data-lang-id="id-or-sign-up">Atau daftar dengan:</span></p>
                                         <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-google text-danger"></i>
                                         </button>
                                     </div>
                                 </form>
                             <?php } ?>
+                            <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
+                            <button class="btn btn-sm btn-outline-success ms-2 rounded-3" onclick="simulasiPerubahan()">(<span id="pemicu-terjemahan" class="title-class" data-lang-id="pemicu-terjemahan">Pemicu Terjemahan</span>)</button>
+                            <?php endif; ?>
                         </div>
                     </div>
                 
