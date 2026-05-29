@@ -391,17 +391,3 @@ SPANavigator.setupThemeEventListeners();
         });
     }
 })();
-
-document.addEventListener('DOMContentLoaded', () => {
-            // --- 1. Sidebar Toggler Logic ---
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebarOverlay = document.getElementById('sidebarOverlay');
-
-            const toggleSidebar = (e) => {
-                e.preventDefault();
-                document.body.classList.toggle('sb-toggled');
-            };
-
-            sidebarToggle.addEventListener('click', toggleSidebar);
-            sidebarOverlay.addEventListener('click', toggleSidebar);
-});

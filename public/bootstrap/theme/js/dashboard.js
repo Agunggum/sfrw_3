@@ -122,4 +122,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Jalankan fungsi avatar
             updateAvatarByName();
-        });
+});

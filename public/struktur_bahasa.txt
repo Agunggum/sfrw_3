@@ -1,0 +1,52 @@
+[
+    {
+        "lang_id": "welcome_title",
+        "element_id": "main-title",
+        "element_class": "title-class highlight"
+    },
+    {
+        "lang_id": "id-keluar",
+        "element_id": "id-keluar",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "pemicu-terjemahan",
+        "element_id": "pemicu-terjemahan",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "en-lit-html-engine-active",
+        "element_id": "en-lit-html-engine-active",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-halo",
+        "element_id": "id-halo",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-anda-menggunakan",
+        "element_id": "id-anda-menggunakan",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-sfrw-adalah-framework-dari-indonesia",
+        "element_id": "id-sfrw-adalah-framework-dari-indonesia",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-yang-dikembangkan-oleh-indonesia-untuk-programer-atau-calon-programer",
+        "element_id": "id-yang-dikembangkan-oleh-indonesia-untuk-programer-atau-calon-programer",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-pelajari-lebih-lebih-lanjut",
+        "element_id": "id-pelajari-lebih-lebih-lanjut",
+        "element_class": "title-class"
+    },
+    {
+        "lang_id": "id-dokumentasi",
+        "element_id": "id-dokumentasi",
+        "element_class": "title-class"
+    }
+]

@@ -18,6 +18,8 @@ Rute::ambil('/', function() {
     return Indexcontroller::index();
 });
 
+Rute::ambil('getLang', 'IndexController@Lang');
+
 // Halaman Login
 Rute::ambil('login', function() {
     require_once tampilan('login');
@@ -79,6 +81,7 @@ Rute::ambil('logsfiles/{file}', function($file) {
 
 // Rute yang memerlukan autentikasi dan peran admin untuk CRUD pengguna
 Rute::middleware('Auth')->grup(function() {
+    Rute::kirim('lang-update', 'IndexController@updateLang');
     Rute::ambil('dashboard', function() {
         require_once tampilan('dashboard/dashboard');
     });

@@ -1,0 +1,26 @@
+{
+    "id": {
+        "welcome_title": "Selamat datang",
+        "id-keluar": "Keluar",
+        "pemicu-terjemahan": "Pemicu Terjemahan",
+        "en-lit-html-engine-active": "Lit-HTML Engine Aktif",
+        "id-halo": "Halo",
+        "id-anda-menggunakan": "Anda menggunakan",
+        "id-sfrw-adalah-framework-dari-indonesia": "sfrw adalah framework dari",
+        "id-yang-dikembangkan-oleh-indonesia-untuk-programer-atau-calon-programer": "yang dikembangkan oleh indonesia untuk programer atau calon programer",
+        "id-pelajari-lebih-lebih-lanjut": "Pelajari lebih lanjut.",
+        "id-dokumentasi": "dokumentasi"
+    },
+    "en": {
+        "welcome_title": "Welcome",
+        "id-keluar": "Sign out",
+        "pemicu-terjemahan": "Translation Trigger",
+        "en-lit-html-engine-active": "Lit-HTML Engine Active",
+        "id-halo": "Hello",
+        "id-anda-menggunakan": "you use",
+        "id-sfrw-adalah-framework-dari-indonesia": "sfrw is a framework for",
+        "id-yang-dikembangkan-oleh-indonesia-untuk-programer-atau-calon-programer": "developed by Indonesia for programmers or prospective programmers",
+        "id-pelajari-lebih-lebih-lanjut": "Learn more.",
+        "id-dokumentasi": "documentation"
+    }
+}
