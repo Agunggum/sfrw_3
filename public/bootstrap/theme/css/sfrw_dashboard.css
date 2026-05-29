@@ -92,8 +92,8 @@ transform: scaleX(1);
 
 /* Sidebar Styling */
 #sidebar-wrapper {
-min-height: 100vh;
-height: 100vh;
+min-height: 100dvh;
+height: 100dvh;
 width: var(--sidebar-width);
 margin-left: calc(-1 * var(--sidebar-width));
 transition: margin 0.25s ease-out;
@@ -253,7 +253,7 @@ flex-direction: column;
 }
 
 #page-content-wrapper .container-page {
-height: calc(97vh - var(--navbar-height));
+height: calc(97dvh - var(--navbar-height));
 overflow-y: auto;
 border-radius: 0.5rem; /* Membuat sudut rounded (setara border-radius Bootstrap) */
 /* Opsional: Tambahkan background atau border agar efek rounded & scroll terlihat jelas */
