@@ -35,7 +35,8 @@
                                     <?php echo forminput(['email', 'email', 'email', 'email', 'off', 'required']); ?>
 
                                     <!-- Email input -->
-                                    <?php echo forminput(['text', 'username', 'username', 'username', 'off', 'required']); ?>
+                                    <?php echo forminput(['text', 'username', 'username', 'username', 'off', 'required pattern="^[a-zA-Z0-9]+$" 
+    title="Hanya diperbolehkan huruf (a-z, A-Z) dan angka (0-9)"']); ?>
 
                                     <!-- Password input -->
                                     <?php echo forminput(['password', 'password', 'password-field', 'password', 'off', 'required'], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>']); ?>
