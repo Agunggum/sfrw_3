@@ -106,7 +106,7 @@ color: var(--bs-body-color);
 [data-bs-theme="dark"] #sidebar-wrapper .nav-link:hover,
 [data-bs-theme="dark"] #sidebar-wrapper .nav-link.active {
 color: var(--accent-color);
-background-color: rgba(255, 255, 255, 0.05);
+background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Styling Khusus untuk Sub-Menu (Nested UL) */
