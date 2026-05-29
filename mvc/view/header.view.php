@@ -54,6 +54,18 @@ if (defined('IS_AJAX') && IS_AJAX) {
             const theme = getPreferredTheme();
             if (theme === 'dark') document.documentElement.setAttribute('data-bs-theme', 'dark');
             else document.documentElement.setAttribute('data-bs-theme', 'light');
+
+            // Logika Pencegah Flash Bahasa
+            // Ambil bahasa yang tersimpan, jika tidak ada default-kan ke 'id'
+            const currentLang = localStorage.getItem('user_language') || 'id';
+            document.documentElement.setAttribute('data-lang-current', currentLang);
+            
+            // Jika bahasanya 'id' (sesuai teks asli HTML Anda), kita bisa langsung tampilkan body nanti
+            if (currentLang === 'id') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.body.classList.add('lang-ready');
+                });
+            }
         })();
     </script>
 </head>
