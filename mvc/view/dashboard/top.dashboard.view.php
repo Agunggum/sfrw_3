@@ -26,20 +26,20 @@
                 <div class="collapse <?php echo (ROUTE == 'users') ? 'show' : ''; ?>" id="submenuMaster" data-bs-parent="#sidebarMenu">
                     <ul class="nav flex-column ps-3 pt-1 gap-1 nav-tree">
                         <li class="nav-item">
-                            <a href="<?php echo BASEURL; ?>users" class="nav-link rounded <?php echo (ROUTE == 'users') ? 'active' : ''; ?> py-2 small">
-                                <i class="bi bi-circle me-2 fs-8"></i> Data Pengguna
+                            <a href="<?php echo BASEURL; ?>users" class="nav-link animated-link rounded <?php echo (ROUTE == 'users') ? 'active' : ''; ?> py-2 small">
+                                Data Pengguna
                             </a>
                             <ul class="nav flex-column ps-3 pt-1 gap-1">
                                 <li class="nav-item">
-                                    <a href="<?php echo BASEURL; ?>users/tambah" class="nav-link rounded py-2 small">
-                                        <i class="bi bi-circle me-2 fs-8"></i> Form Pengguna
+                                    <a href="<?php echo BASEURL; ?>users/tambah" class="nav-link animated-link rounded py-2 small">
+                                        Form Pengguna
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link rounded py-2 small">
-                                <i class="bi bi-circle me-2 fs-8"></i> Data Produk
+                            <a href="#" class="nav-link animated-link rounded py-2 small">
+                                Data Produk
                             </a>
                         </li>
                     </ul>
@@ -57,13 +57,13 @@
                 <div class="collapse" id="submenuLaporan" data-bs-parent="#sidebarMenu">
                     <ul class="nav flex-column ps-3 pt-1 gap-1 nav-tree">
                         <li class="nav-item">
-                            <a href="#" class="nav-link rounded py-2 small">
-                                <i class="bi bi-circle me-2 fs-8"></i> Laporan Penjualan
+                            <a href="#" class="nav-link animated-link rounded py-2 small">
+                                Laporan Penjualan
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link rounded py-2 small">
-                                <i class="bi bi-circle me-2 fs-8"></i> Laporan Keuangan
+                            <a href="#" class="nav-link animated-link rounded py-2 small">
+                                Laporan Keuangan
                             </a>
                         </li>
                     </ul>

@@ -30,6 +30,40 @@ background-color: var(--bs-body-bg);
 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Menghapus gaya default hover Bootstrap dan menerapkan animasi */
+.animated-link {
+text-decoration: none !important;
+position: relative;
+display: inline-block;
+/* Atur warna teks utama di sini jika ingin mengubahnya */
+}
+/* Memaksa hover Bootstrap agar tidak mengubah latar belakang / border */
+.animated-link:hover, 
+.animated-link:focus, 
+.animated-link:active {
+background-color: transparent !important;
+border-color: transparent !important;
+box-shadow: none !important; /* Menghapus efek glow fokus */
+color: inherit; /* Menjaga warna teks tetap sama saat di-hover */
+}
+/* Membuat animasi garis bawah dari kiri ke kanan */
+.animated-link::after {
+content: '';
+position: absolute;
+width: 90%;
+transform: scaleX(0);
+height: 2px;
+bottom: -2px; /* Jarak garis dari teks */
+left: 10px;
+background-color: currentColor; /* Warna garis otomatis mengikuti warna teks */
+transform-origin: bottom left;
+transition: transform 0.25s ease-out;
+}
+/* Jalankan animasi saat hover */
+.animated-link:hover::after {
+transform: scaleX(1);
+}
+
 .user-avatar {
     width: 32px; 
     height: 32px;
@@ -156,44 +190,57 @@ color: var(--accent-color);
 background-color: var(--card-bg);
 }
 
-/* Container Utama Submenu */
+/* Container Utama Submenu (Garis Vertikal Utama Digambar di Sini) */
 .nav-tree {
     position: relative;
+    list-style: none;
+    padding-left: 20px; /* Jarak geser sub-menu ke dalam */
 }
 
-/* Garis Vertikal Utama */
+/* Membuat garis lurus kontinu dari atas sampai ke lingkaran terakhir */
 .nav-tree::before {
     content: '';
     position: absolute;
-    top: 0;
-    bottom: 15px; /* Memberi jarak di bagian bawah agar garis tidak tembus */
-    left: 7px;    /* Menyesuaikan posisi tepat di belakang icon/text */
-    width: 1px;
-    background-color: #dee2e6; /* Warna garis abu-abu light (bisa diganti sesuai tema) */
+    left: 24px;         /* Mengunci posisi horizontal tepat di tengah ikon lingkaran */
+    top: 14px;          /* Dimulai tepat dari tengah-tengah ikon lingkaran pertama */
+    bottom: 18px;       /* Berhenti tepat di tengah-tengah ikon lingkaran terakhir */
+    width: 1px;         /* Ketebalan garis */
+    background-color: #dee2e6; /* Warna garis abu-abu terang */
+    z-index: 1;         /* Berada di bawah lapisan ikon */
 }
 
 /* Item List Navigasi */
 .nav-tree .nav-item {
     position: relative;
+    margin: 0;          /* Reset margin agar tidak merusak jarak hitung garis */
 }
 
-/* Garis Horisontal Cabang */
-.nav-tree .nav-item::before {
-    content: '';
-    position: absolute;
-    top: 20px;    /* Menyelaraskan garis horizontal dengan tengah teks menu */
-    left: 7px;
-    width: 10px;  /* Panjang garis horizontal */
-    height: 1px;
-    background-color: #dee2e6;
-}
-
-/* Opsional: Mengubah warna icon/lingkaran kecil bawaan agar serasi */
-.nav-tree .nav-link i.bi-circle {
-    font-size: 0.55rem; /* Mengecilkan bulatan ikon lingkaran */
+/* Menyelaraskan Struktur Link Menu */
+.nav-tree .nav-link {
+    display: flex;
+    align-items: center;
     position: relative;
-    z-index: 2; /* Agar ikon berada di atas garis */
-    background-color: var(--bg-body); /* Sesuaikan dengan background sidebar Anda */
+    z-index: 2;         /* Supaya link tetap bisa diklik dengan aman */
+}
+
+/* Pengaturan Ikon Lingkaran */
+.nav-tree .nav-link i.bi-circle {
+    font-size: 0.55rem;       /* Ukuran bulatan ikon lingkaran */
+    margin-right: 10px;       /* Jarak antara lingkaran dengan teks menu */
+    color: #dee2e6;           /* Warna border lingkaran */
+    background-color: #fff;   /* KUNCI: Isi warna putih/sesuai background sidebar Anda */
+    position: relative;
+    z-index: 3;               /* Menaruh ikon di paling atas untuk menutupi potongan garis */
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mengubah warna lingkaran saat menu aktif */
+.nav-tree .nav-link.active i.bi-circle {
+    color: #0d6efd;           /* Menjadi biru saat aktif */
+    background-color: #fff;   /* Tetap pertahankan background pembungkusnya */
 }
 
 /* Page Content Styling */
