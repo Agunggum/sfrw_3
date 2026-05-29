@@ -92,6 +92,8 @@ PembangunKueri::tabel('users')
 
 S-FRW dibangun dengan ❤️ untuk komunitas developer yang menginginkan framework ringan namun bertenaga. Silakan kirimkan saran atau laporkan bug untuk membantu kami berkembang.
 
+# ScreenShot
+
 ---
 
 ![Teks Alternatif](sfrw_index.png)
