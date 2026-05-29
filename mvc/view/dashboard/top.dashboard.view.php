@@ -21,8 +21,8 @@
                 <a class="nav-link rounded d-flex align-items-center justify-content-between"
                     data-bs-toggle="collapse" href="#submenuMaster" role="button" aria-expanded="false" aria-controls="submenuMaster">
                     <div>
-                        <i class="bi bi-database me-2"></i>
-                        <span id="id-master-data" class="title-class" data-lang-id="id-master-data">Master Data</span>
+                        <i class="bi bi-people me-2"></i>
+                        <span id="id-data-pengguna" class="title-class" data-lang-id="id-data-pengguna">Data Pengguna</span>
                     </div>
                     <i class="bi bi-chevron-down arrow-icon fs-7"></i>
                 </a>
@@ -32,17 +32,10 @@
                             <a href="<?php echo BASEURL; ?>users" class="nav-link animated-link rounded <?php echo (ROUTE == 'users') ? 'active' : ''; ?> py-2 small">
                                 <span id="id-data-pengguna" class="title-class" data-lang-id="id-data-pengguna">Data Pengguna</span>
                             </a>
-                            <ul class="nav flex-column ps-3 pt-1 gap-1">
-                                <li class="nav-item">
-                                    <a href="<?php echo BASEURL; ?>users/tambah" class="nav-link animated-link rounded py-2 small">
-                                        <span id="id-tambah-data-pengguna" class="title-class" data-lang-id="id-tambah-data-pengguna">Tambah Data Pengguna</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link animated-link rounded py-2 small">
-                                <span id="id-data-produk" class="title-class" data-lang-id="id-data-produk">Data Produk</span>
+                            <a href="<?php echo BASEURL; ?>users/tambah" class="nav-link animated-link rounded py-2 small">
+                                <span id="id-tambah-data-pengguna" class="title-class" data-lang-id="id-tambah-data-pengguna">Tambah Data Pengguna</span>
                             </a>
                         </li>
                     </ul>
