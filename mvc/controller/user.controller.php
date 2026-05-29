@@ -1,4 +1,6 @@
 <?php
+require_once vendors('logcarbon/logcarbon');
+
 use app\Models\Users;
 
 class UserController extends Controller {
@@ -136,11 +138,13 @@ class UserController extends Controller {
                     "status" => "success",
                     "message" => "Pengguna dengan ID {$id} berhasil dihapus.",
                 ];
+                Logcarbon::carbonlog(BASESESSION." :: deleted :: id: {$id}","userdata");
             }else{
                 $output_data = [
                     "status" => "error",
                     "message" => "Pengguna dengan ID {$id} gagal untuk dihapus karena Role adalah Admin.",
                 ];
+                Logcarbon::carbonlog(BASESESSION." :: failed deleted :: id: {$id}","userdata");
             }
             
             // HTTP 200 untuk sukses
