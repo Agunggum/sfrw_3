@@ -32,7 +32,7 @@
                             <ul class="nav flex-column ps-3 pt-1 gap-1">
                                 <li class="nav-item">
                                     <a href="<?php echo BASEURL; ?>users/tambah" class="nav-link animated-link rounded py-2 small">
-                                        Form Pengguna
+                                        Tambah Data Pengguna
                                     </a>
                                 </li>
                             </ul>
