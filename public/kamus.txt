@@ -1,8 +1,7 @@
 {
     "id": {
         "id-pemicu": "",
-        "id-selamat-datang": "Selamat datang",
-        "id-keluar": "Keluar",
+        "id-masuk": "Masuk",
         "pemicu-terjemahan": "Pemicu Terjemahan",
         "en-lit-html-engine-active": "Lit-HTML Engine Aktif",
         "id-halo": "Halo",
@@ -10,12 +9,17 @@
         "id-sfrw-adalah-framework-dari-indonesia": "sfrw adalah framework dari",
         "id-yang-dikembangkan-oleh-indonesia-untuk-programer-atau-calon-programer": "yang dikembangkan oleh indonesia untuk programer atau calon programer",
         "id-pelajari-lebih-lebih-lanjut": "Pelajari lebih lanjut.",
-        "id-dokumentasi": "dokumentasi"
+        "id-dokumentasi": "dokumentasi",
+        "id-kembali": "Kembali",
+        "id-lupa-password": "Lupa password?",
+        "id-daftar": "Daftar akun",
+        "id-daftar-google": "Daftar dengan Google",
+        "id-selamat-datang": "Selamat datang",
+        "id-keluar": "Keluar"
     },
     "en": {
         "id-pemicu": "",
-        "id-selamat-datang": "Welcome",
-        "id-keluar": "Sign out",
+        "id-masuk": "Sign in",
         "pemicu-terjemahan": "Translation Trigger",
         "en-lit-html-engine-active": "Lit-HTML Engine Active",
         "id-halo": "Hello",
@@ -23,6 +27,12 @@
         "id-sfrw-adalah-framework-dari-indonesia": "sfrw is a framework for",
         "id-yang-dikembangkan-oleh-indonesia-untuk-programer-atau-calon-programer": "developed by Indonesia for programmers or prospective programmers",
         "id-pelajari-lebih-lebih-lanjut": "Learn more.",
-        "id-dokumentasi": "documentation"
+        "id-dokumentasi": "documentation",
+        "id-kembali": "Back",
+        "id-lupa-password": "Forgot the password?",
+        "id-daftar": "Register account",
+        "id-daftar-google": "Register with Google",
+        "id-selamat-datang": "Welcome",
+        "id-keluar": "Sign out"
     }
 }

@@ -110,23 +110,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const langId = el.getAttribute('data-lang-id');
                 let textIndo = el.textContent;
                 
-                // 1. Ambil teks asli Indonesia dari kamus lama jika sedang berada dalam mode 'en'
                 if (currentLang === 'en' && dictionary['id'] && dictionary['id'][langId]) {
                     textIndo = dictionary['id'][langId];
                 }
 
                 let textEnglish = '';
 
-                // PERBAIKAN: Cek apakah hasil update manual berkas kamus untuk bahasa Inggris sudah ada
+                // Cek apakah di kamus lokal sudah ada (baik bawaan maupun hasil edit manual)
                 if (dictionary['en'] && dictionary['en'][langId] && dictionary['en'][langId].trim() !== '') {
-                    // Jika sudah ada di kamus (hasil update manual), gunakan yang sudah ada
                     textEnglish = dictionary['en'][langId];
                 } else {
-                    // Jika BELUM ada di kamus, baru panggil API translate otomatis
+                    // Jika benar-benar baru dan belum ada di kamus, baru ditranslate otomatis
                     textEnglish = await translateText(textIndo, 'id', 'en');
                 }
 
-                // Simpan ke objek kamus baru
                 newIdKamus[langId] = textIndo;
                 newEnKamus[langId] = textEnglish;
 
@@ -137,21 +134,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Perbarui objek global kamus
-            dictionary = { id: newIdKamus, en: newEnKamus };
-            changeLanguage(currentLang);
+            // Buat objek kamus sementara untuk dikirim ke backend
+            let tempDictionary = { id: newIdKamus, en: newEnKamus };
 
-            // Kirim sinkronisasi ke backend agar file kamus.txt tetap sinkron
+            // Kirim data baru ke backend
             fetch('<?php echo BASEURL; ?>lang-update', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     struktur: elementsData,
-                    kamus: dictionary
+                    kamus: tempDictionary // Kirim data berjalan
                 })
             })
-            .then(res => res.text())
-            .then(data => console.log("Backend Sync:", data))
+            .then(res => res.json())
+            .then(data => {
+                console.log("Backend Sync:", data.message);
+                
+                // Gabungkan juga di sisi frontend agar jika ada key baru langsung masuk, 
+                // namun key lama hasil edit manual Anda tetap aman tidak ter-reset sebelum refresh halaman.
+                dictionary.id = { ...tempDictionary.id, ...dictionary.id };
+                dictionary.en = { ...tempDictionary.en, ...dictionary.en };
+                
+                changeLanguage(currentLang);
+            })
             .catch(err => console.error("Sync Error:", err));
         }
 

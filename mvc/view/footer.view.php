@@ -1,11 +1,7 @@
 </div>
 <?php if (defined('IS_AJAX') && IS_AJAX) return; ?>
 <script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.1'); ?>"></script>
-<?php if (ROUTE == '/'): ?>
 <?php require_once view('bahasaIndex'); ?>
-<?php else: ?>
-<?php require_once view('bahasaLogin'); ?>
-<?php endif; ?>
 <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
 <!-- Native Live Reload Integration (SSE) -->
 <script>

@@ -13,58 +13,45 @@ class IndexController extends Controller {
         $struktur = file_get_contents('public/struktur_bahasa.txt');
         echo $kamus;
     }
-    
-    public static function LangLogin() {
-        $kamus = file_get_contents('public/kamus_login.txt');
-        $struktur = file_get_contents('public/struktur_bahasa_login.txt');
-        echo $kamus;
-    }
 
     public static function updateLang() {
-        $inputData = file_get_contents('php://input');
+        $inputData = json_decode(file_get_contents('php://input'), true);
 
-        if (!empty($inputData)) {
-            $data = json_decode($inputData, true);
+        if ($inputData && isset($inputData['kamus'])) {
+            $pathKamus = 'public/kamus.txt'; // SELEKSI: Sesuaikan dengan jalur file kamus.txt Anda
             
-            if ($data !== null) {
-                // 1. Simpan file kamus.txt (Hasil auto-translate Indonesia & Inggris)
-                if (isset($data['kamus'])) {
-                    self::file_contents_save('public/kamus.txt', $data['kamus']);
-                }
-                
-                // 2. Simpan file struktur_bahasa.txt (Log perubahan Class & ID)
-                if (isset($data['struktur'])) {
-                    self::file_contents_save('public/struktur_bahasa.txt', $data['struktur']);
-                }
-
-                echo "Sukses: Kamus diterjemahkan & Struktur diperbarui!";
-            } else {
-                echo "Gagal: Format JSON tidak valid.";
+            // 2. Baca isi kamus lama yang sudah ada di server
+            $kamusLama = [];
+            if (file_exists($pathKamus)) {
+                $isiFile = file_get_contents($pathKamus);
+                $kamusLama = json_decode($isiFile, true) ?: [];
             }
-        }
-    }
 
-    public static function updateLangLogin() {
-        $inputData = file_get_contents('php://input');
+            // Pastikan struktur dasar id dan en ada pada kamus lama
+            if (!isset($kamusLama['id'])) $kamusLama['id'] = [];
+            if (!isset($kamusLama['en'])) $kamusLama['en'] = [];
 
-        if (!empty($inputData)) {
-            $data = json_decode($inputData, true);
-            
-            if ($data !== null) {
-                // 1. Simpan file kamus.txt (Hasil auto-translate Indonesia & Inggris)
-                if (isset($data['kamus'])) {
-                    self::file_contents_save('public/kamus_login.txt', $data['kamus']);
-                }
-                
-                // 2. Simpan file struktur_bahasa.txt (Log perubahan Class & ID)
-                if (isset($data['struktur'])) {
-                    self::file_contents_save('public/struktur_bahasa_login.txt', $data['struktur']);
-                }
+            $kamusBaruDariFrontend = $inputData['kamus'];
 
-                echo "Sukses: Kamus diterjemahkan & Struktur diperbarui!";
+            // 3. KUNCI PERBAIKAN: Gunakan operator + atau array_merge 
+            // untuk menambahkan yang BELUM ADA saja tanpa menimpa yang sudah di-update manual.
+            // Kamus Lama ditaruh di depan agar nilainya (termasuk hasil edit manual) tidak tertimpa!
+            $kamusGabungan = [
+                'id' => $kamusLama['id'] + ($kamusBaruDariFrontend['id'] ?? []),
+                'en' => $kamusLama['en'] + ($kamusBaruDariFrontend['en'] ?? [])
+            ];
+
+            // 4. Simpan kembali hasil penggabungan ke kamus.txt
+            if (file_put_contents($pathKamus, json_encode($kamusGabungan, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+                http_response_code(200);
+                echo json_encode(["status" => "success", "message" => "Kamus berhasil diperbarui dengan data baru."]);
             } else {
-                echo "Gagal: Format JSON tidak valid.";
+                http_response_code(500);
+                echo json_encode(["status" => "error", "message" => "Gagal menulis ke file kamus.txt"]);
             }
+        } else {
+            http_response_code(400);
+            echo json_encode(["status" => "error", "message" => "Data tidak valid."]);
         }
     }
 
