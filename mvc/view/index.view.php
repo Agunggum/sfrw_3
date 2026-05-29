@@ -50,21 +50,21 @@
                                 <li>
                                     <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
                                         <i class="bi bi-sun-fill me-2 opacity-50 theme-icon"></i>
-                                        Light
+                                        <span id="id-terang" class="title-class" data-lang-id="id-terang">Terang</span>
                                         <i class="bi bi-check2 ms-auto d-none"></i>
                                     </button>
                                 </li>
                                 <li>
                                     <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
                                         <i class="bi bi-moon-stars-fill me-2 opacity-50 theme-icon"></i>
-                                        Dark
+                                        <span id="id-gelap" class="title-class" data-lang-id="id-gelap">Gelap</span>
                                         <i class="bi bi-check2 ms-auto d-none"></i>
                                     </button>
                                 </li>
                                 <li>
                                     <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
                                         <i class="bi bi-circle-half me-2 opacity-50 theme-icon"></i>
-                                        System
+                                        <span id="id-sistem" class="title-class" data-lang-id="id-sistem">Sistem</span>
                                         <i class="bi bi-check2 ms-auto d-none"></i>
                                     </button>
                                 </li>

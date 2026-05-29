@@ -2,7 +2,7 @@
 <?php if (defined('IS_AJAX') && IS_AJAX) return; ?>
 <script src="<?php echo asset('bootstrap/theme/js/dashboard.js'); ?>"></script>
 <script src="<?php echo asset('bootstrap/theme/js/main.js'); ?>"></script>
-
+<?php require_once view('bahasaIndex'); ?>
 <!-- Native Live Reload Integration (SSE) -->
 <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
     <script>

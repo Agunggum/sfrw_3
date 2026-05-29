@@ -24,7 +24,19 @@
         "id-sudah-akun": "Anda sudah punya akun?",
         "id-or-sign-up": "Atau daftar dengan:",
         "id-versi": "versi",
-        "id-mendftar": "Mendaftar"
+        "id-mendftar": "Mendaftar",
+        "id-terang": "Terang",
+        "id-gelap": "Gelap",
+        "id-sistem": "Sistem",
+        "id-master-data": "Master Data",
+        "id-data-pengguna": "Data Pengguna",
+        "id-tambah-data-pengguna": "Tambah Data Pengguna",
+        "id-data-produk": "Data Produk",
+        "id-laporan": "Laporan",
+        "id-laporan-penjualan": "Laporan Penjualan",
+        "id-laporan-keuangan": "Laporan Keuangan",
+        "id-profil": "Profil",
+        "id-pengaturan": "Pengaturan"
     },
     "en": {
         "id-pemicu": "",
@@ -51,6 +63,18 @@
         "id-sudah-akun": "Do you already have an account?",
         "id-or-sign-up": "Or register with:",
         "id-versi": "version",
-        "id-mendftar": "Register"
+        "id-mendftar": "Register",
+        "id-terang": "Light",
+        "id-gelap": "Dark",
+        "id-sistem": "System",
+        "id-master-data": "Master Data",
+        "id-data-pengguna": "User Data",
+        "id-tambah-data-pengguna": "Add User Data",
+        "id-data-produk": "Product Data",
+        "id-laporan": "Report",
+        "id-laporan-penjualan": "Sales report",
+        "id-laporan-keuangan": "Financial statements",
+        "id-profil": "Profile",
+        "id-pengaturan": "Arrangement"
     }
 }
