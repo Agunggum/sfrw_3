@@ -8,7 +8,7 @@
             const initLiveReload = () => {
                 console.log('%c S-FRW: Native Live Reload Active ', 'background: #198754; color: #fff');
 
-                const eventSource = new EventSource('<?php echo BASEURL; ?>livereload-server.php');
+                const eventSource = new EventSource('<?php echo BASEURL; ?>public/livereload-server.php');
 
                 eventSource.addEventListener('reload', (e) => {
                     const data = JSON.parse(e.data);
