@@ -3,9 +3,39 @@
 <script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.1'); ?>"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    let dictionary = {}; 
+        let dictionary = {}; 
         // MEMBACA LOCALSTORAGE: Jika sebelumnya sudah memilih bahasa, pakai itu. Jika belum, default ke 'id'
         let currentLang = localStorage.getItem('user_language') || 'id';
+
+        // Amankan fungsi render awal ini agar langsung dieksekusi tanpa nunggu script lain
+        function renderLanguageOnInit(lang) {
+            // 1. Ubah ikon bendera utama di awal agar sesuai
+            const flagMapping = {
+                'en': 'fi-us',
+                'id': 'fi-id'
+            };
+            const currentFlagEl = document.getElementById('current-flag-icon');
+            if (currentFlagEl && flagMapping[lang]) {
+                currentFlagEl.classList.remove('fi-id', 'fi-us');
+                currentFlagEl.classList.add(flagMapping[lang]);
+            }
+
+            // 2. Terjemahkan semua elemen dengan data-lang-id berdasarkan file kamus yang sudah dimuat PHP
+            document.querySelectorAll('[data-lang-id]').forEach(el => {
+                const id = el.getAttribute('data-lang-id');
+                if (typeof dictionary !== 'undefined' && dictionary[lang] && dictionary[lang][id]) {
+                    el.textContent = dictionary[lang][id];
+                }
+            });
+        }
+
+        // KUNCI UTAMA: Jalankan SEGERA setelah DOM siap (lebih cepat dari window.onload)
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => renderLanguageOnInit(currentLang));
+        } else {
+            // Jika DOM ternyata sudah siap, langsung eksekusi saat itu juga
+            renderLanguageOnInit(currentLang);
+        }
 
         // 1. Load Kamus saat halaman dibuka
         async function loadDictionary() {

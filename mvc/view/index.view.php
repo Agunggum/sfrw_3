@@ -23,16 +23,16 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="bd-language-text">
                                 <li>
-                                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-language-value="en-US" aria-pressed="false" onclick="changeLanguage('en')">
-                                        <i class="fi fi-us me-2 opacity-50 language-icon"></i>
-                                        English
+                                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-language-value="id-ID" aria-pressed="false" onclick="changeLanguage('id')">
+                                        <i class="fi fi-id me-2 opacity-50 language-icon"></i>
+                                        Indonesia
                                         <i class="bi bi-check2 ms-auto d-none"></i>
                                     </button>
                                 </li>
                                 <li>
-                                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-language-value="id-ID" aria-pressed="false" onclick="changeLanguage('id')">
-                                        <i class="fi fi-id me-2 opacity-50 language-icon"></i>
-                                        Indonesia
+                                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-language-value="en-US" aria-pressed="false" onclick="changeLanguage('en')">
+                                        <i class="fi fi-us me-2 opacity-50 language-icon"></i>
+                                        English
                                         <i class="bi bi-check2 ms-auto d-none"></i>
                                     </button>
                                 </li>
