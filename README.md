@@ -93,4 +93,10 @@ PembangunKueri::tabel('users')
 S-FRW dibangun dengan ❤️ untuk komunitas developer yang menginginkan framework ringan namun bertenaga. Silakan kirimkan saran atau laporkan bug untuk membantu kami berkembang.
 
 ---
+
+![Teks Alternatif](sfrw_index.png)
+
+![Teks Alternatif](sfrw_dashboard.png)
+
+---
 **Sunda Framework (S-FRW)** - *Fast, Simple, and Reactive.*
