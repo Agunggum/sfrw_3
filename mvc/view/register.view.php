@@ -50,7 +50,7 @@
                                     </div>
 
                                     <!-- Submit button -->
-                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4 rounded-4" data-bs-theme="auto"><span id="id-mendftar" class="title-class" data-lang-id="id-mendftar">Mendaftar</span></button>
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4 rounded-4" data-bs-theme="auto"><span id="id-mendaftar" class="title-class" data-lang-id="id-mendaftar">Mendaftar</span></button>
 
                                     <!-- Register buttons -->
                                     <div class="text-center">
