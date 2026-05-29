@@ -121,6 +121,28 @@
                         <li><a class="dropdown-menu-item dropdown-item" href="<?php echo BASEURL; ?>signout"><i class="bi bi-box-arrow-right me-2"></i> Sign out</a></li>
                     </ul>
                 </div>
+
+                <div class="dropdown" id="language-dropdown-container">
+                    <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center" id="bd-language" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle language">
+                        <i id="current-flag-icon" class="fi fi-id language-icon-active me-2"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="bd-language-text">
+                        <li>
+                            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-language-value="id-ID" aria-pressed="false" onclick="changeLanguage('id')">
+                                <i class="fi fi-id me-2 opacity-50 language-icon"></i>
+                                Indonesia
+                                <i class="bi bi-check2 ms-auto d-none"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-language-value="en-US" aria-pressed="false" onclick="changeLanguage('en')">
+                                <i class="fi fi-us me-2 opacity-50 language-icon"></i>
+                                English
+                                <i class="bi bi-check2 ms-auto d-none"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
 

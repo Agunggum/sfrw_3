@@ -9,6 +9,7 @@
                         <?php if(isset($_SESSION['username'])){ ?>
                             <span class="h5"><span id="id-selamat-datang" class="title-class" data-lang-id="id-selamat-datang">Selamat datang</span>, <strong><?php echo $_SESSION['fullname']; ?></strong></span>
                             <a href="<?php echo BASEURL; ?>signout" class="btn btn-sm btn-outline-danger ms-2"><span id="id-keluar" class="title-class" data-lang-id="id-keluar">Keluar</span></a>
+                            <a href="<?php echo BASEURL; ?>dashboard" class="btn btn-sm btn-info ms-2"><span id="id-dasbor" class="title-class" data-lang-id="id-dasbor">Dasbor</span></a>
                         <?php } else { ?>
                             <a href="<?php echo BASEURL; ?>login" class="btn btn-sm btn-danger rounded-3"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span></a>
                         <?php } ?>
@@ -22,7 +23,6 @@
                         <div class="dropdown" id="language-dropdown-container">
                             <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center" id="bd-language" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle language">
                                 <i id="current-flag-icon" class="fi fi-id language-icon-active me-2"></i>
-                                <span class="d-lg-none ms-2" id="bd-language-text">Toggle language</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="bd-language-text">
                                 <li>
@@ -45,7 +45,6 @@
                         <div class="dropdown" id="theme-dropdown-container">
                             <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
                                 <i class="bi bi-circle-half theme-icon-active me-2"></i>
-                                <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="bd-theme-text">
                                 <li>

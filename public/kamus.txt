@@ -15,7 +15,8 @@
         "id-daftar": "Daftar akun",
         "id-daftar-google": "Daftar dengan Google",
         "id-selamat-datang": "Selamat datang",
-        "id-keluar": "Keluar"
+        "id-keluar": "Keluar",
+        "id-dasbor": "Dasbor"
     },
     "en": {
         "id-pemicu": "",
@@ -33,6 +34,7 @@
         "id-daftar": "Register account",
         "id-daftar-google": "Register with Google",
         "id-selamat-datang": "Welcome",
-        "id-keluar": "Sign out"
+        "id-keluar": "Sign out",
+        "id-dasbor": "Dashboards"
     }
 }
