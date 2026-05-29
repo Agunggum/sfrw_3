@@ -31,6 +31,16 @@ S-FRW mendukung gaya pengembangan **"Vibe Coding"**, di mana Anda fokus pada mem
 
 ## 🔧 Konfigurasi Cepat
 
+1.  **Instalasi**: Download atau clone repositori ini ke lokal Anda.
+2.  **Konfigurasi**: Ubah file `env.php` untuk mengatur lingkungan dan URL aplikasi.
+3.  **Database**: Konfigurasi database di file `web/route.php`.
+4.  **Server**: Jalankan server PHP dan database.
+5.  **Aplikasi**: Jalankan server PHP dan browser Anda dan akses aplikasi Anda di `http://localhost/sfrw_3/`.
+6.  **Seeding**: Jalankan perintah `setup-database/seeding-sfrw` untuk mengisi database dengan data awal.
+7.  **Login**: Login dengan akun admin (username: admin, password: admin123).
+8.  **Auto Language**: S-FRW akan mengatur bahasa untuk otomatis dengan contoh. `<span id="id-lupa-password" class="title-class" data-lang-id="id-lupa-password">Lupa password?</span>` pada label yang memiliki atribut `data-lang-id` yang sama dengan ID element dan akan di distribusikan melalui file (public/kamus.txt), pastikan id dibuat unik.
+
+
 ### Environment (`env.php`)
 ```php
 define('ENVIRONMENT', 'local'); // Gunakan 'local' untuk mengaktifkan Live Reload
@@ -73,6 +83,10 @@ PembangunKueri::tabel('users')
 -   **XSS Protection**: Helper `anti_injection()` tersedia untuk membersihkan input pengguna.
 -   **Session Fixation Protection**: Regenerasi ID session otomatis saat login sukses.
 -   **SSE Stream**: Live reload menggunakan koneksi persisten yang sangat hemat resource dibandingkan polling tradisional.
+-   **Performance**: Optimasi untuk kecepatan dan efisiien, menghindari memori lek dan resource lek.
+-   **Maintenance**: Mudah untuk diperbarui dan diperbaiki, dengan struktur folder yang terstruktur dan konsisten.
+-   **Support**: Dukungan komunitas yang aktif dan sederhana, dengan forum dan GitHub untuk bantuan dan kontribusi.
+-   **Module**: Module bawaan dan tidak perlu install.
 
 ## 🤝 Kontribusi
 
