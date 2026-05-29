@@ -85,8 +85,8 @@ $key = encrypt(date('YmdHi')); ?>
                             <i class="bi bi-three-dots-vertical"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-table-menu" data-bs-popper="static">
-                            <li><a class="dropdown-item edit-btn" href="<?php echo BASEURL; ?>users/${data.id_encrypted}" data-id="${idData}">Edit Details</a></li>
-                            <li><a class="dropdown-item delete-btn" href="#" data-id="${idData}" data-username="${data.username}">Delete Record</a></li>
+                            <li><a class="dropdown-item edit-btn" href="<?php echo BASEURL; ?>users/${data.id_encrypted}" data-id="${idData}">Lihat detil</a></li>
+                            <li><a class="dropdown-item delete-btn" href="#" data-id="${idData}" data-username="${data.username}">Hapus</a></li>
                         </ul>
                     </div>`;
                     }
@@ -171,7 +171,7 @@ $key = encrypt(date('YmdHi')); ?>
                 },
                 complete: function() {
                     // Kembalikan status tombol ke semula
-                    $btn.prop('disabled', false).text('Understood');
+                    $btn.prop('disabled', false).text('Ya, Hapus!');
                 }
             });
         });
@@ -243,8 +243,8 @@ $key = encrypt(date('YmdHi')); ?>
                 Apakah Anda yakin ingin menghapus record ini? (Username: <span id="delete-id-display"></span>)
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
-                <button type="button" class="btn btn-danger" id="confirm-delete-action">Understood</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-action">Ya, Hapus!</button>
             </div>
         </div>
     </div>

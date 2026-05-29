@@ -11,7 +11,7 @@
 
             <li class="nav-item">
                 <a class="nav-link rounded <?php echo (ROUTE == 'dashboard') ? 'active' : ''; ?>" href="<?php echo BASEURL; ?>dashboard">
-                    <i class="bi bi-house-door me-2"></i> Dashboard
+                    <i class="bi bi-house-door me-2"></i> Dasbor
                 </a>
             </li>
 
