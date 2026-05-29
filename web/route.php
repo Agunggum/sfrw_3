@@ -62,6 +62,9 @@ Rute::ambil('datatable', function() {
 Rute::ambil('signout', 'Logincontroller@signout');
 
 // Halaman Logs (dengan parameter file)
+Rute::ambil('logs', function() {
+    arahkan(BASEURL."logs/error");
+});
 Rute::ambil('logs/{file}', function($file) {
     require_once vendors('logcarbon/logcarbon');
     require_once tampilan('logs', [
