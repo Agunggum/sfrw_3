@@ -36,7 +36,7 @@ S-FRW mendukung gaya pengembangan **"Vibe Coding"**, di mana Anda fokus pada mem
 3.  **Database**: Konfigurasi database di file `web/route.php`.
 4.  **Server**: Jalankan server PHP dan database.
 5.  **Aplikasi**: Jalankan server PHP dan browser Anda dan akses aplikasi Anda di `http://localhost/sfrw_3/`.
-6.  **Seeding**: Jalankan perintah `setup-database/seeding-sfrw` untuk mengisi database dengan data awal.
+6.  **Seeding**: Jalankan perintah pada url `[nama_folder_project]/setup-database/seeding-sfrw` untuk mengisi database dengan data awal.
 7.  **Login**: Login dengan akun admin (username: admin, password: admin123).
 8.  **Auto Language**: S-FRW akan mengatur bahasa untuk otomatis dengan contoh. `<span id="id-lupa-password" class="title-class" data-lang-id="id-lupa-password">Lupa password?</span>` pada label yang memiliki atribut `data-lang-id` yang sama dengan ID element dan akan di distribusikan melalui file (public/kamus.txt), pastikan id dibuat unik.
 
