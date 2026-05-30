@@ -75,6 +75,6 @@
         "id-laporan-penjualan": "Sales report",
         "id-laporan-keuangan": "Financial statements",
         "id-profil": "Profile",
-        "id-pengaturan": "Arrangement"
+        "id-pengaturan": "Setting"
     }
 }
