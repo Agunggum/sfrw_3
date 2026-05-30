@@ -1,6 +1,6 @@
 <?php if ( ! defined('MODPATH')) exit('No direct script access allowed');
-$filelogs = (!isset($file)) ?  "error.log":$file.".log";
-$getfile = fopen('logs/'.$filelogs, 'r');
+$filelogs = (!isset($file)) ? "error.log" : $file . ".log";
+$getfile = fopen('logs/' . $filelogs, 'r');
 $result = [];
 
 if ($getfile) {
@@ -8,15 +8,18 @@ if ($getfile) {
         $parts = explode(' ~ ', trim($data));
         
         // Pastikan jumlah elemen sesuai sebelum memasukkan ke array
-        if (count($parts) >= 3) {
+        if (count($parts) >= 4) { // Diubah ke >= 4 karena Anda memanggil $parts[3]
             $result[] = [
                 'waktu'   => daydateandtime_indo($parts[0]),
-                'level'   => $parts[1].', '.$parts[2],
+                'level'   => $parts[1] . ', ' . $parts[2],
                 'pesan'   => $parts[3]
             ];
         }
     }
     fclose($getfile);
 }
+
+// Tambahkan baris ini untuk membalikkan urutan dari bawah ke atas
+$result = array_reverse($result);
 
 echo json_encode($result, JSON_PRETTY_PRINT);

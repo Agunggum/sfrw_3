@@ -110,6 +110,7 @@ $(document).ready(function() {
         ],
         scrollX: true,
         fixedHeader: true,
+        "ordering": false,
         // set the initial value
         pageLength: <?php echo PAGINATION; ?>,
         ajax: {

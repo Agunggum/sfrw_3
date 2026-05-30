@@ -130,7 +130,8 @@
                 url: 'https://jsonplaceholder.typicode.com/posts',
                 dataSrc: ''
             },
-            columns: [{
+            columns: [
+                {
                     data: null, // Tidak butuh data dari database
                     sortable: false, // Matikan fitur sorting untuk kolom nomor
                     searchable: false, // Matikan fitur pencarian untuk kolom nomor
