@@ -20,6 +20,21 @@ if (!isset($_SESSION['error_data']) && isset($_SESSION['6vhow83GCbV6jdXTMEgAJdqE
 }
 
 if (DEBUG == 'true'):
+function auto_translate($text, $target_lang = 'id', $source_lang = 'en') {
+    $url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" 
+            . $source_lang . "&tl=" . $target_lang . "&dt=t&q=" . urlencode($text);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+    $response = curl_exec($ch);
+    curl_init();
+    $result = json_decode($response, true);
+    if (isset($result[0][0][0])) {
+        return $result[0][0][0];
+    }
+    return $text; // Kembalikan teks asli jika gagal
+}
 ?>
 <!DOCTYPE html>
 <html lang="id" data-bs-theme="light">
@@ -101,7 +116,7 @@ if (DEBUG == 'true'):
                             <div class="col-md-8">
                                 <p class="fs-5 mb-1"><strong>Pesan:</strong></p>
                                 <div class="alert alert-danger border-0 shadow-sm">
-                                    <?php echo htmlspecialchars($error['errstr']); ?>
+                                    <?php echo auto_translate(htmlspecialchars($error['errstr'])); ?>
                                 </div>
                             </div>
                             <div class="col-md-4">
