@@ -22,6 +22,7 @@ EXTENSIONAUTOLOAD;
  * And away we go...
  *
 */
+require_once __DIR__ . '/vendor/autoload.php';
 $app = require_once __DIR__.'/bootstrap/app.php';
 /* End of file index.php */
 /* Location: ./index.php */
