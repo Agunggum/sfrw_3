@@ -44,7 +44,7 @@
                                     <div class="row mb-4">
                                         <div class="col d-flex justify-content-center">
                                         <!-- Checkbox -->
-                                        <?php echo formcheck(['Remember me']); ?>
+                                        <?php echo formcheck(['Ingat saya']); ?>
                                         </div>
 
                                         <div class="col">

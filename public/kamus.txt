@@ -37,7 +37,8 @@
         "id-laporan-keuangan": "Laporan Keuangan",
         "id-profil": "Profil",
         "id-pengaturan": "Pengaturan",
-        "id-bukan-anggota": "Bukan anggota?"
+        "id-bukan-anggota": "Bukan anggota?",
+        "id-ingat-saya": "Ingat saya"
     },
     "en": {
         "id-pemicu": "",
@@ -77,6 +78,7 @@
         "id-laporan-keuangan": "Financial statements",
         "id-profil": "Profile",
         "id-pengaturan": "Setting",
-        "id-bukan-anggota": "Not a member?"
+        "id-bukan-anggota": "Not a member?",
+        "id-ingat-saya": "Remember me"
     }
 }

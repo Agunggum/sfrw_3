@@ -370,16 +370,22 @@ function formcheck($select = [], $data = [], $bootstrap = []) {
     if($bootstrapgroup=='group'){
         if($bootstrapgroupalign=='left'){
             foreach ($select as $selects) {
-                $input .= '<div class="input-group rounded-3">'.$bootstrapgroupicon.'<div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div></div>';
+                $valueselect = strtolower($selects);
+                $valueselect = str_replace(" ", "-", $valueselect);
+                $input .= '<div class="input-group rounded-3">'.$bootstrapgroupicon.'<div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'"><span id="id-'.$valueselect.'" class="title-class" data-lang-id="id-'.$valueselect.'">'.$selects.'</span></label></div></div>';
             }
         }else{
             foreach ($select as $selects) {
-                $input .= '<div class="input-group rounded-3"><div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>'.$bootstrapgroupicon.'</div>';
+                $valueselect = strtolower($selects);
+                $valueselect = str_replace(" ", "-", $valueselect);
+                $input .= '<div class="input-group rounded-3"><div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'"><span id="id-'.$valueselect.'" class="title-class" data-lang-id="id-'.$valueselect.'">'.$selects.'</span></label></div>'.$bootstrapgroupicon.'</div>';
             }
         }
     }else{
         foreach ($select as $selects) {
-            $input .= '<div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'">'.$selects.'</label></div>';
+            $valueselect = strtolower($selects);
+            $valueselect = str_replace(" ", "-", $valueselect);
+            $input .= '<div class="form-check"><input class="form-check-input focus-ring focus-ring-danger" type="checkbox" value="'.$selects.'" name="'.$nameform.'" id="'.str_replace(" ", "", $selects).'"><label class="form-check-label" for="'.str_replace(" ", "", $selects).'"><span id="id-'.$valueselect.'" class="title-class" data-lang-id="id-'.$valueselect.'">'.$selects.'</span></label></div>';
         }
     }
 
