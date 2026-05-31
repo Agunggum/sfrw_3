@@ -18,6 +18,14 @@ $key = encrypt(date('YmdHi')); ?>
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+            </tr>
         </tbody>
         <tfoot>
             <tr>
@@ -51,6 +59,9 @@ $key = encrypt(date('YmdHi')); ?>
             ajax: {
                 url: '<?php echo BASEURL . 'userslist/' . $key; ?>',
                 dataSrc: ''
+            },
+            "language": {
+                "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div>'
             },
             columns: [{
                     data: null,
