@@ -85,6 +85,13 @@
                                 <th>Information</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                                <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                                <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </section>
             </div>
@@ -116,6 +123,9 @@ $(document).ready(function() {
         ajax: {
             url: '<?php echo BASEURL.'logsfiles/'.$data['file']; ?>',
             dataSrc: ''
+        },
+        "language": {
+            "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div>'
         },
         columns: [
             {data: 'waktu'},

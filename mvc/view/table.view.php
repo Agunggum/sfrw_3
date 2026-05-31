@@ -87,6 +87,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                            <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                            <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                            <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                            <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
+                        </tr>
                     </tbody>
                     <tfoot>
                         <tr>
@@ -129,6 +136,9 @@
             ajax: {
                 url: 'https://jsonplaceholder.typicode.com/posts',
                 dataSrc: ''
+            },
+            "language": {
+                "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div>'
             },
             columns: [
                 {

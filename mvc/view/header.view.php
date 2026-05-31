@@ -22,7 +22,6 @@ if (defined('IS_AJAX') && IS_AJAX) {
     <meta property="og:description" content="<?php echo WEBTITLE; ?> <?php echo VERSIONFRMAEWORK; ?>" />
     <meta property="og:site_name" content="<?php echo WEBTITLE; ?>" />
     <style>
-        @import "<?php echo asset('bootstrap/theme/css/bootstrap.css?v=5.3.8'); ?>";
         @import "<?php echo asset('bootstrap/theme/css/bootstrap.min.css?v=5.3.8'); ?>";
         @import "<?php echo asset('bootstrap/theme/css/datatables-bootstrap-5.css'); ?>";
         @import "<?php echo asset('bootstrap/theme/fontawesome/css/all.css'); ?>";
@@ -30,10 +29,9 @@ if (defined('IS_AJAX') && IS_AJAX) {
         @import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css");
         @import "<?php echo asset('bootstrap/theme/css/sfrw.css'); ?>";
     </style>
-    <script src="<?php echo asset('bootstrap/theme/js/jquery-1.11.1.min.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/jquery-3.7.1.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/fontawesome/js/all.js'); ?>"></script>
+    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/datatables.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/dataTables.bootstrap5.js'); ?>"></script>
