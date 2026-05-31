@@ -58,7 +58,7 @@
 
                                     <!-- Register buttons -->
                                     <div class="text-center">
-                                        <p>Not a member? <a href="<?php echo BASEURL.'register'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-daftar" class="title-class" data-lang-id="id-daftar">Daftar akun</span></a></p>
+                                        <p><span id="id-bukan-anggota" class="title-class" data-lang-id="id-bukan-anggota">Bukan anggota?</span> <a href="<?php echo BASEURL.'register'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-daftar" class="title-class" data-lang-id="id-daftar">Daftar akun</span></a></p>
                                         <p><span id="id-daftar-google" class="title-class" data-lang-id="id-daftar-google">Daftar dengan Google</span></p>
                                         <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-google text-danger"></i>
