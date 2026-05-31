@@ -29,7 +29,7 @@
                     
                     <div class="d-flex justify-content-center">
                         
-                        <div class="col-md-8 col-lg-8 col-xl-8">
+                        <div class="col-md-10 col-lg-10 col-xl-8">
                             <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
                                 <p class="h3 text-left font-weight-bold"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span>.</p>
                                 

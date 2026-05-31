@@ -27,7 +27,7 @@
                     
                     <div class="d-flex justify-content-center">
                         
-                        <div class="col-md-8 col-lg-8 col-xl-8">
+                        <div class="col-md-10 col-lg-10 col-xl-8">
                                 <?php if(isset($s) and $s != ""){ 
                                 if($data['s']['end_time'] > date('Y-m-d H:i:s')){
                                 ?>
