@@ -155,6 +155,7 @@ class Loginmodel extends Controller {
                 $tahun_sekarang = date('Y');
                 $html_email = tampilan('mailer', [
                     $data['subject'] = $subject,
+                    $data['title'] = WEBTITLETOP,
                     $data['content'] = $content,
                     $data['tahun'] = $tahun_sekarang,
                 ]);
@@ -238,6 +239,7 @@ class Loginmodel extends Controller {
                 $tahun_sekarang = date('Y');
                 $html_email = tampilan('mailer', [
                     $data['subject'] = $subject,
+                    $data['title'] = WEBTITLETOP,
                     $data['content'] = $content,
                     $data['tahun'] = $tahun_sekarang,
                 ]);
