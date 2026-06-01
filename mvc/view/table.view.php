@@ -3,7 +3,7 @@
 <div class="container col-12 col-md-12 col-xl-12 col-lg-12 mb-5">
     <div class="row">
         <div class="col-xl-12 col-lg-12 pt-2">
-            <div class="d-flex justify-content-between align-items-center">
+            <nav class="d-flex justify-content-between align-items-center">
                 <div>
                     <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
                     <?php if(isset($_SESSION['username'])){ ?>
@@ -72,9 +72,9 @@
                     </div>
 
                 </div>
-            </div>
+            </nav>
         </div>
-        <div class="col-12 col-md-12 col-xl-12 col-lg-12">
+        <main class="col-12 col-md-12 col-xl-12 col-lg-12">
             <section>
                 <table class="datatable-help table table-striped">
                     <thead>
@@ -106,7 +106,7 @@
                     </tfoot>
                 </table>
             </section>
-        </div>
+        </main>
     </div>
 </div>
 <footer class="fixed-bottom mt-auto m-1 p-2 rounded" data-bs-theme="light">

@@ -3,7 +3,7 @@
     <div class="container col-12 col-xl-12 col-lg-12 mb-5">
         <div class="row">
             <div class="col-xl-12 col-lg-12 pt-2">
-                <div class="d-flex justify-content-between align-items-center">
+                <nav class="d-flex justify-content-between align-items-center">
                     <div>
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
                         <?php if(isset($_SESSION['username'])){ ?>
@@ -72,9 +72,9 @@
                         </div>
 
                     </div>
-                </div>
+                </nav>
             </div>
-            <div class="col-xl-8 col-lg-8 pt-5 mt-5">
+            <main class="col-xl-8 col-lg-8 pt-5 mt-5">
                 <p><font class="h2 font-weight-bold text-danger">sfrw</font> <small><?php echo VERSIONFRMAEWORK; ?></small></p>
                 <!-- Lit-HTML Example Component -->
                 <?php 
@@ -87,7 +87,7 @@
                     ]); 
                 ?>
                 <div id="lit-app" class="mb-4"></div>
-            </div>
+            </main>
         </div>
     </div>
     <footer class="fixed-bottom mt-auto m-1 p-2 rounded" data-bs-theme="light">
