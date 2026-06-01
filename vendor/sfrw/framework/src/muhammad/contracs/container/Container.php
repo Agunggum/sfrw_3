@@ -172,9 +172,9 @@ function services($get) {
 function alert($alert, $title, $message, $redirect = 'javascript:history.go(-1)') {
     $alert_html = "";
     if($alert=='warning'){
-        $alert_html = "<div class='alert alert-danger animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p class='h6'><em>".anti_injection($title)."</em></p><p class='h6'><strong><i class='fa fa-exclamation-circle'></i> oops..!</strong> ".$message."</p></div>";
+        $alert_html = "<div class='alert alert-danger animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p><em>".anti_injection($title)."</em></p><p><strong><i class='fa fa-exclamation-circle'></i> oops..!</strong> ".$message."</p></div>";
     } elseif($alert=='success'){
-        $alert_html = "<div class='alert alert-info animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p class='h6'><em>".anti_injection($title)."</em></p><p class='h6'><strong><i class='fa fa-check'></i> successfuly!</strong> ".$message."</p></div>";
+        $alert_html = "<div class='alert alert-info animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p><em>".anti_injection($title)."</em></p><p><strong><i class='fa fa-check'></i> successfuly!</strong> ".$message."</p></div>";
     }
 
     $_SESSION['alert'] = $alert_html;
@@ -191,10 +191,10 @@ function alert($alert, $title, $message, $redirect = 'javascript:history.go(-1)'
 //flasher static
 function alertstatic($alert, $title, $message) {
     if($alert=='warning'){
-        return "<div class='alert alert-danger animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p class='h6'><em>".anti_injection($title)."</em></p><p class='h6'><strong><i class='fa fa-exclamation-circle'></i> oops..!</strong> ".anti_injection($message)."</p></div>";
+        return "<div class='alert alert-danger animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p><em>".anti_injection($title)."</em></p><p><strong><i class='fa fa-exclamation-circle'></i> oops..!</strong> ".anti_injection($message)."</p></div>";
     }
     if($alert=='success'){
-        return "<div class='alert alert-info animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p class='h6'><em>".anti_injection($title)."</em></p><p class='h6'><strong><i class='fa fa-check'></i> succesfuly!</strong> ".anti_injection($message)."</p></div>";
+        return "<div class='alert alert-info animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p><em>".anti_injection($title)."</em></p><p><strong><i class='fa fa-check'></i> succesfuly!</strong> ".anti_injection($message)."</p></div>";
     }
 }
 
