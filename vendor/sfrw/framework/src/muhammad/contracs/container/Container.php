@@ -161,6 +161,13 @@ function vendors($get) {
     return $base;
 }
 
+//Site include app/services
+function services($get) {
+    $base = "app/Services/{$get}".EXT;
+    $_REQUEST['errorlogclass'] = $base;
+    return $base;
+}
+
 //flasher
 function alert($alert, $title, $message, $redirect = 'javascript:history.go(-1)') {
     $alert_html = "";

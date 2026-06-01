@@ -3,6 +3,7 @@ require_once model_data('login');
 
 use app\Models\Users;
 use sfrw\logcarbon;
+use app\Services\Validator;
 
 class Logincontroller extends Controller {
 

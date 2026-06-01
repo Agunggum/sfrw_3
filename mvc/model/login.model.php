@@ -1,5 +1,6 @@
 <?php
 require_once vendors('logcarbon/logcarbon');
+require_once services('Validator');
 
 use app\Models\Users;
 use app\Models\Forgotlink;
@@ -8,6 +9,17 @@ use app\Models\Accessapp;
 class Loginmodel extends Controller {
 
 	function loginformmodel($uri) { 
+        $requestData = $_POST;
+        $rules = [
+            'username' => 'required|min:4',
+            'password' => 'required|min:6',
+        ];
+
+        if (!Validator::validate($requestData, $rules)) {
+            alert('warning', 'Attention..!', Validator::getErrorsString(), $uri.'login');
+            return;
+        }
+
 		$password = $_POST['password'];
         $username = $_POST['username']; // Menggunakan raw input karena PembangunKueri sudah melakukan escape
         $_SESSION['username_form'] = anti_injection($username); // Tetap gunakan anti_injection untuk tampilan
@@ -81,6 +93,11 @@ class Loginmodel extends Controller {
 	}
 
     function forgotformmodel($uri) { 
+        if (!Validator::validate($_POST, ['email' => 'required|email'])) {
+            alert('warning', 'Attention..!', Validator::getErrorsString(), BASEURL.'forgot-password');
+            return;
+        }
+
         $email = anti_injection($_POST['email']);
 
         $data = PembangunKueri::tabel(Users::schematable())
@@ -164,6 +181,16 @@ class Loginmodel extends Controller {
 	}
 
     function forgotnewformmodel($uri,$s) { 
+        $rules = [
+            'password1' => 'required|min:6',
+            'password2' => 'required|matches:password1'
+        ];
+
+        if (!Validator::validate($_POST, $rules)) {
+            alert('warning', 'Attention..!', Validator::getErrorsString(), BASEURL.'forgot-password?s='.$s);
+            return;
+        }
+
         $pass1 = $_POST['password1'];
         $pass2 = $_POST['password2'];
 
@@ -181,12 +208,6 @@ class Loginmodel extends Controller {
             return;
         }
             
-        if($pass1 != $pass2){
-            Logcarbon::carbonlog($data['email']." :: forgot denied : password not match","logsignin");
-            alert('warning', 'Alert forgot password', 'Password does not match.', BASEURL.'forgot-password?s='.$s);
-            return;
-        }
-
         // JIka sedang maintenance data segera lock sistem
         if(ENVIRONMENT == 'maintenance'){
             alert('warning', 'Alert forgot password', 'Login denied. system is under maintenance.', BASEURL.'forgot-password?s='.$s);
