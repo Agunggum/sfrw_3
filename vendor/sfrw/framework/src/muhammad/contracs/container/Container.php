@@ -194,7 +194,7 @@ function alertstatic($alert, $title, $message) {
         return "<div class='alert alert-danger animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p><em>".anti_injection($title)."</em></p><p>".anti_injection($message)."</p></div>";
     }
     if($alert=='success'){
-        return "<div class='alert alert-info animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p><em>".anti_injection($title)."</em></p><p><strong>".anti_injection($message)."</p></div>";
+        return "<div class='alert alert-info animated fadeInDown'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><p><em>".anti_injection($title)."</em></p><p>".anti_injection($message)."</p></div>";
     }
 }
 
