@@ -122,16 +122,41 @@ class Loginmodel extends Controller {
             ]);
 
             if(MAILACTIVATE == 'true'){
-                //mail concept
-                $subject = MAILTITLE." - Forgot Password";
-                // Kirim email dalam format HTML
-                $headers  = "From: no reply ".MAILTITLE." <".MAILUSER.">\r\n";
-                $headers .= "Content-type: text/html\r\n";
-                $mailreq = $data['email'];
-                $pesan = "Dear " . $data['fullname'] . ",";
-                $pesan .= "<br/><br/>Anda telah melakukan lupa password, berikut adalah link nya.<br/><br/><em>You have forgotten your password, here is the link.</em><br/><br/>Link :<br/><a href='".$linkforgot."'>".$linkforgot."</a><br/><br/><br/><br/>Thanks,<br/>System <strong>".WEBTITLE."</strong>";
-                mail($mailreq,$subject,$pesan,$headers);
-                //End mail
+                $nama_user       = $data['fullname'];
+                $subject         = "Permintaan perubahan kata sandi";
+                $email_tujuan    = $data['email'];
+
+                $content = "
+                    <p>Hai ".$nama_user."!</p>
+                    <p>Kami mendeteksi permintaan kata sandi baru Anda pada ".daydateandtime_indo(date('Y-m-d H:i'))." WIB.</p>
+                    <p>Berikut adalah link reset password Anda: <a href='".$linkforgot."'>".$linkforgot."</a></p>
+                    <p>Jika ini bukan Anda, segera amankan akun Anda.</p>
+                    <p>Salam dari Aplikasi ".MAILTITLE."</p>
+                ";
+
+                $tahun_sekarang = date('Y');
+                $html_email = tampilan('mailer', [
+                    $data['subject'] = $subject,
+                    $data['content'] = $content,
+                    $data['tahun'] = $tahun_sekarang,
+                ]);
+
+                $mail = new PHPMailer;
+                $mail->IsSMTP();
+                $mail->SMTPSecure = '';
+                $mail->Host = MAILHOST;
+                $mail->SMTPDebug = 0;
+                $mail->Port = MAILPORT;
+                $mail->SMTPAuth = false;
+                $mail->Username = MAILUSER;
+                $mail->Password = MAILPASS;
+                $mail->SetFrom(MAILSENT, MAILTITLE);
+                $mail->AddAddress($email_tujuan, $nama_user);
+                // --- KONTEN EMAIL ---
+                $mail->isHTML(true); // Set format email ke HTML
+                $mail->Subject = MAILTITLE." - ".$subject;
+                $mail->Body    = $html_email;
+                $mail->Send();
             }
 
             alert('success', 'Alert forgot password', 'Please check your email to reset your password.', BASEURL.'forgot-password');
@@ -144,6 +169,10 @@ class Loginmodel extends Controller {
 
         $data = PembangunKueri::tabel(Forgotlink::schematable())
                 ->dimana('target_link', '=', $s)
+                ->pertama();
+        
+        $dataUser = PembangunKueri::tabel(Users::schematable())
+                ->dimana('email', '=', $data['email'])
                 ->pertama();
             
         if(!$data){
@@ -173,21 +202,40 @@ class Loginmodel extends Controller {
                 ->perbarui(['password' => $hashed_password]);
 
             if(MAILACTIVATE == 'true'){
-                //mail concept
-                $jmail = PembangunKueri::tabel(Users::schematable())
-                    ->pilih('username', 'fullname', 'email')
-                    ->dimana('email', '=', $data['email'])
-                    ->pertama();
+                $nama_user       = $dataUser['fullname'];
+                $subject         = "Perubahan kata sandi";
+                $email_tujuan    = $data['email'];
 
-                $subject = MAILTITLE." - Forgot Password";
-                // Kirim email dalam format HTML
-                $headers  = "From: no reply ".MAILTITLE." <".MAILUSER.">\r\n";
-                $headers .= "Content-type: text/html\r\n";
-                $mailreq = $jmail['email'];
-                $pesan = "Dear " . $jmail['fullname'] . ",";
-                $pesan .= "<br/><br/>Lupa password berhasil dilakukan, dan password sudah diubah.<br/><br/><em>Forgot password was successfully done, and the password has been changed.</em><br/><br/><br/><br/>Thanks,<br/>System <strong>".WEBTITLE."</strong>";
-                mail($mailreq,$subject,$pesan,$headers);
-                //End mail
+                $content = "
+                    <p>Hai ".$nama_user."!</p>
+                    <p>Kami mendeteksi perubahan kata sandi Anda pada ".daydateandtime_indo(date('Y-m-d H:i'))." WIB.</p>
+                    <p>Jika ini bukan Anda, segera amankan akun Anda.</p>
+                    <p>Salam dari Aplikasi ".MAILTITLE."</p>
+                ";
+
+                $tahun_sekarang = date('Y');
+                $html_email = tampilan('mailer', [
+                    $data['subject'] = $subject,
+                    $data['content'] = $content,
+                    $data['tahun'] = $tahun_sekarang,
+                ]);
+
+                $mail = new PHPMailer;
+                $mail->IsSMTP();
+                $mail->SMTPSecure = '';
+                $mail->Host = MAILHOST;
+                $mail->SMTPDebug = 0;
+                $mail->Port = MAILPORT;
+                $mail->SMTPAuth = true;
+                $mail->Username = MAILUSER;
+                $mail->Password = MAILPASS;
+                $mail->SetFrom(MAILSENT, MAILTITLE);
+                $mail->AddAddress($email_tujuan, $nama_user);
+                // --- KONTEN EMAIL ---
+                $mail->isHTML(true); // Set format email ke HTML
+                $mail->Subject = MAILTITLE." - ".$subject;
+                $mail->Body    = $html_email;
+                $mail->Send();
             }
 
             alert('success', 'Alert forgot password', 'Password update successful.', BASEURL);

@@ -1,6 +1,6 @@
 </div>
 <?php if (defined('IS_AJAX') && IS_AJAX) return; ?>
-<script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.1'); ?>"></script>
+<script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.2'); ?>"></script>
 <?php require_once view('bahasaIndex'); ?>
 <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
 <!-- Native Live Reload Integration (SSE) -->

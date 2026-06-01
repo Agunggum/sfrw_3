@@ -37,7 +37,12 @@ if (defined('IS_AJAX') && IS_AJAX) {
     <script src="<?php echo asset('bootstrap/theme/js/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/datatables.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/dataTables.bootstrap5.js'); ?>"></script>
-    <script type="module" src="<?php echo asset('bootstrap/theme/js/sfrw.js'); ?>"></script>
+    <script>
+        // Global variables for JS
+        window.BASEURL = '<?php echo BASEURL; ?>';
+        window.BASEURL_PATH = '<?php echo parse_url(BASEURL, PHP_URL_PATH); ?>';
+    </script>
+    <script type="module" src="<?php echo asset('bootstrap/theme/js/app.js?v=0.1'); ?>"></script>
     
 </head>
 <body>

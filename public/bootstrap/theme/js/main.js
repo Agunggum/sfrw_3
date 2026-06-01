@@ -40,36 +40,19 @@ const SPANavigator = (() => {
 
     const handleFormSubmit = async (e) => {
         const form = e.target.closest('form');
-        if (!form || form.getAttribute('target') === '_blank') {
+        if (!form || form.getAttribute('target') === '_blank' || isLoading) {
+            if (isLoading) e.preventDefault();
             return;
         }
 
         const submitBtn = form.querySelector('[type="submit"]');
         const method = form.getAttribute('method')?.toUpperCase() || 'GET';
         
-        // Animasi Loading pada tombol
-        let originalBtnHtml = '';
-        if (submitBtn) {
-            originalBtnHtml = submitBtn.innerHTML;
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Loading...`;
-        }
-
         e.preventDefault();
-        startProgress();
         
         const url = form.getAttribute('action') || window.location.href;
-        const options = {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        };
 
-        if (method === 'POST') {
-            options.method = 'POST';
-            options.body = new FormData(form);
-        } else {
-            // Handle GET form
+        if (method === 'GET') {
             const formData = new FormData(form);
             const params = new URLSearchParams(formData);
             const getUrl = url.includes('?') ? `${url}&${params}` : `${url}?${params}`;
@@ -84,6 +67,26 @@ const SPANavigator = (() => {
             }
         }
 
+        // POST handling
+        isLoading = true;
+        startProgress();
+
+        // Animasi Loading pada tombol
+        let originalBtnHtml = '';
+        if (submitBtn) {
+            originalBtnHtml = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Loading...`;
+        }
+
+        const options = {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        };
+
         try {
             const response = await fetch(url, options);
             await handleResponse(response, url);
@@ -91,6 +94,7 @@ const SPANavigator = (() => {
             console.error('SPA form submit failed:', error);
             form.submit(); // Fallback
         } finally {
+            isLoading = false;
             stopProgress();
             if (submitBtn && !document.body.contains(submitBtn)) {
                 // Button might have been replaced by SPA content, do nothing
@@ -149,6 +153,7 @@ const SPANavigator = (() => {
             console.error('SPA load failed:', error);
             window.location.href = url;
         } finally {
+            isLoading = false;
             stopProgress();
         }
     };

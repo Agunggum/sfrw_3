@@ -20,11 +20,11 @@ define('VERSION', '1.0');
 define('TVERSION', '');
 define('COPYR', (date('Y')=='2025') ? ''.date('Y'):'2025 - '.date('Y'));
 
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_NAME', 'framework');
-define('DB_PASS', '');
-define('DB_DRIVER', 'MySqli'); //MySql or MySqli
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_NAME', getenv('DB_NAME') ?: 'framework');
+define('DB_PASS', getenv('DB_PASS') ?: '');
+define('DB_DRIVER', getenv('DB_DRIVER') ?: 'MySqli'); //MySql or MySqli
 
 /*****************************************************************/
 /* Date timezone
