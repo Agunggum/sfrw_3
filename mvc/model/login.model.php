@@ -5,7 +5,6 @@ require_once services('Validator');
 
 use app\Models\Users;
 use app\Models\Forgotlink;
-use app\Models\Accessapp;
 
 class Loginmodel extends Controller {
 
@@ -15,7 +14,6 @@ class Loginmodel extends Controller {
             'username' => 'required|min:4',
             'password' => 'required|min:6',
         ];
-
         if (!Validator::validate($requestData, $rules)) {
             alert('warning', 'Attention..!', Validator::getErrorsString(), $uri.'login');
             return;
@@ -184,7 +182,7 @@ class Loginmodel extends Controller {
 
     function forgotnewformmodel($uri,$s) { 
         $rules = [
-            'password1' => 'required|min:6',
+            'password1' => 'required|min:8',
             'password2' => 'required|matches:password1'
         ];
 
