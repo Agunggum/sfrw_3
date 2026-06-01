@@ -3,7 +3,7 @@ namespace muhammad\foundation;
 
 class Application
 {
-     public static function publicPath()
+    public static function publicPath()
     {
         foreach (glob("app/Models/*".EXT) as $filenamemodels)
         {
@@ -23,5 +23,10 @@ class Application
         }
         define('VERSIONFRMAEWORK', '3.0');
         require_once core('Core');
+    }
+
+    public static function rutePath()
+    {
+        require_once route('route');
     }
 }

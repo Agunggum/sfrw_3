@@ -1,4 +1,10 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require_once route('route');
+<?php 
+use muhammad\foundation\Application;
+/*
+|--------------------------------------------------------------------------
+| Create The Application
+|--------------------------------------------------------------------------
+*/
+Application::rutePath();
 /* End of file app.php */
 /* Location: ./app/app.php */
