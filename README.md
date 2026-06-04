@@ -96,6 +96,8 @@ S-FRW dibangun dengan ❤️ untuk komunitas developer yang menginginkan framewo
 
 ![Teks Alternatif](sfrw_index.png)
 
+![Teks Alternatif](sfrw_login.png)
+
 ![Teks Alternatif](sfrw_dashboard.png)
 
 ---
