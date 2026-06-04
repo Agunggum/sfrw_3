@@ -85,6 +85,14 @@ App.ambil('/login', () => {
     console.log('SPA: Halaman Login Aktif');
 });
 
+App.ambil('/forgot-password', () => {
+    console.log('SPA: Halaman Forgot Passwords Aktif');
+});
+
+App.ambil('/register', () => {
+    console.log('SPA: Halaman Register Aktif');
+});
+
 App.ambil('/dashboard', () => {
     console.log('SPA: Halaman Dashboard Aktif');
 });

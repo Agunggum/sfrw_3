@@ -41,7 +41,7 @@ if (defined('IS_AJAX') && IS_AJAX) {
         window.BASEURL = '<?php echo BASEURL; ?>';
         window.BASEURL_PATH = '<?php echo parse_url(BASEURL, PHP_URL_PATH); ?>';
     </script>
-    <script type="module" src="<?php echo asset('bootstrap/theme/js/app.js?v=0.1'); ?>"></script>
+    <script type="module" src="<?php echo asset('bootstrap/theme/js/app.js?v=0.2'); ?>"></script>
     
 </head>
 <body>
