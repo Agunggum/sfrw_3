@@ -74,12 +74,13 @@
                     </div>
                 </nav>
             </div>
-            <main class="col-xl-8 col-lg-8 pt-5 mt-5">
+            <main class="col-xl-8 col-lg-8 mt-5">
                 <p><font class="h2 font-weight-bold text-danger">sfrw</font> <small><?php echo VERSIONFRMAEWORK; ?></small></p>
                 <!-- Lit-HTML Example Component -->
                 <?php 
                     // Meneruskan data dari PHP ke JavaScript secara otomatis
                     echo pass_to_js([
+                        'image' => asset('bootstrap/theme/abefc969-a907-4243-a25d-7372a4997a21.jpg'),
                         'title' => 'S-FRW Reactive',
                         'user' => $_SESSION['fullname'] ?? 'Developer',
                         'version' => VERSIONFRMAEWORK,

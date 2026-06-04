@@ -101,10 +101,10 @@ function routeget($get, $route="", $access="") {
 }
 
 //Site storage
-function storage() {
-    $base = "app/storage/";
-    return $base;
-    db::closeConnectMySQL(BASEPATH);
+function storage($filename = '') {
+    $base = BASEURL."storage/{$filename}";
+    $path = $base . ltrim($filename, '/');
+    return $path;
 }
     
 function get($data = []) {

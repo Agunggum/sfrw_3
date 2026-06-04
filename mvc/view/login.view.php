@@ -2,76 +2,76 @@
 <?php require_once view('header'); ?>
     <div class="col-md-12 col-lg-12 col-xl-12">
         <div class="row">
+
+            <div class="col-md-12 col-lg-6 col-xl-6 rounded-5 vh-100 overflow-y-auto d-none d-lg-block d-xl-block">
+                <div class="pt-2">
+                    <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
+                    <a href="<?php echo BASEURL; ?>" data-bs-theme="light" class="text-danger animated-link"><i class="fa fa-angle-left fa-fw"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                </div>
+                    
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-12 col-lg-12 col-xl-12 mt-3 mb-1 text-left">
+                        <div class="h3"><span><?php echo WEBTITLE; ?></span></div>
+                        <small data-toggle="modal" data-target="#versionmodal" style="vertical-align: super; font-size: small; cursor: pointer;"><i class="fa fa-copyright"></i> v<?php echo VERSION; ?></small>
+                    </div>
+                </div>
+                <img src="<?php echo asset('bootstrap/theme/abefc969-a907-4243-a25d-7372a4997a21.jpg'); ?>" alt="Gambar Login" class="img-fluid rounded-5">
+            </div>
             
             <div class="col-md-12 col-lg-6 col-xl-6 shadow rounded-5 vh-100 overflow-y-auto">
                 
-                <div class="text-center">
-                    <div class="pt-2">
-                        <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
-                        <span class="float-left">
-                            <a href="<?php echo BASEURL; ?>" data-bs-theme="light" class="text-danger animated-link"><i class="fa fa-angle-left fa-fw"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
-                        </span>
-                    </div>
-                    <div class="clearfix"></div>
-                    
-                    <div class="d-flex justify-content-center">
-                        <div class="col-md-12 col-lg-12 col-xl-12 mt-5 mb-4 text-left">
-                            <div class="h3"><span><?php echo WEBTITLE; ?></span></div>
-                            <small data-toggle="modal" data-target="#versionmodal" style="vertical-align: super; font-size: small; cursor: pointer;"><i class="fa fa-copyright"></i> v<?php echo VERSION; ?></small>
-                        </div>
-                    </div>
-                
-                    <p class="mt-5"><?php 
+                <p class="mt-5 pt-2"><?php 
                     if(isset($_SESSION['username'])){
                         alihkan(BASEURL);
                     }
                     if(isset($_SESSION['alert'])){ echo $_SESSION['alert']; } ?></p>
                     
-                    <div class="d-flex justify-content-center">
-                        
-                        <div class="col-md-10 col-lg-10 col-xl-8">
-                            <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
-                                <p class="h3 text-left font-weight-bold"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span>.</p>
+                <div class="d-flex justify-content-center align-middle">
+                    
+                    <div class="col-md-10 col-lg-10 col-xl-8">
+                        <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
+                            <p class="h3 text-left font-weight-bold mb-5"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span>.</p>
                                 
-                                <form class="m-t" role="form" method="post" action="<?php echo BASEURL.'authlogin'; ?>">
-                                    <!-- Email input -->
-                                    <?php echo forminput(['text', 'username', 'username', 'username or email', 'off', 'required']); ?>
+                            <form class="m-t" role="form" method="post" action="<?php echo BASEURL.'authlogin'; ?>">
+                                <!-- Email input -->
+                                <?php echo forminput(['text', 'username', 'username', 'username or email', 'off', 'required']); ?>
 
-                                    <!-- Password input -->
-                                    <?php echo forminput(['password', 'password', 'password-field', 'password', 'off', ''], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>', 'toggle-password']); ?>
+                                <!-- Password input -->
+                                <?php echo forminput(['password', 'password', 'password-field', 'password', 'off', ''], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>', 'toggle-password']); ?>
 
-                                    <!-- 2 column grid layout for inline styling -->
-                                    <div class="row mb-4">
-                                        <div class="col d-flex justify-content-center">
-                                        <!-- Checkbox -->
-                                        <?php echo formcheck(['Ingat saya']); ?>
-                                        </div>
-
-                                        <div class="col">
-                                        <!-- Simple link -->
-                                        <a href="<?php echo BASEURL.'forgot-password'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-lupa-password" class="title-class" data-lang-id="id-lupa-password">Lupa password?</span></a>
-                                        </div>
+                                <!-- 2 column grid layout for inline styling -->
+                                <div class="row mb-4">
+                                    <div class="col d-flex justify-content-center">
+                                    <!-- Checkbox -->
+                                    <?php echo formcheck(['Ingat saya']); ?>
                                     </div>
 
-                                    <!-- Submit button -->
-                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4 rounded-4" data-bs-theme="auto"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span></button>
-
-                                    <!-- Register buttons -->
-                                    <div class="text-center">
-                                        <p><span id="id-bukan-anggota" class="title-class" data-lang-id="id-bukan-anggota">Bukan anggota?</span> <a href="<?php echo BASEURL.'register'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-daftar" class="title-class" data-lang-id="id-daftar">Daftar akun</span></a></p>
-                                        <p><span id="id-daftar-google" class="title-class" data-lang-id="id-daftar-google">Daftar dengan Google</span></p>
-                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-google text-danger"></i>
-                                        </button>
+                                    <div class="col">
+                                    <!-- Simple link -->
+                                    <a href="<?php echo BASEURL.'forgot-password'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-lupa-password" class="title-class" data-lang-id="id-lupa-password">Lupa password?</span></a>
                                     </div>
-                                </form>
-                            <?php } ?>
-                            <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
+                                </div>
+
+                                <!-- Submit button -->
+                                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4 rounded-4" data-bs-theme="auto"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span></button>
+
+                                <!-- Register buttons -->
+                                <div class="text-center">
+                                    <p><span id="id-bukan-anggota" class="title-class" data-lang-id="id-bukan-anggota">Bukan anggota?</span> <a href="<?php echo BASEURL.'register'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-daftar" class="title-class" data-lang-id="id-daftar">Daftar akun</span></a></p>
+                                    <p><span id="id-daftar-google" class="title-class" data-lang-id="id-daftar-google">Daftar dengan Google</span></p>
+                                    <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-google text-danger"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        <?php } ?>
+                        <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
+                            <div class="text-center">
                             <button class="btn btn-sm btn-outline-success ms-2 rounded-3" onclick="simulasiPerubahan()">(<span id="pemicu-terjemahan" class="title-class" data-lang-id="pemicu-terjemahan">Pemicu Terjemahan</span>)</button>
-                            <?php endif; ?>
-                        </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
-                
+
                 </div>
             </div>
         
