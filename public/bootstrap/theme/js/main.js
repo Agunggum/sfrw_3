@@ -4,7 +4,9 @@
 const SPANavigator = (() => {
     const contentId = 'spa-content';
     let progressBar = null;
+    let progressTimeout = null;
     let isLoading = false;
+    let loadingStartTime = 0;
     
     const init = () => {
         createProgressBar();
@@ -14,7 +16,11 @@ const SPANavigator = (() => {
     };
 
     const createProgressBar = () => {
-        if (document.getElementById('nprogress')) return;
+        let existing = document.getElementById('nprogress');
+        if (existing) {
+            progressBar = existing;
+            return;
+        }
         progressBar = document.createElement('div');
         progressBar.id = 'nprogress';
         progressBar.innerHTML = '<div class="bar"></div>';
@@ -22,19 +28,44 @@ const SPANavigator = (() => {
     };
 
     const startProgress = () => {
+        if (!progressBar) createProgressBar();
         const bar = progressBar.querySelector('.bar');
+        if (!bar) return;
+        
+        if (progressTimeout) {
+            clearTimeout(progressTimeout);
+            progressTimeout = null;
+        }
+
+        progressBar.style.opacity = '1';
         bar.style.width = '0%';
         bar.style.transition = 'width 0.3s ease';
-        setTimeout(() => bar.style.width = '30%', 50);
-        setTimeout(() => bar.style.width = '70%', 400);
+        
+        // Use a small delay to ensure the browser registers width: 0% before starting transition
+        requestAnimationFrame(() => {
+            setTimeout(() => { if (bar) bar.style.width = '30%'; }, 50);
+            setTimeout(() => { if (bar) bar.style.width = '70%'; }, 400);
+        });
     };
 
     const stopProgress = () => {
+        if (!progressBar) return;
         const bar = progressBar.querySelector('.bar');
+        if (!bar) return;
+
         bar.style.width = '100%';
-        setTimeout(() => {
-            bar.style.width = '0%';
-            bar.style.transition = 'none';
+        
+        if (progressTimeout) clearTimeout(progressTimeout);
+        
+        progressTimeout = setTimeout(() => {
+            if (progressBar && bar) {
+                progressBar.style.opacity = '0';
+                setTimeout(() => {
+                    bar.style.transition = 'none';
+                    bar.style.width = '0%';
+                }, 200);
+            }
+            progressTimeout = null;
         }, 300);
     };
 
@@ -69,6 +100,7 @@ const SPANavigator = (() => {
 
         // POST handling
         isLoading = true;
+        loadingStartTime = Date.now();
         startProgress();
 
         // Animasi Loading pada tombol
@@ -89,7 +121,11 @@ const SPANavigator = (() => {
 
         try {
             const response = await fetch(url, options);
-            await handleResponse(response, url);
+            const redirectUrl = await handleResponse(response, url);
+            if (redirectUrl) {
+                isLoading = false;
+                return await loadContent(redirectUrl, true);
+            }
         } catch (error) {
             console.error('SPA form submit failed:', error);
             form.submit(); // Fallback
@@ -106,21 +142,55 @@ const SPANavigator = (() => {
     };
 
     const handleLinkClick = (e) => {
+        // 1. Cek apakah sedang loading (dengan fail-safe 20 detik)
         if (isLoading) {
-            e.preventDefault();
-            return;
+            const now = Date.now();
+            if (now - loadingStartTime > 20000) {
+                console.warn('SPA stuck detected, forcing reset...');
+                isLoading = false;
+            } else {
+                e.preventDefault();
+                return;
+            }
         }
         
+        // 2. Dapatkan elemen <a> terdekat
         const link = e.target.closest('a');
         if (!link) return;
 
-        const url = link.getAttribute('href');
-        if (!url || url.startsWith('http') || url.startsWith('#') || url.startsWith('javascript:') || link.getAttribute('target') === '_blank') {
+        // 3. Abaikan jika klik dengan tombol selain tombol utama (kiri) atau dengan tombol modifier
+        if (e.button !== 0 || e.ctrlKey || e.shiftKey || e.metaKey || e.altKey) return;
+
+        // 4. Abaikan jika memiliki atribut download atau target="_blank"
+        if (link.hasAttribute('download') || link.getAttribute('target') === '_blank') return;
+
+        // 5. Dapatkan URL link
+        const href = link.href;
+        if (!href) return;
+
+        // 6. Parsing URL
+        let url;
+        try {
+            url = new URL(href);
+        } catch (err) {
             return;
         }
 
+        // 7. Abaikan jika link eksternal (host berbeda)
+        if (url.origin !== window.location.origin) return;
+
+        // 8. Abaikan jika protokol bukan http/https (misal mailto:, tel:)
+        if (!['http:', 'https:'].includes(url.protocol)) return;
+
+        // 9. Abaikan jika link anchor pada halaman yang sama
+        if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) return;
+
+        // 10. Abaikan jika secara eksplisit dilarang melalui data-spa="false" atau data-spa-ignore
+        if (link.dataset.spa === 'false' || link.hasAttribute('data-spa-ignore')) return;
+
+        // 11. Cegah reload dan navigasi via SPA
         e.preventDefault();
-        navigateTo(url);
+        navigateTo(href);
     };
 
     const handlePopState = (e) => {
@@ -138,34 +208,56 @@ const SPANavigator = (() => {
         if (!container) return;
 
         isLoading = true;
+        loadingStartTime = Date.now();
         container.style.opacity = '0.5';
         startProgress();
 
+        // Timeout 15 detik untuk koneksi lambat
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
+
         try {
             const response = await fetch(url, {
+                signal: controller.signal,
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             });
 
-            handleResponse(response, url, pushState);
+            clearTimeout(timeoutId);
+            const redirectUrl = await handleResponse(response, url, pushState);
+            
+            if (redirectUrl) {
+                // Jika ada redirect, kita hentikan loading saat ini dan mulai pemuatan baru
+                isLoading = false; 
+                // Kita tidak memanggil stopProgress di sini agar bar tetap terlihat jalan ke arah baru
+                return await loadContent(redirectUrl, true);
+            }
         } catch (error) {
             console.error('SPA load failed:', error);
+            if (error.name === 'AbortError') {
+                console.warn('SPA request timeout, falling back to full reload');
+            }
             window.location.href = url;
         } finally {
-            isLoading = false;
-            stopProgress();
+            // Hanya jalankan pembersihan jika ini adalah pemanggilan terakhir (tidak ada redirect aktif)
+            if (isLoading) {
+                isLoading = false;
+                stopProgress();
+                const finalContainer = document.getElementById(contentId);
+                if (finalContainer) finalContainer.style.opacity = '1';
+            }
         }
     };
 
     const handleResponse = async (response, url, pushState = true) => {
         const container = document.getElementById(contentId);
+        if (!container) return;
         
         // Cek header redirect dari server
         const spaRedirect = response.headers.get('X-SPA-Redirect');
         if (spaRedirect) {
-            navigateTo(spaRedirect);
-            return;
+            return spaRedirect;
         }
 
         if (!response.ok) throw new Error('Network response was not ok');
@@ -175,7 +267,6 @@ const SPANavigator = (() => {
 
         // Update content
         container.innerHTML = html;
-        container.style.opacity = '1';
 
         // Update title
         if (title) document.title = title;
@@ -188,37 +279,153 @@ const SPANavigator = (() => {
         // Re-initialize scripts
         reinitScripts();
         window.scrollTo(0, 0);
+        
+        return null;
     };
 
     const reinitScripts = () => {
         // Re-init Theme Toggle (Dropdown version)
         initThemeSwitcher();
 
+        // Re-init data- attributes components (Bootstrap, Avatars, etc.)
+        reinitDataComponents();
+
         // Re-init any other components (Shorten, etc.)
-        $('.comment').shorten();
+        if (typeof $ !== 'undefined' && $.fn.shorten) {
+            $('.comment').shorten();
+        }
         
         // Execute scripts inside the new content
-        const scripts = document.getElementById(contentId).querySelectorAll('script');
-        scripts.forEach(oldScript => {
-            const newScript = document.createElement('script');
-            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-            
-            // Handle Module Scripts (for Lit-HTML components)
-            if (oldScript.type === 'module') {
-                const scriptContent = oldScript.innerHTML;
-                const blob = new Blob([scriptContent], { type: 'application/javascript' });
-                newScript.src = URL.createObjectURL(blob);
-            } else {
-                newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+        const container = document.getElementById(contentId);
+        if (!container) return;
+
+        const scripts = container.querySelectorAll('script');
+        
+        // Kita gunakan array untuk memproses secara berurutan
+        const scriptArray = Array.from(scripts);
+        
+        scriptArray.forEach(oldScript => {
+            try {
+                const newScript = document.createElement('script');
+                
+                // Salin semua atribut
+                Array.from(oldScript.attributes).forEach(attr => {
+                    newScript.setAttribute(attr.name, attr.value);
+                });
+                
+                // Handle isi script
+                if (oldScript.src) {
+                    // Script eksternal
+                    // Tambahkan cache buster untuk module agar re-run di SPA
+                    if (oldScript.type === 'module') {
+                        const url = new URL(oldScript.src, window.location.href);
+                        url.searchParams.set('spa_t', Date.now());
+                        newScript.src = url.href;
+                    }
+                } else if (oldScript.type === 'module') {
+                    // Module script inline (lit-html, dll)
+                    const scriptContent = oldScript.innerHTML;
+                    const blob = new Blob([scriptContent], { type: 'application/javascript' });
+                    newScript.src = URL.createObjectURL(blob);
+                } else {
+                    // Inline script biasa
+                    newScript.textContent = oldScript.textContent;
+                }
+                
+                // Ganti script lama dengan yang baru untuk memicu eksekusi
+                if (oldScript.parentNode) {
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                }
+            } catch (err) {
+                console.error('Error re-initializing script:', err, oldScript);
             }
-            
-            oldScript.parentNode.replaceChild(newScript, oldScript);
         });
 
-        // Trigger Custom Event for Lit-HTML auto-render
-        document.dispatchEvent(new CustomEvent('spa:content-loaded', {
-            detail: { url: window.location.href, data: window.pageData || {} }
-        }));
+        // Trigger Custom Event for components that need to know content has changed
+        // Berikan delay sedikit agar script (terutama module) punya waktu untuk mulai loading
+        setTimeout(() => {
+            document.dispatchEvent(new CustomEvent('spa:content-loaded', {
+                detail: { url: window.location.href, data: window.pageData || {} }
+            }));
+        }, 10);
+    };
+
+    const reinitDataComponents = () => {
+        // 1. Re-init Bootstrap Dropdowns, Tooltips, Popovers
+        if (typeof bootstrap !== 'undefined') {
+            // Dropdowns
+            const dropdowns = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+            dropdowns.forEach(el => {
+                // Bersihkan instance lama jika ada untuk menghindari memory leak atau double init
+                const instance = bootstrap.Dropdown.getInstance(el);
+                if (instance) instance.dispose();
+                new bootstrap.Dropdown(el);
+            });
+
+            // Tooltips
+            const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            tooltips.forEach(el => {
+                const instance = bootstrap.Tooltip.getInstance(el);
+                if (instance) instance.dispose();
+                new bootstrap.Tooltip(el);
+            });
+
+            // Popovers
+            const popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
+            popovers.forEach(el => {
+                const instance = bootstrap.Popover.getInstance(el);
+                if (instance) instance.dispose();
+                new bootstrap.Popover(el);
+            });
+        }
+
+        // 2. Re-init User Avatars (data-name)
+        const avatarEls = document.querySelectorAll('#userAvatar, .user-avatar');
+        avatarEls.forEach(avatarEl => {
+            const fullName = avatarEl.getAttribute('data-name') || 'User';
+            const words = fullName.trim().split(' ');
+            let initials = '';
+            if (words.length > 0 && words[0] !== '') {
+                initials += words[0][0];
+                if (words.length > 1) initials += words[words.length - 1][0];
+            } else {
+                initials = 'U';
+            }
+            avatarEl.setAttribute('data-initials', initials);
+
+            let hash = 0;
+            for (let i = 0; i < fullName.length; i++) {
+                hash = fullName.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            const h = Math.abs(hash % 360);
+            avatarEl.style.backgroundColor = `hsl(${h}, 65%, 45%)`;
+        });
+
+        // 3. Re-init Sidebar Toggler
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        if (sidebarToggle && sidebarOverlay) {
+            // Remove old listeners to prevent multiple execution
+            const newToggle = sidebarToggle.cloneNode(true);
+            sidebarToggle.parentNode.replaceChild(newToggle, sidebarToggle);
+            
+            const newOverlay = sidebarOverlay.cloneNode(true);
+            sidebarOverlay.parentNode.replaceChild(newOverlay, sidebarOverlay);
+
+            const toggleSidebar = (e) => {
+                e.preventDefault();
+                document.body.classList.toggle('sb-toggled');
+            };
+
+            newToggle.addEventListener('click', toggleSidebar);
+            newOverlay.addEventListener('click', toggleSidebar);
+        }
+
+        // 4. Re-init Translation (data-lang-id)
+        if (typeof window.changeLanguage === 'function') {
+            const currentLang = localStorage.getItem('user_language') || 'id';
+            window.changeLanguage(currentLang);
+        }
     };
 
     const getStoredTheme = () => localStorage.getItem('theme')

@@ -1,8 +1,7 @@
 </div>
 <?php if (defined('IS_AJAX') && IS_AJAX) return; ?>
-<script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.2'); ?>"></script>
+<script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.7'); ?>"></script>
 <?php require_once view('bahasaIndex'); ?>
-<?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
 <!-- Native Live Reload Integration (SSE) -->
 <script>
     (() => {
@@ -32,6 +31,5 @@
         initLiveReload();
     })();
 </script>
-<?php endif; ?>
 </body>
 </html>

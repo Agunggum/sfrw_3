@@ -111,10 +111,10 @@
                 </div>
 
                 <div class="dropdown ms-2">
-                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-body" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="d-flex align-items-center btn btn-link nav-link text-decoration-none dropdown-toggle text-body" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="user-avatar me-2" id="userAvatar" data-name="<?php echo $_SESSION['fullname']; ?>"></div>
                         <span class="d-none d-sm-inline" id="userNameText"><?php echo $_SESSION['fullname']; ?></span>
-                    </a>
+                    </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser">
                         <li><a class="dropdown-menu-item dropdown-item" href="#"><i class="bi bi-person me-2"></i><span id="id-profil" class="title-class" data-lang-id="id-profil">Profil</span></a></li>
                         <li><a class="dropdown-menu-item dropdown-item" href="#"><i class="bi bi-gear me-2"></i><span id="id-pengaturan" class="title-class" data-lang-id="id-pengaturan">Pengaturan</span></a></li>
