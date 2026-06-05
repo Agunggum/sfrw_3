@@ -1,6 +1,15 @@
 <script>
+// Expose dictionary and helper to global scope
+window.dictionary = {};
+window.__ = function(id, defaultText = null) {
+    const lang = document.documentElement.getAttribute('data-lang-current') || 'id';
+    if (window.dictionary && window.dictionary[lang] && window.dictionary[lang][id]) {
+        return window.dictionary[lang][id];
+    }
+    return defaultText || id;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-    let dictionary = {}; 
     // MEMBACA LOCALSTORAGE: Jika sebelumnya sudah memilih bahasa, pakai itu. Jika belum, default ke 'id'
     let currentLang = localStorage.getItem('user_language') || 'id';
 
@@ -20,8 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Render teks dari objek kamus (dictionary)
         document.querySelectorAll('[data-lang-id]').forEach(el => {
             const id = el.getAttribute('data-lang-id');
-            if (typeof dictionary !== 'undefined' && dictionary[lang] && dictionary[lang][id]) {
-                el.textContent = dictionary[lang][id];
+            const translated = window.__(id);
+            if (translated !== id) {
+                el.textContent = translated;
             }
         });
 
@@ -41,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('<?php echo BASEURL; ?>getLang');
             if (response.ok) {
-                dictionary = await response.json();
+                window.dictionary = await response.json();
                 // Terapkan bahasa yang tersimpan di localStorage
                 changeLanguage(currentLang);
             }
@@ -53,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fungsi Ganti Bahasa di Layar
     window.changeLanguage = function(lang) {
         currentLang = lang;
+        document.documentElement.setAttribute('data-lang-current', lang);
     
         // 1. Simpan pilihan bahasa ke LocalStorage & Cookie (Anti-Flash)
         localStorage.setItem('user_language', lang);
@@ -87,10 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // 4. Menerjemahkan sisa elemen dinamis di halaman
         document.querySelectorAll('[data-lang-id]').forEach(el => {
             const id = el.getAttribute('data-lang-id');
-            if (typeof dictionary !== 'undefined' && dictionary[lang] && dictionary[lang][id]) {
-                el.textContent = dictionary[lang][id];
+            const translated = window.__(id);
+            if (translated !== id) {
+                el.textContent = translated;
             }
         });
+        
+        // 5. Berikan sinyal bahwa bahasa telah berubah (untuk Lit-HTML dll)
+        document.dispatchEvent(new CustomEvent('lang:changed', { detail: { lang } }));
     }
 
     // OPMIONAL: Jalankan fungsi saat halaman dimuat pertama kali 
@@ -125,15 +140,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const langId = el.getAttribute('data-lang-id');
             let textIndo = el.textContent;
                 
-            if (currentLang === 'en' && dictionary['id'] && dictionary['id'][langId]) {
-                textIndo = dictionary['id'][langId];
+            if (currentLang === 'en' && window.dictionary['id'] && window.dictionary['id'][langId]) {
+                textIndo = window.dictionary['id'][langId];
             }
 
             let textEnglish = '';
 
             // Cek apakah di kamus lokal sudah ada (baik bawaan maupun hasil edit manual)
-            if (dictionary['en'] && dictionary['en'][langId] && dictionary['en'][langId].trim() !== '') {
-                textEnglish = dictionary['en'][langId];
+            if (window.dictionary['en'] && window.dictionary['en'][langId] && window.dictionary['en'][langId].trim() !== '') {
+                textEnglish = window.dictionary['en'][langId];
             } else {
                 // Jika benar-benar baru dan belum ada di kamus, baru ditranslate otomatis
                 textEnglish = await translateText(textIndo, 'id', 'en');
@@ -167,8 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             // Gabungkan juga di sisi frontend agar jika ada key baru langsung masuk, 
             // namun key lama hasil edit manual Anda tetap aman tidak ter-reset sebelum refresh halaman.
-            dictionary.id = { ...tempDictionary.id, ...dictionary.id };
-            dictionary.en = { ...tempDictionary.en, ...dictionary.en };
+            window.dictionary.id = { ...tempDictionary.id, ...window.dictionary.id };
+            window.dictionary.en = { ...tempDictionary.en, ...window.dictionary.en };
                 
             changeLanguage(currentLang);
         })
@@ -198,6 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
             h1.classList.toggle('highlight');
             /*h1.id = h1.id === 'main-title' ? 'new-main-title' : 'main-title';*/
         }
-    }
+    };
 });
 </script>

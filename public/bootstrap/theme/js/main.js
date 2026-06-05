@@ -331,52 +331,34 @@ const SPANavigator = (() => {
         // Re-init Theme Toggle (Dropdown version)
         initThemeSwitcher();
 
-        // Re-init data- attributes components (Bootstrap, Avatars, etc.)
-        reinitDataComponents();
-
-        // Re-init any other components (Shorten, etc.)
-        if (typeof $ !== 'undefined' && $.fn.shorten) {
-            $('.comment').shorten();
-        }
-        
         // Execute scripts inside the new content
         const container = document.getElementById(contentId);
         if (!container) return;
 
         const scripts = container.querySelectorAll('script');
-        
-        // Kita gunakan array untuk memproses secara berurutan
         const scriptArray = Array.from(scripts);
         
         scriptArray.forEach(oldScript => {
             try {
                 const newScript = document.createElement('script');
-                
-                // Salin semua atribut
                 Array.from(oldScript.attributes).forEach(attr => {
                     newScript.setAttribute(attr.name, attr.value);
                 });
                 
-                // Handle isi script
                 if (oldScript.src) {
-                    // Script eksternal
-                    // Tambahkan cache buster untuk module agar re-run di SPA
                     if (oldScript.type === 'module') {
                         const url = new URL(oldScript.src, window.location.href);
                         url.searchParams.set('spa_t', Date.now());
                         newScript.src = url.href;
                     }
                 } else if (oldScript.type === 'module') {
-                    // Module script inline (lit-html, dll)
                     const scriptContent = oldScript.innerHTML;
                     const blob = new Blob([scriptContent], { type: 'application/javascript' });
                     newScript.src = URL.createObjectURL(blob);
                 } else {
-                    // Inline script biasa
                     newScript.textContent = oldScript.textContent;
                 }
                 
-                // Ganti script lama dengan yang baru untuk memicu eksekusi
                 if (oldScript.parentNode) {
                     oldScript.parentNode.replaceChild(newScript, oldScript);
                 }
@@ -385,13 +367,15 @@ const SPANavigator = (() => {
             }
         });
 
-        // Trigger Custom Event for components that need to know content has changed
-        // Berikan delay sedikit agar script (terutama module) punya waktu untuk mulai loading
+        // Re-init data- attributes components (Bootstrap, Avatars, etc.)
+        // We do this AFTER script execution to ensure any dynamically added elements are caught
         setTimeout(() => {
+            reinitDataComponents();
+            
             document.dispatchEvent(new CustomEvent('spa:content-loaded', {
                 detail: { url: window.location.href, data: window.pageData || {} }
             }));
-        }, 10);
+        }, 20);
     };
 
     const reinitDataComponents = () => {
@@ -469,6 +453,11 @@ const SPANavigator = (() => {
         if (typeof window.changeLanguage === 'function') {
             const currentLang = localStorage.getItem('user_language') || 'id';
             window.changeLanguage(currentLang);
+        }
+
+        // 5. Re-init any other components (Shorten, etc.)
+        if (typeof $ !== 'undefined' && $.fn.shorten) {
+            $('.comment').shorten();
         }
     };
 
