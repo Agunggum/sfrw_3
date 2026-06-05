@@ -5,6 +5,14 @@ $key = encrypt(date('YmdHi')); ?>
 <?php if (isset($_SESSION['alert'])) {
     echo $_SESSION['alert'];
 } ?>
+<style>
+    /* CSS tambahan untuk merapikan dropdown yang dipindah ke body via JS */
+    .dropdown-table-menu {
+        margin: 0 !important;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+        border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+</style>
 <section>
     <table class="datatable-help table table-striped">
         <thead>
@@ -60,6 +68,16 @@ $key = encrypt(date('YmdHi')); ?>
                 url: '<?php echo BASEURL . 'userslist/' . $key; ?>',
                 dataSrc: ''
             },
+            drawCallback: function() {
+                // Sembunyikan dropdown yang terbuka saat tabel di-draw ulang (search/paging)
+                $('.dropdown-table-menu').each(function() {
+                    var $menu = $(this);
+                    if ($menu.is(':visible')) {
+                        var $dropdown = $menu.data('origin');
+                        if ($dropdown) bootstrap.Dropdown.getOrCreateInstance($dropdown[0]).hide();
+                    }
+                });
+            },
             "language": {
                 "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div>'
             },
@@ -91,13 +109,13 @@ $key = encrypt(date('YmdHi')); ?>
                         // PENTING: Gunakan properti objek seperti row.id atau data.id (sesuai API Anda), bukan row[0] jika dataSrc berbentuk objek.
                         var idData = row.id || data.id_encrypted;
 
-                        return `<div class="dropdown text-right">
-                        <button class="btn btn-outline-default btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-boundary="body" aria-expanded="false">
+                        return `<div class="dropdown float-end">
+                        <button class="btn btn-outline-default btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
                         </button>
-                        <ul class="dropdown-menu dropdown-table-menu" data-bs-popper="static">
+                        <ul class="dropdown-menu dropdown-table-menu">
                             <li><a class="dropdown-item edit-btn" href="<?php echo BASEURL; ?>users/${data.id_encrypted}" data-id="${idData}">Lihat detil</a></li>
-                            <li><a class="dropdown-item delete-btn" href="#" data-id="${idData}" data-username="${data.username}">Hapus</a></li>
+                            <li><button class="dropdown-item delete-btn" href="#" data-id="${idData}" data-username="${data.username}">Hapus</button></li>
                         </ul>
                     </div>`;
                     }
@@ -215,31 +233,62 @@ $key = encrypt(date('YmdHi')); ?>
         var $dropdownMenu = $dropdownContainer.find('.dropdown-table-menu');
 
         if ($dropdownMenu.length) {
-            // SIMPAN referensi container asal ke dalam data elemen menu dropdown
+            // SIMPAN referensi container asal
             $dropdownMenu.data('origin', $dropdownContainer);
 
-            // Pindahkan menu ke body dan posisikan secara absolut
-            $('body').append($dropdownMenu.css({
-                position: 'absolute',
-                left: $dropdownContainer.offset().left,
-                top: $dropdownContainer.offset().top + $dropdownContainer.outerHeight()
-            }).detach());
-        }
-    });
-    // Saat dropdown Bootstrap ditutup
-    $(document).on('hide.bs.dropdown', '.dropdown', function() {
-        // Cari menu dropdown yang saat ini menempel di body
-        var $dropdownMenu = $('body').find('.dropdown-table-menu');
+            // Pindahkan ke body
+            $('body').append($dropdownMenu.detach());
 
-        if ($dropdownMenu.length) {
-            // AMBIL kembali referensi container asal yang sudah disimpan tadi
-            var $originalContainer = $dropdownMenu.data('origin');
+            // Hitung posisi relatif terhadap viewport
+            var rect = $dropdownContainer[0].getBoundingClientRect();
+            
+            $dropdownMenu.css({
+                display: 'block',
+                position: 'fixed',
+                zIndex: '9999',
+                top: rect.bottom + 'px',
+                left: rect.left + 'px'
+            });
 
-            if ($originalContainer && $originalContainer.length) {
-                // Kembalikan menu tepat ke container asalnya masing-masing
-                $originalContainer.append($dropdownMenu.detach());
+            // Sesuaikan jika menu keluar dari viewport kanan
+            var menuRect = $dropdownMenu[0].getBoundingClientRect();
+            if (menuRect.right > window.innerWidth) {
+                $dropdownMenu.css({
+                    left: (rect.right - menuRect.width) + 'px'
+                });
             }
         }
+    });
+
+    // Saat dropdown Bootstrap ditutup
+    $(document).on('hide.bs.dropdown', '.dropdown', function() {
+        var $dropdownMenu = $('body').find('.dropdown-table-menu');
+        if ($dropdownMenu.length) {
+            var $originalContainer = $dropdownMenu.data('origin');
+            if ($originalContainer && $originalContainer.length) {
+                $originalContainer.append($dropdownMenu.detach());
+                $dropdownMenu.css({
+                    display: '',
+                    position: '',
+                    zIndex: '',
+                    top: '',
+                    left: ''
+                });
+            }
+        }
+    });
+
+    // Tutup dropdown saat container tabel di-scroll
+    $(document).on('scroll', '.dataTables_scrollBody', function() {
+        $('.dropdown-table-menu').each(function() {
+            if ($(this).is(':visible')) {
+                var $origin = $(this).data('origin');
+                if ($origin) {
+                    var instance = bootstrap.Dropdown.getInstance($origin[0]);
+                    if (instance) instance.hide();
+                }
+            }
+        });
     });
 </script>
 <!-- Modal Static Backdrop diletakkan secara mandiri di body -->
