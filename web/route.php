@@ -20,11 +20,15 @@ Rute::ambil('/', function() {
 
 // Halaman Login
 Rute::ambil('login', function() {
-    require_once tampilan('login');
+    require_once tampilan('login', [
+        $data['title'] = "S-FRW Login",
+    ]);
 });
 
 Rute::ambil('register', function() {
-    require_once tampilan('register');
+    require_once tampilan('register', [
+        $data['title'] = "S-FRW Register",
+    ]);
 });
 
 Rute::kirim('authlogin', function() {
@@ -41,7 +45,9 @@ Rute::kirim('authforgot/{s}', function($s) {
 
 // Halaman Lupa Password
 Rute::ambil('forgot-password', function() {
-    require_once tampilan('forgot-password');
+    require_once tampilan('forgot-password', [
+        $data['title'] = "S-FRW Lupa Password",
+    ]);
 });
 
 Rute::ambil('forgot-password/{s}', function($s) {
@@ -55,7 +61,9 @@ Rute::ambil('forgot-password/{s}', function($s) {
 
 // Halaman Tabel (Datatable)
 Rute::ambil('datatable', function() {
-    require_once tampilan('table');
+    require_once tampilan('table', [
+        $data['title'] = "S-FRW Datatable",
+    ]);
 });
 
 // Halaman Keluar (Signout)
@@ -67,8 +75,8 @@ Rute::ambil('logs', function() {
 });
 Rute::ambil('logs/{file}', function($file) {
     require_once tampilan('logs', [
-        $data['title'] = "Logs",
-        $data['breadcrumb'] = "Logs",
+        $data['title'] = "S-FRW Logs",
+        $data['breadcrumb'] = "S-FRW Logs",
         $data['icon'] = "fa fa-logs",
         $data['file'] = $file
     ]);
@@ -82,7 +90,9 @@ Rute::ambil('logsfiles/{file}', function($file) {
 // Rute yang memerlukan autentikasi dan peran admin untuk CRUD pengguna
 Rute::middleware('Auth')->grup(function() {
     Rute::ambil('dashboard', function() {
-        require_once tampilan('dashboard/dashboard');
+        require_once tampilan('dashboard/dashboard', [
+            $data['title'] = "S-FRW Dashboard",
+        ]);
     });
 
     Rute::middleware('Role:admin')->grup(function() {

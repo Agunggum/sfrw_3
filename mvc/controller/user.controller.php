@@ -14,7 +14,9 @@ class UserController extends Controller {
             if (!is_dir(MODPATH.'view/users')) mkdir(MODPATH.'view/users');
             file_put_contents(MODPATH.'view/users/daftar.view'.EXT, '<h1>Daftar Pengguna</h1><pre><?php print_r($data["users"]); ?></pre>');
         }
-        require_once tampilan('users/daftar');
+        require_once tampilan('users/daftar', [
+            $data['title'] = "S-FRW Daftar Pengguna",
+        ]);
     }
 
     public static function daftarlist($key) {
@@ -44,7 +46,9 @@ class UserController extends Controller {
      * Membutuhkan peran 'admin'.
      */
     public static function formTambah() {
-        require_once tampilan('users/tambah');
+        require_once tampilan('users/tambah', [
+            $data['title'] = "S-FRW Form Tambah Pengguna",
+        ]);
     }
 
     /**
