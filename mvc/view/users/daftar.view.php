@@ -114,7 +114,7 @@ $key = encrypt(date('YmdHi')); ?>
                             <i class="bi bi-three-dots-vertical"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-table-menu">
-                            <li><a class="dropdown-item edit-btn" href="<?php echo BASEURL; ?>users/${data.id_encrypted}" data-id="${idData}">Lihat detil</a></li>
+                            <li><a class="dropdown-item edit-btn" href="<?php echo BASEURL; ?>users/${data.id_encrypted}/see" data-id="${idData}">Lihat detil</a></li>
                             <li><button class="dropdown-item delete-btn" href="#" data-id="${idData}" data-username="${data.username}">Hapus</button></li>
                         </ul>
                     </div>`;

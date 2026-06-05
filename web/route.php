@@ -106,7 +106,7 @@ Rute::middleware('Auth')->grup(function() {
     });
 
     // Rute ini hanya memerlukan login, tanpa peran spesifik
-    Rute::ambil('users/{id}', 'UserController@lihat');
+    Rute::ambil('users/{id}/see', 'UserController@lihat');
 });
 
 // Rute khusus untuk setup database (JANGAN GUNAKAN DI LINGKUNGAN PRODUKSI)

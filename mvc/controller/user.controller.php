@@ -87,7 +87,10 @@ class UserController extends Controller {
             alert('warning', 'Tidak ditemukan', 'Pengguna tidak ditemukan.', BASEURL . 'users');
             return;
         }
-        require_once tampilan('users/lihat', ['user' => $user]);
+        require_once tampilan('users/lihat', [
+            $data['title'] = "S-FRW Lihat Pengguna",
+            $data['user'] = $user
+        ]);
     }
 
     /**
@@ -100,7 +103,10 @@ class UserController extends Controller {
             alert('warning', 'Tidak ditemukan', 'Pengguna tidak ditemukan.', BASEURL . 'users');
             return;
         }
-        require_once tampilan('users/edit', ['user' => $user]);
+        require_once tampilan('users/edit', [
+            $data['title'] = "S-FRW Form Edit Pengguna",
+            $data['user'] = $user
+        ]);
     }
 
     /**

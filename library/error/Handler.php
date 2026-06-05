@@ -20,7 +20,12 @@ if (!isset($_SESSION['error_data']) && isset($_SESSION['6vhow83GCbV6jdXTMEgAJdqE
 }
 
 if (DEBUG == 'true'):
-function auto_translate($text, $target_lang = 'id', $source_lang = 'en') {
+    // Pengecekan AJAX untuk mode SPA agar body bisa di-scroll
+    if (!defined('IS_AJAX')) {
+        define('IS_AJAX', (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'));
+    }
+
+    function auto_translate($text, $target_lang = 'id', $source_lang = 'en') {
     $url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" 
             . $source_lang . "&tl=" . $target_lang . "&dt=t&q=" . urlencode($text);
     $ch = curl_init();
@@ -87,6 +92,11 @@ function auto_translate($text, $target_lang = 'id', $source_lang = 'en') {
     </style>
 </head>
 <body>
+    <?php if (IS_AJAX): ?>
+    <style>
+        body { overflow-y: auto !important; }
+    </style>
+    <?php endif; ?>
     <div class="error-header">
         <div class="container">
             <div class="d-flex align-items-center">
