@@ -254,7 +254,17 @@ const SPANavigator = (() => {
         const container = document.getElementById(contentId);
         if (!container) return;
         
-        // Cek header redirect dari server
+        // 1. Cek perubahan Layout (Public vs Dashboard)
+        const currentLayout = document.documentElement.getAttribute('data-spa-layout');
+        const newLayout = response.headers.get('X-SPA-Layout');
+        
+        if (currentLayout && newLayout && currentLayout !== newLayout) {
+            console.warn(`SPA: Layout change detected (${currentLayout} -> ${newLayout}), performing full reload.`);
+            window.location.href = url;
+            return;
+        }
+
+        // 2. Cek header redirect dari server
         const spaRedirect = response.headers.get('X-SPA-Redirect');
         if (spaRedirect) {
             return spaRedirect;
@@ -276,11 +286,45 @@ const SPANavigator = (() => {
             window.history.pushState({}, title || '', url);
         }
 
-        // Re-initialize scripts
+        // Re-initialize assets (CSS) and scripts
+        reinitAssets();
         reinitScripts();
         window.scrollTo(0, 0);
         
         return null;
+    };
+
+    const reinitAssets = () => {
+        const container = document.getElementById(contentId);
+        if (!container) return;
+
+        // Pindahkan <link> dan <style> dari konten ke <head> agar ter-render dengan benar
+        // dan tidak terduplikasi saat navigasi selanjutnya
+        const assets = container.querySelectorAll('link[rel="stylesheet"], style');
+        const head = document.head;
+
+        assets.forEach(asset => {
+            const isLink = asset.tagName === 'LINK';
+            const assetId = isLink ? asset.href : asset.textContent.substring(0, 100);
+            
+            // Cek apakah asset sudah ada di head
+            let exists = false;
+            if (isLink) {
+                exists = !!head.querySelector(`link[href="${asset.href}"]`);
+            } else {
+                // Untuk inline style, kita bisa gunakan hash atau id jika ada
+                // Namun untuk kesederhanaan, kita biarkan saja jika tidak ada ID khusus
+                if (asset.id) exists = !!head.querySelector(`#${asset.id}`);
+            }
+
+            if (!exists) {
+                const newAsset = asset.cloneNode(true);
+                head.appendChild(newAsset);
+            }
+            
+            // Hapus dari container agar tidak dieksekusi ulang/ganda oleh browser
+            asset.remove();
+        });
     };
 
     const reinitScripts = () => {

@@ -2,11 +2,12 @@
 if (defined('IS_AJAX') && IS_AJAX) {
     // Jika AJAX, kita kirimkan judul halaman via header agar bisa diupdate oleh JS
     header('X-Page-Title: ' . $data['title']);
+    header('X-SPA-Layout: public');
     return; 
 } 
 ?>
 <!doctype html>
-<html class="no-js" lang="en" data-bs-theme="light">
+<html class="no-js" lang="en" data-bs-theme="light" data-spa-layout="public">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">

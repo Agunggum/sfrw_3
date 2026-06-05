@@ -1,7 +1,7 @@
 </div>
 <?php if (defined('IS_AJAX') && IS_AJAX) return; ?>
 <script src="<?php echo asset('bootstrap/theme/js/dashboard.js'); ?>"></script>
-<script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.7'); ?>"></script>
+<script src="<?php echo asset('bootstrap/theme/js/main.js?v=0.8'); ?>"></script>
 <?php require_once view('bahasaIndex'); ?>
 <!-- Native Live Reload Integration (SSE) -->
 <script>
