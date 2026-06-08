@@ -76,12 +76,8 @@ function app($get) {
 //Site route
 function route($get) {
     $base = "web/".$get.EXT;
-    if (is_readable($base)) {
-        return $base;
-    } else {
-        $_REQUEST['errorlogview'] = $base;
-        return BASEPATH."error/viewnotfound".EXT;
-    }
+    $_REQUEST['errorlogview'] = $base;
+    return $base;
 }
 
 //Site route
