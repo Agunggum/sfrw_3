@@ -79,6 +79,7 @@ function route($get) {
     if (is_readable($base)) {
         return $base;
     } else {
+        $_REQUEST['errorlogview'] = $base;
         return BASEPATH."error/viewnotfound".EXT;
     }
 }
