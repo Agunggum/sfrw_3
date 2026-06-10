@@ -14,7 +14,7 @@ $key = encrypt(date('YmdHi')); ?>
     }
 </style>
 <section>
-    <table class="datatable-help table table-striped">
+    <table id="datatable-users" class="datatable-help table table-striped">
         <thead>
             <tr>
                 <th>No</th>
@@ -50,7 +50,7 @@ $key = encrypt(date('YmdHi')); ?>
 <?php require_once view('dashboard/bottom.dashboard'); ?>
 <script>
     $(document).ready(function() {
-        var table = $('.datatable-help').DataTable({
+        var table = $('#datatable-users').DataTable({
             layout: {
                 /*top2Start: 'pageLength', topEnd: 'search',*/
             },
