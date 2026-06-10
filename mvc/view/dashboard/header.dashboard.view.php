@@ -33,11 +33,11 @@ if (defined('IS_AJAX') && IS_AJAX) {
         @import "<?php echo asset('bootstrap/theme/css/sfrw_dashboard.css?v=0.3'); ?>";
     </style>
     <script src="<?php echo asset('bootstrap/theme/js/jquery-3.7.1.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/fontawesome/js/all.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.bundle.min.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/js/datatables.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/js/dataTables.bootstrap5.js'); ?>"></script>
+    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>" defer></script>
+    <script src="<?php echo asset('bootstrap/theme/fontawesome/js/all.js'); ?>" defer></script>
+    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.bundle.min.js'); ?>" defer></script>
+    <script src="<?php echo asset('bootstrap/theme/js/datatables.js'); ?>" defer></script>
+    <script src="<?php echo asset('bootstrap/theme/js/dataTables.bootstrap5.js'); ?>" defer></script>
     <script>
         // Global variables for JS
         window.BASEURL = '<?php echo BASEURL; ?>';
