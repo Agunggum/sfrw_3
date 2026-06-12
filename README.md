@@ -2,10 +2,6 @@
 
 **Sunda Framework (S-FRW)** adalah framework PHP modern yang dirancang untuk kecepatan, kesederhanaan, dan pengalaman pengembangan yang luar biasa (**Vibe Coding**). Framework ini menggabungkan kekuatan PHP di sisi server dengan reaktivitas modern di sisi klien.
 
-### 💻 Tech Stack:
-* **Bahasa:** ![JavaScript](https://shields.io) ![PHP](https://shields.io)
-* **Frontend:** ![lit-html](https://shields.io) ![bootstrap](https://shields.io) ![datatables](https://shields.io)
-
 ## ✨ Fitur Unggulan
 
 -   **🚀 SPA (Single Page Application)**: Navigasi antar halaman instan tanpa refresh penuh menggunakan sistem *AJAX-driven navigation*.
