@@ -28,6 +28,7 @@ S-FRW mendukung gaya pengembangan **"Vibe Coding"**, di mana Anda fokus pada mem
 
 1.  **Lihat Filosofi Desain**: Pelajari prinsip dasar di [DESIGN.MD].
 2.  **Mulai Membangun**: Ikuti contoh praktis membangun fitur di [APP.MD].
+3.  **Dokumentasi**: Mulai membangun aplikasi anda dan lihat dokumentasi di [Dokumentasi](https://documentation.agunggum.id).
 
 ## 🔧 Konfigurasi Cepat
 
