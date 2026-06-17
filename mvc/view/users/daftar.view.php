@@ -14,7 +14,7 @@ $key = encrypt(date('YmdHi')); ?>
     }
 </style>
 <section>
-    <table id="datatable-users" class="table table-striped">
+    <table id="datatable-users" class="table table-striped table-rounded">
         <thead>
             <tr>
                 <th>No</th>
