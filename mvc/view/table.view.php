@@ -76,7 +76,7 @@
         </div>
         <main class="col-12 col-md-12 col-xl-12 col-lg-12">
             <section>
-                <table class="datatable-help table table-striped">
+                <table class="datatable-help table table-striped table-rounded">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -84,10 +84,12 @@
                             <th>id</th>
                             <th>Title</th>
                             <th>Description</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
                             <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
                             <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
                             <td><span class="placeholder-glow placeholder rounded-3 col-12"></span></td>
@@ -102,6 +104,7 @@
                             <th>id</th>
                             <th>Title</th>
                             <th>Description</th>
+                            <th></th>
                         </tr>
                     </tfoot>
                 </table>
