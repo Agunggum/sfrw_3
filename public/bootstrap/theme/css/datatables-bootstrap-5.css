@@ -650,7 +650,6 @@ table.table-rounded tfoot td:last-child {
     border-right: 1px solid var(--bs-border-color) !important;
 }
 
-
 /* 
 /* Baris data tengah hanya memiliki garis pembatas kolom internal dan garis bawah (tanpa border luar) */
 table.table-rounded tbody td {
