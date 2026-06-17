@@ -11,8 +11,8 @@ class Loginmodel extends Controller {
 	function loginformmodel($uri) { 
         $requestData = $_POST;
         $rules = [
-            'username' => 'required|min:4',
-            'password' => 'required|min:6',
+            'username' => 'required',
+            'password' => 'required',
         ];
         if (!Validator::validate($requestData, $rules)) {
             alert('warning', 'Attention..!', Validator::getErrorsString(), $uri.'login');
