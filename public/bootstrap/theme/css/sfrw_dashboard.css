@@ -8,6 +8,7 @@
 --card-bg: #f8f9fa; 
 --border-color: #dee2e6; 
 --accent-color: #dc3545;
+--border-menu: #e6e6e6;
 }
 [data-bs-theme="dark"] { 
 --bg-body: #121212; 
@@ -17,6 +18,7 @@
 --card-bg: #1e1e1e; 
 --border-color: #333333; 
 --accent-color: #dc3545; 
+--border-menu: #495057;
 }
 html[data-bs-theme="dark"]::-webkit-scrollbar-thumb {
   background-color: #495057;
@@ -131,19 +133,20 @@ transition: all 0.2s ease;
 }
 
 [data-bs-theme="light"] #sidebar-wrapper {
-background-color: var(--bg-body);
+background-color: var(--bs-body-tertiary-bg);
 color: var(--text-main);
 }
 
 [data-bs-theme="light"] #sidebar-wrapper .nav-link:hover,
 [data-bs-theme="light"] #sidebar-wrapper .nav-link.active {
-color: var(--accent-color);
-background-color: rgba(182, 182, 182, 0.1);
+color: var(--text-main);
+background-color: rgba(255, 255, 255, 0.6);
+border: 1px solid var(--border-menu);
 }
 
 /* Tampilan warna sidebar pada mode gelap */
 [data-bs-theme="dark"] #sidebar-wrapper {
-background-color: var(--bg-body);
+background-color: var(--bs-body-tertiary-bg);
 border-right: 1px solid var(--border-color);
 }
 
@@ -152,7 +155,7 @@ color: var(--bs-body-color);
 }
 [data-bs-theme="dark"] #sidebar-wrapper .nav-link:hover,
 [data-bs-theme="dark"] #sidebar-wrapper .nav-link.active {
-color: var(--accent-color);
+color: var(--text-main);
 background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -270,13 +273,13 @@ height: calc(97dvh - var(--navbar-height));
 overflow-y: auto;
 border-radius: 0.5rem; /* Membuat sudut rounded (setara border-radius Bootstrap) */
 /* Opsional: Tambahkan background atau border agar efek rounded & scroll terlihat jelas */
-background-color: var(--bs-body-tertiary-bg);
+background-color: var(--bs-body);
 flex-grow: 1;
 }
 
 .navbar {
 height: var(--navbar-height);
-background-color: var(--bs-body-tertiary-bg);
+background-color: var(--bs-body);
 position: fixed;
 top: 0;
 right: 0;
