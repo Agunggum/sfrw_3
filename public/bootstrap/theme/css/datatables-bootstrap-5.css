@@ -675,8 +675,40 @@ table.table-rounded tbody td:first-child {
     border-left: 1px solid var(--bs-border-color) !important;
 }
 
-/* Sembunyikan warna background yang bocor melewati lengkungan head/foot */
+
+/* ==========================================================================
+   PERBAIKAN / TAMBAHAN LOGIKA: JIKA FOOT TIDAK ADA
+   ========================================================================= */
+
+/* Pastikan baris terakhir di tbody memiliki border-bottom sebagai penutup luar jika tfoot absen */
+table.table-rounded:not(:has(tfoot)) tbody tr:last-child td {
+    border-bottom: 1px solid var(--bs-border-color) !important;
+}
+
+/* Bulatkan sudut kiri bawah pada td pertama di baris terakhir jika tfoot absen */
+table.table-rounded:not(:has(tfoot)) tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 12px !important;
+}
+
+/* Bulatkan sudut kanan bawah pada td terakhir di baris terakhir jika tfoot absen */
+table.table-rounded:not(:has(tfoot)) tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 12px !important;
+}
+
+/* Antisipasi jika DataTables kosong (baris khusus "No data available") */
+table.table-rounded:not(:has(tfoot)) tbody tr:last-child td.dataTables_empty {
+    border-bottom-left-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+}
+
+
+/* ==========================================================================
+   OPTIONAL/SAFETY: CLIP BACKGROUND
+   ========================================================================= */
+
+/* Sembunyikan warna background yang bocor melewati lengkungan head, body akhir, atau foot */
 table.table-rounded thead th,
+table.table-rounded tbody td,
 table.table-rounded tfoot th,
 table.table-rounded tfoot td {
     background-clip: padding-box !important;

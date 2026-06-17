@@ -77,7 +77,7 @@
 
             <main class="col-12 col-md-12 col-xl-12 col-lg-12">
                 <section>
-                    <table class="datatable-logs table table-striped">
+                    <table class="datatable-logs table table-striped table-rounded">
                         <thead>
                             <tr>
                                 <th>Date</th>

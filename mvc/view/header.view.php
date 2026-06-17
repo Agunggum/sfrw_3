@@ -25,7 +25,7 @@ if (defined('IS_AJAX') && IS_AJAX) {
     <style>
         @import "<?php echo asset('bootstrap/theme/css/bootstrap.css?v=5.3.8'); ?>";
         @import "<?php echo asset('bootstrap/theme/css/bootstrap.min.css?v=5.3.8'); ?>";
-        @import "<?php echo asset('bootstrap/theme/css/datatables-bootstrap-5.css'); ?>";
+        @import "<?php echo asset('bootstrap/theme/css/datatables-bootstrap-5.css?v=0.1'); ?>";
         @import "<?php echo asset('bootstrap/theme/fontawesome/css/all.css'); ?>";
         @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
         @import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css");
