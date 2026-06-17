@@ -19,7 +19,7 @@
 
             <li class="nav-item">
                 <a class="nav-link rounded d-flex align-items-center justify-content-between"
-                    data-bs-toggle="collapse" href="#submenuMaster" role="button" aria-expanded="false" aria-controls="submenuMaster">
+                    data-bs-toggle="collapse" href="#submenuMaster" role="button" aria-expanded="<?php echo (ROUTE == 'users') ? 'true' : 'false'; ?>" aria-controls="submenuMaster">
                     <div>
                         <i class="bi bi-people me-2"></i>
                         <span id="id-data-pengguna" class="title-class" data-lang-id="id-data-pengguna">Data Pengguna</span>
