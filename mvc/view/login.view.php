@@ -7,7 +7,7 @@
                 <div class="container">
                     <div class="pt-2">
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
-                        <a href="<?php echo BASEURL; ?>" class="text-danger animated-link"><i class="fa fa-angle-left fa-fw"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                        <a href="<?php echo BASEURL; ?>" class="text-accent animated-link"><i class="fa fa-angle-left fa-fw"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
                     </div>
                         
                     <div class="d-flex justify-content-center">
@@ -50,7 +50,7 @@
 
                                     <div class="col">
                                     <!-- Simple link -->
-                                    <a href="<?php echo BASEURL.'forgot-password'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-lupa-password" class="title-class" data-lang-id="id-lupa-password">Lupa password?</span></a>
+                                    <a href="<?php echo BASEURL.'forgot-password'; ?>" data-bs-theme="light" class="text-accent animated-link"><span id="id-lupa-password" class="title-class" data-lang-id="id-lupa-password">Lupa password?</span></a>
                                     </div>
                                 </div>
 
@@ -59,10 +59,10 @@
 
                                 <!-- Register buttons -->
                                 <div class="text-center">
-                                    <p><span id="id-bukan-anggota" class="title-class" data-lang-id="id-bukan-anggota">Bukan anggota?</span> <a href="<?php echo BASEURL.'register'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-daftar" class="title-class" data-lang-id="id-daftar">Daftar akun</span></a></p>
+                                    <p><span id="id-bukan-anggota" class="title-class" data-lang-id="id-bukan-anggota">Bukan anggota?</span> <a href="<?php echo BASEURL.'register'; ?>" data-bs-theme="light" class="text-accent animated-link"><span id="id-daftar" class="title-class" data-lang-id="id-daftar">Daftar akun</span></a></p>
                                     <p><span id="id-daftar-google" class="title-class" data-lang-id="id-daftar-google">Daftar dengan Google</span></p>
                                     <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
-                                    <i class="fab fa-google text-danger"></i>
+                                    <i class="fab fa-google text-accent"></i>
                                     </button>
                                 </div>
                             </form>

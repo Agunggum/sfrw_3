@@ -17,7 +17,7 @@ const welcomeTemplate = (data) => html`
             <div class="row mt-3">
                 <div class="col-lg-6 pb-2">
                     <div>
-                        <span>${__('id-sfrw-adalah-framework-dari-indonesia', 'sfrw adalah framework dari')}</span> <font class="text-danger">indonesia</font> <span>${__('id-yang-dikembangkan-oleh-indonesia-untuk-programer-atau-calon-programer', 'yang dikembangkan oleh indonesia untuk programer atau calon programer')}</span> <font class="text-danger">indonesia</font></p>
+                        <span>${__('id-sfrw-adalah-framework-dari-indonesia', 'sfrw adalah framework dari')}</span> <font class="text-accent fw-bold">indonesia</font> <span>${__('id-yang-dikembangkan-oleh-indonesia-untuk-programer-atau-calon-programer', 'yang dikembangkan oleh indonesia untuk programer atau calon programer')}</span> <font class="text-accent fw-bold">indonesia</font></p>
                     </div>
                 </div>
                 <div class="col-lg-6 pb-2">

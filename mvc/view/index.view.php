@@ -96,5 +96,5 @@
             <span><i class="bi bi-c-circle"></i> <?php echo COPYR; ?></span>
         </div>
     </footer>
-<script type="module" src="<?php echo asset('bootstrap/theme/js/lit-html/welcome-lit.js?v=0.2'); ?>"></script>
+<script type="module" src="<?php echo asset('bootstrap/theme/js/lit-html/welcome-lit.js?v=0.3'); ?>"></script>
 <?php require_once view('footer'); ?>
