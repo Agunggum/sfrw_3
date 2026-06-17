@@ -10,6 +10,11 @@ class Loginmodel extends Controller {
 
 	function loginformmodel($uri) { 
         $requestData = $_POST;
+
+		$password = $_POST['password'];
+        $username = $_POST['username']; // Menggunakan raw input karena PembangunKueri sudah melakukan escape
+        $_SESSION['username_form'] = anti_injection($username); // Tetap gunakan anti_injection untuk tampilan
+
         $rules = [
             'username' => 'required',
             'password' => 'required',
@@ -18,10 +23,6 @@ class Loginmodel extends Controller {
             alert('warning', 'Attention..!', Validator::getErrorsString(), $uri.'login');
             return;
         }
-
-		$password = $_POST['password'];
-        $username = $_POST['username']; // Menggunakan raw input karena PembangunKueri sudah melakukan escape
-        $_SESSION['username_form'] = anti_injection($username); // Tetap gunakan anti_injection untuk tampilan
 
         // Pastikan tabel Users ada sebelum query
         $table = Users::schematable();
