@@ -605,10 +605,7 @@ table.table-rounded td {
     border-color: var(--bs-border-color) !important;
 }
 
-/* ==========================================================================
-   LOGIKA UTAMA: THEAD (HEADER) - Sudut Atas Melengkung & Border Luar Atas
-   ========================================================================== */
-
+/* 
 /* Garis atas dan samping untuk seluruh elemen header */
 table.table-rounded thead th {
     border-top: 1px solid var(--bs-border-color) !important;
@@ -629,11 +626,7 @@ table.table-rounded thead th:last-child {
     border-right: 1px solid var(--bs-border-color) !important;
 }
 
-
-/* ==========================================================================
-   LOGIKA UTAMA: TFOOT (FOOTER) - Sudut Bawah Melengkung & Border Luar Bawah
-   ========================================================================== */
-
+/* 
 /* Garis bawah dan samping untuk seluruh elemen footer */
 table.table-rounded tfoot th,
 table.table-rounded tfoot td {
@@ -658,10 +651,7 @@ table.table-rounded tfoot td:last-child {
 }
 
 
-/* ==========================================================================
-   LOGIKA UTAMA: TBODY (DATA TENGAH) - Sudut Tetap Kotak / Siku
-   ========================================================================== */
-
+/* 
 /* Baris data tengah hanya memiliki garis pembatas kolom internal dan garis bawah (tanpa border luar) */
 table.table-rounded tbody td {
     border-top: none !important;
@@ -675,11 +665,7 @@ table.table-rounded tbody td:first-child {
     border-left: 1px solid var(--bs-border-color) !important;
 }
 
-
-/* ==========================================================================
-   PERBAIKAN / TAMBAHAN LOGIKA: JIKA FOOT TIDAK ADA
-   ========================================================================= */
-
+/* 
 /* Pastikan baris terakhir di tbody memiliki border-bottom sebagai penutup luar jika tfoot absen */
 table.table-rounded:not(:has(tfoot)) tbody tr:last-child td {
     border-bottom: 1px solid var(--bs-border-color) !important;
@@ -701,11 +687,7 @@ table.table-rounded:not(:has(tfoot)) tbody tr:last-child td.dataTables_empty {
     border-bottom-right-radius: 12px !important;
 }
 
-
-/* ==========================================================================
-   OPTIONAL/SAFETY: CLIP BACKGROUND
-   ========================================================================= */
-
+/* 
 /* Sembunyikan warna background yang bocor melewati lengkungan head, body akhir, atau foot */
 table.table-rounded thead th,
 table.table-rounded tbody td,
