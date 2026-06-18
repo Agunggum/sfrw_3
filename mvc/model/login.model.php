@@ -1,7 +1,10 @@
 <?php
 require_once vendors('logcarbon/logcarbon');
-require_once vendors('phpmailer/phpmailer');
 require_once services('Validator');
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 use app\Models\Users;
 use app\Models\Forgotlink;
@@ -159,7 +162,7 @@ class Loginmodel extends Controller {
                     $data['tahun'] = $tahun_sekarang,
                 ]);
 
-                $mail = new PHPMailer;
+                $mail = new PHPMailer(true);
                 $mail->IsSMTP();
                 $mail->SMTPSecure = '';
                 $mail->Host = MAILHOST;
@@ -243,7 +246,7 @@ class Loginmodel extends Controller {
                     $data['tahun'] = $tahun_sekarang,
                 ]);
 
-                $mail = new PHPMailer;
+                 $mail = new PHPMailer(true);
                 $mail->IsSMTP();
                 $mail->SMTPSecure = '';
                 $mail->Host = MAILHOST;
