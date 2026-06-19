@@ -47,6 +47,7 @@ define('PAGINATION', '15');
 /* Email connector
 */
 define('MAILACTIVATE', 'false');
+define('MAILSECURE', 'false');
 define('MAILHOST', 'smtp.yourdomain.com');
 define('MAILSENT', 'no-reply@yourdomain.id');
 define('MAILUSER', 'yourmail@yourdomain.com');
