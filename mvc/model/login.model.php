@@ -180,7 +180,7 @@ class Loginmodel extends Controller {
                         $mail->AddAddress($email_tujuan, $nama_user);
                         // --- KONTEN EMAIL ---
                         $mail->isHTML(true); // Set format email ke HTML
-                        $mail->Subject = MAILTITLE." - ".$subject;
+                        $mail->Subject = $subject." - ".MAILTITLE;
                         $mail->Body    = $html_email;
                         $mail->Send();
                         $message = "<br><br>Mail sent successfully";
@@ -189,7 +189,7 @@ class Loginmodel extends Controller {
                         Logcarbon::carbonlog("{$mail->ErrorInfo}", "error");
                     }
                 }else{
-                    $subjectMail = MAILTITLE." - ".$subject;
+                    $subjectMail = $subject." - ".MAILTITLE;
                     // Kirim email dalam format HTML
                     $headersMail  = "From: ".MAILTITLE." <".MAILSENT.">\r\n";
                     $headersMail .= "Content-type: text/html\r\n";
