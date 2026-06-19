@@ -179,12 +179,13 @@ class Loginmodel extends Controller {
                     $mail->Subject = MAILTITLE." - ".$subject;
                     $mail->Body    = $html_email;
                     $mail->Send();
+                    $message = "Mail sent successfully";
                 } catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    $message = "Mail could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
             }
 
-            alert('success', 'Alert forgot password', 'Please check your email to reset your password.', BASEURL.'forgot-password');
+            alert('success', 'Alert forgot password', 'Please check your email to reset your password.<br><br>'.$message, BASEURL.'forgot-password');
         }
 	}
 
