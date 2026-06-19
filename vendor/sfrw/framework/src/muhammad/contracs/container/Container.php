@@ -719,9 +719,9 @@ function daydateandtime_en($date) {
     switch($hari){
 		case 'Sun': $hari_ini = "Sunday"; break;
 		case 'Mon': $hari_ini = "Monday"; break;
-		case 'Tue': $hari_ini = "Selasa"; break;
-		case 'Wed': $hari_ini = "Rabu"; break;
-		case 'Thu': $hari_ini = "Kamis"; break;
+		case 'Tue': $hari_ini = "Tuesday"; break;
+		case 'Wed': $hari_ini = "Wednesday"; break;
+		case 'Thu': $hari_ini = "Thursday"; break;
 		case 'Fri': $hari_ini = "Friday"; break;
 		case 'Sat': $hari_ini = "Saturday"; break;
         default: $hari_ini = ""; break;
