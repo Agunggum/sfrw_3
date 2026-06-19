@@ -130,7 +130,7 @@ class Loginmodel extends Controller {
 
             //membuat sesi timeout
             $linkforgotbase = md5($email."-".DATEWMIN);
-            $linkforgot = BASEURL."forgot-password?s=".$linkforgotbase;
+            $linkforgot = BASEURL."forgot-password/".$linkforgotbase;
             $endTime = date('Y-m-d H:i:s', strtotime("+15 minutes", strtotime(DATEWMIN)));
                 
             PembangunKueri::tabel(Forgotlink::schematable())->sisipkan([
