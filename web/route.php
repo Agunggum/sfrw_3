@@ -52,6 +52,7 @@ Rute::ambil('forgot-password', function() {
 
 Rute::ambil('forgot-password/{s}', function($s) {
     require_once tampilan('forgot-password', [
+        $data['title'] = "S-FRW Lupa Password",
         $data['s'] = PembangunKueri::tabel('forgot_link')
                 ->pilih('end_time')
                 ->dimana('target_link', '=', $s)
