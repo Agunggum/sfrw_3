@@ -185,7 +185,11 @@ class Loginmodel extends Controller {
                         $message = "Mail could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     }
                 }else{
-                    mail($email_tujuan, $subject, $html_email, "From: ".MAILTITLE." <".MAILSENT.">");
+                    $subjectMail = MAILTITLE." - ".$subject;
+                    // Kirim email dalam format HTML
+                    $headersMail  = "From: ".MAILTITLE." <".MAILSENT.">\r\n";
+                    $headersMail .= "Content-type: text/html\r\n";
+                    mail($email_tujuan, $subjectMail, $html_email, $headersMail);
                     $message = "Mail sent successfully";
                 }
             }
