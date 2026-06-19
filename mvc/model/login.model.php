@@ -163,21 +163,25 @@ class Loginmodel extends Controller {
                 ]);
 
                 $mail = new PHPMailer(true);
-                $mail->IsSMTP();
-                $mail->SMTPSecure = '';
-                $mail->Host = MAILHOST;
-                $mail->SMTPDebug = 0;
-                $mail->Port = MAILPORT;
-                $mail->SMTPAuth = false;
-                $mail->Username = MAILUSER;
-                $mail->Password = MAILPASS;
-                $mail->SetFrom(MAILSENT, MAILTITLE);
-                $mail->AddAddress($email_tujuan, $nama_user);
-                // --- KONTEN EMAIL ---
-                $mail->isHTML(true); // Set format email ke HTML
-                $mail->Subject = MAILTITLE." - ".$subject;
-                $mail->Body    = $html_email;
-                $mail->Send();
+                try {
+                    $mail->IsSMTP();
+                    $mail->SMTPSecure = '';
+                    $mail->Host = MAILHOST;
+                    $mail->SMTPDebug = 0;
+                    $mail->Port = MAILPORT;
+                    $mail->SMTPAuth = false;
+                    $mail->Username = MAILUSER;
+                    $mail->Password = MAILPASS;
+                    $mail->SetFrom(MAILSENT, MAILTITLE);
+                    $mail->AddAddress($email_tujuan, $nama_user);
+                    // --- KONTEN EMAIL ---
+                    $mail->isHTML(true); // Set format email ke HTML
+                    $mail->Subject = MAILTITLE." - ".$subject;
+                    $mail->Body    = $html_email;
+                    $mail->Send();
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
             }
 
             alert('success', 'Alert forgot password', 'Please check your email to reset your password.', BASEURL.'forgot-password');
