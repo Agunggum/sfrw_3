@@ -185,7 +185,8 @@ class Loginmodel extends Controller {
                         $mail->Send();
                         $message = "Mail sent successfully";
                     } catch (Exception $e) {
-                        $message = "Mail could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                        $message = "Mail could not be sent.";
+                        Logcarbon::carbonlog("{$mail->ErrorInfo}", "error");
                     }
                 }else{
                     $subjectMail = MAILTITLE." - ".$subject;
