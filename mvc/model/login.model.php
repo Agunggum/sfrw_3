@@ -162,26 +162,31 @@ class Loginmodel extends Controller {
                     $data['tahun'] = $tahun_sekarang,
                 ]);
 
-                $mail = new PHPMailer(true);
-                try {
-                    $mail->IsSMTP();
-                    $mail->SMTPSecure = '';
-                    $mail->Host = MAILHOST;
-                    $mail->SMTPDebug = 0;
-                    $mail->Port = MAILPORT;
-                    $mail->SMTPAuth = false;
-                    $mail->Username = MAILUSER;
-                    $mail->Password = MAILPASS;
-                    $mail->SetFrom(MAILSENT, MAILTITLE);
-                    $mail->AddAddress($email_tujuan, $nama_user);
-                    // --- KONTEN EMAIL ---
-                    $mail->isHTML(true); // Set format email ke HTML
-                    $mail->Subject = MAILTITLE." - ".$subject;
-                    $mail->Body    = $html_email;
-                    $mail->Send();
+                if(MAILSECURE == 'true'){
+                    $mail = new PHPMailer(true);
+                    try {
+                        $mail->IsSMTP();
+                        $mail->SMTPSecure = '';
+                        $mail->Host = MAILHOST;
+                        $mail->SMTPDebug = 0;
+                        $mail->Port = MAILPORT;
+                        $mail->SMTPAuth = false;
+                        $mail->Username = MAILUSER;
+                        $mail->Password = MAILPASS;
+                        $mail->SetFrom(MAILSENT, MAILTITLE);
+                        $mail->AddAddress($email_tujuan, $nama_user);
+                        // --- KONTEN EMAIL ---
+                        $mail->isHTML(true); // Set format email ke HTML
+                        $mail->Subject = MAILTITLE." - ".$subject;
+                        $mail->Body    = $html_email;
+                        $mail->Send();
+                        $message = "Mail sent successfully";
+                    } catch (Exception $e) {
+                        $message = "Mail could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
+                }else{
+                    mail($email_tujuan, $subject, $html_email, "From: ".MAILTITLE." <".MAILSENT.">");
                     $message = "Mail sent successfully";
-                } catch (Exception $e) {
-                    $message = "Mail could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
             }
 
