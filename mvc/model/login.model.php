@@ -155,12 +155,15 @@ class Loginmodel extends Controller {
                 ";
 
                 $tahun_sekarang = date('Y');
-                $html_email = tampilan('mailer', [
+
+                ob_start();
+                include tampilan('mailer', [
                     $data['subject'] = $subject,
                     $data['title'] = WEBTITLETOP,
                     $data['content'] = $content,
                     $data['tahun'] = $tahun_sekarang,
                 ]);
+                $html_email = ob_get_clean();
 
                 if(MAILSECURE == 'true'){
                     $mail = new PHPMailer(true);
