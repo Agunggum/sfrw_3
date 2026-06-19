@@ -68,7 +68,7 @@
                     <tr>
                         <td class='footer-bg' style='background-color: #f8f9fa; padding: 24px; text-align: center; border-top: 1px solid #dee2e6; font-size: 0.815rem;'>
                             <p class='dark-muted' style='margin: 0 0 8px 0; color: #6c757d;'>&copy; <?php echo $data['tahun']; ?>. All Rights Reserved.</p>
-                            <p class='dark-muted' style='margin: 0; color: #8c949c; font-size: 0.75rem;'>Anda menerima email ini karena terdaftar di sistem kami.</p>
+                            <p class='dark-muted' style='margin: 0; color: #8c949c; font-size: 0.75rem;'>You are receiving this email because you are registered in our system.</p>
                         </td>
                     </tr>
                     
