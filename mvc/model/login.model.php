@@ -183,9 +183,9 @@ class Loginmodel extends Controller {
                         $mail->Subject = MAILTITLE." - ".$subject;
                         $mail->Body    = $html_email;
                         $mail->Send();
-                        $message = "Mail sent successfully";
+                        $message = "<br><br>Mail sent successfully";
                     } catch (Exception $e) {
-                        $message = "Mail could not be sent.";
+                        $message = "<br><br>Mail could not be sent.";
                         Logcarbon::carbonlog("{$mail->ErrorInfo}", "error");
                     }
                 }else{
@@ -194,11 +194,11 @@ class Loginmodel extends Controller {
                     $headersMail  = "From: ".MAILTITLE." <".MAILSENT.">\r\n";
                     $headersMail .= "Content-type: text/html\r\n";
                     mail($email_tujuan, $subjectMail, $html_email, $headersMail);
-                    $message = "Mail sent successfully";
+                    $message = "<br><br>Mail sent successfully";
                 }
             }
 
-            alert('success', 'Alert forgot password', 'Please check your email to reset your password.<br><br>'.$message, BASEURL.'forgot-password');
+            alert('success', 'Alert forgot password', 'Please check your email to reset your password.'.$message, BASEURL.'forgot-password');
         }
 	}
 
