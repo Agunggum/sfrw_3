@@ -38,7 +38,7 @@ class UserController extends Controller {
             ];
         }
         
-        echo json_encode($output_data, JSON_PRETTY_PRINT);
+        echo ambilJson($output_data);
     }
 
     /**

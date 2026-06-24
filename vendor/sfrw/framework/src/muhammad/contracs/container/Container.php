@@ -27,14 +27,7 @@ function get_db_conn() {
 }
 
 function ambilJson($query){
-    if (!($query instanceof mysqli_result)) {
-        return json_encode(["error" => "Invalid query result"]);
-    }
-    $data = array();
-    while ($row = $query->fetch_assoc()) {
-        $data[] = $row;
-    }
-    return json_encode($data, JSON_PRETTY_PRINT);
+    return json_encode($query, JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT);
 }
 
 function barisAngkaMysql($query){
