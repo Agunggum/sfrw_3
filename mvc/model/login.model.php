@@ -171,7 +171,7 @@ class Loginmodel extends Controller {
                         $mail->IsSMTP();
                         $mail->SMTPSecure = '';
                         $mail->Host = MAILHOST;
-                        $mail->SMTPDebug = 0;
+                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
                         $mail->Port = MAILPORT;
                         $mail->SMTPAuth = false;
                         $mail->Username = MAILUSER;
