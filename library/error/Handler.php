@@ -188,6 +188,18 @@ if (DEBUG == 'true'):
                                 <span class="text-secondary">Request URI:</span>
                                 <span class="text-truncate" style="max-width: 200px;"><?php echo htmlspecialchars($error['uri']); ?></span>
                             </li>
+                            <li class="mb-2 d-flex justify-content-between border-bottom pb-2">
+                                <span class="text-secondary">Mailer:</span>
+                                <span class="badge bg-info text-dark"><?php echo MAILACTIVATE; ?></span>
+                            </li>
+                            <li class="mb-2 d-flex justify-content-between border-bottom pb-2">
+                                <span class="text-secondary">Mailer secure:</span>
+                                <span class="badge bg-info text-dark"><?php echo MAILSECURE; ?></span>
+                            </li>
+                            <li class="mb-2 d-flex justify-content-between border-bottom pb-2">
+                                <span class="text-secondary">Database driver:</span>
+                                <span><?php echo DB_DRIVER; ?></span>
+                            </li>
                         </ul>
                     </div>
                 </div>

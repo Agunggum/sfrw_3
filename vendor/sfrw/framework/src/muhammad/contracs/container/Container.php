@@ -487,7 +487,7 @@ function customError($errno, $errstr, $errfile, $errline) {
     $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'] = "{$errline}, {$errstr}, {$errfile}, {$_SERVER['REQUEST_URI']}, {$dates}";
 
     // Jika mode DEBUG aktif, langsung tampilkan Handler
-    if (DEBUG == 'true') {
+    if (DEBUG == 'true' && ENVIRONMENT == 'local') {
         if (!headers_sent()) {
             // Bersihkan output buffer jika ada untuk memastikan hanya Handler yang tampil
             while (ob_get_level() > 0) {
@@ -538,7 +538,7 @@ function customErrorHandler() {
     $_SESSION['zyA2QF2M25e3TyVmi2w99n2tB'] = $errstr;
     $_SESSION['6vhow83GCbV6jdXTMEgAJdqEN'] = "0, {$errstr}, -, {$_SERVER['REQUEST_URI']}, {$dates}";
 
-    if (DEBUG == 'true') {
+    if (DEBUG == 'true' && ENVIRONMENT == 'local') {
         $lognote = "Error 404 :: {$errstr} :: {$_SERVER['REQUEST_URI']}";
         $dataToLog = [$dates, get_client_ip(), get_client_browser(), $lognote];
         $data = implode(" ~ ", $dataToLog) . PHP_EOL;
@@ -546,6 +546,13 @@ function customErrorHandler() {
 
         // Load Handler secara langsung
         require_once BASEPATH . 'error/Handler' . EXT;
+        exit();
+    }else{
+        // Jika mode produksi, tampilkan 404 generik
+        if (!headers_sent()) {
+            http_response_code(404);
+        }
+        require_once BASEPATH . 'error/404handler' . EXT;
         exit();
     }
 }
