@@ -53,6 +53,7 @@ define('MAILSENT', 'no-reply@yourdomain.id');
 define('MAILUSER', 'yourmail@yourdomain.com');
 define('MAILPASS', '');
 define('MAILPORT', 587);
+define('SMTPAUTH', 'true');
 
 /* 
 /* Autoload and File Extension
