@@ -76,6 +76,25 @@ class Loginmodel extends Controller {
 
             Logcarbon::carbonlog($username." :: login success","logsignin");
 
+            // ==========================================
+            // LOGIKHA FITUR REMEMBER ME
+            // ==========================================
+            if (isset($_POST['ingat-saya']) && $_POST['ingat-saya'] == '1') {
+                // Membuat token acak yang aman
+                $rememberToken = bin2hex(random_bytes(32));
+                $cookieValue = $data['username'] . ':' . $rememberToken;
+                
+                // Menentukan masa berlaku cookie (misal: 30 hari)
+                $expiryTime = time() + (30 * 24 * 60 * 60); 
+
+                // Set cookie (Disarankan menggunakan httponly dan secure jika menggunakan HTTPS)
+                setcookie('remember_me', $cookieValue, $expiryTime, "/", "", false, true);
+
+                // Opsional: Jika Anda punya kolom `remember_token` di database, simpan hash-nya di sini
+                // PembangunKueri::tabel($table)->dimana('username', '=', $data['username'])->perbarui(['remember_token' => password_hash($rememberToken, PASSWORD_DEFAULT)]);
+            }
+            // ==========================================
+
             // membuat sesi timeout
             $_SESSION['timeout'] = WAKTUINI + KADALUARSA;
             $_SESSION['timelog'] = WAKTUINI + KADALUARSA + 13;
