@@ -257,32 +257,49 @@ class Loginmodel extends Controller {
                 ";
 
                 $tahun_sekarang = date('Y');
+
+                ob_start();
                 $html_email = tampilan('mailer', [
                     $data['subject'] = $subject,
                     $data['title'] = WEBTITLETOP,
                     $data['content'] = $content,
                     $data['tahun'] = $tahun_sekarang,
-                ]);
+                ]); 
+                $html_email = ob_get_clean();
 
-                 $mail = new PHPMailer(true);
-                $mail->IsSMTP();
-                $mail->SMTPSecure = '';
-                $mail->Host = MAILHOST;
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                $mail->Port = MAILPORT;
-                $mail->SMTPAuth = SMTPAUTH;
-                $mail->Username = MAILUSER;
-                $mail->Password = MAILPASS;
-                $mail->SetFrom(MAILSENT, MAILTITLE);
-                $mail->AddAddress($email_tujuan, $nama_user);
-                // --- KONTEN EMAIL ---
-                $mail->isHTML(true); // Set format email ke HTML
-                $mail->Subject = MAILTITLE." - ".$subject;
-                $mail->Body    = $html_email;
-                $mail->Send();
+                if(MAILSECURE == 'true'){
+                    $mail = new PHPMailer(true);
+                    try {
+                        $mail->IsSMTP();
+                        $mail->SMTPSecure = '';
+                        $mail->Host = MAILHOST;
+                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                        $mail->Port = MAILPORT;
+                        $mail->SMTPAuth = SMTPAUTH;
+                        $mail->Username = MAILUSER;
+                        $mail->Password = MAILPASS;
+                        $mail->SetFrom(MAILSENT, MAILTITLE);
+                        $mail->AddAddress($email_tujuan, $nama_user);
+                        // --- KONTEN EMAIL ---
+                        $mail->isHTML(true); // Set format email ke HTML
+                        $mail->Subject = MAILTITLE." - ".$subject;
+                        $mail->Body    = $html_email;
+                        $mail->Send();
+                        $message = "<br><br>Mail sent successfully";
+                    } catch (Exception $e) {
+                        $message = "Error: {$mail->ErrorInfo}";
+                    }
+                }else{
+                    $subjectMail = $subject." - ".MAILTITLE;
+                    // Kirim email dalam format HTML
+                    $headersMail  = "From: ".MAILTITLE." <".MAILSENT.">\r\n";
+                    $headersMail .= "Content-type: text/html\r\n";
+                    mail($email_tujuan, $subjectMail, $html_email, $headersMail);
+                    $message = "<br><br>Mail sent successfully";
+                }
             }
 
-            alert('success', 'Alert forgot password', 'Password update successful.', BASEURL);
+            alert('success', 'Alert forgot password', 'Password update successful.'.$message, BASEURL);
         }
 	}
     
