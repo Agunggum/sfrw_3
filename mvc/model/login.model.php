@@ -79,7 +79,7 @@ class Loginmodel extends Controller {
             // ==========================================
             // LOGIKHA FITUR REMEMBER ME
             // ==========================================
-            if (isset($_POST['ingat-saya']) && $_POST['ingat-saya'] == '1') {
+            if (isset($_POST['ingat-saya']) && $_POST['ingat-saya'] == 'Ingat saya') {
                 // Membuat token acak yang aman
                 $rememberToken = bin2hex(random_bytes(32));
                 $cookieValue = $data['username'] . ':' . $rememberToken;
