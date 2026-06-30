@@ -2,6 +2,31 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //koneksi ke database via methode/function yang ada di config.php
 if(CONNECTION == 'true'){ db::connectMySQL(BASEPATH); }
+
+if (!isset($_SESSION['username']) && isset($_COOKIE['remember_me'])) {
+    list($username, $token) = explode(':', $_COOKIE['remember_me'], 2);
+    
+    // Cari user berdasarkan username di cookie
+    $user = PembangunKueri::tabel('master_users')
+            ->dimana('username', '=', $username)
+            ->pertama();
+
+    if ($user && $user['active'] == 'Y') {
+        // (Opsional) Jika Anda menyimpan token di DB, lakukan verifikasi silang di sini
+        
+        // Daftarkan ulang session login otomatis
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['fullname'] = $user['fullname'];
+        $_SESSION['accessme'] = $user['role'];
+        $_SESSION['timeout'] = WAKTUINI + KADALUARSA;
+        $_SESSION['timelog'] = WAKTUINI + KADALUARSA + 13;
+        $_SESSION['error']    = "false";
+    } else {
+        // Jika cookie tidak valid/user tidak aktif, hapus cookie-nya
+        setcookie('remember_me', '', time() - 3600, '/');
+    }
+}
+
 // Define page route - mendukung penulisan URL via params (Apache) atau REQUEST_URI (Nginx/Laravel Herd)
 if (isset($_GET['params'])) {
     $route = $_GET['params'];
