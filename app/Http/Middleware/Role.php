@@ -15,7 +15,7 @@ class Role {
         if ($peranPengguna !== $role) {
             // Jika peran tidak sesuai, tampilkan halaman error atau alihkan
             header("HTTP/1.0 403 Forbidden");
-            echo "Akses Ditolak: Anda tidak memiliki izin untuk mengakses halaman ini.";
+            require_once BASEPATH . 'error/403handler' . EXT;
             exit();
         }
 
