@@ -30,14 +30,6 @@ function ambilJson($query){
     return json_encode($query, JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT);
 }
 
-function barisAngkaMysql($query){
-    if ($query instanceof mysqli_result) {
-        return $query->num_rows;
-    }
-    return 0;
-}
-// end database
-
 //Site asset public
 function asset($path) {
     return BASEURL.''. $path;
@@ -191,7 +183,7 @@ function alertstatic($alert, $title, $message) {
 function arahkan($redirect = 'javascript:history.go(-1)', $func = '0', $message = '0') {
     if($func != '0'){ $_SESSION[$func] = $func; }
     if($message != '0'){ $_SESSION['message'] = $message; }
-    $direct = "<script>setTimeout(function () { window.location.href = '".$redirect."'; }, 1000);</script>";
+    $direct = "<script>setTimeout(function () { window.location.href = '".$redirect."'; }, 10);</script>";
     echo $direct;
 }
 //end flasher

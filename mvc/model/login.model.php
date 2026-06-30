@@ -110,7 +110,9 @@ class Loginmodel extends Controller {
                 unset($_SESSION['intended_url']);
             }
                 
-            alert('success', '', '<i class="fa fa-check animated flip" style="font-size:4.5em;"></i></p><p><strong>..Waiting to sign in..</strong>', $redirect_url);
+            //alert('success', '', '<i class="fa fa-check animated flip" style="font-size:4.5em;"></i></p><p><strong>..Waiting to sign in..</strong>', $redirect_url);
+
+            arahkan($redirect_url);
         }
 	}
 
@@ -338,6 +340,7 @@ class Loginmodel extends Controller {
         }
 
         session_destroy();
+        setcookie('remember_me', '', time() - 3600, '/');
         
         // Alihkan ke halaman login
         alihkan(BASEURL . 'login');
