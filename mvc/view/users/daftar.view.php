@@ -78,7 +78,7 @@
                 });
             },
             "language": {
-                "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div> Don`t see data? <a href="<?php echo BASEURL; ?>users"><i class="bi bi-repeat" onclick="location.reload()"></i></a>'
+                "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div> <a href="<?php echo BASEURL; ?>users" onclick="location.reload()"><span id="en-dont-see-data" class="title-class" data-lang-id="en-dont-see-data">Don`t see data?</span> <i class="bi bi-repeat"></i></a>'
             },
             columns: [{
                     data: null,

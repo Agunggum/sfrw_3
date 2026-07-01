@@ -38,7 +38,8 @@
         "id-profil": "Profil",
         "id-pengaturan": "Pengaturan",
         "id-bukan-anggota": "Bukan anggota?",
-        "id-ingat-saya": "Ingat saya"
+        "id-ingat-saya": "Ingat saya",
+	"en-dont-see-data": "Tidak melihat data?"
     },
     "en": {
         "id-pemicu": "",
@@ -79,6 +80,7 @@
         "id-profil": "Profile",
         "id-pengaturan": "Setting",
         "id-bukan-anggota": "Not a member?",
-        "id-ingat-saya": "Remember me"
+        "id-ingat-saya": "Remember me",
+	"en-dont-see-data": "Don`t see data?"
     }
 }
