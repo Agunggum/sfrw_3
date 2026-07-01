@@ -13,10 +13,10 @@
     }
 </style>
 <section>
-    <table id="datatable-users" class="table table-striped table-rounded">
+    <table id="datatable-users" class="table table-striped table-hover table-rounded">
         <thead>
             <tr>
-                <th>No</th>
+                <th>#</th>
                 <th>Fullname</th>
                 <th>Username</th>
                 <th>Email</th>
@@ -36,7 +36,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <th>No</th>
+                <th>#</th>
                 <th>Fullname</th>
                 <th>Username</th>
                 <th>Email</th>
