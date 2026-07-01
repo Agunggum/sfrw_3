@@ -7,7 +7,7 @@
                 <div class="container">
                     <div class="pt-2">
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
-                        <a href="<?php echo BASEURL; ?>" class="text-danger animated-link"><i class="fa fa-angle-left fa-fw"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                        <a href="<?php echo BASEURL; ?>" class="text-accent animated-link"><i class="fa fa-angle-left fa-fw"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
                     </div>
                         
                     <div class="d-flex justify-content-center">
@@ -64,7 +64,7 @@
 
                             <!-- Register buttons -->
                             <div class="text-center">
-                                <p><a href="<?php echo BASEURL.'login'; ?>" class="text-danger animated-link"><span id="id-kembali-masuk" class="title-class" data-lang-id="id-kembali-masuk">Kembali ke halaman Masuk</span></a></p>
+                                <p><a href="<?php echo BASEURL.'login'; ?>" class="text-accent animated-link"><span id="id-kembali-masuk" class="title-class" data-lang-id="id-kembali-masuk">Kembali ke halaman Masuk</span></a></p>
                             </div>
                             <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
                                 <div class="text-center">
