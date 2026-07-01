@@ -19,11 +19,8 @@ class UserController extends Controller {
         ]);
     }
 
-    public static function daftarlist($key) {
-        if ($key != encrypt(date('YmdHi'))) {
-            echo json_encode(['status' => '404', 'message' => 'Kunci tidak valid'], JSON_PRETTY_PRINT);
-            return;
-        }
+    public static function daftarlist() {
+        // Hilangkan verifikasi kunci yang kadaluwarsa agar stabil di SPA
         $users = PembangunKueri::tabel(Users::schematable())->pilih('*')->urutkan('id', 'ASC')->dapatkan();
 
         $output_data = [];
