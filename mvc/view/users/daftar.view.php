@@ -48,17 +48,8 @@
 </section>
 <?php require_once view('dashboard/bottom.dashboard'); ?>
 <script>
-    // Variabel global untuk menyimpan instance DataTables
-    var userDataTable;
-
-    // Inisialisasi DataTables dengan fungsi yang bisa dipanggil kembali
-    function initUserDatatable() {
-        // Destroy instance lama jika ada (untuk mencegah duplicate di SPA)
-        if ($.fn.DataTable.isDataTable('#datatable-users')) {
-            userDataTable.destroy();
-        }
-        
-        userDataTable = $('#datatable-users').DataTable({
+    $(document).ready(function() {
+        var table = $('#datatable-users').DataTable({
             layout: {
                 /*top2Start: 'pageLength', topEnd: 'search',*/
             },
@@ -87,7 +78,7 @@
                 });
             },
             "language": {
-                "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div>'
+                "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div> Don`t see data? <a href="<?php echo BASEURL; ?>users"><i class="bi bi-repeat" onclick="location.reload()"></i></a>'
             },
             columns: [{
                     data: null,
@@ -170,6 +161,17 @@
                 success: function(response) {
                     // Validasi response dari backend
                     if (response.status === 'success') {
+                        
+                        // Hapus baris dari DataTables secara visual
+                        if (currentTableRow && currentTableRow.length) {
+                            table.row(currentTableRow).remove().draw(false);
+                        } else {
+                            var fallbackRow = $(`.edit-btn[data-id="${idYangAkanDihapus}"]`).closest('tr');
+                            if (fallbackRow.length) {
+                                table.row(fallbackRow).remove().draw(false);
+                            }
+                        }
+
                         // Tutup modal
                         var modalElement = document.getElementById('staticBackdrop');
                         var myModal = bootstrap.Modal.getOrCreateInstance(modalElement);
@@ -177,9 +179,8 @@
 
                         // Notifikasi sukses
                         showToast("Sukses: " + response.message, 'success');
-                        
-                        // Refresh DataTables HANYA jika penghapusan berhasil
-                        userDataTable.ajax.reload(null, false);
+                        $('.datatable-help').DataTable().ajax.reload(null, false);
+
                     } else {
                         // Jika backend mengirim status "error" walau HTTP Request-nya 'Success (200)'
                         showToast("Gagal: " + response.message, 'danger');
@@ -223,19 +224,6 @@
                 delay: 5000 // Toast otomatis menghilang setelah 4 detik
             });
             toast.show();
-        }
-    }
-
-    // Panggil init pertama kali saat halaman dimuat normal
-    $(document).ready(function() {
-        initUserDatatable();
-    });
-
-    // Panggil init setiap kali content di-load via SPA
-    document.addEventListener('spa:content-loaded', function() {
-        // Pastikan tabel ada di DOM sebelum inisialisasi
-        if ($('#datatable-users').length) {
-            initUserDatatable();
         }
     });
     // Saat dropdown Bootstrap akan ditampilkan

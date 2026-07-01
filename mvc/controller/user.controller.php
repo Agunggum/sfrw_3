@@ -136,8 +136,11 @@ class UserController extends Controller {
      * Menghapus pengguna dari database.
      * Membutuhkan peran 'admin'.
      */
-    public static function hapus($id) {
+    public static function hapus($id_encrypted) {
         try {
+            // Dekripsi ID terlebih dahulu
+            $id = decrypt($id_encrypted);
+            
             $data = PembangunKueri::tabel(Users::schematable())->dimana('id', $id)->danDimana('role', 'user')->hapus();
             
             if($data > 0){
@@ -154,10 +157,15 @@ class UserController extends Controller {
                 Logcarbon::carbonlog(BASESESSION." :: failed deleted :: id: {$id}","userdata");
             }
             
+            // Set header JSON
+            header('Content-Type: application/json; charset=utf-8');
             // HTTP 200 untuk sukses
             http_response_code(200); 
             echo json_encode($output_data, JSON_PRETTY_PRINT);
+            exit();
         } catch (\Exception $e) {
+            // Set header JSON
+            header('Content-Type: application/json; charset=utf-8');
             $output_data = [
                 "status" => "error",
                 "message" => "Terjadi kesalahan: " . $e->getMessage(),
@@ -166,6 +174,7 @@ class UserController extends Controller {
             // PERBAIKAN: Set status HTTP ke 500 agar ditangkap oleh fungsi error: di AJAX
             http_response_code(500); 
             echo json_encode($output_data, JSON_PRETTY_PRINT);
+            exit();
         }
     }
 }
