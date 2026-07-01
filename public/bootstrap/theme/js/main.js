@@ -473,18 +473,17 @@ const SPANavigator = (() => {
     }
 
     const setTheme = theme => {
-        if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.setAttribute('data-bs-theme', 'dark')
+        if (theme === 'auto') {
+            document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
         } else {
-            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? 'light' : theme)
+            document.documentElement.setAttribute('data-bs-theme', theme)
         }
+        showActiveTheme(theme)
     }
 
     const showActiveTheme = (theme, focus = false) => {
-        const themeSwitcher = document.querySelector('#bd-theme')
-        if (!themeSwitcher) return
-
-        const activeThemeIcon = themeSwitcher.querySelector('i')
+        // Support both dashboard and index theme toggles
+        const themeIconActive = document.querySelector('#themeIconActive') || document.querySelector('#bd-theme .theme-icon-active')
         const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
         
         if (!btnToActive) return
@@ -502,12 +501,18 @@ const SPANavigator = (() => {
         const activeCheckIcon = btnToActive.querySelector('.bi-check2')
         if (activeCheckIcon) activeCheckIcon.classList.remove('d-none')
         
-        // Update main button icon
-        const iconClasses = btnToActive.querySelector('.theme-icon').classList.value
-        activeThemeIcon.className = iconClasses.replace('me-2 opacity-50', 'me-2').replace('theme-icon', 'theme-icon-active')
-
-        if (focus) {
-            themeSwitcher.focus()
+        // Update main button icon (supports both variants)
+        if (themeIconActive) {
+            const iconEl = btnToActive.querySelector('i')
+            if (iconEl) {
+                themeIconActive.className = iconEl.className.replace('me-2', '').replace('opacity-50', '').replace('theme-icon', 'theme-icon-active').trim()
+                
+                if(theme === 'dark') {
+                    themeIconActive.classList.add('text-warning')
+                } else {
+                    themeIconActive.classList.remove('text-warning')
+                }
+            }
         }
     }
 
