@@ -15,7 +15,7 @@ class UserController extends Controller {
             file_put_contents(MODPATH.'view/users/daftar.view'.EXT, '<h1>Daftar Pengguna</h1><pre><?php print_r($data["users"]); ?></pre>');
         }
         require_once tampilan('users/daftar', [
-            $data['title'] = "S-FRW Daftar Pengguna",
+            $data['title'] = "S-FRW Data Pengguna",
         ]);
     }
 
