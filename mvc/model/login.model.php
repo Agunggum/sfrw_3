@@ -1,7 +1,6 @@
 <?php
 require_once vendors('logcarbon/logcarbon');
 require_once services('Validator');
-
 require_once services('Pengirimmail');
 
 use app\Models\Users;

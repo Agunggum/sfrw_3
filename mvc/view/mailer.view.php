@@ -37,6 +37,9 @@
             }
         }
 
+        [data-ogsb] .body-wrapper { background-color: #121212 !important; }
+        [data-ogsb] .card-wrapper { background-color: #1e1e1e !important; border-color: #2d2d2d !important; }
+        [data-ogsb] .header-bg { background-color: #0a46a6 !important; }
         [data-ogsc] .body-wrapper { background-color: #121212 !important; }
         [data-ogsc] .card-wrapper { background-color: #1e1e1e !important; border-color: #2d2d2d !important; }
         [data-ogsc] .header-bg { background-color: #0a46a6 !important; }
