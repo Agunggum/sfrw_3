@@ -75,7 +75,7 @@
 
     <div id="page-content-wrapper">
         <nav class="navbar navbar-expand px-4">
-            <button class="btn btn-outline-secondary btn-sm rounded-circle me-3" id="sidebarToggle">
+            <button class="btn btn-outline-secondary btn-sm rounded-4 me-3" id="sidebarToggle">
                 <i class="bi bi-list fs-5"></i>
             </button>
 
