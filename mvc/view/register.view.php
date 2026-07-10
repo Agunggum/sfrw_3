@@ -7,13 +7,13 @@
                 <div class="container">
                     <div class="pt-2">
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
-                        <a href="<?php echo BASEURL; ?>" class="text-danger animated-link"><i class="fa fa-angle-left fa-fw"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                        <a href="<?php echo BASEURL; ?>" class="text-danger animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
                     </div>
                         
                     <div class="d-flex justify-content-center">
                         <div class="col-md-12 col-lg-12 col-xl-12 mt-3 mb-1 text-left">
                             <div class="h3"><span><?php echo WEBTITLE; ?></span></div>
-                            <small data-toggle="modal" data-target="#versionmodal" style="vertical-align: super; font-size: small; cursor: pointer;"><i class="fa fa-copyright"></i> v<?php echo VERSION; ?></small>
+                            <small data-toggle="modal" data-target="#versionmodal" style="vertical-align: super; font-size: small; cursor: pointer;"><i class="bi bi-copyright"></i> v<?php echo VERSION; ?></small>
                         </div>
                     </div>
                     <img src="<?php echo asset('bootstrap/theme/abefc969-a907-4243-a25d-7372a4997a21.jpg'); ?>" alt="Gambar Login" class="img-fluid rounded-5">
@@ -61,7 +61,7 @@
                                 <div class="text-center">
                                     <p><span id="id-or-sign-up" class="title-class" data-lang-id="id-or-sign-up">Atau daftar dengan:</span></p>
                                     <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
-                                    <i class="fab fa-google text-danger"></i>
+                                    <i class="bi bi-google text-danger"></i>
                                     </button>
                                 </div>
                             </form>
