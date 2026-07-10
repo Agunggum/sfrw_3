@@ -6,6 +6,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+require_once services('Pengirimmail');
+
 use app\Models\Users;
 use app\Models\Forgotlink;
 
@@ -175,48 +177,9 @@ class Loginmodel extends Controller {
                     <p>Salam dari Aplikasi ".MAILTITLE."</p>
                 ";
 
-                $tahun_sekarang = date('Y');
-
-                ob_start();
-                include tampilan('mailer', [
-                    $data['subject'] = $subject,
-                    $data['title'] = WEBTITLETOP,
-                    $data['content'] = $content,
-                    $data['tahun'] = $tahun_sekarang,
-                ]);
-                $html_email = ob_get_clean();
-
-                if(MAILSECURE == 'true'){
-                    $mail = new PHPMailer(true);
-                    try {
-                        $mail->IsSMTP();
-                        $mail->SMTPSecure = '';
-                        $mail->Host = MAILHOST;
-                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                        $mail->Port = MAILPORT;
-                        $mail->SMTPAuth = SMTPAUTH;
-                        $mail->Username = MAILUSER;
-                        $mail->Password = MAILPASS;
-                        $mail->SetFrom(MAILSENT, MAILTITLE);
-                        $mail->AddAddress($email_tujuan, $nama_user);
-                        // --- KONTEN EMAIL ---
-                        $mail->isHTML(true); // Set format email ke HTML
-                        $mail->Subject = $subject." - ".MAILTITLE;
-                        $mail->Body    = $html_email;
-                        $mail->Send();
-                        $message = "<br><br>Mail sent successfully";
-                    } catch (Exception $e) {
-                        $message = "<br><br>Mail could not be sent.";
-                        Logcarbon::carbonlog("{$mail->ErrorInfo}", "error");
-                    }
-                }else{
-                    $subjectMail = $subject." - ".MAILTITLE;
-                    // Kirim email dalam format HTML
-                    $headersMail  = "From: ".MAILTITLE." <".MAILSENT.">\r\n";
-                    $headersMail .= "Content-type: text/html\r\n";
-                    mail($email_tujuan, $subjectMail, $html_email, $headersMail);
-                    $message = "<br><br>Mail sent successfully";
-                }
+                $message = Pengirimmail::sentMail($subject, $email_tujuan, $nama_user, $content);
+            }else{
+                $message = "<br><em>Notifikasi belum aktif!</em>";
             }
 
             alert('success', 'Alert forgot password', 'Please check your email to reset your password.'.$message, BASEURL.'forgot-password');
@@ -277,47 +240,9 @@ class Loginmodel extends Controller {
                     <p>Salam dari Aplikasi ".MAILTITLE."</p>
                 ";
 
-                $tahun_sekarang = date('Y');
-
-                ob_start();
-                $html_email = tampilan('mailer', [
-                    $data['subject'] = $subject,
-                    $data['title'] = WEBTITLETOP,
-                    $data['content'] = $content,
-                    $data['tahun'] = $tahun_sekarang,
-                ]); 
-                $html_email = ob_get_clean();
-
-                if(MAILSECURE == 'true'){
-                    $mail = new PHPMailer(true);
-                    try {
-                        $mail->IsSMTP();
-                        $mail->SMTPSecure = '';
-                        $mail->Host = MAILHOST;
-                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                        $mail->Port = MAILPORT;
-                        $mail->SMTPAuth = SMTPAUTH;
-                        $mail->Username = MAILUSER;
-                        $mail->Password = MAILPASS;
-                        $mail->SetFrom(MAILSENT, MAILTITLE);
-                        $mail->AddAddress($email_tujuan, $nama_user);
-                        // --- KONTEN EMAIL ---
-                        $mail->isHTML(true); // Set format email ke HTML
-                        $mail->Subject = MAILTITLE." - ".$subject;
-                        $mail->Body    = $html_email;
-                        $mail->Send();
-                        $message = "<br><br>Mail sent successfully";
-                    } catch (Exception $e) {
-                        $message = "Error: {$mail->ErrorInfo}";
-                    }
-                }else{
-                    $subjectMail = $subject." - ".MAILTITLE;
-                    // Kirim email dalam format HTML
-                    $headersMail  = "From: ".MAILTITLE." <".MAILSENT.">\r\n";
-                    $headersMail .= "Content-type: text/html\r\n";
-                    mail($email_tujuan, $subjectMail, $html_email, $headersMail);
-                    $message = "<br><br>Mail sent successfully";
-                }
+                $message = Pengirimmail::sentMail($subject, $email_tujuan, $nama_user, $content);
+            }else{
+                $message = "<br><em>Notifikasi belum aktif!</em>";
             }
 
             alert('success', 'Alert forgot password', 'Password update successful.'.$message, BASEURL);
