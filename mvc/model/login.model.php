@@ -2,10 +2,6 @@
 require_once vendors('logcarbon/logcarbon');
 require_once services('Validator');
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
 require_once services('Pengirimmail');
 
 use app\Models\Users;
