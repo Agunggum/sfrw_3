@@ -559,8 +559,8 @@ SPANavigator.setupThemeEventListeners();
             minHideChars: 30,
             ellipsesText: "...",
             // Menggunakan class Bootstrap yang adaptif terhadap Dark Mode
-            moreText: "<i class='fa fa-angles-down'></i> Selengkapnya",
-            lessText: "<i class='fa fa-angles-up'></i> Sembunyikan",
+            moreText: "<i class='bi bi-angles-down'></i> Selengkapnya",
+            lessText: "<i class='bi bi-angles-up'></i> Sembunyikan",
             onLess: function() {},
             onMore: function() {},
             force: false

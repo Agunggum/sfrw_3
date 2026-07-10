@@ -36,7 +36,7 @@ const welcomeTemplate = (data) => html`
                     <p>${__('id-bukan-anggota', 'Bukan anggota?')} <a href="${data.linkregister}">${__('id-daftar', 'Daftar')}</a></p>
                     <p>${__('id-atau-daftar-dengan', 'atau masuk dengan')}:</p>
                     <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-google"></i>
+                    <i class="bi bi-google"></i>
                     </button>
                 </div>
             </form>

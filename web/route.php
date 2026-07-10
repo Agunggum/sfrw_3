@@ -78,7 +78,7 @@ Rute::ambil('logs/{file}', function($file) {
     require_once tampilan('logs', [
         $data['title'] = "S-FRW Logs",
         $data['breadcrumb'] = "S-FRW Logs",
-        $data['icon'] = "fa fa-logs",
+        $data['icon'] = "bi bi-logs",
         $data['file'] = $file
     ]);
 });

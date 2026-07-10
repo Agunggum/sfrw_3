@@ -49,7 +49,7 @@
                                     <!-- Submit button -->
                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-danger btn-block mb-4 rounded-4"><span id="id-submit-new-password" class="title-class" data-lang-id="id-submit-new-password">Kirim Kata Sandi Baru</span></button>
                                 </form>
-                            <?php else: alert('warning', 'Attention..!', '<i class="fa fa-lock"></i> Link expired!', BASEURL.'forgot-password'); endif; 
+                            <?php else: alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> Link expired!', BASEURL.'forgot-password'); endif; 
                         else: ?>
                                 <p class="h3 text-left font-weight-bold mb-5"><span id="id-lupa-kata-sandi" class="title-class" data-lang-id="id-lupa-kata-sandi">Lupa Kata Sandi.</span></p>
                                     

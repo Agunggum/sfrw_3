@@ -37,7 +37,7 @@ class Loginmodel extends Controller {
             Logcarbon::carbonlog($username." :: login denied : not found","logsignin");
             
             $_SESSION['error'] = "true";
-            alert('warning', 'Attention..!', '<i class="fa fa-lock"></i> login denied.', $uri.'login');
+            alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> login denied.', $uri.'login');
             return;
         }
             
@@ -45,7 +45,7 @@ class Loginmodel extends Controller {
             Logcarbon::carbonlog($username." :: login denied : inactive","logsignin");
             
             $_SESSION['error'] = "true";
-            alert('warning', 'Attention..!', '<i class="fa fa-lock"></i> You are no longer able to log into this system.', $uri.'login');
+            alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> You are no longer able to log into this system.', $uri.'login');
             return;
         }
             
@@ -55,13 +55,13 @@ class Loginmodel extends Controller {
             Logcarbon::carbonlog($username." :: login denied : wrong password","logsignin");
             
             $_SESSION['error'] = "true";
-            alert('warning', 'Attention..!', '<i class="fa fa-lock"></i> Please re-check the Username/ email or Password you entered, make sure the data you entered is correct.', $uri.'login');
+            alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> Please re-check the Username/ email or Password you entered, make sure the data you entered is correct.', $uri.'login');
             return;
         }
             
         // Login sukses
         if(ENVIRONMENT == 'maintenance' and $data['role'] != 'administrator'){
-            alert('warning', 'Attention..!', '<i class="fa fa-lock"></i> Login denied. system is under maintenance.', $uri.'login');
+            alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> Login denied. system is under maintenance.', $uri.'login');
             return;
         }else{
             // Regenerate session ID to prevent session fixation
@@ -107,7 +107,7 @@ class Loginmodel extends Controller {
                 unset($_SESSION['intended_url']);
             }
                 
-            //alert('success', '', '<i class="fa fa-check animated flip" style="font-size:4.5em;"></i></p><p><strong>..Waiting to sign in..</strong>', $redirect_url);
+            //alert('success', '', '<i class="bi bi-check animated flip" style="font-size:4.5em;"></i></p><p><strong>..Waiting to sign in..</strong>', $redirect_url);
 
             arahkan($redirect_url);
         }
