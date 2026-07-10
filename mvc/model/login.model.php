@@ -159,23 +159,18 @@ class Loginmodel extends Controller {
                 'updated_at' => DATEWMIN
             ]);
 
-            if(MAILACTIVATE == 'true'){
-                $nama_user       = $data['fullname'];
-                $subject         = "Permintaan perubahan kata sandi";
-                $email_tujuan    = $data['email'];
+            $nama_user       = $data['fullname'];
+            $subject         = "Permintaan perubahan kata sandi";
+            $email_tujuan    = $data['email'];
 
-                $content = "
-                    <p>Hai ".$nama_user."!</p>
-                    <p>Kami mendeteksi permintaan kata sandi baru Anda pada ".daydateandtime_indo(date('Y-m-d H:i'))." WIB.</p>
-                    <p>Berikut adalah link reset password Anda: <a href='".$linkforgot."'>".$linkforgot."</a></p>
-                    <p>Jika ini bukan Anda, segera amankan akun Anda.</p>
-                    <p>Salam dari Aplikasi ".MAILTITLE."</p>
-                ";
-
-                $message = Pengirimmail::sentMail($subject, $email_tujuan, $nama_user, $content);
-            }else{
-                $message = "<br><em>Notifikasi belum aktif!</em>";
-            }
+            $content = "
+                <p>Hai ".$nama_user."!</p>
+                <p>Kami mendeteksi permintaan kata sandi baru Anda pada ".daydateandtime_indo(date('Y-m-d H:i'))." WIB.</p>
+                <p>Berikut adalah link reset password Anda: <a href='".$linkforgot."'>".$linkforgot."</a></p>
+                <p>Jika ini bukan Anda, segera amankan akun Anda.</p>
+                <p>Salam dari Aplikasi ".MAILTITLE."</p>
+            ";
+            $message = Pengirimmail::sentMail($subject, $email_tujuan, $nama_user, $content);
 
             alert('success', 'Alert forgot password', 'Please check your email to reset your password.'.$message, BASEURL.'forgot-password');
         }
@@ -223,22 +218,18 @@ class Loginmodel extends Controller {
                 ->dimana('email', '=', $data['email'])
                 ->perbarui(['password' => $hashed_password]);
 
-            if(MAILACTIVATE == 'true'){
-                $nama_user       = $dataUser['fullname'];
-                $subject         = "Perubahan kata sandi";
-                $email_tujuan    = $data['email'];
+            $nama_user       = $dataUser['fullname'];
+            $subject         = "Perubahan kata sandi";
+            $email_tujuan    = $data['email'];
 
-                $content = "
-                    <p>Hai ".$nama_user."!</p>
-                    <p>Kami mendeteksi perubahan kata sandi Anda pada ".daydateandtime_indo(date('Y-m-d H:i'))." WIB.</p>
-                    <p>Jika ini bukan Anda, segera amankan akun Anda.</p>
-                    <p>Salam dari Aplikasi ".MAILTITLE."</p>
-                ";
+            $content = "
+                <p>Hai ".$nama_user."!</p>
+                <p>Kami mendeteksi perubahan kata sandi Anda pada ".daydateandtime_indo(date('Y-m-d H:i'))." WIB.</p>
+                <p>Jika ini bukan Anda, segera amankan akun Anda.</p>
+                <p>Salam dari Aplikasi ".MAILTITLE."</p>
+            ";
 
-                $message = Pengirimmail::sentMail($subject, $email_tujuan, $nama_user, $content);
-            }else{
-                $message = "<br><em>Notifikasi belum aktif!</em>";
-            }
+            $message = Pengirimmail::sentMail($subject, $email_tujuan, $nama_user, $content);
 
             alert('success', 'Alert forgot password', 'Password update successful.'.$message, BASEURL);
         }
