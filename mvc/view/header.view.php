@@ -13,6 +13,14 @@ if (defined('IS_AJAX') && IS_AJAX) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo $data['title']; ?></title>
+
+    <link rel="manifest" href="<?php echo asset('manifest.json'); ?>">
+  
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#212529">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>">
+
     <meta name="description" content="<?php echo WEBTITLE; ?> <?php echo VERSIONFRMAEWORK; ?>" />
     <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.ico'); ?>" sizes="any" >
     <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.svg'); ?>" type="image/svg+xml">

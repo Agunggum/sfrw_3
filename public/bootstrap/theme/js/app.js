@@ -8,7 +8,6 @@ const App = (() => {
     const routes = [];
 
     const addRoute = (method, path, handler) => {
-        // Ubah format rute {param} menjadi regex
         const regexPath = path.replace(/\{([^}]+)\}/g, '([^/]+)').replace(/\//g, '\\/');
         routes.push({
             method: method.toUpperCase(),
@@ -19,7 +18,6 @@ const App = (() => {
     };
 
     const handle = (url) => {
-        // Bersihkan URL dari BASEURL
         const baseUrl = window.location.origin + (window.BASEURL_PATH || '/');
         let path = url.replace(baseUrl, '').split('?')[0];
         if (!path.startsWith('/')) path = '/' + path;
@@ -46,7 +44,7 @@ const App = (() => {
 
 window.App = App;
 
-// Mencegah flash tema (FOUC) & Inisialisasi Global
+// Mencegah flash tema (FOUC) & Inisialisasi Global + PWA
 (() => {
     const getStoredTheme = () => localStorage.getItem('theme');
     const getPreferredTheme = () => {
@@ -61,10 +59,46 @@ window.App = App;
     const currentLang = localStorage.getItem('user_language') || 'id';
     document.documentElement.setAttribute('data-lang-current', currentLang);
     
+    // --- FITUR KETERANGAN OFFLINE ---
+    const updateOnlineStatus = () => {
+        let offlineAlert = document.getElementById('pwa-offline-alert');
+        
+        if (!navigator.onLine) {
+            // Jika offline dan elemen belum ada, buat elemennya
+            if (!offlineAlert) {
+                offlineAlert = document.createElement('div');
+                offlineAlert.id = 'pwa-offline-alert';
+                // Styling sederhana (bisa disesuaikan dengan Bootstrap Anda)
+                offlineAlert.style = 'position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #dc3545; color: white; padding: 10px 20px; border-radius: 5px; z-index: 9999; font-family: sans-serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1);';
+                offlineAlert.innerText = '⚠️ Anda sedang offline. Beberapa fitur mungkin tidak tersedia.';
+                document.body.appendChild(offlineAlert);
+            }
+        } else {
+            // Jika kembali online, hapus keterangan offline
+            if (offlineAlert) {
+                offlineAlert.remove();
+            }
+        }
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('lang-ready');
         App.handle(window.location.href);
+
+        // Cek status koneksi saat aplikasi pertama kali dimuat
+        updateOnlineStatus();
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
     });
+
+    // --- REGISTRASI SERVICE WORKER (PWA) ---
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/pwa.js')
+                .then(reg => console.log('PWA: Service Worker terdaftar dengan sukses!', reg.scope))
+                .catch(err => console.error('PWA: Gagal mendaftarkan Service Worker:', err));
+        });
+    }
 
     // Sinkronisasi dengan SPA Navigator
     document.addEventListener('spa:content-loaded', (e) => {
@@ -73,26 +107,10 @@ window.App = App;
 })();
 
 /**
- * Definisi Rute Frontend (Metode route.php)
- * --------------------------------------------------------------------------
+ * Definisi Rute Frontend
  */
-
-App.ambil('/', () => {
-    console.log('SPA: Halaman Beranda Aktif');
-});
-
-App.ambil('/login', () => {
-    console.log('SPA: Halaman Login Aktif');
-});
-
-App.ambil('/forgot-password', () => {
-    console.log('SPA: Halaman Forgot Passwords Aktif');
-});
-
-App.ambil('/register', () => {
-    console.log('SPA: Halaman Register Aktif');
-});
-
-App.ambil('/dashboard', () => {
-    console.log('SPA: Halaman Dashboard Aktif');
-});
+App.ambil('/', () => { console.log('SPA: Halaman Beranda Aktif'); });
+App.ambil('/login', () => { console.log('SPA: Halaman Login Aktif'); });
+App.ambil('/forgot-password', () => { console.log('SPA: Halaman Forgot Passwords Aktif'); });
+App.ambil('/register', () => { console.log('SPA: Halaman Register Aktif'); });
+App.ambil('/dashboard', () => { console.log('SPA: Halaman Dashboard Aktif'); });

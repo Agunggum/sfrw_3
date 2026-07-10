@@ -1,0 +1,23 @@
+{
+  "name": "SFRW - Application",
+  "short_name": "SFRW",
+  "description": "SFRW - Application",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#212529",
+  "icons": [
+    {
+      "src": "bootstrap/theme/logo-sfrw.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "bootstrap/theme/logo-sfrw.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
