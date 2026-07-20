@@ -66,6 +66,15 @@ class Validator {
                 }
                 break;
 
+            case 'minlength':
+                if (!empty($value)) {
+                    // Gunakan mb_strlen agar akurat menghitung panjang string
+                    if (mb_strlen((string)$value) < (int)$ruleValue) {
+                        self::addError($field, "Kolom {$fieldName} minimal harus {$ruleValue} karakter.");
+                    }
+                }
+                break;
+
             case 'min':
                 if (!empty($value)) {
                     if (is_numeric($value)) {
@@ -129,13 +138,13 @@ class Validator {
     public static function getErrorsString() {
         if (empty(self::$errors)) return '';
         
-        $output = '<ul class="text-start mb-0">';
+        $output = '- ';
         foreach (self::$errors as $fieldErrors) {
             foreach ($fieldErrors as $error) {
-                $output .= "<li>{$error}</li>";
+                $output .= "{$error}, ";
             }
         }
-        $output .= '</ul>';
+        $output .= '';
         return $output;
     }
 

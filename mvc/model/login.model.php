@@ -178,7 +178,7 @@ class Loginmodel extends Controller {
 
     function forgotnewformmodel($uri,$s) { 
         $rules = [
-            'password1' => 'required|min:8',
+            'password1' => 'required|minlength:8',
             'password2' => 'required|matches:password1'
         ];
 

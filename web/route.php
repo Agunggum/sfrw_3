@@ -93,13 +93,14 @@ Rute::middleware('Auth')->grup(function() {
     Rute::ambil('dashboard', function() {
         require_once tampilan('dashboard/dashboard', [
             $data['title'] = "S-FRW Dashboard",
+            $data['id'] = 0
         ]);
     });
 
     Rute::middleware('Role:admin')->grup(function() {
         Rute::ambil('users', 'UserController@daftar');
         Rute::ambil('userslist', 'UserController@daftarlist');
-        Rute::ambil('users/tambah', 'UserController@formTambah');
+        Rute::ambil('users/create', 'UserController@formTambah');
         Rute::kirim('users/simpan', 'UserController@simpan');
         Rute::ambil('users/{id}/edit', 'UserController@formEdit');
         Rute::kirim('users/{id}/perbarui', 'UserController@perbarui');

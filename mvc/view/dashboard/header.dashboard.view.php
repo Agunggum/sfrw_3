@@ -41,8 +41,8 @@ if (defined('IS_AJAX') && IS_AJAX) {
         @import "<?php echo asset('bootstrap/theme/css/sfrw_dashboard.css?v=0.5'); ?>";
     </style>
     <script src="<?php echo asset('bootstrap/theme/js/jquery-3.7.1.js'); ?>"></script>
-    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>" defer></script>
     <?php /*<script src="<?php echo asset('bootstrap/theme/fontawesome/js/all.js'); ?>" defer></script>*/ ?>
+    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>" defer></script>
     <script src="<?php echo asset('bootstrap/theme/js/bootstrap.bundle.min.js'); ?>" defer></script>
     <script src="<?php echo asset('bootstrap/theme/js/datatables.js'); ?>" defer></script>
     <script src="<?php echo asset('bootstrap/theme/js/dataTables.bootstrap5.js'); ?>" defer></script>

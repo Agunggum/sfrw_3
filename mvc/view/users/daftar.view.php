@@ -40,10 +40,10 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Fullname</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
+                <th><span id="id-namalengkap" class="title-class" data-lang-id="id-namalengkap">Nama lengkap</span></th>
+                <th><span id="id-username" class="title-class" data-lang-id="id-username">Nama pengguna</span></th>
+                <th><span id="id-email" class="title-class" data-lang-id="id-email">Surel</span></th>
+                <th><span id="id-role" class="title-class" data-lang-id="id-role">Peran</span></th>
                 <th></th>
             </tr>
         </thead>
@@ -60,10 +60,10 @@
         <tfoot>
             <tr>
                 <th>#</th>
-                <th>Fullname</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
+                <th><span id="id-namalengkap" class="title-class" data-lang-id="id-namalengkap">Nama lengkap</span></th>
+                <th><span id="id-username" class="title-class" data-lang-id="id-username">Nama pengguna</span></th>
+                <th><span id="id-email" class="title-class" data-lang-id="id-email">Surel</span></th>
+                <th><span id="id-role" class="title-class" data-lang-id="id-role">Peran</span></th>
                 <th></th>
             </tr>
         </tfoot>
@@ -216,7 +216,7 @@
                 toastElement.classList.add('bg-danger');
             }
 
-            var toast = new bootstrap.Toast(toastElement, { delay: 5000 });
+            var toast = new bootstrap.Toast(toastElement, { delay: 8000 });
             toast.show();
         }
 

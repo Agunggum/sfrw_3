@@ -39,7 +39,11 @@
         "id-pengaturan": "Pengaturan",
         "id-bukan-anggota": "Bukan anggota?",
         "id-ingat-saya": "Ingat saya",
-	"en-dont-see-data": "Tidak melihat data?"
+        "en-dont-see-data": "Tidak melihat data?",
+        "id-namalengkap": "Nama lengkap",
+        "id-username": "Nama pengguna",
+        "id-email": "Surel",
+        "id-role": "Peran"
     },
     "en": {
         "id-pemicu": "",
@@ -81,6 +85,10 @@
         "id-pengaturan": "Setting",
         "id-bukan-anggota": "Not a member?",
         "id-ingat-saya": "Remember me",
-	"en-dont-see-data": "Don`t see data?"
+        "en-dont-see-data": "Don`t see data?",
+        "id-namalengkap": "Full name",
+        "id-username": "Username",
+        "id-email": "Email",
+        "id-role": "Role"
     }
 }

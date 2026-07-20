@@ -1,5 +1,6 @@
 <?php
 require_once vendors('logcarbon/logcarbon');
+require_once services('Validator');
 
 use app\Models\Users;
 
@@ -43,8 +44,9 @@ class UserController extends Controller {
      * Membutuhkan peran 'admin'.
      */
     public static function formTambah() {
-        require_once tampilan('users/tambah', [
+        require_once tampilan('users/create', [
             $data['title'] = "S-FRW Form Tambah Pengguna",
+            $data['id'] = 0,
         ]);
     }
 
@@ -53,25 +55,51 @@ class UserController extends Controller {
      * Membutuhkan peran 'admin'.
      */
     public static function simpan() {
+        // Set response header agar dibaca sebagai JSON oleh AJAX
+        header('Content-Type: application/json');
+
         $input = kiriman();
+
+        // 1. Jalankan Validasi Input
+        $rules = [
+            'username' => 'required|minlength:3|regex:/^[a-z0-9_]+$/',
+            'password' => 'required|minlength:8',
+            'fullname' => 'required',
+            'email'    => 'required|email|unique:users,email'
+        ];
+
+        if (!Validator::validate($input, $rules)) {
+            // Kembalikan error validasi dalam bentuk JSON
+            echo json_encode([
+                'status'  => 'error',
+                'message' => Validator::getErrorsString()
+            ]);
+            exit;
+        }
         
-        // Filter hanya kolom yang diizinkan (fillable)
+        // 2. Filter hanya kolom yang diizinkan (fillable) setelah lolos validasi
         $fillable = explode(", ", Users::schemafillable());
         $data = array_intersect_key($input, array_flip($fillable));
 
-        if (empty($data['username']) || empty($data['password'])) {
-            alert('warning', 'Gagal', 'Username dan Password wajib diisi.');
-            return;
-        }
-
-        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT); // Enkripsi password modern
+        // 3. Enkripsi password modern
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         
         try {
             PembangunKueri::tabel(Users::schematable())->sisipkan($data);
-            alert('success', 'Berhasil', 'Pengguna baru berhasil disimpan.', BASEURL . 'users');
+            
+            // Respon sukses untuk AJAX
+            echo json_encode([
+                'status'  => 'success',
+                'message' => 'Pengguna baru berhasil disimpan.'
+            ]);
         } catch (\Exception $e) {
-            alert('warning', 'Gagal', 'Terjadi kesalahan: ' . $e->getMessage());
+            // Respon gagal jika ada error database / unique constraint
+            echo json_encode([
+                'status'  => 'error',
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ]);
         }
+        exit;
     }
 
     /**
@@ -84,8 +112,9 @@ class UserController extends Controller {
             alert('warning', 'Tidak ditemukan', 'Pengguna tidak ditemukan.', BASEURL . 'users');
             return;
         }
-        require_once tampilan('users/lihat', [
+        require_once tampilan('users/profile', [
             $data['title'] = "S-FRW Lihat Pengguna",
+            $data['id'] = $id,
             $data['user'] = $user
         ]);
     }
@@ -111,25 +140,50 @@ class UserController extends Controller {
      * Membutuhkan peran 'admin'.
      */
     public static function perbarui($id) {
+        header('Content-Type: application/json');
+
         $input = kiriman();
-        
-        // Filter hanya kolom yang diizinkan (fillable)
+        $id = $input['id'] ?? null;
+
+        if (!$id) {
+            echo json_encode(['status' => 'error', 'message' => 'ID tidak ditemukan.']);
+            exit;
+        }
+
+        // Filter kolom yang dikirim
         $fillable = explode(", ", Users::schemafillable());
         $data = array_intersect_key($input, array_flip($fillable));
 
-        // Jangan perbarui password jika kosong
-        if (!empty($data['password'])) {
-            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-        } else {
-            unset($data['password']); 
+        // Jalankan validator jika perlu
+        $rules = [
+            'username' => 'regex:/^[a-z0-9_]+$/|minlength:3',
+            'email'    => 'email|unique:users,email,' . $id
+        ];
+
+        if (!Validator::validate($data, array_intersect_key($rules, $data))) {
+            echo json_encode([
+                'status'  => 'error',
+                'message' => Validator::getErrorsString()
+            ]);
+            exit;
         }
 
         try {
-            PembangunKueri::tabel(Users::schematable())->dimana('id', $id)->perbarui($data);
-            alert('success', 'Berhasil', "Pengguna dengan ID {$id} berhasil diperbarui.", BASEURL . 'users');
+            PembangunKueri::tabel(Users::schematable())
+                ->dimana('id', $id)
+                ->perbarui($data);
+
+            echo json_encode([
+                'status'  => 'success',
+                'message' => 'Data berhasil diperbarui.'
+            ]);
         } catch (\Exception $e) {
-            alert('warning', 'Gagal', 'Terjadi kesalahan: ' . $e->getMessage());
+            echo json_encode([
+                'status'  => 'error',
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ]);
         }
+        exit;
     }
 
     /**
@@ -139,7 +193,7 @@ class UserController extends Controller {
     public static function hapus($id_encrypted) {
         try {
             // Dekripsi ID terlebih dahulu
-            $id = decrypt($id_encrypted);
+            $id = $id_encrypted;
             
             $data = PembangunKueri::tabel(Users::schematable())->dimana('id', $id)->danDimana('role', 'user')->hapus();
             
