@@ -15,9 +15,13 @@ class UserController extends Controller {
             if (!is_dir(MODPATH.'view/users')) mkdir(MODPATH.'view/users');
             file_put_contents(MODPATH.'view/users/daftar.view'.EXT, '<h1>Daftar Pengguna</h1><pre><?php print_r($data["users"]); ?></pre>');
         }
-        require_once tampilan('users/daftar', [
-            $data['title'] = "S-FRW Data Pengguna",
-        ]);
+        if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+            $data['title'] = "S-FRW Data Pengguna";
+        }else{
+            $data['title'] = "S-FRW Users Data";
+        }
+        $data['id'] = 0;
+        require_once tampilan('users/daftar', $data);
     }
 
     public static function daftarlist() {
@@ -44,10 +48,13 @@ class UserController extends Controller {
      * Membutuhkan peran 'admin'.
      */
     public static function formTambah() {
-        require_once tampilan('users/create', [
-            $data['title'] = "S-FRW Form Tambah Pengguna",
-            $data['id'] = 0,
-        ]);
+        if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+            $data['title'] = "S-FRW Form Tambah Pengguna";
+        }else{
+            $data['title'] = "S-FRW Form Add Users";
+        }
+        $data['id'] = 0;
+        require_once tampilan('users/create', $data);
     }
 
     /**

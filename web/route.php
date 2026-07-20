@@ -20,15 +20,21 @@ Rute::ambil('/', function() {
 
 // Halaman Login
 Rute::ambil('login', function() {
-    require_once tampilan('login', [
-        $data['title'] = "S-FRW Login",
-    ]);
+    if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+        $data['title'] = "S-FRW Masuk";
+    }else{
+        $data['title'] = "S-FRW Login";
+    }
+    require_once tampilan('login', $data);
 });
 
 Rute::ambil('register', function() {
-    require_once tampilan('register', [
-        $data['title'] = "S-FRW Register",
-    ]);
+    if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+        $data['title'] = "S-FRW Daftar";
+    }else{
+        $data['title'] = "S-FRW Register";
+    }
+    require_once tampilan('register', $data);
 });
 
 Rute::kirim('authlogin', function() {
@@ -45,26 +51,35 @@ Rute::kirim('authforgot/{s}', function($s) {
 
 // Halaman Lupa Password
 Rute::ambil('forgot-password', function() {
-    require_once tampilan('forgot-password', [
-        $data['title'] = "S-FRW Lupa Password",
-    ]);
+    if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+        $data['title'] = "S-FRW Lupa Password";
+    }else{
+        $data['title'] = "S-FRW Forgot Password";
+    }
+    require_once tampilan('forgot-password', $data);
 });
 
 Rute::ambil('forgot-password/{s}', function($s) {
-    require_once tampilan('forgot-password', [
-        $data['title'] = "S-FRW Lupa Password",
-        $data['s'] = PembangunKueri::tabel('forgot_link')
+    if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+        $data['title'] = "S-FRW Lupa Password";
+    }else{
+        $data['title'] = "S-FRW Forgot Password";
+    }
+    $data['s'] = PembangunKueri::tabel('forgot_link')
                 ->pilih('end_time')
                 ->dimana('target_link', '=', $s)
-                ->pertama()
-    ]);
+                ->pertama();
+    require_once tampilan('forgot-password', $data);
 });
 
 // Halaman Tabel (Datatable)
 Rute::ambil('datatable', function() {
-    require_once tampilan('table', [
-        $data['title'] = "S-FRW Datatable",
-    ]);
+    if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+        $data['title'] = "S-FRW Tabel";
+    }else{
+        $data['title'] = "S-FRW Datatable";
+    }
+    require_once tampilan('table', $data);
 });
 
 // Halaman Keluar (Signout)
@@ -91,10 +106,13 @@ Rute::ambil('logsfiles/{file}', function($file) {
 // Rute yang memerlukan autentikasi dan peran admin untuk CRUD pengguna
 Rute::middleware('Auth')->grup(function() {
     Rute::ambil('dashboard', function() {
-        require_once tampilan('dashboard/dashboard', [
-            $data['title'] = "S-FRW Dashboard",
-            $data['id'] = 0
-        ]);
+        if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+            $data['title'] = "S-FRW Dasbor";
+        }else{
+            $data['title'] = "S-FRW Dashboard";
+        }
+        $data['id'] = 0;
+        require_once tampilan('dashboard/dashboard', $data);
     });
 
     Rute::middleware('Role:admin')->grup(function() {
