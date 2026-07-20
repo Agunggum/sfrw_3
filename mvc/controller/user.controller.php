@@ -133,11 +133,14 @@ class UserController extends Controller {
             }
             return;
         }
-        require_once tampilan('users/profile', [
-            $data['title'] = "S-FRW Lihat Pengguna",
-            $data['id'] = $id,
-            $data['user'] = $user
-        ]);
+        if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+            $data['title'] = "S-FRW Profil Pengguna";
+        }else{
+            $data['title'] = "S-FRW Users Profile";
+        }
+        $data['id'] = $id;
+        $data['user'] = $user;
+        require_once tampilan('users/profile', $data);
     }
 
     /**
