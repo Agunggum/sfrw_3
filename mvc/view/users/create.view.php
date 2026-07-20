@@ -14,29 +14,29 @@
                 <div class="card-body p-4">
                     <form id="form-add-user" onsubmit="return false;" autocomplete="off">
                         <div class="mb-3">
-                            <label for="fullname" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
-                            <?php echo forminput(['text', 'fullname', 'fullname', 'fullname', 'off', 'required']); ?>
+                            <label for="fullname" class="form-label"><span id="id-namalengkap" class="title-class" data-lang-id="id-namalengkap">Nama lengkap</span> <span class="text-danger">*</span></label>
+                            <?php echo forminput(['text', 'fullname', 'fullname', 'Fullname', 'off', 'required']); ?>
                         </div>
 
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                            <?php echo forminput(['text', 'username', 'username', 'Masukkan username', 'off', 'required pattern="^[a-z0-9_]+$" title="Username harus unik dan hanya berisi huruf, angka, dan garis bawah (_)"']); ?>
+                            <label for="username" class="form-label"><span id="id-username" class="title-class" data-lang-id="id-username">Nama pengguna</span> <span class="text-danger">*</span></label>
+                            <?php echo forminput(['text', 'username', 'username', 'Username', 'off', 'required pattern="^[a-z0-9_]+$" title="Username harus unik dan hanya berisi huruf, angka, dan garis bawah (_)"']); ?>
                         </div>
 
                         <div class="mb-3">
-                            <label for="email" class="form-label">Alamat Email <span class="text-danger">*</span></label>
-                            <?php echo forminput(['email', 'email', 'email', 'contoh@email.com', 'off', 'required']); ?>
+                            <label for="email" class="form-label"><span id="id-email" class="title-class" data-lang-id="id-email">Surel</span> <span class="text-danger">*</span></label>
+                            <?php echo forminput(['email', 'email', 'Email', 'jhon.doe@email.com', 'off', 'required']); ?>
                         </div>
 
                         <div class="mb-3">
-                            <label for="password-field" class="form-label">Password <span class="text-danger">*</span></label>
-                            <?php echo forminput(['password', 'password', 'password-field', 'password', 'off', 'required pattern=".{8,}" title="Password harus minimal 8 karakter"'], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>', 'toggle-password']); ?>
+                            <label for="password-field" class="form-label"><span id="id-sandi" class="title-class" data-lang-id="id-sandi">Kata sandi</span> <span class="text-danger">*</span></label>
+                            <?php echo forminput(['password', 'password', 'password-field', 'Password', 'off', 'required pattern=".{8,}" title="Password harus minimal 8 karakter"'], ['group', 'right', '<button id="toggle-password" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-slash"></i></button>', 'toggle-password']); ?>
                         </div>
 
                         <div class="mb-4">
-                            <label for="role" class="form-label">Role / Peran <span class="text-danger">*</span></label>
+                            <label for="role" class="form-label"><span id="id-role" class="title-class" data-lang-id="id-role">Peran</span> <span class="text-danger">*</span></label>
                             <select class="form-select" id="role" name="role" required>
-                                <option value="" selected disabled>-- Pilih Role --</option>
+                                <option value="" selected disabled>--</option>
                                 <option value="admin">Admin</option>
                                 <option value="user">User</option>
                             </select>

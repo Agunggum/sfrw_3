@@ -45,7 +45,8 @@
         "id-email": "Surel",
         "id-role": "Peran",
         "id-tambah-pengguna-baru": "Tambah Pengguna Baru",
-        "id-profil-pengguna": "Profil Pengguna"
+        "id-profil-pengguna": "Profil Pengguna",
+        "id-sandi": "Kata sandi"
     },
     "en": {
         "id-pemicu": "",
@@ -93,6 +94,7 @@
         "id-email": "Email",
         "id-role": "Role",
         "id-tambah-pengguna-baru": "Add New User",
-        "id-profil-pengguna": "User Profile"
+        "id-profil-pengguna": "User Profile",
+        "id-sandi": "Password"
     }
 }
