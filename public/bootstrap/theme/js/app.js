@@ -92,12 +92,25 @@ window.App = App;
     });
 
     // --- REGISTRASI SERVICE WORKER (PWA) ---
-    if ('serviceWorker' in navigator) {
+    /*if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/pwa.js')
                 .then(reg => console.log('PWA: Service Worker terdaftar dengan sukses!', reg.scope))
                 .catch(err => console.error('PWA: Gagal mendaftarkan Service Worker:', err));
         });
+    }*/
+
+    // Registrasi Service Worker KHUSUS MOBILE
+    if ('serviceWorker' in navigator) {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+
+        if (isMobile) {
+            window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/pwa.js')
+                .then(reg => console.log('PWA Mobile: Registered', reg.scope))
+                .catch(err => console.error('PWA Mobile Error:', err));
+            });
+        }
     }
 
     // Sinkronisasi dengan SPA Navigator
