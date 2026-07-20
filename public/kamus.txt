@@ -46,7 +46,10 @@
         "id-role": "Peran",
         "id-tambah-pengguna-baru": "Tambah Pengguna Baru",
         "id-profil-pengguna": "Profil Pengguna",
-        "id-sandi": "Kata sandi"
+        "id-sandi": "Kata sandi",
+        "id-apakah-yakin-hapus-record-ini": "Apakah Anda yakin ingin menghapus record ini?",
+        "id-batal": "Batal",
+        "id-ya-hapus": "Ya, Hapus!"
     },
     "en": {
         "id-pemicu": "",
@@ -95,6 +98,9 @@
         "id-role": "Role",
         "id-tambah-pengguna-baru": "Add New User",
         "id-profil-pengguna": "User Profile",
-        "id-sandi": "Password"
+        "id-sandi": "Password",
+        "id-apakah-yakin-hapus-record-ini": "Are you sure you want to delete this record?",
+        "id-batal": "Cancelled",
+        "id-ya-hapus": "Yes, Delete!"
     }
 }

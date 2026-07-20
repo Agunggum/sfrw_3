@@ -134,9 +134,9 @@
                                 aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
                         </button>
-                        <ul class="dropdown-menu dropdown-table-menu">
-                            <li><a class="dropdown-item edit-btn" href="<?php echo BASEURL; ?>users/${data.id_encrypted}/see" data-id="${idData}">Lihat detil</a></li>
-                            <li><button class="dropdown-item delete-btn" type="button" data-id="${idData}" data-username="${data.username}">Hapus</button></li>
+                        <ul class="dropdown-menu dropdown-table-menu" style="width: 70px !important;">
+                            <li><a class="dropdown-item text-center icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);" href="<?php echo BASEURL; ?>users/${data.id_encrypted}/see" data-id="${idData}">-- <i class="bi bi-search"></i> --</a></li>
+                            <li><a class="dropdown-item text-center icon-link icon-link-hover delete-btn" style="cursor:pointer; --bs-icon-link-transform: translate3d(0, -.125rem, 0);" data-id="${idData}" data-username="${data.username}">-- <i class="bi bi-trash text-danger"></i> --</a></li>
                         </ul>
                     </div>`;
                     }
@@ -198,7 +198,7 @@
                     }
                 },
                 complete: function() {
-                    $btn.prop('disabled', false).text('Ya, Hapus!');
+                    $btn.prop('disabled', false).text('Ya, Deleted!');
                 }
             });
         });
@@ -235,15 +235,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Konfirmasi Hapus</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><sKonfirmasi Hapus</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Apakah Anda yakin ingin menghapus record ini? (Username: <span id="delete-id-display"></span>)
+                <span id="id-apakah-yakin-hapus-record-ini" class="title-class" data-lang-id="id-apakah-yakin-hapus-record-ini">Apakah Anda yakin ingin menghapus record ini?</span> (Username: <span id="delete-id-display"></span>)
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-danger" id="confirm-delete-action">Ya, Hapus!</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span id="id-batal" class="title-class" data-lang-id="id-batal">Batal</span></button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-action"><span id="id-ya-hapus" class="title-class" data-lang-id="id-ya-hapus">Ya, Hapus!</span></button>
             </div>
         </div>
     </div>
