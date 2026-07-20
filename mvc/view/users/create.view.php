@@ -7,7 +7,9 @@
         <div class="col-12 col-lg-11 col-xl-10">
             <div class="card shadow-sm border-0 rounded-3">
                 <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                    <h5 class="card-title mb-0 fw-bold">Tambah Pengguna Baru</h5>
+                    <h5 class="card-title mb-0 fw-bold">
+                        <i class="bi bi-plus me-2"></i><span id="id-tambah-pengguna-baru" class="title-class" data-lang-id="id-tambah-pengguna-baru">Tambah Pengguna Baru</span>
+                    </h5>
                 </div>
                 <div class="card-body p-4">
                     <form id="form-add-user" onsubmit="return false;" autocomplete="off">

@@ -43,7 +43,9 @@
         "id-namalengkap": "Nama lengkap",
         "id-username": "Nama pengguna",
         "id-email": "Surel",
-        "id-role": "Peran"
+        "id-role": "Peran",
+        "id-tambah-pengguna-baru": "Tambah Pengguna Baru",
+        "id-profil-pengguna": "Profil Pengguna"
     },
     "en": {
         "id-pemicu": "",
@@ -89,6 +91,8 @@
         "id-namalengkap": "Full name",
         "id-username": "Username",
         "id-email": "Email",
-        "id-role": "Role"
+        "id-role": "Role",
+        "id-tambah-pengguna-baru": "Add New User",
+        "id-profil-pengguna": "User Profile"
     }
 }

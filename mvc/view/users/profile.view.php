@@ -8,10 +8,10 @@
             <div class="card shadow-sm border-0 rounded-3">
                 <div class="card-header py-3 d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0 fw-bold">
-                        <i class="bi bi-person-badge me-2"></i>Profil Pengguna
+                        <i class="bi bi-person-badge me-2"></i><span id="id-profil-pengguna" class="title-class" data-lang-id="id-profil-pengguna">Profil Pengguna</span>
                     </h5>
                     <a href="<?php echo BASEURL; ?>users" class="btn btn-outline-secondary btn-sm">
-                        <i class="bi bi-arrow-left me-1"></i> Kembali
+                        <i class="bi bi-arrow-left me-1"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span>
                     </a>
                 </div>
                 <div class="card-body p-4">
@@ -33,7 +33,7 @@
                         
                         <!-- Kolom Fullname -->
                         <div class="col-12 col-sm-6">
-                            <label class="form-label text-muted small mb-1">Nama Lengkap</label>
+                            <label class="form-label text-muted small mb-1"><span id="id-namalengkap" class="title-class" data-lang-id="id-namalengkap">Nama lengkap</span></label>
                             <div class="inline-field-wrapper" data-field="fullname">
                                 <!-- Mode Display -->
                                 <div class="view-mode d-flex justify-content-between align-items-center p-2 rounded-3 border">
@@ -59,7 +59,7 @@
 
                         <!-- Kolom Username -->
                         <div class="col-12 col-sm-6">
-                            <label class="form-label text-muted small mb-1">Username</label>
+                            <label class="form-label text-muted small mb-1"><span id="id-username" class="title-class" data-lang-id="id-username">Nama pengguna</span></label>
                             <div class="inline-field-wrapper" data-field="username">
                                 <div class="view-mode d-flex justify-content-between align-items-center p-2 rounded-3 border">
                                     <span class="field-value fw-semibold"><?php echo htmlspecialchars($user['username'] ?? '-'); ?></span>
@@ -83,7 +83,7 @@
 
                         <!-- Kolom Email -->
                         <div class="col-12 col-sm-6">
-                            <label class="form-label text-muted small mb-1">Email</label>
+                            <label class="form-label text-muted small mb-1"><span id="id-email" class="title-class" data-lang-id="id-email">Surel</span></label>
                             <div class="inline-field-wrapper" data-field="email">
                                 <div class="view-mode d-flex justify-content-between align-items-center p-2 rounded-3 border">
                                     <span class="field-value fw-semibold"><?php echo htmlspecialchars($user['email'] ?? '-'); ?></span>
@@ -107,7 +107,7 @@
 
                         <!-- Kolom Role -->
                         <div class="col-12 col-sm-6">
-                            <label class="form-label text-muted small mb-1">Role / Peran</label>
+                            <label class="form-label text-muted small mb-1"><span id="id-role" class="title-class" data-lang-id="id-role">Peran</span></label>
                             <div class="inline-field-wrapper" data-field="role">
                                 <div class="view-mode d-flex justify-content-between align-items-center p-2 rounded-3 border">
                                     <span class="field-value fw-semibold text-capitalize"><?php echo htmlspecialchars($user['role'] ?? '-'); ?></span>
