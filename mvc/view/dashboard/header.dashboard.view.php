@@ -35,14 +35,14 @@ if (defined('IS_AJAX') && IS_AJAX) {
         @import "<?php echo asset('bootstrap/theme/css/bootstrap.css?v=5.3.8'); ?>";
         @import "<?php echo asset('bootstrap/theme/css/bootstrap.min.css?v=5.3.8'); ?>";
         @import "<?php echo asset('bootstrap/theme/css/datatables-bootstrap-5.css?v=0.1'); ?>";
-        @import "<?php echo asset('bootstrap/theme/fontawesome/css/all.css'); ?>";
+        <?php /*@import "<?php echo asset('bootstrap/theme/fontawesome/css/all.css'); ?>*/ ?>
         @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
         @import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css");
         @import "<?php echo asset('bootstrap/theme/css/sfrw_dashboard.css?v=0.5'); ?>";
     </style>
     <script src="<?php echo asset('bootstrap/theme/js/jquery-3.7.1.js'); ?>"></script>
     <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>" defer></script>
-    <script src="<?php echo asset('bootstrap/theme/fontawesome/js/all.js'); ?>" defer></script>
+    <?php /*<script src="<?php echo asset('bootstrap/theme/fontawesome/js/all.js'); ?>" defer></script>*/ ?>
     <script src="<?php echo asset('bootstrap/theme/js/bootstrap.bundle.min.js'); ?>" defer></script>
     <script src="<?php echo asset('bootstrap/theme/js/datatables.js'); ?>" defer></script>
     <script src="<?php echo asset('bootstrap/theme/js/dataTables.bootstrap5.js'); ?>" defer></script>
