@@ -4,14 +4,37 @@
 <?php if (isset($_SESSION['alert'])) {
     echo $_SESSION['alert'];
 } ?>
+
 <style>
-    /* CSS tambahan untuk merapikan dropdown yang dipindah ke body via JS */
+    /* 1. Atur z-index dropdown agar berada di layer paling atas dari seluruh komponen DataTables */
     .dropdown-table-menu {
-        margin: 0 !important;
+        z-index: 1070 !important;
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
         border: 1px solid rgba(0, 0, 0, 0.15);
     }
+    /* 2. Turunkan z-index milik FixedHeader */
+    table.dataTable.fixedHeader-floating,
+    table.dataTable.fixedHeader-locked {
+        z-index: 1030 !important;
+    }
+    /* 3. Atur z-index untuk FixedColumns DataTables agar tidak menimpa menu dropdown */
+    div.DTFC_LeftWrapper,
+    div.DTFC_RightWrapper,
+    .dtfc-fixed-left,
+    .dtfc-fixed-right {
+        z-index: 1020 !important;
+    }
+    /* 4. Pastikan cell/kontainer dropdown saat aktif di kolom fixed naik ke atas */
+    td.dtfc-fixed-right,
+    td.dtfc-fixed-left {
+        position: relative;
+    }
+    td.dtfc-fixed-right:has(.dropdown-toggle.show),
+    td.dtfc-fixed-left:has(.dropdown-toggle.show) {
+        z-index: 1060 !important;
+    }
 </style>
+
 <section>
     <table id="datatable-users" class="table table-striped table-hover table-rounded">
         <thead>
@@ -46,13 +69,13 @@
         </tfoot>
     </table>
 </section>
+
 <?php require_once view('dashboard/bottom.dashboard'); ?>
+
 <script>
     $(document).ready(function() {
         var table = $('#datatable-users').DataTable({
-            layout: {
-                /*top2Start: 'pageLength', topEnd: 'search',*/
-            },
+            layout: {},
             "lengthMenu": [
                 [<?php echo PAGINATION; ?>, 50, 100, -1],
                 [<?php echo PAGINATION; ?>, 50, 100, "All"]
@@ -67,20 +90,18 @@
                 url: '<?php echo BASEURL . 'userslist'; ?>',
                 dataSrc: ''
             },
+            // Otomatis tutup dropdown yang terbuka jika tabel di-render ulang (misal: paged/search)
             drawCallback: function() {
-                // Sembunyikan dropdown yang terbuka saat tabel di-draw ulang (search/paging)
-                $('.dropdown-table-menu').each(function() {
-                    var $menu = $(this);
-                    if ($menu.is(':visible')) {
-                        var $dropdown = $menu.data('origin');
-                        if ($dropdown) bootstrap.Dropdown.getOrCreateInstance($dropdown[0]).hide();
-                    }
+                $('.dropdown-toggle.show').each(function() {
+                    var instance = bootstrap.Dropdown.getInstance(this);
+                    if (instance) instance.hide();
                 });
             },
             "language": {
                 "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div> <a href="<?php echo BASEURL; ?>users" onclick="location.reload()"><span id="en-dont-see-data" class="title-class" data-lang-id="en-dont-see-data">Don`t see data?</span> <i class="bi bi-repeat"></i></a>'
             },
-            columns: [{
+            columns: [
+                {
                     data: null,
                     sortable: false,
                     searchable: false,
@@ -88,70 +109,65 @@
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }
                 },
-                {
-                    data: 'fullname'
-                },
-                {
-                    data: 'username'
-                },
-                {
-                    data: 'email'
-                },
-                {
-                    data: 'role'
-                },
+                { data: 'fullname' },
+                { data: 'username' },
+                { data: 'email' },
+                { data: 'role' },
                 {
                     data: null,
                     orderable: false,
                     searchable: false,
                     render: function(data, type, row, meta) {
-                        // PENTING: Gunakan properti objek seperti row.id atau data.id (sesuai API Anda), bukan row[0] jika dataSrc berbentuk objek.
                         var idData = row.id || data.id_encrypted;
 
+                        /* 
+                          PERBAIKAN UTAMA:
+                          Gunakan data-bs-boundary="body" dan strategy:"fixed" dari Popper.js.
+                          Sistem ini akan menghitung posisi melayang secara native tanpa merusak DOM HTML.
+                        */
                         return `<div class="dropdown float-end">
-                        <button class="btn btn-outline-default btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-outline-default btn-sm dropdown-toggle" 
+                                type="button" 
+                                data-bs-toggle="dropdown" 
+                                data-bs-boundary="body" 
+                                data-bs-popper-config='{"strategy":"fixed"}' 
+                                aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-table-menu">
                             <li><a class="dropdown-item edit-btn" href="<?php echo BASEURL; ?>users/${data.id_encrypted}/see" data-id="${idData}">Lihat detil</a></li>
-                            <li><button class="dropdown-item delete-btn" href="#" data-id="${idData}" data-username="${data.username}">Hapus</button></li>
+                            <li><button class="dropdown-item delete-btn" type="button" data-id="${idData}" data-username="${data.username}">Hapus</button></li>
                         </ul>
                     </div>`;
                     }
                 },
             ]
         });
-        // Variabel penampung sementara untuk data baris yang akan dihapus
+
         var currentTableRow = null;
         var idYangAkanDihapus = null;
         var userYangAkanDihapus = null;
 
-        // 1. Event listener ketika tombol delete di dalam dropdown diklik
+        // 1. Event listener ketika tombol delete diklik
         $(document).on('click', '.delete-btn', function(e) {
             e.preventDefault();
 
             idYangAkanDihapus = $(this).data('id');
             userYangAkanDihapus = $(this).data('username');
 
-            // Cari elemen <tr> terdekat dari tombol delete yang diklik di tabel asli
-            // Kita gunakan .edit-btn yang masih tersisa di tabel asli sebagai acuan pencarian baris (TR)
-            var originalDropdownContainer = $(`.edit-btn[data-id="${idYangAkanDihapus}"]`).closest('tr');
-            currentTableRow = originalDropdownContainer;
+            // Tangkap elemen <tr> langsung dari tombol delete
+            currentTableRow = $(this).closest('tr');
 
-            // Tampilkan ID di modal
             $('#delete-id-display').text(userYangAkanDihapus);
 
-            // Munculkan modal
             var modalElement = document.getElementById('staticBackdrop');
             var myModal = bootstrap.Modal.getOrCreateInstance(modalElement);
             myModal.show();
         });
 
-        // 2. Event listener ketika tombol "Understood" (Konfirmasi Hapus) di dalam modal diklik
+        // 2. Event listener konfirmasi hapus modal
         $('#confirm-delete-action').on('click', function() {
             var $btn = $(this);
-
-            // Mencegah double click selama proses AJAX berjalan
             $btn.prop('disabled', true).text('Processing...');
 
             $.ajax({
@@ -159,37 +175,21 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    // Validasi response dari backend
                     if (response.status === 'success') {
-                        
-                        // Hapus baris dari DataTables secara visual
                         if (currentTableRow && currentTableRow.length) {
                             table.row(currentTableRow).remove().draw(false);
-                        } else {
-                            var fallbackRow = $(`.edit-btn[data-id="${idYangAkanDihapus}"]`).closest('tr');
-                            if (fallbackRow.length) {
-                                table.row(fallbackRow).remove().draw(false);
-                            }
                         }
 
-                        // Tutup modal
                         var modalElement = document.getElementById('staticBackdrop');
                         var myModal = bootstrap.Modal.getOrCreateInstance(modalElement);
                         myModal.hide();
 
-                        // Notifikasi sukses
                         showToast("Sukses: " + response.message, 'success');
-                        $('.datatable-help').DataTable().ajax.reload(null, false);
-
                     } else {
-                        // Jika backend mengirim status "error" walau HTTP Request-nya 'Success (200)'
                         showToast("Gagal: " + response.message, 'danger');
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error("Error Response: ", xhr.responseText);
-                    
-                    // Coba parsing jika error response berupa JSON string
                     try {
                         var errObj = JSON.parse(xhr.responseText);
                         showToast("Gagal: " + errObj.message, 'danger');
@@ -198,7 +198,6 @@
                     }
                 },
                 complete: function() {
-                    // Kembalikan status tombol ke semula
                     $btn.prop('disabled', false).text('Ya, Hapus!');
                 }
             });
@@ -208,10 +207,8 @@
             var toastElement = document.getElementById('liveToast');
             var toastMessage = document.getElementById('toastMessage');
 
-            // Set teks pesan dari respon PHP
             toastMessage.textContent = message;
 
-            // Atur warna background berdasarkan tipe status (Bootstrap 5 classes)
             toastElement.classList.remove('bg-success', 'bg-danger');
             if (type === 'success') {
                 toastElement.classList.add('bg-success');
@@ -219,78 +216,21 @@
                 toastElement.classList.add('bg-danger');
             }
 
-            // Inisialisasi dan jalankan Bootstrap Toast
-            var toast = new bootstrap.Toast(toastElement, {
-                delay: 5000 // Toast otomatis menghilang setelah 4 detik
-            });
+            var toast = new bootstrap.Toast(toastElement, { delay: 5000 });
             toast.show();
         }
-    });
-    // Saat dropdown Bootstrap akan ditampilkan
-    $(document).on('show.bs.dropdown', '.dropdown', function() {
-        var $dropdownContainer = $(this);
-        var $dropdownMenu = $dropdownContainer.find('.dropdown-table-menu');
 
-        if ($dropdownMenu.length) {
-            // SIMPAN referensi container asal
-            $dropdownMenu.data('origin', $dropdownContainer);
-
-            // Pindahkan ke body
-            $('body').append($dropdownMenu.detach());
-
-            // Hitung posisi relatif terhadap viewport
-            var rect = $dropdownContainer[0].getBoundingClientRect();
-            
-            $dropdownMenu.css({
-                display: 'block',
-                position: 'fixed',
-                zIndex: '9999',
-                top: rect.bottom + 'px',
-                left: rect.left + 'px'
+        // Otomatis tutup dropdown jika kontainer tabel di-scroll
+        $(document).on('scroll', '.dataTables_scrollBody', function() {
+            $('.dropdown-toggle.show').each(function() {
+                var instance = bootstrap.Dropdown.getInstance(this);
+                if (instance) instance.hide();
             });
-
-            // Sesuaikan jika menu keluar dari viewport kanan
-            var menuRect = $dropdownMenu[0].getBoundingClientRect();
-            if (menuRect.right > window.innerWidth) {
-                $dropdownMenu.css({
-                    left: (rect.right - menuRect.width) + 'px'
-                });
-            }
-        }
-    });
-
-    // Saat dropdown Bootstrap ditutup
-    $(document).on('hide.bs.dropdown', '.dropdown', function() {
-        var $dropdownMenu = $('body').find('.dropdown-table-menu');
-        if ($dropdownMenu.length) {
-            var $originalContainer = $dropdownMenu.data('origin');
-            if ($originalContainer && $originalContainer.length) {
-                $originalContainer.append($dropdownMenu.detach());
-                $dropdownMenu.css({
-                    display: '',
-                    position: '',
-                    zIndex: '',
-                    top: '',
-                    left: ''
-                });
-            }
-        }
-    });
-
-    // Tutup dropdown saat container tabel di-scroll
-    $(document).on('scroll', '.dataTables_scrollBody', function() {
-        $('.dropdown-table-menu').each(function() {
-            if ($(this).is(':visible')) {
-                var $origin = $(this).data('origin');
-                if ($origin) {
-                    var instance = bootstrap.Dropdown.getInstance($origin[0]);
-                    if (instance) instance.hide();
-                }
-            }
         });
     });
 </script>
-<!-- Modal Static Backdrop diletakkan secara mandiri di body -->
+
+<!-- Modal Static Backdrop -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -308,14 +248,14 @@
         </div>
     </div>
 </div>
+
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
     <div id="liveToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
-            <div class="toast-body" id="toastMessage">
-                <!-- Pesan dari PHP akan dimasukkan di sini via JavaScript -->
-            </div>
+            <div class="toast-body" id="toastMessage"></div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
 </div>
+
 <?php require_once view('dashboard/footer.dashboard'); ?>
