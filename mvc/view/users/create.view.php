@@ -25,7 +25,7 @@
 
                         <div class="mb-3">
                             <label for="email" class="form-label"><span id="id-email" class="title-class" data-lang-id="id-email">Surel</span> <span class="text-danger">*</span></label>
-                            <?php echo forminput(['email', 'email', 'Email', 'jhon.doe@email.com', 'off', 'required']); ?>
+                            <?php echo forminput(['email', 'email', 'email', 'jhon.doe@email.com', 'off', 'required']); ?>
                         </div>
 
                         <div class="mb-3">
@@ -44,7 +44,7 @@
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" id="btn-submit" class="btn btn-success px-4">
-                                <i class="bi bi-save me-1"></i> Simpan Pengguna
+                                <i class="bi bi-save me-1"></i> <span id="id-simpan-pengguna" class="title-class" data-lang-id="id-simpan-pengguna">Simpan Pengguna</span>
                             </button>
                         </div>
                     </form>
