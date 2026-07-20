@@ -49,9 +49,9 @@ class UserController extends Controller {
      */
     public static function formTambah() {
         if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
-            $data['title'] = "S-FRW Form Tambah Pengguna";
+            $data['title'] = "S-FRW Tambah Pengguna Baru";
         }else{
-            $data['title'] = "S-FRW Form Add Users";
+            $data['title'] = "S-FRW Add New User";
         }
         $data['id'] = 0;
         require_once tampilan('users/create', $data);
