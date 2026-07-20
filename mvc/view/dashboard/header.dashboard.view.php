@@ -40,8 +40,8 @@ if (defined('IS_AJAX') && IS_AJAX) {
         @import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css");
         @import "<?php echo asset('bootstrap/theme/css/sfrw_dashboard.css?v=0.5'); ?>";
     </style>
-    <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" defer></script>
+    <script src="<?php echo asset('bootstrap/theme/js/jquery-3.7.1.js'); ?>"></script>
+    <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>" defer></script>
     <?php /*<script src="<?php echo asset('bootstrap/theme/fontawesome/js/all.js'); ?>" defer></script>*/ ?>
     <script src="<?php echo asset('bootstrap/theme/js/bootstrap.bundle.min.js'); ?>" defer></script>
     <script src="<?php echo asset('bootstrap/theme/js/datatables.js'); ?>" defer></script>
