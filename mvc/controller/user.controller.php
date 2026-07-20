@@ -88,15 +88,25 @@ class UserController extends Controller {
             PembangunKueri::tabel(Users::schematable())->sisipkan($data);
             
             // Respon sukses untuk AJAX
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                $message = 'Pengguna baru berhasil disimpan.';
+            }else{
+                $message = 'New user successfully saved.';
+            }
             echo json_encode([
                 'status'  => 'success',
-                'message' => 'Pengguna baru berhasil disimpan.'
+                'message' => $message
             ]);
         } catch (\Exception $e) {
             // Respon gagal jika ada error database / unique constraint
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                $message = 'Terjadi kesalahan: ' . $e->getMessage();
+            }else{
+                $message = 'There is an error: ' . $e->getMessage();
+            }
             echo json_encode([
                 'status'  => 'error',
-                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+                'message' => $message
             ]);
         }
         exit;
@@ -109,7 +119,11 @@ class UserController extends Controller {
     public static function lihat($id) {
         $user = PembangunKueri::tabel(Users::schematable())->dimana('id', decrypt($id))->pertama();
         if (!$user) {
-            alert('warning', 'Tidak ditemukan', 'Pengguna tidak ditemukan.', BASEURL . 'users');
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Tidak ditemukan', 'Pengguna tidak ditemukan.', BASEURL . 'users');
+            }else{
+                alert('warning', 'Not Found', 'User not found.', BASEURL . 'users');
+            }
             return;
         }
         require_once tampilan('users/profile', [
@@ -126,7 +140,11 @@ class UserController extends Controller {
     public static function formEdit($id) {
         $user = PembangunKueri::tabel(Users::schematable())->dimana('id', $id)->pertama();
         if (!$user) {
-            alert('warning', 'Tidak ditemukan', 'Pengguna tidak ditemukan.', BASEURL . 'users');
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Tidak ditemukan', 'Pengguna tidak ditemukan.', BASEURL . 'users');
+            }else{
+                alert('warning', 'Not Found', 'User not found.', BASEURL . 'users');
+            }
             return;
         }
         require_once tampilan('users/edit', [
@@ -173,14 +191,27 @@ class UserController extends Controller {
                 ->dimana('id', $id)
                 ->perbarui($data);
 
+            // Respon sukses untuk AJAX
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                $message = 'Data berhasil diperbarui.';
+            }else{
+                $message = 'Data successfully updated.';
+            }
+
             echo json_encode([
                 'status'  => 'success',
-                'message' => 'Data berhasil diperbarui.'
+                'message' => $message
             ]);
         } catch (\Exception $e) {
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                $message = 'Terjadi kesalahan: ' . $e->getMessage();
+            }else{
+                $message = 'There is an error: ' . $e->getMessage();
+            }
+            
             echo json_encode([
                 'status'  => 'error',
-                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+                'message' => $message
             ]);
         }
         exit;
@@ -198,15 +229,27 @@ class UserController extends Controller {
             $data = PembangunKueri::tabel(Users::schematable())->dimana('id', $id)->danDimana('role', 'user')->hapus();
             
             if($data > 0){
+                // Respon sukses untuk AJAX
+                if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                    $message = 'Pengguna dengan ID ' . $id . ' berhasil dihapus.';
+                }else{
+                    $message = 'User with ID ' . $id . ' has been deleted.';
+                }
                  $output_data = [
                     "status" => "success",
-                    "message" => "Pengguna dengan ID {$id} berhasil dihapus.",
+                    "message" => $message,
                 ];
                 Logcarbon::carbonlog(BASESESSION." :: deleted :: id: {$id}","userdata");
             }else{
+                // Respon gagal untuk AJAX
+                if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                    $message = 'Pengguna dengan ID ' . $id . ' gagal untuk dihapus karena Role adalah Admin.';
+                }else{
+                    $message = 'User with ID ' . $id . ' failed to delete because it is an Admin.';
+                }
                 $output_data = [
                     "status" => "error",
-                    "message" => "Pengguna dengan ID {$id} gagal untuk dihapus karena Role adalah Admin.",
+                    "message" => $message,
                 ];
                 Logcarbon::carbonlog(BASESESSION." :: failed deleted :: id: {$id}","userdata");
             }
@@ -220,9 +263,15 @@ class UserController extends Controller {
         } catch (\Exception $e) {
             // Set header JSON
             header('Content-Type: application/json; charset=utf-8');
+            // Respon gagal untuk AJAX
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                $message = 'Terjadi kesalahan: ' . $e->getMessage();
+            }else{
+                $message = 'There is an error: ' . $e->getMessage();
+            }
             $output_data = [
                 "status" => "error",
-                "message" => "Terjadi kesalahan: " . $e->getMessage(),
+                "message" => $message,
             ];
             
             // PERBAIKAN: Set status HTTP ke 500 agar ditangkap oleh fungsi error: di AJAX

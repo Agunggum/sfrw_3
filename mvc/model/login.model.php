@@ -37,7 +37,11 @@ class Loginmodel extends Controller {
             Logcarbon::carbonlog($username." :: login denied : not found","logsignin");
             
             $_SESSION['error'] = "true";
-            alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> login denied.', $uri.'login');
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Perhatian..!', 'Masuk ditolak. Harap periksa kembali Nama Pengguna/email atau Kata Sandi yang Anda masukkan.',  $uri.'login');
+            }else{
+                alert('warning', 'Attention..!', 'login denied. Please double-check the username/email or password you entered', $uri.'login');
+            }
             return;
         }
             
@@ -45,7 +49,11 @@ class Loginmodel extends Controller {
             Logcarbon::carbonlog($username." :: login denied : inactive","logsignin");
             
             $_SESSION['error'] = "true";
-            alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> You are no longer able to log into this system.', $uri.'login');
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Perhatian..!', 'Anda tidak dapat lagi masuk ke sistem ini.', $uri.'login');
+            }else{
+                alert('warning', 'Attention..!', 'You are no longer able to log into this system.', $uri.'login');
+            }
             return;
         }
             
@@ -55,13 +63,21 @@ class Loginmodel extends Controller {
             Logcarbon::carbonlog($username." :: login denied : wrong password","logsignin");
             
             $_SESSION['error'] = "true";
-            alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> Please re-check the Username/ email or Password you entered, make sure the data you entered is correct.', $uri.'login');
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Perhatian..!', 'Masuk ditolak. Harap periksa kembali Nama Pengguna/email atau Kata Sandi yang Anda masukkan.', $uri.'login');
+            }else{
+                alert('warning', 'Attention..!', 'Login denied. Please double-check the username/email or password you entered.', $uri.'login');
+            }
             return;
         }
             
         // Login sukses
         if(ENVIRONMENT == 'maintenance' and $data['role'] != 'administrator'){
-            alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> Login denied. system is under maintenance.', $uri.'login');
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Perhatian..!', 'Masuk ditolak. Sistem sedang dalam pemeliharaan.', $uri.'login');
+            }else{
+                alert('warning', 'Attention..!', 'Login denied. system is under maintenance.', $uri.'login');
+            }
             return;
         }else{
             // Regenerate session ID to prevent session fixation
@@ -128,19 +144,31 @@ class Loginmodel extends Controller {
             
         if(!$data){
             Logcarbon::carbonlog($email." :: forgot denied : not found","logsignin");
-            alert('warning', 'Alert forgot password', 'Please re-check the Email you entered, make sure the data you entered is correct.', BASEURL.'forgot-password');
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Perhatian..!', 'Email yang Anda masukkan tidak ditemukan.', BASEURL.'forgot-password');
+            }else{
+                alert('warning', 'Attention..!', 'Please re-check the Email you entered, make sure the data you entered is correct.', BASEURL.'forgot-password');
+            }
             return;
         }
             
         if($data['active'] == 'N'){
             Logcarbon::carbonlog($email." :: forgot denied : inactive","logsignin");
-            alert('warning', 'Alert forgot password', 'You are no longer able to log into this system.', BASEURL.'forgot-password');
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Perhatian..!', 'Akun Anda telah di-block.', BASEURL.'forgot-password');
+            }else{
+                alert('warning', 'Attention..!', 'You are no longer able to log into this system.', BASEURL.'forgot-password');
+            }
             return;
         }
 
         // JIka sedang maintenance data segera lock sistem
         if(ENVIRONMENT == 'maintenance'){
-            alert('warning', 'Alert forgot password', 'System is under maintenance.', BASEURL.'forgot-password');
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Perhatian..!', 'Sistem sedang dalam pemeliharaan.', BASEURL.'forgot-password');
+            }else{
+                alert('warning', 'Attention..!', 'System is under maintenance.', BASEURL.'forgot-password');
+            }
             return;
         }
         else{
@@ -172,7 +200,11 @@ class Loginmodel extends Controller {
             ";
             $message = Pengirimmail::sentMail($subject, $email_tujuan, $nama_user, $content);
 
-            alert('success', 'Alert forgot password', 'Please check your email to reset your password.'.$message, BASEURL.'forgot-password');
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('success', 'Perhatian..!', 'Perubahan kata sandi Anda telah di kirim ke email Anda. Silahkan cek email Anda.', BASEURL.'forgot-password');
+            }else{
+                alert('success', 'Attention..!', 'Please check your email to reset your password.'.$message, BASEURL.'forgot-password');
+            }
         }
 	}
 
@@ -200,13 +232,21 @@ class Loginmodel extends Controller {
             
         if(!$data){
             Logcarbon::carbonlog("Unknown :: forgot denied : link not found","logsignin");
-            alert('warning', 'Alert forgot password', 'Please re-check your link an email.', BASEURL.'forgot-password?s='.$s);
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Perhatian..!', 'Link reset password Anda tidak valid ditemukan.', BASEURL.'forgot-password?s='.$s);
+            }else{
+                alert('warning', 'Attention..!', 'Please re-check your link an email.', BASEURL.'forgot-password?s='.$s);
+            }
             return;
         }
             
         // JIka sedang maintenance data segera lock sistem
         if(ENVIRONMENT == 'maintenance'){
-            alert('warning', 'Alert forgot password', 'Login denied. system is under maintenance.', BASEURL.'forgot-password?s='.$s);
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('warning', 'Perhatian..!', 'Sistem sedang dalam pemeliharaan.', BASEURL.'forgot-password?s='.$s);
+            }else{
+                alert('warning', 'Attention..!', 'System is under maintenance.', BASEURL.'forgot-password?s='.$s);
+            }
             return;
         }
         else{
@@ -231,7 +271,11 @@ class Loginmodel extends Controller {
 
             $message = Pengirimmail::sentMail($subject, $email_tujuan, $nama_user, $content);
 
-            alert('success', 'Alert forgot password', 'Password update successful.'.$message, BASEURL);
+            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                alert('success', 'Perhatian..!', 'Perubahan kata sandi Anda telah di perbarui.', BASEURL);
+            }else{
+                alert('success', 'Attention..!', 'Password update successful.'.$message, BASEURL);
+            }
         }
 	}
     

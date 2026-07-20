@@ -50,19 +50,31 @@ class Validator {
         switch ($ruleName) {
             case 'required':
                 if ($value === null || $value === '' || (is_array($value) && empty($value))) {
-                    self::addError($field, "Kolom {$fieldName} wajib diisi.");
+                    if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                        self::addError($field, "Kolom {$fieldName} wajib diisi.");
+                    }else{
+                        self::addError($field, "Column {$fieldName} is required.");
+                    }
                 }
                 break;
 
             case 'email':
                 if (!empty($value) && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    self::addError($field, "Format {$fieldName} tidak valid.");
+                    if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                        self::addError($field, "Format {$fieldName} tidak valid.");
+                    }else{
+                        self::addError($field, "Format {$fieldName} is not valid email address.");
+                    }
                 }
                 break;
 
             case 'numeric':
                 if (!empty($value) && !is_numeric($value)) {
-                    self::addError($field, "Kolom {$fieldName} harus berupa angka.");
+                    if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                        self::addError($field, "Kolom {$fieldName} harus berupa angka.");
+                    }else{
+                        self::addError($field, "Column {$fieldName} must be numeric.");
+                    }
                 }
                 break;
 
@@ -70,7 +82,11 @@ class Validator {
                 if (!empty($value)) {
                     // Gunakan mb_strlen agar akurat menghitung panjang string
                     if (mb_strlen((string)$value) < (int)$ruleValue) {
-                        self::addError($field, "Kolom {$fieldName} minimal harus {$ruleValue} karakter.");
+                        if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                            self::addError($field, "Kolom {$fieldName} minimal harus {$ruleValue} karakter.");
+                        }else{
+                            self::addError($field, "Column {$fieldName} must be at least {$ruleValue} characters.");
+                        }
                     }
                 }
                 break;
@@ -79,10 +95,18 @@ class Validator {
                 if (!empty($value)) {
                     if (is_numeric($value)) {
                         if ($value < $ruleValue) {
-                            self::addError($field, "Kolom {$fieldName} minimal harus {$ruleValue}.");
+                            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                                self::addError($field, "Kolom {$fieldName} minimal harus {$ruleValue}.");
+                            }else{
+                                self::addError($field, "Column {$fieldName} must be at least value {$ruleValue}.");
+                            }
                         }
                     } elseif (strlen($value) < $ruleValue) {
-                        self::addError($field, "Kolom {$fieldName} minimal harus {$ruleValue} karakter.");
+                        if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                            self::addError($field, "Kolom {$fieldName} minimal harus {$ruleValue} karakter.");
+                        }else{
+                            self::addError($field, "Column {$fieldName} must be at least {$ruleValue} characters.");
+                        }
                     }
                 }
                 break;
@@ -91,10 +115,18 @@ class Validator {
                 if (!empty($value)) {
                     if (is_numeric($value)) {
                         if ($value > $ruleValue) {
-                            self::addError($field, "Kolom {$fieldName} maksimal adalah {$ruleValue}.");
+                            if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                                self::addError($field, "Kolom {$fieldName} maksimal adalah {$ruleValue}.");
+                            }else{
+                                self::addError($field, "Column {$fieldName} must be at most value {$ruleValue}.");
+                            }
                         }
                     } elseif (strlen($value) > $ruleValue) {
-                        self::addError($field, "Kolom {$fieldName} maksimal adalah {$ruleValue} karakter.");
+                        if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                            self::addError($field, "Kolom {$fieldName} maksimal adalah {$ruleValue} karakter.");
+                        }else{
+                            self::addError($field, "Column {$fieldName} must be at most {$ruleValue} characters.");
+                        }
                     }
                 }
                 break;
@@ -102,14 +134,22 @@ class Validator {
             case 'matches':
                 if ($value !== ($allData[$ruleValue] ?? null)) {
                     $matchFieldName = self::formatFieldName($ruleValue);
-                    self::addError($field, "Kolom {$fieldName} harus sama dengan {$matchFieldName}.");
+                    if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                        self::addError($field, "Kolom {$fieldName} harus sama dengan {$matchFieldName}.");
+                    }else{
+                        self::addError($field, "Column {$fieldName} must match {$matchFieldName}.");
+                    }
                 }
                 break;
 
             case 'regex':
                 if (!empty($value)) {
-                    if (!preg_match($ruleValue, $value)) {
-                        self::addError($field, "Format kolom {$fieldName} tidak sesuai aturan.");
+                    if (!preg_match($ruleValue, $value)) {  
+                        if (isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id') {
+                            self::addError($field, "Format {$fieldName} tidak sesuai aturan.");
+                        }else{
+                            self::addError($field, "Format {$fieldName} is no valid.");
+                        }
                     }
                 }
                 break;
