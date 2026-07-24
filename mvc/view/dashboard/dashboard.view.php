@@ -51,14 +51,14 @@
 
                     <div class="row g-4">
                         <div class="col-12 col-xl-8">
-                            <div class="card border-0 rounded-3 shadow-sm">
+                            <div class="card card-modern border-0 rounded-3 shadow-sm">
                                 <div class="card-header bg-transparent border-bottom d-flex align-items-center justify-content-between py-3">
                                     <h5 class="mb-0 fw-bold">Latest Transactions</h5>
                                     <span class="badge bg-info-subtle text-info p-2 rounded">Live Updates</span>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-hover align-middle mb-0">
-                                        <thead class="table-light">
+                                        <thead class="card-modern">
                                             <tr>
                                                 <th>Order ID</th>
                                                 <th>Product</th>
