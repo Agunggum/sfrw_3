@@ -127,14 +127,14 @@
 
                 <div class="dropdown" id="language-dropdown-container">
                     <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center" id="bd-language" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle language">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white text-white rounded-circle overflow-hidden overflow-ellipsis me-1" style="width: 20px; height: 20px;">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-dark text-white rounded-circle overflow-hidden overflow-ellipsis me-1" style="width: 20px; height: 20px;">
                             <i id="current-flag-icon" class="fi fi-id language-icon-active"></i>
                         </div>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="bd-language-text">
                         <li>
                             <button type="button" class="dropdown-item d-flex align-items-center lang-item" data-lang="id" data-bs-language-value="id-ID" aria-pressed="false" onclick="changeLanguage('id')">
-                                <div class="d-inline-flex align-items-center justify-content-center bg-white text-white rounded-circle overflow-hidden overflow-ellipsis me-2" style="width: 20px; height: 20px;">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-dark text-white rounded-circle overflow-hidden overflow-ellipsis me-2" style="width: 20px; height: 20px;">
                                     <i class="fi fi-id opacity-75 language-icon"></i>
                                 </div>
                                 Indonesia
@@ -143,7 +143,7 @@
                         </li>
                         <li>
                             <button type="button" class="dropdown-item d-flex align-items-center lang-item" data-lang="en" data-bs-language-value="en-US" aria-pressed="false" onclick="changeLanguage('en')">
-                                <div class="d-inline-flex align-items-center justify-content-center bg-white text-white rounded-circle overflow-hidden overflow-ellipsis me-2" style="width: 20px; height: 20px;">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-dark text-white rounded-circle overflow-hidden overflow-ellipsis me-2" style="width: 20px; height: 20px;">
                                     <i class="fi fi-us opacity-75 language-icon"></i>
                                 </div>
                                 English
