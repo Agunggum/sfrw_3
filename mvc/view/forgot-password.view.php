@@ -12,15 +12,15 @@
                         
                     <div class="d-flex justify-content-center">
                         <div class="col-md-12 col-lg-12 col-xl-12 mt-3 mb-1 text-left">
-                            <div class="h3"><span><?php echo WEBTITLE; ?></span></div>
-                            <small data-toggle="modal" data-target="#versionmodal" style="vertical-align: super; font-size: small; cursor: pointer;"><i class="bi bi-copyright"></i> v<?php echo VERSION; ?></small>
+                            <div class="h3"><span><?php echo WEBTITLE; ?></span><small data-toggle="modal" data-target="#versionmodal" style="vertical-align: super; font-size: small; cursor: pointer;"><i class="bi bi-copyright"></i> v<?php echo VERSION; ?></small></div>
+                            
                         </div>
                     </div>
                     <img src="<?php echo asset('bootstrap/theme/abefc969-a907-4243-a25d-7372a4997a21.jpg'); ?>" alt="Gambar Login" class="img-fluid rounded-5">
                 </div>
             </section>
             
-            <div class="col-md-12 col-lg-6 col-xl-6 shadow rounded-5" style="height: 100vh; overflow-y: auto;">
+            <section class="col-md-12 col-lg-6 col-xl-6 shadow rounded-5" style="height: 100vh; overflow-y: auto;">
 
                 <div class="d-flex justify-content-center d-block d-lg-none d-xl-none">
                     <div class="pt-2">
@@ -84,7 +84,7 @@
                     </div>
                 
                 </div>
-            </div>
+            </section>
         
         </div>
     </div>
