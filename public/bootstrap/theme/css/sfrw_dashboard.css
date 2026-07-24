@@ -10,6 +10,7 @@
 --accent-color: #dc3545;
 --accent-bar: #212529;
 --border-menu: #e6e6e6;
+--disabled-bg: #6c757d;
 }
 [data-bs-theme="dark"] { 
 --bg-body: #121212; 
@@ -21,6 +22,7 @@
 --accent-color: #dc3545; 
 --accent-bar: #f8f9fa;
 --border-menu: #495057;
+--disabled-bg: #333334;
 }
 html[data-bs-theme="dark"]::-webkit-scrollbar-thumb {
   background-color: #495057;
@@ -31,6 +33,13 @@ html[data-bs-theme="dark"]::-webkit-scrollbar-track {
 [aria-labelledby="bd-theme-text"] {
 --bs-dropdown-link-active-bg: #dc3545; /* Ganti dengan warna aktif yang Anda inginkan */
 --bs-dropdown-link-active-color: #ffffff; /* Warna teks saat aktif */
+}
+input:read-only {
+    background-color: var(--disabled-bg);
+    color: var(--text-main);
+    -webkit-text-fill-color: var(--disabled-bg);
+    opacity: 1;
+    cursor: not-allowed;
 }
 /* Loading Animation Styles */
 .btn { transition: all 0.2s ease-in-out; position: relative; }

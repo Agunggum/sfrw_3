@@ -21,7 +21,7 @@ class Forgotlink extends Model {
     }
 
     static public function skema() {
-        return "CREATE TABLE IF NOT EXISTS `forgot_link` (
+        return "CREATE TABLE IF NOT EXISTS " . self::schematable() . " (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `email` varchar(255) NOT NULL,
             `target_link` varchar(255) NOT NULL,

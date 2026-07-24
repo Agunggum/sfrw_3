@@ -24,7 +24,7 @@ class Users extends Model {
     }
 
     static public function skema() {
-        return "CREATE TABLE IF NOT EXISTS `master_users` (
+        return "CREATE TABLE IF NOT EXISTS " . self::schematable() . " (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `fullname` varchar(255) NOT NULL,
             `email` varchar(255) NOT NULL,
