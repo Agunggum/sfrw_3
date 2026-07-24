@@ -59,7 +59,7 @@
                                 <div class="row mb-4">
                                     <div class="col">
                                         <!-- Checkbox -->
-                                        <?php echo formcheck(['Dengan ini saya menerima syarat dan ketentuan mengenai pendaftaran akun'], ['terms']); ?>
+                                        <?php echo formcheck(['Dengan ini saya menerima syarat dan ketentuan mengenai pendaftaran akun'], ['terms', 'required']); ?>
                                     </div>
                                 </div>
 
