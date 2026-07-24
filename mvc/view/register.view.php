@@ -21,8 +21,18 @@
             </section>
             
             <div class="col-md-12 col-lg-6 col-xl-6 shadow rounded-5 vh-100 overflow-y-auto">
+
+                <div class="d-flex justify-content-center d-block d-lg-none d-xl-none">
+                    <div class="pt-2">
+                        <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
+                        <a href="<?php echo BASEURL; ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                    </div>
+                    <div class="mt-5 mb-2">
+                        <div class="h3 text-center"><?php echo WEBTITLE; ?></div>
+                    </div>
+                </div>
                 
-                <p class="mt-5 pt-2"><?php 
+                <p class="mt-sm-1 mt-md-1 mt-lg-5 mt-xl-5 pt-lg-5 pt-xl-5"><?php 
                 if(isset($_SESSION['username'])){
                     alihkan(BASEURL);
                 }
@@ -49,8 +59,8 @@
                                 <!-- 2 column grid layout for inline styling -->
                                 <div class="row mb-4">
                                     <div class="col">
-                                        <!-- Simple link -->
-                                        <a href="<?php echo BASEURL.'login'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-sudah-akun" class="title-class" data-lang-id="id-sudah-akun">Anda sudah punya akun?</span></a>
+                                        <!-- Checkbox -->
+                                        <?php echo formcheck(['Dengan ini saya menerima syarat dan ketentuan mengenai pendaftaran akun'], ['terms']); ?>
                                     </div>
                                 </div>
 
@@ -59,6 +69,7 @@
 
                                 <!-- Register buttons -->
                                 <div class="text-center">
+                                    <a href="<?php echo BASEURL.'login'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-sudah-akun" class="title-class" data-lang-id="id-sudah-akun">Anda sudah punya akun?</span></a>
                                     <p><span id="id-or-sign-up" class="title-class" data-lang-id="id-or-sign-up">Atau daftar dengan:</span></p>
                                     <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
                                     <i class="bi bi-google text-danger"></i>
