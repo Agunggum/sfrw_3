@@ -1,5 +1,5 @@
-:root { --bg-body: #ffffff; --text-main: #212529; --card-bg: #f8f9fa; --border-color: #dee2e6; --accent-color: #dc3545; --accent-bar: #212529; }
-[data-bs-theme="dark"] { --bg-body: #121212; --text-main: #f8f9fa; --card-bg: #1e1e1e; --border-color: #333333; --accent-color: #FF6B6B; --accent-bar: #f8f9fa; }
+:root { --bg-body: #ffffff; --bs-body-bg: #f8fafc; --text-main: #212529; --card-bg: #f8f9fa; --border-color: #dee2e6; --accent-color: #dc3545; --accent-bar: #212529; }
+[data-bs-theme="dark"] { --bg-body: #121212; --bs-body-bg: #090d16; --text-main: #f8f9fa; --card-bg: #1e1e1e; --border-color: #333333; --accent-color: #FF6B6B; --accent-bar: #f8f9fa; }
 html[data-bs-theme="dark"]::-webkit-scrollbar-thumb {
   background-color: #495057;
 }
@@ -9,6 +9,10 @@ html[data-bs-theme="dark"]::-webkit-scrollbar-track {
 [aria-labelledby="bd-theme-text"] {
 --bs-dropdown-link-active-bg: #dc3545; /* Ganti dengan warna aktif yang Anda inginkan */
 --bs-dropdown-link-active-color: #ffffff; /* Warna teks saat aktif */
+}
+body {
+background-color: var(--bs-body-bg);
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 footer { background-color: var(--card-bg); border: 1px solid var(--border-color); }
 /* Loading Animation Styles */

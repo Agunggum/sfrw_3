@@ -2,10 +2,12 @@
 --sidebar-width: 250px;
 --navbar-height: 60px;
 --bg-body: #ffffff;
---bs-body-bg: #ffffff;
+--bs-body-bg: #f8fafc;
 --bs-body-tertiary-bg: #f8f9fa;
- --text-main: #212529; 
---card-bg: #f8f9fa; 
+--text-main: #212529; 
+--card-bg: #f8f9fa;
+--card-border: rgba(226, 232, 240, 0.8);
+--card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 --border-color: #dee2e6; 
 --accent-color: #dc3545;
 --accent-bar: #212529;
@@ -14,10 +16,12 @@
 }
 [data-bs-theme="dark"] { 
 --bg-body: #121212; 
---bs-body-bg: #121212;
---bs-body-tertiary-bg: #222222;
+--bs-body-bg: #090d16;
+--bs-body-tertiary-bg: #090d16;
 --text-main: #f8f9fa; 
---card-bg: #1e1e1e; 
+--card-bg: #1e293b;
+--card-border: rgba(52, 65, 85, 0.6);
+--card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
 --border-color: #333333; 
 --accent-color: #dc3545; 
 --accent-bar: #f8f9fa;
@@ -54,6 +58,13 @@ overflow-x: hidden;
 overflow-y: hidden;
 background-color: var(--bs-body-bg);
 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.card-modern {
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+border-radius: 1.25rem;
+box-shadow: var(--card-shadow);
+transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.3s ease;
 }
 
 /* Menghapus gaya default hover Bootstrap dan menerapkan animasi */
