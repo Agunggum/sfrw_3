@@ -32,8 +32,8 @@ class Users extends Model {
             `password` varchar(255) NOT NULL,
             `active` enum('Y','N') NOT NULL DEFAULT 'Y',
             `role` varchar(50) NOT NULL DEFAULT 'user',
-            `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            `created_at` timestamp NULL DEFAULT NULL,
+            `updated_at` timestamp NULL DEFAULT NULL,
             PRIMARY KEY (`id`),
             UNIQUE KEY `email` (`email`)
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";

@@ -267,6 +267,17 @@ class PembangunKueri {
     }
 
     public function sisipkan($data) {
+        // Tanggal saat ini dari sistem
+        $sekarang = date('Y-m-d H:i:s');
+
+        // Otomatis isi created_at & updated_at jika belum diisi manual
+        if (!isset($data['created_at'])) {
+            $data['created_at'] = $sekarang;
+        }
+        if (!isset($data['updated_at'])) {
+            $data['updated_at'] = $sekarang;
+        }
+
         $kolom = implode(', ', array_keys($data));
         $nilai = array_map(function($val) {
             return $this->formatNilai($val);
@@ -284,6 +295,9 @@ class PembangunKueri {
     }
 
     public function perbarui($data) {
+        // Otomatis perbarui updated_at dengan waktu sistem saat ini
+        $data['updated_at'] = date('Y-m-d H:i:s');
+
         $set = [];
         foreach ($data as $kolom => $nilai) {
             $nilai = $this->formatNilai($nilai);
