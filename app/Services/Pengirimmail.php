@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 
 class Pengirimmail {
 
-    public static function sentMail($judul, $emailPenerima, $namaPenerima, $isiPesan) {
+    public static function sentMail($judul, $emailPenerima, $namaPenerima, $isiPesan, $ccPenerima = []) {
         $tahun_sekarang = date('Y');
 
         ob_start();
@@ -31,6 +31,9 @@ class Pengirimmail {
                     $mail->Password = MAILPASS;
                     $mail->SetFrom(MAILSENT, MAILTITLE);
                     $mail->AddAddress($emailPenerima, $namaPenerima);
+                    foreach ($ccPenerima as $key => $email) {
+                        $mail->addCC($email, $key);
+                    }
                     // --- KONTEN EMAIL ---
                     $mail->isHTML(true); // Set format email ke HTML
                     $mail->Subject = $judul." - ".MAILTITLE;
@@ -46,6 +49,9 @@ class Pengirimmail {
                 // Kirim email dalam format HTML
                 $headersMail  = "From: ".MAILTITLE." <".MAILSENT.">\r\n";
                 $headersMail .= "Content-type: text/html\r\n";
+                foreach ($ccPenerima as $key => $email) {
+                    $headersMail .= "CC: $email\r\n";
+                }
                 mail($emailPenerima, $subjectMail, $html_email, $headersMail);
                 $message = "<br><br>Mail sent successfully";
             }
