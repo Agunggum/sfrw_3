@@ -4,7 +4,7 @@
             
                     <div class="row g-3 mb-4">
                         <div class="col-12 col-sm-6 col-xl-3">
-                            <div class="card border-0 rounded-3 shadow-sm bg-primary text-white">
+                            <div class="card card-modern">
                                 <div class="card-body d-flex align-items-center justify-content-between p-4">
                                     <div>
                                         <h3 class="fw-bold mb-1">150</h3>
@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-xl-3">
-                            <div class="card border-0 rounded-3 shadow-sm bg-success text-white">
+                            <div class="card card-modern">
                                 <div class="card-body d-flex align-items-center justify-content-between p-4">
                                     <div>
                                         <h3 class="fw-bold mb-1">53%</h3>
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-xl-3">
-                            <div class="card border-0 rounded-3 shadow-sm bg-warning text-dark">
+                            <div class="card card-modern">
                                 <div class="card-body d-flex align-items-center justify-content-between p-4">
                                     <div>
                                         <h3 class="fw-bold mb-1">44</h3>
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-xl-3">
-                            <div class="card border-0 rounded-3 shadow-sm bg-danger text-white">
+                            <div class="card card-modern">
                                 <div class="card-body d-flex align-items-center justify-content-between p-4">
                                     <div>
                                         <h3 class="fw-bold mb-1">65</h3>
@@ -51,12 +51,12 @@
 
                     <div class="row g-4">
                         <div class="col-12 col-xl-8">
-                            <div class="card card-modern border-0 rounded-3 shadow-sm">
+                            <div class="card card-modern">
                                 <div class="card-header bg-transparent border-bottom d-flex align-items-center justify-content-between py-3">
                                     <h5 class="mb-0 fw-bold">Latest Transactions</h5>
                                     <span class="badge bg-info-subtle text-info p-2 rounded">Live Updates</span>
                                 </div>
-                                <div class="table-responsive">
+                                <div class="table-responsive mb-4">
                                     <table class="table table-hover align-middle mb-0">
                                         <thead class="card-modern">
                                             <tr>
@@ -92,7 +92,7 @@
                         </div>
 
                         <div class="col-12 col-xl-4">
-                            <div class="card border-0 rounded-3 shadow-sm">
+                            <div class="card card-modern">
                                 <div class="card-header bg-transparent border-bottom py-3">
                                     <h5 class="mb-0 fw-bold">System Status</h5>
                                 </div>
