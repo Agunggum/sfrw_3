@@ -7,7 +7,7 @@
 --text-main: #212529; 
 --card-bg: #f8f9fa;
 --card-border: rgba(226, 232, 240, 0.8);
---card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+--card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
 --border-color: #dee2e6; 
 --accent-color: #dc3545;
 --accent-bar: #212529;
