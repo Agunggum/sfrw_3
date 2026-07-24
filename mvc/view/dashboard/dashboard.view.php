@@ -8,7 +8,7 @@
                                 <div class="card-body d-flex align-items-center justify-content-between p-4">
                                     <div>
                                         <h3 class="fw-bold mb-1">150</h3>
-                                        <p class="mb-0 text-white-50">New Orders</p>
+                                        <p class="mb-0 text-dark-50">New Orders</p>
                                     </div>
                                     <i class="bi bi-bag-plus fs-1 opacity-50"></i>
                                 </div>
@@ -19,7 +19,7 @@
                                 <div class="card-body d-flex align-items-center justify-content-between p-4">
                                     <div>
                                         <h3 class="fw-bold mb-1">53%</h3>
-                                        <p class="mb-0 text-white-50">Bounce Rate</p>
+                                        <p class="mb-0 text-dark-50">Bounce Rate</p>
                                     </div>
                                     <i class="bi bi-graph-up-arrow fs-1 opacity-50"></i>
                                 </div>
@@ -41,7 +41,7 @@
                                 <div class="card-body d-flex align-items-center justify-content-between p-4">
                                     <div>
                                         <h3 class="fw-bold mb-1">65</h3>
-                                        <p class="mb-0 text-white-50">Unique Visitors</p>
+                                        <p class="mb-0 text-dark-50">Unique Visitors</p>
                                     </div>
                                     <i class="bi bi-pie-chart fs-1 opacity-50"></i>
                                 </div>
