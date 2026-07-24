@@ -30,6 +30,11 @@ function ambilJson($query){
     return json_encode($query, JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT);
 }
 
+//Site url
+function site_url($path = '') {
+    return BASEURL . ltrim($path, '/');
+}
+
 //Site asset public
 function asset($path) {
     return BASEURL.''. $path;
