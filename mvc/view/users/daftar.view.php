@@ -8,21 +8,21 @@
 <style>
     /* 1. Atur z-index dropdown agar berada di layer paling atas dari seluruh komponen DataTables */
     .dropdown-table-menu {
-        z-index: 1070 !important;
+        z-index: 170 !important;
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
         border: 1px solid rgba(0, 0, 0, 0.15);
     }
     /* 2. Turunkan z-index milik FixedHeader */
     table.dataTable.fixedHeader-floating,
     table.dataTable.fixedHeader-locked {
-        z-index: 1030 !important;
+        z-index: 130 !important;
     }
     /* 3. Atur z-index untuk FixedColumns DataTables agar tidak menimpa menu dropdown */
     div.DTFC_LeftWrapper,
     div.DTFC_RightWrapper,
     .dtfc-fixed-left,
     .dtfc-fixed-right {
-        z-index: 1020 !important;
+        z-index: 120 !important;
     }
     /* 4. Pastikan cell/kontainer dropdown saat aktif di kolom fixed naik ke atas */
     td.dtfc-fixed-right,
@@ -31,7 +31,7 @@
     }
     td.dtfc-fixed-right:has(.dropdown-toggle.show),
     td.dtfc-fixed-left:has(.dropdown-toggle.show) {
-        z-index: 1060 !important;
+        z-index: 160 !important;
     }
 </style>
 
