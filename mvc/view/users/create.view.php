@@ -82,7 +82,7 @@
             $btnSubmit.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Menyimpan...');
 
             $.ajax({
-                url: '<?php echo BASEURL; ?>users/simpan', // Sesuaikan dengan route endpoint simpan di backend
+                url: '<?php echo site_url('users/simpan'); ?>', // Sesuaikan dengan route endpoint simpan di backend
                 type: 'POST',
                 data: $form.serialize(), // Mengirimkan seluruh field form
                 dataType: 'json',
@@ -92,7 +92,7 @@
 
                         // Opsi: Redirect otomatis ke halaman list user setelah 1.5 detik
                         setTimeout(function() {
-                            window.location.href = '<?php echo BASEURL; ?>users';
+                            window.location.href = '<?php echo site_url('users'); ?>';
                         }, 1500);
                     } else {
                         showToast("Gagal: " + response.message, 'danger');

@@ -10,7 +10,7 @@
                     <h5 class="card-title mb-0 fw-bold">
                         <i class="bi bi-person-badge me-2"></i><span id="id-profil-pengguna" class="title-class" data-lang-id="id-profil-pengguna">Profil Pengguna</span>
                     </h5>
-                    <a href="<?php echo BASEURL; ?>users" class="btn btn-outline-secondary btn-sm">
+                    <a href="<?php echo site_url('users'); ?>" class="btn btn-outline-secondary btn-sm">
                         <i class="bi bi-arrow-left me-1"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span>
                     </a>
                 </div>
@@ -196,7 +196,7 @@
             postData[fieldName] = newValue; // Misal: { id: "123", fullname: "Budi" }
 
             $.ajax({
-                url: '<?php echo BASEURL; ?>users/' + userId + '/perbarui', // Endpoint backend untuk update single field
+                url: '<?php echo site_url('users/'); ?>' + userId + '/perbarui', // Endpoint backend untuk update single field
                 type: 'POST',
                 data: postData,
                 dataType: 'json',

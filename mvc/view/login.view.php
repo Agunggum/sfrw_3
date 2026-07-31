@@ -7,7 +7,7 @@
                 <div class="container">
                     <div class="pt-2">
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
-                        <a href="<?php echo BASEURL; ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                        <a href="<?php echo site_url('/'); ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
                     </div>
                         
                     <div class="d-flex justify-content-center">
@@ -24,7 +24,7 @@
                 <div class="d-flex justify-content-center d-block d-lg-none d-xl-none">
                     <div class="pt-2">
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
-                        <a href="<?php echo BASEURL; ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                        <a href="<?php echo site_url('/'); ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
                     </div>
                     <div class="mt-5 mb-2">
                         <div class="h3 text-center"><?php echo WEBTITLE; ?></div>
@@ -33,7 +33,7 @@
                 
                 <p class="mt-sm-1 mt-md-1 mt-lg-5 mt-xl-5 pt-lg-5 pt-xl-5"><?php 
                     if(isset($_SESSION['username'])){
-                        alihkan(BASEURL);
+                        alihkan(site_url('/'));
                     }
                     if(isset($_SESSION['alert'])){ echo $_SESSION['alert']; } ?></p>
                     
@@ -43,7 +43,7 @@
                         <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
                             <p class="h3 text-left font-weight-bold mb-5"><span id="id-masuk" class="title-class" data-lang-id="id-masuk">Masuk</span>.</p>
                                 
-                            <form class="m-t" role="form" method="post" action="<?php echo BASEURL.'authlogin'; ?>">
+                            <form class="m-t" role="form" method="post" action="<?php echo site_url('authlogin'); ?>">
                                 <!-- Email input -->
                                 <?php echo forminput(['text', 'username', 'username', 'username or email', 'off', 'required']); ?>
 
@@ -59,7 +59,7 @@
 
                                     <div class="col">
                                     <!-- Simple link -->
-                                    <a href="<?php echo BASEURL.'forgot-password'; ?>" data-bs-theme="light" class="text-accent animated-link"><span id="id-lupa-password" class="title-class" data-lang-id="id-lupa-password">Lupa password?</span></a>
+                                    <a href="<?php echo site_url('forgot-password'); ?>" data-bs-theme="light" class="text-accent animated-link"><span id="id-lupa-password" class="title-class" data-lang-id="id-lupa-password">Lupa password?</span></a>
                                     </div>
                                 </div>
 
@@ -68,7 +68,7 @@
 
                                 <!-- Register buttons -->
                                 <div class="text-center">
-                                    <p><span id="id-bukan-anggota" class="title-class" data-lang-id="id-bukan-anggota">Bukan anggota?</span> <a href="<?php echo BASEURL.'register'; ?>" data-bs-theme="light" class="text-accent animated-link"><span id="id-daftar" class="title-class" data-lang-id="id-daftar">Daftar akun</span></a></p>
+                                    <p><span id="id-bukan-anggota" class="title-class" data-lang-id="id-bukan-anggota">Bukan anggota?</span> <a href="<?php echo site_url('register'); ?>" data-bs-theme="light" class="text-accent animated-link"><span id="id-daftar" class="title-class" data-lang-id="id-daftar">Daftar akun</span></a></p>
                                     <p><span id="id-daftar-google" class="title-class" data-lang-id="id-daftar-google">Daftar dengan Google</span></p>
                                     <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
                                     <i class="bi bi-google text-accent"></i>

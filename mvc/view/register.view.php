@@ -7,7 +7,7 @@
                 <div class="container">
                     <div class="pt-2">
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
-                        <a href="<?php echo BASEURL; ?>" class="text-danger animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                        <a href="<?php echo site_url('/'); ?>" class="text-danger animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
                     </div>
                         
                     <div class="d-flex justify-content-center">
@@ -24,7 +24,7 @@
                 <div class="d-flex justify-content-center d-block d-lg-none d-xl-none">
                     <div class="pt-2">
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
-                        <a href="<?php echo BASEURL; ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                        <a href="<?php echo site_url('/'); ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
                     </div>
                     <div class="mt-5 mb-2">
                         <div class="h3 text-center"><?php echo WEBTITLE; ?></div>
@@ -33,7 +33,7 @@
                 
                 <p class="mt-sm-1 mt-md-1 mt-lg-5 mt-xl-5 pt-lg-5 pt-xl-5"><?php 
                 if(isset($_SESSION['username'])){
-                    alihkan(BASEURL);
+                    alihkan(site_url('/'));
                 }
                 if(isset($_SESSION['alert'])){ echo $_SESSION['alert']; } ?></p>
                     
@@ -43,7 +43,7 @@
                         <?php if(empty($_SESSION['error']) or $_SESSION['error']=="true"){ ?>
                             <p class="h3 text-left font-weight-bold mb-5"><span id="id-buat-akun" class="title-class" data-lang-id="id-buat-akun">Membuat akun.</span></p>
                                 
-                            <form class="m-t" role="form" method="post" action="<?php echo BASEURL.'authregister'; ?>">
+                            <form class="m-t" role="form" method="post" action="<?php echo site_url('authregister'); ?>">
                                 <input type="hidden" name="login" value="MASUK">
                                 <!-- Email input -->
                                 <?php echo forminput(['email', 'email', 'email', 'email', 'off', 'required']); ?>
@@ -68,7 +68,7 @@
 
                                 <!-- Register buttons -->
                                 <div class="text-center">
-                                    <a href="<?php echo BASEURL.'login'; ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-sudah-akun" class="title-class" data-lang-id="id-sudah-akun">Anda sudah punya akun?</span></a>
+                                    <a href="<?php echo site_url('login'); ?>" data-bs-theme="light" class="text-danger animated-link"><span id="id-sudah-akun" class="title-class" data-lang-id="id-sudah-akun">Anda sudah punya akun?</span></a>
                                     <p><span id="id-or-sign-up" class="title-class" data-lang-id="id-or-sign-up">Atau daftar dengan:</span></p>
                                     <button  type="button" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-link btn-floating mx-1">
                                     <i class="bi bi-google text-danger"></i>

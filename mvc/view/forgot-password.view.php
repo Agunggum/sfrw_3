@@ -7,7 +7,7 @@
                 <div class="container">
                     <div class="pt-2">
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
-                        <a href="<?php echo BASEURL; ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                        <a href="<?php echo site_url('/'); ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
                     </div>
                         
                     <div class="d-flex justify-content-center">
@@ -25,7 +25,7 @@
                 <div class="d-flex justify-content-center d-block d-lg-none d-xl-none">
                     <div class="pt-2">
                         <span id="id-pemicu" class="title-class" data-lang-id="id-pemicu"></span>
-                        <a href="<?php echo BASEURL; ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
+                        <a href="<?php echo site_url('/'); ?>" class="text-accent animated-link"><i class="bi bi-arrow-left"></i> <span id="id-kembali" class="title-class" data-lang-id="id-kembali">Kembali</span></a>
                     </div>
                     <div class="mt-5 mb-2">
                         <div class="h3 text-center"><?php echo WEBTITLE; ?></div>
@@ -34,9 +34,9 @@
                 
                 <p class="mt-sm-1 mt-md-1 mt-lg-5 mt-xl-5 pt-lg-5 pt-xl-5"><?php 
                 if(isset($s) and $s != ""):
-                    $action = BASEURL.'authforgot/'.$s;
+                    $action = site_url('authforgot/'.$s);
                 else:
-                    $action = BASEURL.'authforgotpassword';
+                    $action = site_url('authforgotpassword');
                 endif;
                 if(isset($_SESSION['alert'])){ echo $_SESSION['alert']; } ?></p>
                     
@@ -59,7 +59,7 @@
                                     <!-- Submit button -->
                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init data-bs-theme="light" class="btn btn-danger btn-block mb-4 rounded-4"><span id="id-submit-new-password" class="title-class" data-lang-id="id-submit-new-password">Kirim Kata Sandi Baru</span></button>
                                 </form>
-                            <?php else: alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> Link expired!', BASEURL.'forgot-password'); endif; 
+                            <?php else: alert('warning', 'Attention..!', '<i class="bi bi-lock"></i> Link expired!', site_url('forgot-password')); endif; 
                         else: ?>
                                 <p class="h3 text-left font-weight-bold mb-5"><span id="id-lupa-kata-sandi" class="title-class" data-lang-id="id-lupa-kata-sandi">Lupa Kata Sandi.</span></p>
                                     
@@ -74,7 +74,7 @@
 
                             <!-- Register buttons -->
                             <div class="text-center">
-                                <p><a href="<?php echo BASEURL.'login'; ?>" class="text-accent animated-link"><span id="id-kembali-masuk" class="title-class" data-lang-id="id-kembali-masuk">Kembali ke halaman Masuk</span></a></p>
+                                <p><a href="<?php echo site_url('login'); ?>" class="text-accent animated-link"><span id="id-kembali-masuk" class="title-class" data-lang-id="id-kembali-masuk">Kembali ke halaman Masuk</span></a></p>
                             </div>
                             <?php if (defined('ENVIRONMENT') && ENVIRONMENT === 'local'): ?>
                                 <div class="text-center">

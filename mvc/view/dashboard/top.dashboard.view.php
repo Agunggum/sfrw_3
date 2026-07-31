@@ -11,7 +11,7 @@
         <ul class="nav flex-column flex-nowrap p-2 gap-1" id="sidebarMenu">
 
             <li class="nav-item">
-                <a class="nav-link rounded <?php echo (ROUTE == 'dashboard') ? 'active' : ''; ?>" href="<?php echo BASEURL; ?>dashboard">
+                <a class="nav-link rounded <?php echo (ROUTE == 'dashboard') ? 'active' : ''; ?>" href="<?php echo site_url('dashboard'); ?>">
                     <i class="bi bi-house-door me-2"></i>
                     <span id="id-dasbor" class="title-class" data-lang-id="id-dasbor">Dasbor</span>
                 </a>
@@ -29,12 +29,12 @@
                 <div class="collapse <?php echo (ROUTE == 'users' || ROUTE == 'users/create' || ROUTE == 'users/'.$data['id'].'/see') ? 'show' : ''; ?>" id="submenuMaster" data-bs-parent="#sidebarMenu">
                     <ul class="nav flex-column ps-3 pt-1 gap-1 nav-tree">
                         <li class="nav-item">
-                            <a href="<?php echo BASEURL; ?>users" class="nav-link animated-link rounded <?php echo (ROUTE == 'users' || ROUTE == 'users/'.$data['id'].'/see') ? 'active' : ''; ?> py-2 small">
+                            <a href="<?php echo site_url('users'); ?>" class="nav-link animated-link rounded <?php echo (ROUTE == 'users' || ROUTE == 'users/'.$data['id'].'/see') ? 'active' : ''; ?> py-2 small">
                                 <span id="id-data-pengguna" class="title-class" data-lang-id="id-data-pengguna">Data Pengguna</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo BASEURL; ?>users/create" class="nav-link animated-link rounded <?php echo (ROUTE == 'users/create') ? 'active' : ''; ?> py-2 small">
+                            <a href="<?php echo site_url('users/create'); ?>" class="nav-link animated-link rounded <?php echo (ROUTE == 'users/create') ? 'active' : ''; ?> py-2 small">
                                 <span id="id-tambah-data-pengguna" class="title-class" data-lang-id="id-tambah-data-pengguna">Tambah Data Pengguna</span>
                             </a>
                         </li>
@@ -121,7 +121,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-menu-item dropdown-item" href="<?php echo BASEURL; ?>signout"><i class="bi bi-box-arrow-right me-2"></i><span id="id-keluar" class="title-class" data-lang-id="id-keluar">Keluar</span></a></li>
+                        <li><a class="dropdown-menu-item dropdown-item" href="<?php echo site_url('signout'); ?>"><i class="bi bi-box-arrow-right me-2"></i><span id="id-keluar" class="title-class" data-lang-id="id-keluar">Keluar</span></a></li>
                     </ul>
                 </div>
 

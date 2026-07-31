@@ -15,6 +15,24 @@ const SPANavigator = (() => {
         window.addEventListener('popstate', handlePopState);
     };
 
+    /**
+     * Helper untuk memvalidasi apakah URL aman untuk SPA
+     */
+    const shouldUseSPA = (href) => {
+        if (!href) return false;
+        try {
+            const url = new URL(href, window.location.href);
+            if (url.origin !== window.location.origin) return false;
+            if (!['http:', 'https:'].includes(url.protocol)) return false;
+            if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) {
+                return false;
+            }
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
+
     const createProgressBar = () => {
         let existing = document.getElementById('nprogress');
         if (existing) {
