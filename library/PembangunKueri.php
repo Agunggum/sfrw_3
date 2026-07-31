@@ -69,7 +69,7 @@ class PembangunKueri {
         return $instance;
     }
 
-    public static function kueriMentah($kueri) {
+    public function kueriMentah($kueri) {
         $this->mentah = $kueri;
         $this->dimana[] = $kueri;
         return $this;
