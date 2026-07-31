@@ -147,7 +147,7 @@ td.dtfc-fixed-left:has(.dropdown-toggle.show) {
                 rightColumns: 1
             },
             ajax: {
-                url: '<?php echo site_url('users/list'); ?>',
+                url: '<?php echo site_url('userslist'); ?>',
                 dataSrc: ''
             },
             // Otomatis tutup dropdown yang terbuka jika tabel di-render ulang (misal: paged/search)
@@ -195,7 +195,7 @@ td.dtfc-fixed-left:has(.dropdown-toggle.show) {
                             <i class="bi bi-three-dots-vertical"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-table-menu" style="width: 70px !important;">
-                            <li><a class="dropdown-item text-center icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);" href="<?php echo site_url('users/' . data.id_encrypted . '/see'); ?>" data-id="${idData}">-- <i class="bi bi-search"></i> --</a></li>
+                            <li><a class="dropdown-item text-center icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);" href="<?php echo site_url('users/${data.id_encrypted}/see'); ?>" data-id="${idData}">-- <i class="bi bi-search"></i> --</a></li>
                             <li><a class="dropdown-item text-center icon-link icon-link-hover delete-btn" style="cursor:pointer; --bs-icon-link-transform: translate3d(0, -.125rem, 0);" data-id="${idData}" data-username="${data.username}">-- <i class="bi bi-trash text-danger"></i> --</a></li>
                         </ul>
                     </div>`;
