@@ -1,4 +1,6 @@
-<?php if (! defined('APPPATH')) exit('No direct script access allowed'); ?>
+<?php if (! defined('APPPATH')) exit('No direct script access allowed'); 
+$id_id = isset($_COOKIE['user_language']) && $_COOKIE['user_language'] == 'id';
+?>
 <?php require_once view('dashboard/header.dashboard'); ?>
 <?php require_once view('dashboard/top.dashboard'); ?>
 <?php if (isset($_SESSION['alert'])) {
@@ -158,7 +160,7 @@ td.dtfc-fixed-left:has(.dropdown-toggle.show) {
                 });
             },
             "language": {
-                "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div> <a href="<?php echo site_url('users'); ?>" onclick="location.reload()"><span id="en-dont-see-data" class="title-class" data-lang-id="en-dont-see-data">Don`t see data?</span> <i class="bi bi-repeat"></i></a>'
+                "loadingRecords": '<div class="placeholder-glow p-2"><span class="placeholder-glow placeholder rounded-3 col-12"></span></div> <a href="<?php echo site_url('users'); ?>"><span id="en-dont-see-data" class="title-class" data-lang-id="en-dont-see-data">Don`t see data?</span> <i class="bi bi-repeat"></i></a>'
             },
             columns: [
                 {
@@ -231,7 +233,7 @@ td.dtfc-fixed-left:has(.dropdown-toggle.show) {
             $btn.prop('disabled', true).text('Processing...');
 
             $.ajax({
-                url: '<?php echo site_url('users/delete/'); ?>' + idYangAkanDihapus,
+                url: '<?php echo site_url('users-hapus/'); ?>' + idYangAkanDihapus,
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
@@ -244,21 +246,21 @@ td.dtfc-fixed-left:has(.dropdown-toggle.show) {
                         var myModal = bootstrap.Modal.getOrCreateInstance(modalElement);
                         myModal.hide();
 
-                        showToast("Sukses: " + response.message, 'success');
+                        showToast("<?php echo $id_id ? 'Sukses: ' : 'Success: '; ?> " + response.message, 'success');
                     } else {
-                        showToast("Gagal: " + response.message, 'danger');
+                        showToast("<?php echo $id_id ? 'Gagal: ' : 'Failed: '; ?>  " + response.message, 'danger');
                     }
                 },
                 error: function(xhr, status, error) {
                     try {
                         var errObj = JSON.parse(xhr.responseText);
-                        showToast("Gagal: " + errObj.message, 'danger');
+                        showToast("<?php echo $id_id ? 'Gagal: ' : 'Failed: '; ?> " + errObj.message, 'danger');
                     } catch(e) {
-                        showToast("Gagal: Terjadi kesalahan sistem.", 'danger');
+                        showToast("<?php echo $id_id ? 'Gagal: ' : 'Failed: '; ?> Terjadi kesalahan sistem.", 'danger');
                     }
                 },
                 complete: function() {
-                    $btn.prop('disabled', false).text('Ya, Deleted!');
+                    $btn.prop('disabled', false).text("<?php echo $id_id ? 'Ya, Hapus!' : 'Yes, Deleted!'; ?> ");
                 }
             });
         });
