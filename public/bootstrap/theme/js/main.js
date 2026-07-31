@@ -13,6 +13,7 @@ const SPANavigator = (() => {
         document.addEventListener('click', handleLinkClick);
         document.addEventListener('submit', handleFormSubmit);
         window.addEventListener('popstate', handlePopState);
+        setupGlobalPasswordToggle(); // Event Delegation Global untuk Password Toggle
     };
 
     /**
@@ -31,6 +32,53 @@ const SPANavigator = (() => {
         } catch (e) {
             return false;
         }
+    };
+
+    /**
+     * Event Delegation Global untuk Toggle Password.
+     * Dipasang sekali pada level `document`, sehingga SELALU BEKERJA 
+     * meskipun elemen password berganti/dimuat ulang via SPA.
+     */
+    const setupGlobalPasswordToggle = () => {
+        document.addEventListener('click', (e) => {
+            // Memicu jika elemen yang diklik (atau elemen di dalamnya) cocok dengan selector toggle
+            const toggleBtn = e.target.closest('#toggle-password, .toggle-password, [data-toggle="password"]');
+            if (!toggleBtn) return;
+
+            e.preventDefault();
+
+            // 1. Cari target input berdasarkan atribut data-target (jika ada)
+            const targetSelector = toggleBtn.getAttribute('data-target');
+            let passwordField = targetSelector ? document.querySelector(targetSelector) : null;
+
+            // 2. Jika tidak ada data-target, cari berdasarkan ID default (#password-field)
+            if (!passwordField) {
+                passwordField = document.querySelector('#password-field');
+            }
+
+            // 3. Jika masih tidak ketemu, cari input password terdekat dalam satu container/form
+            if (!passwordField) {
+                const container = toggleBtn.closest('.input-group, form, div');
+                if (container) {
+                    passwordField = container.querySelector('input[type="password"], input[type="text"]');
+                }
+            }
+
+            // Eksekusi perubahan tipe input & icon
+            if (passwordField) {
+                const isPassword = passwordField.type === 'password';
+                passwordField.type = isPassword ? 'text' : 'password';
+
+                // Ubah Icon (Mendukung Bootstrap Icons & FontAwesome)
+                const icon = toggleBtn.querySelector('i') || toggleBtn;
+                if (icon) {
+                    icon.classList.toggle('bi-eye', !isPassword);
+                    icon.classList.toggle('bi-eye-slash', isPassword);
+                    icon.classList.toggle('fa-eye', !isPassword);
+                    icon.classList.toggle('fa-eye-slash', isPassword);
+                }
+            }
+        });
     };
 
     const createProgressBar = () => {
@@ -59,7 +107,6 @@ const SPANavigator = (() => {
         bar.style.width = '0%';
         bar.style.transition = 'width 0.3s ease';
         
-        // Use a small delay to ensure the browser registers width: 0% before starting transition
         requestAnimationFrame(() => {
             setTimeout(() => { if (bar) bar.style.width = '30%'; }, 50);
             setTimeout(() => { if (bar) bar.style.width = '70%'; }, 400);
@@ -116,12 +163,10 @@ const SPANavigator = (() => {
             }
         }
 
-        // POST handling
         isLoading = true;
         loadingStartTime = Date.now();
         startProgress();
 
-        // Animasi Loading pada tombol
         let originalBtnHtml = '';
         if (submitBtn) {
             originalBtnHtml = submitBtn.innerHTML;
@@ -146,13 +191,11 @@ const SPANavigator = (() => {
             }
         } catch (error) {
             console.error('SPA form submit failed:', error);
-            form.submit(); // Fallback
+            form.submit();
         } finally {
             isLoading = false;
             stopProgress();
-            if (submitBtn && !document.body.contains(submitBtn)) {
-                // Button might have been replaced by SPA content, do nothing
-            } else if (submitBtn) {
+            if (submitBtn && document.body.contains(submitBtn)) {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnHtml;
             }
@@ -160,7 +203,6 @@ const SPANavigator = (() => {
     };
 
     const handleLinkClick = (e) => {
-        // 1. Cek apakah sedang loading (dengan fail-safe 20 detik)
         if (isLoading) {
             const now = Date.now();
             if (now - loadingStartTime > 20000) {
@@ -172,41 +214,17 @@ const SPANavigator = (() => {
             }
         }
         
-        // 2. Dapatkan elemen <a> terdekat
         const link = e.target.closest('a');
         if (!link) return;
 
-        // 3. Abaikan jika klik dengan tombol selain tombol utama (kiri) atau dengan tombol modifier
         if (e.button !== 0 || e.ctrlKey || e.shiftKey || e.metaKey || e.altKey) return;
-
-        // 4. Abaikan jika memiliki atribut download atau target="_blank"
         if (link.hasAttribute('download') || link.getAttribute('target') === '_blank') return;
 
-        // 5. Dapatkan URL link
         const href = link.href;
-        if (!href) return;
+        if (!shouldUseSPA(href)) return;
 
-        // 6. Parsing URL
-        let url;
-        try {
-            url = new URL(href);
-        } catch (err) {
-            return;
-        }
-
-        // 7. Abaikan jika link eksternal (host berbeda)
-        if (url.origin !== window.location.origin) return;
-
-        // 8. Abaikan jika protokol bukan http/https (misal mailto:, tel:)
-        if (!['http:', 'https:'].includes(url.protocol)) return;
-
-        // 9. Abaikan jika link anchor pada halaman yang sama
-        if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) return;
-
-        // 10. Abaikan jika secara eksplisit dilarang melalui data-spa="false" atau data-spa-ignore
         if (link.dataset.spa === 'false' || link.hasAttribute('data-spa-ignore')) return;
 
-        // 11. Cegah reload dan navigasi via SPA
         e.preventDefault();
         navigateTo(href);
     };
@@ -216,6 +234,10 @@ const SPANavigator = (() => {
     };
 
     const navigateTo = (url) => {
+        if (!shouldUseSPA(url)) {
+            window.location.href = url;
+            return;
+        }
         loadContent(url, true);
     };
 
@@ -230,7 +252,6 @@ const SPANavigator = (() => {
         container.style.opacity = '0.5';
         startProgress();
 
-        // Timeout 15 detik untuk koneksi lambat
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 15000);
 
@@ -246,9 +267,7 @@ const SPANavigator = (() => {
             const redirectUrl = await handleResponse(response, url, pushState);
             
             if (redirectUrl) {
-                // Jika ada redirect, kita hentikan loading saat ini dan mulai pemuatan baru
                 isLoading = false; 
-                // Kita tidak memanggil stopProgress di sini agar bar tetap terlihat jalan ke arah baru
                 return await loadContent(redirectUrl, true);
             }
         } catch (error) {
@@ -258,7 +277,6 @@ const SPANavigator = (() => {
             }
             window.location.href = url;
         } finally {
-            // Hanya jalankan pembersihan jika ini adalah pemanggilan terakhir (tidak ada redirect aktif)
             if (isLoading) {
                 isLoading = false;
                 stopProgress();
@@ -272,7 +290,6 @@ const SPANavigator = (() => {
         const container = document.getElementById(contentId);
         if (!container) return;
         
-        // 1. Cek perubahan Layout (Public vs Dashboard)
         const currentLayout = document.documentElement.getAttribute('data-spa-layout');
         const newLayout = response.headers.get('X-SPA-Layout');
         
@@ -282,7 +299,6 @@ const SPANavigator = (() => {
             return;
         }
 
-        // 2. Cek header redirect dari server
         const spaRedirect = response.headers.get('X-SPA-Redirect');
         if (spaRedirect) {
             return spaRedirect;
@@ -293,18 +309,15 @@ const SPANavigator = (() => {
         const html = await response.text();
         const title = response.headers.get('X-Page-Title');
 
-        // Update content
-        container.innerHTML = html;
+        cleanUpUI();
 
-        // Update title
+        container.innerHTML = html;
         if (title) document.title = title;
 
-        // Update URL
         if (pushState && url !== window.location.href) {
             window.history.pushState({}, title || '', url);
         }
 
-        // Re-initialize assets (CSS) and scripts
         reinitAssets();
         reinitScripts();
         window.scrollTo(0, 0);
@@ -312,26 +325,25 @@ const SPANavigator = (() => {
         return null;
     };
 
+    const cleanUpUI = () => {
+        document.querySelectorAll('.modal-backdrop, .offcanvas-backdrop').forEach(el => el.remove());
+        document.body.classList.remove('modal-open', 'overflow-hidden');
+        document.body.style.removeProperty('padding-right');
+    };
+
     const reinitAssets = () => {
         const container = document.getElementById(contentId);
         if (!container) return;
 
-        // Pindahkan <link> dan <style> dari konten ke <head> agar ter-render dengan benar
-        // dan tidak terduplikasi saat navigasi selanjutnya
         const assets = container.querySelectorAll('link[rel="stylesheet"], style');
         const head = document.head;
 
         assets.forEach(asset => {
             const isLink = asset.tagName === 'LINK';
-            const assetId = isLink ? asset.href : asset.textContent.substring(0, 100);
-            
-            // Cek apakah asset sudah ada di head
             let exists = false;
             if (isLink) {
                 exists = !!head.querySelector(`link[href="${asset.href}"]`);
             } else {
-                // Untuk inline style, kita bisa gunakan hash atau id jika ada
-                // Namun untuk kesederhanaan, kita biarkan saja jika tidak ada ID khusus
                 if (asset.id) exists = !!head.querySelector(`#${asset.id}`);
             }
 
@@ -339,17 +351,13 @@ const SPANavigator = (() => {
                 const newAsset = asset.cloneNode(true);
                 head.appendChild(newAsset);
             }
-            
-            // Hapus dari container agar tidak dieksekusi ulang/ganda oleh browser
             asset.remove();
         });
     };
 
     const reinitScripts = () => {
-        // Re-init Theme Toggle (Dropdown version)
         initThemeSwitcher();
 
-        // Execute scripts inside the new content
         const container = document.getElementById(contentId);
         if (!container) return;
 
@@ -385,8 +393,6 @@ const SPANavigator = (() => {
             }
         });
 
-        // Re-init data- attributes components (Bootstrap, Avatars, etc.)
-        // We do this AFTER script execution to ensure any dynamically added elements are caught
         setTimeout(() => {
             reinitDataComponents();
             
@@ -397,35 +403,26 @@ const SPANavigator = (() => {
     };
 
     const reinitDataComponents = () => {
-        // 1. Re-init Bootstrap Dropdowns, Tooltips, Popovers
         if (typeof bootstrap !== 'undefined') {
-            // Dropdowns
-            const dropdowns = document.querySelectorAll('[data-bs-toggle="dropdown"]');
-            dropdowns.forEach(el => {
-                // Bersihkan instance lama jika ada untuk menghindari memory leak atau double init
+            document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach(el => {
                 const instance = bootstrap.Dropdown.getInstance(el);
                 if (instance) instance.dispose();
                 new bootstrap.Dropdown(el);
             });
 
-            // Tooltips
-            const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-            tooltips.forEach(el => {
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
                 const instance = bootstrap.Tooltip.getInstance(el);
                 if (instance) instance.dispose();
                 new bootstrap.Tooltip(el);
             });
 
-            // Popovers
-            const popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
-            popovers.forEach(el => {
+            document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => {
                 const instance = bootstrap.Popover.getInstance(el);
                 if (instance) instance.dispose();
                 new bootstrap.Popover(el);
             });
         }
 
-        // 2. Re-init User Avatars (data-name)
         const avatarEls = document.querySelectorAll('#userAvatar, .user-avatar');
         avatarEls.forEach(avatarEl => {
             const fullName = avatarEl.getAttribute('data-name') || 'User';
@@ -447,11 +444,9 @@ const SPANavigator = (() => {
             avatarEl.style.backgroundColor = `hsl(${h}, 65%, 45%)`;
         });
 
-        // 3. Re-init Sidebar Toggler
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         if (sidebarToggle && sidebarOverlay) {
-            // Remove old listeners to prevent multiple execution
             const newToggle = sidebarToggle.cloneNode(true);
             sidebarToggle.parentNode.replaceChild(newToggle, sidebarToggle);
             
@@ -467,98 +462,90 @@ const SPANavigator = (() => {
             newOverlay.addEventListener('click', toggleSidebar);
         }
 
-        // 4. Re-init Translation (data-lang-id)
         if (typeof window.changeLanguage === 'function') {
             const currentLang = localStorage.getItem('user_language') || 'id';
             window.changeLanguage(currentLang);
         }
 
-        // 5. Re-init any other components (Shorten, etc.)
         if (typeof $ !== 'undefined' && $.fn.shorten) {
             $('.comment').shorten();
         }
     };
 
-    const getStoredTheme = () => localStorage.getItem('theme')
-    const setStoredTheme = theme => localStorage.setItem('theme', theme)
+    const getStoredTheme = () => localStorage.getItem('theme');
+    const setStoredTheme = theme => localStorage.setItem('theme', theme);
 
     const getPreferredTheme = () => {
-        const storedTheme = getStoredTheme()
-        if (storedTheme) {
-            return storedTheme
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }
+        const storedTheme = getStoredTheme();
+        if (storedTheme) return storedTheme;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
 
     const setTheme = theme => {
         if (theme === 'auto') {
-            document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+            document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         } else {
-            document.documentElement.setAttribute('data-bs-theme', theme)
+            document.documentElement.setAttribute('data-bs-theme', theme);
         }
-        showActiveTheme(theme)
-    }
+        showActiveTheme(theme);
+    };
 
     const showActiveTheme = (theme, focus = false) => {
-        // Support both dashboard and index theme toggles
-        const themeIconActive = document.querySelector('#themeIconActive') || document.querySelector('#bd-theme .theme-icon-active')
-        const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+        const themeIconActive = document.querySelector('#themeIconActive') || document.querySelector('#bd-theme .theme-icon-active');
+        const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`);
         
-        if (!btnToActive) return
+        if (!btnToActive) return;
 
         document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-            element.classList.remove('active')
-            element.setAttribute('aria-pressed', 'false')
-            const checkIcon = element.querySelector('.bi-check2')
-            if (checkIcon) checkIcon.classList.add('d-none')
-        })
+            element.classList.remove('active');
+            element.setAttribute('aria-pressed', 'false');
+            const checkIcon = element.querySelector('.bi-check2');
+            if (checkIcon) checkIcon.classList.add('d-none');
+        });
 
-        btnToActive.classList.add('active')
-        btnToActive.setAttribute('aria-pressed', 'true')
+        btnToActive.classList.add('active');
+        btnToActive.setAttribute('aria-pressed', 'true');
         
-        const activeCheckIcon = btnToActive.querySelector('.bi-check2')
-        if (activeCheckIcon) activeCheckIcon.classList.remove('d-none')
+        const activeCheckIcon = btnToActive.querySelector('.bi-check2');
+        if (activeCheckIcon) activeCheckIcon.classList.remove('d-none');
         
-        // Update main button icon (supports both variants)
         if (themeIconActive) {
-            const iconEl = btnToActive.querySelector('i')
+            const iconEl = btnToActive.querySelector('i');
             if (iconEl) {
-                themeIconActive.className = iconEl.className.replace('me-2', '').replace('opacity-50', '').replace('theme-icon', 'theme-icon-active').trim()
-                
+                themeIconActive.className = iconEl.className.replace('me-2', '').replace('opacity-50', '').replace('theme-icon', 'theme-icon-active').trim();
                 if(theme === 'dark') {
-                    themeIconActive.classList.add('text-warning')
+                    themeIconActive.classList.add('text-warning');
                 } else {
-                    themeIconActive.classList.remove('text-warning')
+                    themeIconActive.classList.remove('text-warning');
                 }
             }
         }
-    }
+    };
 
     const initThemeSwitcher = () => {
-        const theme = getPreferredTheme()
-        setTheme(theme)
-        showActiveTheme(theme)
-    }
+        const theme = getPreferredTheme();
+        setTheme(theme);
+        showActiveTheme(theme);
+    };
 
     const setupThemeEventListeners = () => {
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            const storedTheme = getStoredTheme()
+            const storedTheme = getStoredTheme();
             if (storedTheme !== 'light' && storedTheme !== 'dark') {
-                setTheme(getPreferredTheme())
+                setTheme(getPreferredTheme());
             }
-        })
+        });
 
-        // Use event delegation for theme toggles to avoid multiple listeners during SPA navigation
         document.addEventListener('click', e => {
-            const toggle = e.target.closest('[data-bs-theme-value]')
+            const toggle = e.target.closest('[data-bs-theme-value]');
             if (toggle) {
-                const theme = toggle.getAttribute('data-bs-theme-value')
-                setStoredTheme(theme)
-                setTheme(theme)
-                showActiveTheme(theme, true)
+                const theme = toggle.getAttribute('data-bs-theme-value');
+                setStoredTheme(theme);
+                setTheme(theme);
+                showActiveTheme(theme, true);
             }
-        })
-    }
+        });
+    };
 
     return { init, navigateTo, initThemeSwitcher, setupThemeEventListeners };
 })();
@@ -568,6 +555,7 @@ SPANavigator.init();
 SPANavigator.initThemeSwitcher();
 SPANavigator.setupThemeEventListeners();
 
+// jQuery Shorten Plugin
 (function($) {
     $.fn.shorten = function(settings) {
         "use strict";
@@ -576,7 +564,6 @@ SPANavigator.setupThemeEventListeners();
             showChars: 300,
             minHideChars: 30,
             ellipsesText: "...",
-            // Menggunakan class Bootstrap yang adaptif terhadap Dark Mode
             moreText: "<i class='bi bi-angles-down'></i> Selengkapnya",
             lessText: "<i class='bi bi-angles-up'></i> Sembunyikan",
             onLess: function() {},
@@ -586,11 +573,9 @@ SPANavigator.setupThemeEventListeners();
 
         if (settings) $.extend(config, settings);
 
-        // Pencegahan inisialisasi ganda
         if ($(this).data('jquery.shorten') && !config.force) return false;
         $(this).data('jquery.shorten', true);
 
-        // Gunakan delegasi event yang lebih efisien
         $(document).off("click", '.morelink').on("click", '.morelink', function(e) {
             e.preventDefault();
             var $this = $(this);
@@ -619,7 +604,6 @@ SPANavigator.setupThemeEventListeners();
             var textContent = $this.text();
 
             if (textContent.length > config.showChars + config.minHideChars) {
-                // Pemotongan sederhana yang aman untuk teks murni
                 var visibleText = textContent.substring(0, config.showChars);
                 
                 var html = `
@@ -636,26 +620,3 @@ SPANavigator.setupThemeEventListeners();
         });
     };
 })(jQuery);
-
-/**
- * Theme Helper Tools
- */
-(() => {
-    'use strict';
-
-    // Toggle Password Helper
-    const togglePassword = document.querySelector('#toggle-password');
-    const passwordField = document.querySelector('#password-field');
-
-    if (togglePassword && passwordField) {
-        togglePassword.addEventListener('click', function() {
-            const type = passwordField.type === 'password' ? 'text' : 'password';
-            passwordField.type = type;
-            const icon = this.querySelector('i');
-            if (icon) {
-                icon.classList.toggle('bi-eye');
-                icon.classList.toggle('bi-eye-slash');
-            }
-        });
-    }
-})();
