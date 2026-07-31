@@ -9,6 +9,7 @@ class PembangunKueri {
     protected $urutkan = '';
     protected $batas = '';
     protected $mulai = '';
+    protected $mentah = null;
 
     protected static function hubungkan() {
         if (!self::$koneksi) {
@@ -69,8 +70,9 @@ class PembangunKueri {
     }
 
     public static function kueriMentah($kueri) {
-        $instance = new self();
-        return $instance->eksekusi($kueri);
+        $this->mentah = $kueri;
+        $this->dimana[] = $kueri;
+        return $this;
     }
 
     public static function cekTabel($namaTabel) {
