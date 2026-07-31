@@ -72,10 +72,8 @@ const SPANavigator = (() => {
                 // Ubah Icon (Mendukung Bootstrap Icons & FontAwesome)
                 const icon = toggleBtn.querySelector('i') || toggleBtn;
                 if (icon) {
-                    icon.classList.toggle('bi-eye', !isPassword);
-                    icon.classList.toggle('bi-eye-slash', isPassword);
-                    icon.classList.toggle('fa-eye', !isPassword);
-                    icon.classList.toggle('fa-eye-slash', isPassword);
+                    icon.classList.toggle('bi-eye', isPassword);
+                    icon.classList.toggle('bi-eye-slash', !isPassword);
                 }
             }
         });
