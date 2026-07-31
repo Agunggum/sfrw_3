@@ -198,7 +198,7 @@ td.dtfc-fixed-left:has(.dropdown-toggle.show) {
                         </button>
                         <ul class="dropdown-menu dropdown-table-menu" style="width: 70px !important;">
                             <li><a class="dropdown-item text-center icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);" href="<?php echo site_url('users/${data.id_encrypted}/see'); ?>" data-id="${idData}">-- <i class="bi bi-search"></i> --</a></li>
-                            <li><a class="dropdown-item text-center icon-link icon-link-hover delete-btn" style="cursor:pointer; --bs-icon-link-transform: translate3d(0, -.125rem, 0);" data-id="${idData}" data-username="${data.username}">-- <i class="bi bi-trash text-danger"></i> --</a></li>
+                            <li><a class="dropdown-item text-center icon-link icon-link-hover delete-btn" style="cursor:pointer; --bs-icon-link-transform: translate3d(0, -.125rem, 0);" data-id="${idData}" data-username="${data.username} - ${data.fullname}">-- <i class="bi bi-trash text-danger"></i> --</a></li>
                         </ul>
                     </div>`;
                     }
@@ -301,7 +301,7 @@ td.dtfc-fixed-left:has(.dropdown-toggle.show) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <span id="id-apakah-yakin-hapus-record-ini" class="title-class" data-lang-id="id-apakah-yakin-hapus-record-ini">Apakah Anda yakin ingin menghapus record ini?</span> (Username: <span id="delete-id-display"></span>)
+                <span id="id-apakah-yakin-hapus-record-ini" class="title-class" data-lang-id="id-apakah-yakin-hapus-record-ini">Apakah Anda yakin ingin menghapus record ini?</span> (Username: <span id="delete-id-display" class="fw-bold"></span>)
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span id="id-batal" class="title-class" data-lang-id="id-batal">Batal</span></button>
