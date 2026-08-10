@@ -15,6 +15,11 @@ if (defined('IS_AJAX') && IS_AJAX) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo $data['title']; ?></title>
 
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
 <link rel="manifest" href="<?php echo asset('manifest.json'); ?>">
 <link rel="apple-touch-icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>">
 <link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.ico'); ?>" sizes="any">
@@ -30,15 +35,7 @@ if (defined('IS_AJAX') && IS_AJAX) {
 <meta property="og:url" content="<?php echo BASEURL; ?>" />
 <meta property="og:description" content="<?php echo WEBTITLE; ?> <?php echo VERSIONFRMAEWORK; ?>" />
 <meta property="og:site_name" content="<?php echo WEBTITLE; ?>" />
-<style>
-@import "<?php echo asset('bootstrap/theme/css/bootstrap.css?v=5.3.8'); ?>";
-@import "<?php echo asset('bootstrap/theme/css/bootstrap.min.css?v=5.3.8'); ?>";
-@import "<?php echo asset('bootstrap/theme/css/datatables-bootstrap-5.css?v=0.1'); ?>";
-<?php /*@import "<?php echo asset('bootstrap/theme/fontawesome/css/all.css'); ?>*/ ?>
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
-@import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css");
-@import "<?php echo asset('bootstrap/theme/css/sfrw_dashboard.css?v=0.7'); ?>";
-</style>
+<style rel="preload"> @import "<?php echo asset('bootstrap/theme/css/bootstrap.css?v=5.3.8'); ?>";@import "<?php echo asset('bootstrap/theme/css/bootstrap.min.css?v=5.3.8'); ?>";@import "<?php echo asset('bootstrap/theme/css/datatables-bootstrap-5.css?v=0.1'); ?>";<?php /*@import "<?php echo asset('bootstrap/theme/fontawesome/css/all.css'); ?>*/ ?>@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");@import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css");@import "<?php echo asset('bootstrap/theme/css/sfrw_dashboard.css?v=0.7'); ?>";</style>
 <script src="<?php echo asset('bootstrap/theme/js/jquery-3.7.1.js'); ?>"></script>
 <?php /*<script src="<?php echo asset('bootstrap/theme/fontawesome/js/all.js'); ?>" defer></script>*/ ?>
 <script src="<?php echo asset('bootstrap/theme/js/bootstrap.min.js'); ?>" defer></script>
