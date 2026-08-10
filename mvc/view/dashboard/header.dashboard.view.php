@@ -16,16 +16,15 @@ if (defined('IS_AJAX') && IS_AJAX) {
 <title><?php echo $data['title']; ?></title>
 
 <link rel="manifest" href="<?php echo asset('manifest.json'); ?>">
+<link rel="apple-touch-icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>">
+<link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.ico'); ?>" sizes="any">
+<link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.svg'); ?>" type="image/svg+xml">
   
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#212529">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-touch-icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>">
 
 <meta name="description" content="<?php echo WEBTITLE; ?> <?php echo VERSIONFRMAEWORK; ?>" />
-<link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.ico'); ?>" sizes="any">
-<link rel="icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.svg'); ?>" type="image/svg+xml">
-<link rel="apple-touch-icon" href="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>">
 <meta property="og:title" content="<?php echo $data['title']; ?>" />
 <meta property="og:image" content="<?php echo asset('bootstrap/theme/logo-sfrw.png'); ?>" />
 <meta property="og:url" content="<?php echo BASEURL; ?>" />
