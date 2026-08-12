@@ -298,7 +298,7 @@ class Loginmodel extends Controller {
         setcookie('remember_me', '', time() - 3600, '/');
         
         // Alihkan ke halaman login
-        arahkan('/login');
+        arahkan(BASEURL . 'login');
     }
     
 }
