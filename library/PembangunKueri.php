@@ -6,6 +6,7 @@ class PembangunKueri {
     protected $pilih = '*';
     protected $gabung = [];
     protected $dimana = [];
+    protected $grup = '';
     protected $urutkan = '';
     protected $batas = '';
     protected $mulai = '';
@@ -110,6 +111,34 @@ class PembangunKueri {
         return $this;
     }
 
+    public function gabungKiri($tabel, $kolom1, $operator = null, $kolom2 = null) {
+        if (is_null($operator)) {
+            // Jika hanya 2 argumen, mungkin kueri join mentah
+            $this->gabung[] = "LEFT JOIN {$tabel} ON {$kolom1}";
+        } else {
+            if (is_null($kolom2)) {
+                $kolom2 = $operator;
+                $operator = '=';
+            }
+            $this->gabung[] = "LEFT JOIN {$tabel} ON {$kolom1} {$operator} {$kolom2}";
+        }
+        return $this;
+    }
+
+    public function gabungKanan($tabel, $kolom1, $operator = null, $kolom2 = null) {
+        if (is_null($operator)) {
+            // Jika hanya 2 argumen, mungkin kueri join mentah
+            $this->gabung[] = "RIGHT JOIN {$tabel} ON {$kolom1}";
+        } else {
+            if (is_null($kolom2)) {
+                $kolom2 = $operator;
+                $operator = '=';
+            }
+            $this->gabung[] = "RIGHT JOIN {$tabel} ON {$kolom1} {$operator} {$kolom2}";
+        }
+        return $this;
+    }
+
     public function dimana($kolom, $operator = null, $nilai = null) {
         if (is_array($kolom)) {
             foreach ($kolom as $k => $v) {
@@ -170,6 +199,11 @@ class PembangunKueri {
         return $this;
     }
 
+    public function grup($kolom, $grup = '') {
+        $this->grup = "ORDER BY {$kolom} {$grup}";
+        return $this;
+    }
+
     public function batas($jumlah) {
         $this->batas = "LIMIT {$jumlah}";
         return $this;
@@ -184,6 +218,7 @@ class PembangunKueri {
         $this->pilih = '*';
         $this->gabung = [];
         $this->dimana = [];
+        $this->grup = '';
         $this->urutkan = '';
         $this->batas = '';
         $this->mulai = '';
@@ -215,6 +250,9 @@ class PembangunKueri {
             $kueri .= ' ' . implode(' ', $this->gabung);
         }
         $kueri .= $this->bangunWhere();
+        if ($this->grup) {
+            $kueri .= " {$this->grup}";
+        }
         if ($this->urutkan) {
             $kueri .= " {$this->urutkan}";
         }
