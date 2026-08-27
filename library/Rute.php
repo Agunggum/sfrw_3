@@ -23,6 +23,14 @@ class Rute {
         self::tambahRute('POST', $uri, $callback);
     }
 
+    public static function ubah($uri, $callback) {
+        self::tambahRute('PUT', $uri, $callback);
+    }
+
+    public static function hapus($uri, $callback) {
+        self::tambahRute('DELETE', $uri, $callback);
+    }
+
     public static function dapatkan($uri, $callback) {
         self::ambil($uri, $callback);
     }
@@ -134,5 +142,7 @@ class Rute {
     // Alias for Laravel users
     public static function get($uri, $callback) { self::ambil($uri, $callback); }
     public static function post($uri, $callback) { self::kirim($uri, $callback); }
+    public static function put($uri, $callback) { self::ubah($uri, $callback); }
+    public static function delete($uri, $callback) { self::hapus($uri, $callback); }
     public static function dispatch($uri, $method) { self::jalankan($uri, $method); }
 }
