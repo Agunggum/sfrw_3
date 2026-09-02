@@ -11,6 +11,7 @@ class PembangunKueri {
     protected $batas = '';
     protected $mulai = '';
     protected $mentah = null;
+    protected $union = []; // Properti baru untuk menyimpan klausa UNION
 
     protected static function hubungkan() {
         if (!self::$koneksi) {
@@ -99,7 +100,6 @@ class PembangunKueri {
 
     public function gabung($tabel, $kolom1, $operator = null, $kolom2 = null) {
         if (is_null($operator)) {
-            // Jika hanya 2 argumen, mungkin kueri join mentah
             $this->gabung[] = "JOIN {$tabel} ON {$kolom1}";
         } else {
             if (is_null($kolom2)) {
@@ -113,7 +113,6 @@ class PembangunKueri {
 
     public function gabungKiri($tabel, $kolom1, $operator = null, $kolom2 = null) {
         if (is_null($operator)) {
-            // Jika hanya 2 argumen, mungkin kueri join mentah
             $this->gabung[] = "LEFT JOIN {$tabel} ON {$kolom1}";
         } else {
             if (is_null($kolom2)) {
@@ -127,7 +126,6 @@ class PembangunKueri {
 
     public function gabungKanan($tabel, $kolom1, $operator = null, $kolom2 = null) {
         if (is_null($operator)) {
-            // Jika hanya 2 argumen, mungkin kueri join mentah
             $this->gabung[] = "RIGHT JOIN {$tabel} ON {$kolom1}";
         } else {
             if (is_null($kolom2)) {
@@ -147,7 +145,6 @@ class PembangunKueri {
             return $this;
         }
 
-        // Jika hanya 2 argumen, asumsikan operatornya adalah '='
         if (func_num_args() === 2) {
             $nilai = $operator;
             $operator = '=';
@@ -194,13 +191,32 @@ class PembangunKueri {
         return $this;
     }
 
+    // --- TAMBAHAN FITUR UNION & UNION ALL ---
+    public function unionAll($kueri, $alih = false) {
+        // $kueri bisa berupa string kueri SQL mentah atau callback function / instance PembangunKueri
+        if ($kueri instanceof PembangunKueri) {
+            $kueri = $kueri->bangunKueriSelect();
+        }
+        $this->union[] = ['jenis' => 'UNION ALL', 'kueri' => $kueri];
+        return $this;
+    }
+
+    public function union($kueri) {
+        if ($kueri instanceof PembangunKueri) {
+            $kueri = $kueri->bangunKueriSelect();
+        }
+        $this->union[] = ['jenis' => 'UNION', 'kueri' => $kueri];
+        return $this;
+    }
+    // ----------------------------------------
+
     public function urutkan($kolom, $arah = 'ASC') {
         $this->urutkan = "ORDER BY {$kolom} {$arah}";
         return $this;
     }
 
     public function grup($kolom, $grup = '') {
-        $this->grup = "ORDER BY {$kolom} {$grup}";
+        $this->grup = "GROUP BY {$kolom} {$grup}";
         return $this;
     }
 
@@ -222,6 +238,7 @@ class PembangunKueri {
         $this->urutkan = '';
         $this->batas = '';
         $this->mulai = '';
+        $this->union = [];
         return $this;
     }
 
@@ -231,7 +248,6 @@ class PembangunKueri {
             $kueri .= " WHERE ";
             foreach ($this->dimana as $i => $kondisi) {
                 if ($i > 0) {
-                    // Cek apakah kondisi sudah diawali dengan OR atau AND
                     if (strpos(strtoupper($kondisi), 'OR ') !== 0 && strpos(strtoupper($kondisi), 'AND ') !== 0) {
                         $kueri .= " AND ";
                     } else {
@@ -256,6 +272,21 @@ class PembangunKueri {
         if ($this->urutkan) {
             $kueri .= " {$this->urutkan}";
         }
+        
+        // Tangani UNION / UNION ALL jika ada
+        if (!empty($this->union)) {
+            // Bungkus query utama dalam kurung buka-tutup jika diperlukan agar aman secara sintaksis SQL
+            $kueri = "(" . $kueri . ")";
+            foreach ($this->union as $item) {
+                $subKueri = $item['kueri'];
+                // Pastikan sub kueri dibungkus kurung jika belum ada
+                if (substr(trim($subKueri), 0, 1) !== '(') {
+                    $subKueri = "(" . $subKueri . ")";
+                }
+                $kueri .= " " . $item['jenis'] . " " . $subKueri;
+            }
+        }
+
         if ($this->batas) {
             $kueri .= " {$this->batas}";
         }
@@ -284,8 +315,10 @@ class PembangunKueri {
 
     public function dapatkan() {
         $kueri = $this->bangunKueriSelect();
+
         $hasil_query = $this->eksekusi($kueri);
         $hasil = [];
+
         if (self::getDriver() == 'MySqli') {
             while ($baris = $hasil_query->fetch_assoc()) {
                 $hasil[] = $baris;
@@ -295,6 +328,7 @@ class PembangunKueri {
                 $hasil[] = $baris;
             }
         }
+
         return $hasil;
     }
 
@@ -302,15 +336,13 @@ class PembangunKueri {
         $original_batas = $this->batas;
         $this->batas(1);
         $hasil = $this->dapatkan();
-        $this->batas = $original_batas; // Restore original limit
+        $this->batas = $original_batas;
         return $hasil[0] ?? null;
     }
 
     public function sisipkan($data) {
-        // Tanggal saat ini dari sistem
         $sekarang = date('Y-m-d H:i:s');
 
-        // Otomatis isi created_at & updated_at jika belum diisi manual
         if (!isset($data['created_at'])) {
             $data['created_at'] = $sekarang;
         }
@@ -335,7 +367,6 @@ class PembangunKueri {
     }
 
     public function perbarui($data) {
-        // Otomatis perbarui updated_at dengan waktu sistem saat ini
         $data['updated_at'] = date('Y-m-d H:i:s');
 
         $set = [];
