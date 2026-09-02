@@ -856,6 +856,7 @@ function hpindo($nohp) {
     $start = new DateTime($tanggal1);
     $end = new DateTime($tanggal2);
     $days = $start->diff($end);
+
     return $days->days;
  }
 
